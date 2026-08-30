@@ -4,6 +4,7 @@ node_modules/
 # production builds
 dist/
 build/
+.dist/
 
 # local environment
 .env
