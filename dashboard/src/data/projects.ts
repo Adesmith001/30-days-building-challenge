@@ -16,32 +16,32 @@ export type Project = {
   images: ProjectImage[];
   liveUrl: string;
   githubUrl: string;
+  twitterUrl?: string;
   learned: string;
 };
 
 export const challengeStartDate = "2026-09-01";
 
 export const projects: Project[] = [
-  /*{
+  {
     day: 1,
-    title: "Project 1",
-    tagline: "A simple project",
-    description: "This is a simple project to get started with.",
+    title: "Cursor Chaos",
+    tagline: "A browser physics experiment where your cursor becomes part of the simulation.",
+    description:
+      "Cursor Chaos turns the pointer into a force inside a Matter.js and Three.js playground. Stir, attract, repel, toggle gravity, and drop new objects into a monochrome physics system.",
     date: "2026-09-01",
     status: "completed",
-    stack: ["React", "TypeScript"],
+    stack: ["React", "TypeScript", "Matter.js", "Three.js", "Canvas"],
     images: [
       {
-        src: "/images/project1.jpg",
-        alt: "Project 1"
-      },
-      {
-        src: "/images/project1-2.jpg",
-        alt: "Project 1 - Screenshot 2"
+        src: "/projects/day-01/cursor-chaos.svg",
+        alt: "Cursor Chaos project preview"
       }
     ],
-    liveUrl: "https://project1.com",
-    githubUrl: "https://github.com/user/project1",
-    learned: "I learned how to create a basic React component."
-  }*/
+    liveUrl: "/day-01-cursor-chaos/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building",
+    twitterUrl: "",
+    learned:
+      "The useful version came from reducing the simulation to a few strong inputs, splitting the large app file into focused modules, and tuning the canvas for mobile performance."
+  }
 ];

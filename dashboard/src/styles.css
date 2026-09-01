@@ -573,6 +573,12 @@ a:focus-visible {
   object-fit: cover;
 }
 
+.modal__media img[src$=".svg"] {
+  object-fit: contain;
+  padding: 24px;
+  background: var(--surface);
+}
+
 .modal__content {
   display: grid;
   align-content: start;

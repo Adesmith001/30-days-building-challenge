@@ -127,6 +127,11 @@ function ProjectModal({
             <a href={project.githubUrl} target="_blank" rel="noreferrer">
               Source
             </a>
+            {project.twitterUrl ? (
+              <a href={project.twitterUrl} target="_blank" rel="noreferrer">
+                Twitter
+              </a>
+            ) : null}
           </div>
         </div>
       </section>

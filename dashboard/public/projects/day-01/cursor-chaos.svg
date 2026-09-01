@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Cursor Chaos</title>
+  <desc id="desc">Day 01 of 30 Builds in 30 Days.</desc>
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <path d="M0 112h1200M0 520h1200" stroke="#dadada"/>
+  <text x="70" y="86" fill="#777777" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="24" letter-spacing="6">DAY 01/30</text>
+  <text x="600" y="220" text-anchor="middle" fill="#0a0a0a" font-family="Arial, Helvetica, sans-serif" font-size="112" font-weight="700">Cursor Chaos</text>
+  <text x="600" y="284" text-anchor="middle" fill="#777777" font-family="Arial, Helvetica, sans-serif" font-size="30">A browser physics experiment where your cursor becomes part of the simulation.</text>
+  <circle cx="250" cy="430" r="46" fill="#050505"/>
+  <circle cx="332" cy="392" r="28" fill="#fff" stroke="#050505" stroke-width="4"/>
+  <rect x="700" y="374" width="140" height="48" fill="#050505" transform="rotate(-16 770 398)"/>
+  <rect x="874" y="408" width="74" height="74" fill="#666866" transform="rotate(14 911 445)"/>
+  <path d="M535 448l48-92 48 92z" fill="#050505"/>
+  <rect x="70" y="542" width="216" height="46" fill="#050505"/>
+  <text x="178" y="573" text-anchor="middle" fill="#ffffff" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="18" letter-spacing="5">STIR</text>
+</svg>
