@@ -35,6 +35,10 @@ export const projects: Project[] = [
     stack: ["React", "TypeScript", "Matter.js", "Three.js", "Canvas"],
     images: [
       {
+        src: "/projects/day-01/image.png",
+        alt: "Cursor Chaos project preview",
+      },
+      {
         src: "/projects/day-01/cursor-chaos.svg",
         alt: "Cursor Chaos project preview",
       },
