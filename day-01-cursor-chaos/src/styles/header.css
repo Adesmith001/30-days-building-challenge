@@ -1,0 +1,101 @@
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr) auto;
+  align-items: center;
+  min-height: 88px;
+  padding: 0 clamp(18px, 3vw, 52px);
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.day,
+.topbar nav,
+.status-line,
+.debug-hud,
+.rail span,
+.intro p,
+.about p,
+.about dt,
+.about dd {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.topbar h1 {
+  margin: 0;
+  justify-self: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(34px, 5.3vw, 64px);
+  line-height: 0.9;
+  letter-spacing: 0;
+}
+
+.topbar nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topbar nav button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.topbar nav button:hover,
+.topbar nav button:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-content: center;
+  pointer-events: none;
+  text-align: center;
+  transition: opacity 360ms ease, transform 360ms ease;
+}
+
+.intro::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 148px;
+  height: 148px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+}
+
+.intro h2 {
+  position: relative;
+  margin: 0 0 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(24px, 3vw, 34px);
+  letter-spacing: 0;
+}
+
+.intro p {
+  position: relative;
+  margin: 0;
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+}
+
+.intro.is-hidden {
+  opacity: 0;
+  transform: scale(0.98);
+}

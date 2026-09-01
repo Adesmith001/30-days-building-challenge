@@ -1,37 +1,6 @@
 export type Vec2 = { x: number; y: number };
 export type GravityState = "down" | "right" | "up" | "left" | "off";
-export type CursorMode = "stir" | "attract" | "repel" | "vortex";
-export type TimeScale = 1 | 0.5 | 0.15;
-
-export function computeCursorForce({
-  bodyPosition,
-  cursorPosition,
-  cursorVelocity,
-  radius,
-  mass,
-  strength,
-}: {
-  bodyPosition: Vec2;
-  cursorPosition: Vec2;
-  cursorVelocity: Vec2;
-  radius: number;
-  mass: number;
-  strength: number;
-}): Vec2 {
-  const dx = bodyPosition.x - cursorPosition.x;
-  const dy = bodyPosition.y - cursorPosition.y;
-  const distance = Math.hypot(dx, dy);
-
-  if (distance > radius || distance === 0) return { x: 0, y: 0 };
-
-  const proximity = 1 - distance / radius;
-  const massFactor = Math.max(0.25, mass);
-
-  return {
-    x: (cursorVelocity.x * proximity * strength) / massFactor,
-    y: (cursorVelocity.y * proximity * strength) / massFactor,
-  };
-}
+export type WindState = "calm" | "right" | "left" | "up";
 
 export function cycleGravity(current: GravityState): GravityState {
   const states: GravityState[] = ["down", "right", "up", "left", "off"];
@@ -54,10 +23,16 @@ export function gravityLabel(gravity: GravityState) {
   return "DOWN";
 }
 
-export function cycleTimeScale(current: TimeScale): TimeScale {
-  if (current === 1) return 0.5;
-  if (current === 0.5) return 0.15;
-  return 1;
+export function cycleWind(current: WindState): WindState {
+  const states: WindState[] = ["calm", "right", "left", "up"];
+  return states[(states.indexOf(current) + 1) % states.length];
+}
+
+export function windVector(wind: WindState): Vec2 {
+  if (wind === "right") return { x: 0.000045, y: 0 };
+  if (wind === "left") return { x: -0.000045, y: 0 };
+  if (wind === "up") return { x: 0, y: -0.000055 };
+  return { x: 0, y: 0 };
 }
 
 export function clamp(value: number, min: number, max: number) {

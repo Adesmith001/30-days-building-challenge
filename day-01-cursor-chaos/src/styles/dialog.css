@@ -1,0 +1,55 @@
+.about {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(248, 248, 246, 0.72);
+  backdrop-filter: blur(16px);
+}
+
+.about-panel {
+  position: relative;
+  width: min(760px, 100%);
+  padding: clamp(32px, 5vw, 58px);
+  border: 1px solid var(--ink);
+  background: var(--paper);
+}
+
+.about-panel .close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  letter-spacing: 0;
+}
+
+.about h2 {
+  margin: 8px 0 24px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(42px, 8vw, 84px);
+  line-height: 0.88;
+  letter-spacing: 0;
+}
+
+.about dl {
+  display: grid;
+  gap: 16px;
+  margin: 28px 0 0;
+}
+
+.about dl div {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 22px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.about dd,
+.about p {
+  margin: 0;
+}

@@ -1,0 +1,120 @@
+.rail {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  z-index: 6;
+  display: grid;
+  grid-template-columns: 1fr;
+  transform: translateY(-50%);
+  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.rail span {
+  writing-mode: vertical-rl;
+  justify-self: center;
+  padding: 12px 9px;
+}
+
+.rail button {
+  width: 60px;
+  height: 60px;
+  border-width: 0 0 1px;
+  font-size: 18px;
+  letter-spacing: 0;
+}
+
+.rail button.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.bottombar {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 7;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  width: min(780px, calc(100% - 32px));
+  transform: translateX(-50%);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  backdrop-filter: blur(12px);
+}
+
+.bottombar button {
+  min-height: 56px;
+  border-width: 0 1px 0 0;
+  background: var(--paper);
+  font-size: 12px;
+}
+
+.bottombar button:last-child {
+  border-right: 0;
+}
+
+.bottombar button.active,
+.bottombar button:hover,
+.bottombar button:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.debug-hud {
+  position: fixed;
+  left: 14px;
+  bottom: 52px;
+  z-index: 6;
+  display: grid;
+  gap: 7px;
+}
+
+.status-line {
+  position: fixed;
+  left: 10px;
+  right: 16px;
+  bottom: 8px;
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.status-line span:nth-child(2) {
+  margin-right: auto;
+}
+
+.is-clean .topbar,
+.is-clean .bottombar,
+.is-clean .rail,
+.is-clean .status-line,
+.is-clean .debug-hud {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .bottombar {
+    bottom: 0;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .bottombar button {
+    min-height: 52px;
+    font-size: 11px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .bottombar button:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .rail,
+  .status-line {
+    display: none;
+  }
+}

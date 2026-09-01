@@ -10,3 +10,10 @@ Final verification:
 - Canvas verifier produced screenshots and state in `output/web-game-5`.
 - Manual desktop/mobile browser pass produced screenshots in `output/final` with no console errors.
 TODO: optional later polish could add collision audio, fragmentation, and dashboard linking.
+
+Refactor pass:
+- Split the 693-line `App.tsx` into focused modules; no source file is over 200 lines.
+- Reduced Day 1 to the first simpler PRD: cursor gravity, gravity cycle, wind, zero-G, spawn, pulse, reset, clean/about/debug.
+- Changed the heading to centered `Cursor Chaos`.
+- Dialed rendering down for smoothness: 24 desktop starting bodies, 16 mobile, 50 max, lower pixel ratio, lighter geometry and shadows, capped runaway velocities.
+- Verified with `npm test`, `npm run build`, the web-game Playwright verifier, and desktop/mobile screenshots.

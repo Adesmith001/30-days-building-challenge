@@ -1,38 +1,26 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { computeCursorForce, cycleGravity, cycleTimeScale } from "./physics";
+import { cycleGravity, cycleWind, gravityVector, windVector } from "./physics";
 
-test("cursor force scales with velocity and fades with distance", () => {
-  const near = computeCursorForce({
-    bodyPosition: { x: 110, y: 100 },
-    cursorPosition: { x: 100, y: 100 },
-    cursorVelocity: { x: 12, y: 0 },
-    radius: 100,
-    mass: 2,
-    strength: 0.02,
-  });
-  const far = computeCursorForce({
-    bodyPosition: { x: 180, y: 100 },
-    cursorPosition: { x: 100, y: 100 },
-    cursorVelocity: { x: 12, y: 0 },
-    radius: 100,
-    mass: 2,
-    strength: 0.02,
-  });
-
-  assert.equal(near.x > far.x, true);
-  assert.equal(near.y, 0);
-  assert.equal(far.x > 0, true);
-});
-
-test("gravity and time controls cycle through the expected visible states", () => {
+test("gravity control cycles through directions and off", () => {
   assert.equal(cycleGravity("down"), "right");
   assert.equal(cycleGravity("right"), "up");
   assert.equal(cycleGravity("up"), "left");
   assert.equal(cycleGravity("left"), "off");
   assert.equal(cycleGravity("off"), "down");
 
-  assert.equal(cycleTimeScale(1), 0.5);
-  assert.equal(cycleTimeScale(0.5), 0.15);
-  assert.equal(cycleTimeScale(0.15), 1);
+  assert.deepEqual(gravityVector("down"), { x: 0, y: 1 });
+  assert.deepEqual(gravityVector("off"), { x: 0, y: 0 });
+});
+
+test("wind controls cycle through calm, left, right, and updraft", () => {
+  assert.equal(cycleWind("calm"), "right");
+  assert.equal(cycleWind("right"), "left");
+  assert.equal(cycleWind("left"), "up");
+  assert.equal(cycleWind("up"), "calm");
+
+  assert.deepEqual(windVector("calm"), { x: 0, y: 0 });
+  assert.deepEqual(windVector("right"), { x: 0.000045, y: 0 });
+  assert.deepEqual(windVector("left"), { x: -0.000045, y: 0 });
+  assert.deepEqual(windVector("up"), { x: 0, y: -0.000055 });
 });
