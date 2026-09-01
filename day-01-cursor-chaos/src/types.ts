@@ -1,6 +1,6 @@
 import type Matter from "matter-js";
 import type * as THREE from "three";
-import type { GravityState, WindState } from "./physics";
+import type { CursorMode } from "./physics";
 
 export type ChaosShape = "circle" | "box" | "bar" | "triangle" | "ring";
 export type MassClass = "light" | "medium" | "heavy";
@@ -27,9 +27,8 @@ export type PointerState = {
 };
 
 export type WorldOptions = {
-  gravity: GravityState;
-  zeroG: boolean;
-  wind: WindState;
+  mode: CursorMode;
+  gravityOn: boolean;
 };
 
 export type WorldStats = {
@@ -40,5 +39,4 @@ export type WorldStats = {
 export type WorldApi = {
   reset: () => void;
   spawn: () => void;
-  pulse: () => void;
 };

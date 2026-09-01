@@ -13,9 +13,8 @@ export function renderWorldText({
 }) {
   return JSON.stringify({
     coordinateSystem: "origin top-left, x right, y down",
-    cursor: "gravity well",
-    gravity: options.zeroG ? "zero-g" : options.gravity,
-    wind: options.wind,
+    mode: options.mode,
+    gravity: options.gravityOn ? "on" : "off",
     fps: Math.round(fps),
     objects: objects.length,
     pointer: {

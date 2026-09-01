@@ -4,7 +4,7 @@ import { random } from "./random";
 import { createScene } from "./scene";
 import { renderWorldText } from "./textState";
 import { INITIAL_DESKTOP, INITIAL_MOBILE, MAX_OBJECTS } from "./constants";
-import { applyCursorGravity, applyEnvironment, applyGrab, applyPulse, containObjects, syncMeshes } from "./simulation";
+import { applyCursorForces, applyEnvironment, applyGrab, containObjects, syncMeshes } from "./simulation";
 import { canvasPointerPosition, isMobileSize, makePointer, rebuildWalls } from "./worldHelpers";
 import type { ChaosObject, WorldOptions, WorldStats } from "./types";
 
@@ -19,7 +19,6 @@ export class ChaosWorld {
   private last = performance.now();
   private raf = 0;
   private fps = 60;
-  private pulseFrames = 0;
   private statsTimer = 0;
 
   constructor(
@@ -40,7 +39,7 @@ export class ChaosWorld {
   }
 
   api() {
-    return { reset: () => this.reset(), spawn: () => this.spawn(), pulse: () => this.pulse() };
+    return { reset: () => this.reset(), spawn: () => this.spawn() };
   }
 
   destroy() {
@@ -100,18 +99,10 @@ export class ChaosWorld {
     this.report();
   }
 
-  private pulse() {
-    this.pulseFrames = 12;
-  }
-
   private step(ms: number) {
-    applyEnvironment(this.engine, this.objects, this.options);
+    applyEnvironment(this.engine, this.options);
     applyGrab(this.pointer);
-    applyCursorGravity(this.objects, this.pointer);
-    if (this.pulseFrames > 0) {
-      applyPulse(this.objects, this.pointer);
-      this.pulseFrames -= 1;
-    }
+    applyCursorForces(this.objects, this.pointer, this.options);
     let remaining = Math.min(33, ms);
     while (remaining > 0) {
       const slice = Math.min(1000 / 60, remaining);

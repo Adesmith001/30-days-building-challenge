@@ -13,7 +13,13 @@ TODO: optional later polish could add collision audio, fragmentation, and dashbo
 
 Refactor pass:
 - Split the 693-line `App.tsx` into focused modules; no source file is over 200 lines.
-- Reduced Day 1 to the first simpler PRD: cursor gravity, gravity cycle, wind, zero-G, spawn, pulse, reset, clean/about/debug.
+- Reduced Day 1 to the pasted Day 01 PRD: stir, attract, repel, gravity toggle, spawn, reset, about, and debug.
 - Changed the heading to centered `Cursor Chaos`.
 - Dialed rendering down for smoothness: 24 desktop starting bodies, 16 mobile, 50 max, lower pixel ratio, lighter geometry and shadows, capped runaway velocities.
 - Verified with `npm test`, `npm run build`, the web-game Playwright verifier, and desktop/mobile screenshots.
+
+PRD verification pass:
+- Added `vercel.json` for SPA rewrites and basic deploy headers.
+- Added Open Graph/Twitter screenshot metadata in `index.html` and the share image at `public/og.svg`.
+- Rechecked mobile layout at 390px wide; the header compacts and controls become a two-column grid.
+- Browser PRD pass exercised attract, repel, gravity off, object spawn, debug, and pointer movement with no console errors.

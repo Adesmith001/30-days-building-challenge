@@ -1,29 +1,40 @@
 import Matter from "matter-js";
-import { clamp, gravityVector, windVector } from "./physics";
+import { clamp, gravityVector } from "./physics";
 import { CURSOR_RADIUS } from "./constants";
 import type { ChaosObject, PointerState, WorldOptions } from "./types";
 
-export function applyEnvironment(engine: Matter.Engine, objects: ChaosObject[], options: WorldOptions) {
-  const gravity = options.zeroG ? { x: 0, y: 0 } : gravityVector(options.gravity);
+export function applyEnvironment(engine: Matter.Engine, options: WorldOptions) {
+  const gravity = gravityVector(options.gravityOn);
   engine.gravity.x = gravity.x;
   engine.gravity.y = gravity.y;
-  engine.gravity.scale = options.zeroG ? 0 : 0.00082;
-
-  const wind = windVector(options.wind);
-  if (!wind.x && !wind.y) return;
-  for (const item of objects) Matter.Body.applyForce(item.body, item.body.position, wind);
+  engine.gravity.scale = options.gravityOn ? 0.00082 : 0;
 }
 
-export function applyCursorGravity(objects: ChaosObject[], pointer: PointerState) {
+export function applyCursorForces(objects: ChaosObject[], pointer: PointerState, options: WorldOptions) {
   if (!pointer.active) return;
   for (const item of objects) {
     if (item.body === pointer.grabBody) continue;
-    const dx = pointer.x - item.body.position.x;
-    const dy = pointer.y - item.body.position.y;
+    const dx = item.body.position.x - pointer.x;
+    const dy = item.body.position.y - pointer.y;
     const distance = Math.max(12, Math.hypot(dx, dy));
     if (distance > CURSOR_RADIUS) continue;
-    const pull = ((1 - distance / CURSOR_RADIUS) * 0.00028) / Math.max(0.8, item.body.mass);
-    Matter.Body.applyForce(item.body, item.body.position, { x: (dx / distance) * pull, y: (dy / distance) * pull });
+    const proximity = 1 - distance / CURSOR_RADIUS;
+    const held = pointer.down ? 2.1 : 1;
+    const mass = Math.max(0.8, item.body.mass);
+
+    if (options.mode === "stir") {
+      Matter.Body.applyForce(item.body, item.body.position, {
+        x: (pointer.vx * proximity * 0.000095 * held) / mass,
+        y: (pointer.vy * proximity * 0.000095 * held) / mass,
+      });
+    } else {
+      const direction = options.mode === "repel" ? 1 : -1;
+      const strength = (0.00013 + proximity * 0.00024) * held;
+      Matter.Body.applyForce(item.body, item.body.position, {
+        x: (dx / distance) * strength * direction,
+        y: (dy / distance) * strength * direction,
+      });
+    }
   }
 }
 
@@ -34,19 +45,6 @@ export function applyGrab(pointer: PointerState) {
     y: pointer.y + pointer.grabOffsetY,
   });
   Matter.Body.setVelocity(pointer.grabBody, { x: pointer.vx * 0.1, y: pointer.vy * 0.1 });
-}
-
-export function applyPulse(objects: ChaosObject[], pointer: PointerState) {
-  for (const item of objects) {
-    const dx = item.body.position.x - pointer.x;
-    const dy = item.body.position.y - pointer.y;
-    const distance = Math.max(1, Math.hypot(dx, dy));
-    if (distance > 300) continue;
-    Matter.Body.applyForce(item.body, item.body.position, {
-      x: (dx / distance) * 0.012,
-      y: (dy / distance) * 0.012,
-    });
-  }
 }
 
 export function containObjects(objects: ChaosObject[], width: number, height: number) {

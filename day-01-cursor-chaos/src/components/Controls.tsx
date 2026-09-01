@@ -1,13 +1,8 @@
 import { MAX_OBJECTS } from "../constants";
-import { gravityLabel, type GravityState, type WindState } from "../physics";
+import { gravityLabel, type CursorMode } from "../physics";
 import type { WorldApi, WorldStats } from "../types";
 
-function windLabel(wind: WindState) {
-  if (wind === "right") return "RIGHT";
-  if (wind === "left") return "LEFT";
-  if (wind === "up") return "UPDRAFT";
-  return "CALM";
-}
+const modes: CursorMode[] = ["stir", "attract", "repel"];
 
 export function Topbar({ onAbout, onReset }: { onAbout: () => void; onReset: () => void }) {
   return (
@@ -25,33 +20,33 @@ export function Topbar({ onAbout, onReset }: { onAbout: () => void; onReset: () 
 
 export function BottomControls({
   api,
-  gravity,
-  wind,
-  zeroG,
+  mode,
+  gravityOn,
   stats,
+  onMode,
   onGravity,
-  onWind,
-  onZeroG,
-  onClean,
+  onReset,
 }: {
   api: WorldApi;
-  gravity: GravityState;
-  wind: WindState;
-  zeroG: boolean;
+  mode: CursorMode;
+  gravityOn: boolean;
   stats: WorldStats;
+  onMode: (mode: CursorMode) => void;
   onGravity: () => void;
-  onWind: () => void;
-  onZeroG: () => void;
-  onClean: () => void;
+  onReset: () => void;
 }) {
   return (
     <div className="bottombar">
-      <button type="button" onClick={onGravity}>GRAVITY: {gravityLabel(gravity)}</button>
-      <button type="button" onClick={onWind}>WIND: {windLabel(wind)}</button>
-      <button type="button" className={zeroG ? "active" : ""} onClick={onZeroG}>ZERO-G</button>
+      {modes.map((item) => (
+        <button key={item} type="button" className={mode === item ? "active" : ""} onClick={() => onMode(item)} aria-pressed={mode === item}>
+          {item.toUpperCase()}
+        </button>
+      ))}
+      <button type="button" className={!gravityOn ? "active" : ""} onClick={onGravity} aria-pressed={!gravityOn}>
+        GRAVITY {gravityLabel(gravityOn)}
+      </button>
       <button type="button" onClick={api.spawn} disabled={stats.objects >= MAX_OBJECTS}>+ OBJECT</button>
-      <button type="button" onClick={api.pulse}>PULSE</button>
-      <button type="button" onClick={onClean}>CLEAN</button>
+      <button type="button" onClick={onReset}>RESET</button>
     </div>
   );
 }
@@ -67,22 +62,20 @@ export function StatusLine({ stats }: { stats: WorldStats }) {
 }
 
 export function DebugHud({
-  gravity,
-  wind,
-  zeroG,
+  mode,
+  gravityOn,
   stats,
 }: {
-  gravity: GravityState;
-  wind: WindState;
-  zeroG: boolean;
+  mode: CursorMode;
+  gravityOn: boolean;
   stats: WorldStats;
 }) {
   return (
     <div className="debug-hud">
       <span>OBJECTS {stats.objects}</span>
       <span>FPS {stats.fps}</span>
-      <span>GRAVITY {zeroG ? "ZERO-G" : gravityLabel(gravity)}</span>
-      <span>WIND {windLabel(wind)}</span>
+      <span>MODE {mode.toUpperCase()}</span>
+      <span>GRAVITY {gravityLabel(gravityOn)}</span>
     </div>
   );
 }
