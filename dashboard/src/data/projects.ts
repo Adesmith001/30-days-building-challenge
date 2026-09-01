@@ -26,7 +26,8 @@ export const projects: Project[] = [
   {
     day: 1,
     title: "Cursor Chaos",
-    tagline: "A browser physics experiment where your cursor becomes part of the simulation.",
+    tagline:
+      "A browser physics experiment where your cursor becomes part of the simulation.",
     description:
       "Cursor Chaos turns the pointer into a force inside a Matter.js and Three.js playground. Stir, attract, repel, toggle gravity, and drop new objects into a monochrome physics system.",
     date: "2026-09-01",
@@ -35,13 +36,13 @@ export const projects: Project[] = [
     images: [
       {
         src: "/projects/day-01/cursor-chaos.svg",
-        alt: "Cursor Chaos project preview"
-      }
+        alt: "Cursor Chaos project preview",
+      },
     ],
-    liveUrl: "/day-01-cursor-chaos/",
+    liveUrl: "https://day-1-cursor-chaos.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building",
-    twitterUrl: "",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2094816204133159369?s=20",
     learned:
-      "The useful version came from reducing the simulation to a few strong inputs, splitting the large app file into focused modules, and tuning the canvas for mobile performance."
-  }
+      "I learned how to sync Matter.js physics with Three.js rendering, turn cursor movement into real-time forces, and keep the simulation smooth by separating high-frequency physics updates from React state.",
+  },
 ];
