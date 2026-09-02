@@ -68,27 +68,27 @@ export const projects: Project[] = [
     ],
     images: [
       {
-        src: "/projects/day-02/image1.png",
+        src: "/projects/day-02/image1.jpg",
         alt: "Meeting Cost project preview",
       },
       {
-        src: "/projects/day-02/image2.png",
+        src: "/projects/day-02/image2.jpg",
         alt: "Meeting Cost project preview",
       },
       {
-        src: "/projects/day-02/image3.png",
+        src: "/projects/day-02/image3.jpg",
         alt: "Meeting Cost project preview",
       },
       {
-        src: "/projects/day-02/image4.png",
+        src: "/projects/day-02/image4.jpg",
         alt: "Meeting Cost project preview",
       },
       {
-        src: "/projects/day-02/image5.png",
+        src: "/projects/day-02/image5.jpg",
         alt: "Meeting Cost project preview",
       },
       {
-        src: "/projects/day-02/image6.png",
+        src: "/projects/day-02/image6.jpg",
         alt: "Meeting Cost project preview",
       }
     ],
