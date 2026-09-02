@@ -66,9 +66,35 @@ export const projects: Project[] = [
       "LocalStorage",
       "html-to-image",
     ],
-    images: [],
+    images: [
+      {
+        src: "/projects/day-02/image1.png",
+        alt: "Meeting Cost project preview",
+      },
+      {
+        src: "/projects/day-02/image2.png",
+        alt: "Meeting Cost project preview",
+      },
+      {
+        src: "/projects/day-02/image3.png",
+        alt: "Meeting Cost project preview",
+      },
+      {
+        src: "/projects/day-02/image4.png",
+        alt: "Meeting Cost project preview",
+      },
+      {
+        src: "/projects/day-02/image5.png",
+        alt: "Meeting Cost project preview",
+      },
+      {
+        src: "/projects/day-02/image6.png",
+        alt: "Meeting Cost project preview",
+      }
+    ],
     liveUrl: "https://day-2-meeting-cost.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2095163490214228275",
     learned:
       "I learned how to turn salary and working-hour inputs into a live meeting burn rate, keep elapsed time accurate with real timestamps, persist meeting history locally, and export a receipt view as an image without sending private salary data outside the browser.",
   },
