@@ -5,6 +5,10 @@ import type {
   AttendeeDraft,
   SalaryPeriod,
 } from "../../types/meeting";
+import {
+  formatNumberInput,
+  parseNumberInput,
+} from "../../lib/inputFormatting";
 import { Button } from "../ui/Button";
 import { IconButton } from "../ui/IconButton";
 import { Modal } from "../ui/Modal";
@@ -67,14 +71,14 @@ export function AddAttendeeModal({
 
       <Field label="SALARY">
         <input
-          type="number"
-          min="0"
-          placeholder="30000000"
-          value={draft.salary || ""}
+          type="text"
+          inputMode="numeric"
+          placeholder="30,000,000"
+          value={formatNumberInput(draft.salary)}
           onChange={(event) =>
             setDraft({
               ...draft,
-              salary: Number(event.target.value) || 0,
+              salary: parseNumberInput(event.target.value),
             })
           }
         />

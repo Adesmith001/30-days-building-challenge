@@ -2,6 +2,10 @@ import { Trash2 } from "lucide-react";
 
 import { hourlyRate } from "../../lib/calculations";
 import { formatMoney } from "../../lib/formatting";
+import {
+  formatNumberInput,
+  parseNumberInput,
+} from "../../lib/inputFormatting";
 import type {
   Attendee,
   Currency,
@@ -43,14 +47,15 @@ export function AttendeeRow({
       <MobileLabel>SALARY</MobileLabel>
 
       <input
-        type="number"
-        min="0"
-        value={attendee.salary || ""}
+        type="text"
+        inputMode="numeric"
+        value={formatNumberInput(attendee.salary)}
         onChange={(event) =>
           onChange({
-            salary: Number(event.target.value) || 0,
+            salary: parseNumberInput(event.target.value),
           })
         }
+        placeholder="12,000,000"
         className="min-w-0 border-b border-black/20 bg-transparent px-2 font-mono outline-none md:border-b-0 md:border-r md:px-4 md:text-right"
       />
 
