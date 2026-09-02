@@ -49,4 +49,27 @@ export const projects: Project[] = [
     learned:
       "I learned how to sync Matter.js physics with Three.js rendering, turn cursor movement into real-time forces, and keep the simulation smooth by separating high-frequency physics updates from React state.",
   },
+  {
+    day: 2,
+    title: "Meeting Cost",
+    tagline:
+      "A live calculator that shows how much money a meeting consumes as it happens.",
+    description:
+      "Meeting Cost converts attendee salaries into an hourly burn rate, tracks meeting time from real timestamps, and produces a local receipt with history, efficiency scoring, and export support.",
+    date: "2026-09-02",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Motion",
+      "LocalStorage",
+      "html-to-image",
+    ],
+    images: [],
+    liveUrl: "https://day-2-meeting-cost.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    learned:
+      "I learned how to turn salary and working-hour inputs into a live meeting burn rate, keep elapsed time accurate with real timestamps, persist meeting history locally, and export a receipt view as an image without sending private salary data outside the browser.",
+  },
 ];
