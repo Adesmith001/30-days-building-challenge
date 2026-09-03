@@ -139,7 +139,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-3-blink.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
-    twitterUrl: "https://x.com/yourcoderboy18/status/2094330216738873724",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2095461828323090522",
     learned:
       "I learned how to build timed visual-memory interactions, adjust difficulty from round performance, persist detailed session records locally, and tailor generated stimulus content with Nigerian states, weather, music, and store items.",
   },
