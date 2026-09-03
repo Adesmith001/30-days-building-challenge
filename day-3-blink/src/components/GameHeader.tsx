@@ -1,7 +1,10 @@
 import {
   Bolt,
+  Menu,
   Settings,
+  X,
 } from "lucide-react";
+import { useState } from "react";
 import { formatScore } from "../lib/utils";
 
 type Props = {
@@ -23,6 +26,8 @@ export function GameHeader({
   onRecords,
   onAbout,
 }: Props) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   if (!gameplay) {
     return (
       <header className="border-b border-slate-300">
@@ -37,7 +42,7 @@ export function GameHeader({
             BLINK
           </p>
 
-          <nav className="flex justify-end gap-6 font-mono text-xs">
+          <nav className="relative flex justify-end gap-6 font-mono text-xs">
             <button
               type="button"
               onClick={onRecords}
@@ -62,6 +67,52 @@ export function GameHeader({
             >
               SOURCE ↗
             </a>
+
+            <button
+              type="button"
+              onClick={() => setMenuOpen((open) => !open)}
+              className="grid size-10 place-items-center md:hidden"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+            >
+              {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
+
+            {menuOpen && (
+              <div className="absolute right-0 top-12 z-10 w-48 border border-slate-300 bg-[#f8f7f5] p-2 shadow-lg md:hidden">
+                <button
+                  type="button"
+                  onClick={() => {
+                    onRecords?.();
+                    setMenuOpen(false);
+                  }}
+                  className="block w-full px-3 py-3 text-left"
+                >
+                  RECORDS
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    onAbout?.();
+                    setMenuOpen(false);
+                  }}
+                  className="block w-full px-3 py-3 text-left"
+                >
+                  ABOUT
+                </button>
+
+                <a
+                  href="https://github.com/Adesmith001/30-days-building-challenge"
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => setMenuOpen(false)}
+                  className="block px-3 py-3"
+                >
+                  SOURCE ↗
+                </a>
+              </div>
+            )}
           </nav>
         </div>
       </header>

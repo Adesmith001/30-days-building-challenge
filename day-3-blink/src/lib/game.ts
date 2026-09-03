@@ -72,7 +72,34 @@ function analyticsStimulus(): Stimulus {
 function checkoutStimulus(): Stimulus {
   const item = randomItem(checkoutItems);
   const total = randomInt(18, 94) * 1000;
-  const label = `₦${total.toLocaleString()}`;
+  const totalLabel = `₦${total.toLocaleString()}`;
+  const buttonColour = randomItem(colours);
+  const askColour = Math.random() > 0.5;
+
+  const question: Question = askColour
+    ? {
+        prompt: "WHAT COLOUR WAS THE MAIN BUTTON?",
+        category: "colour",
+        correctAnswer: buttonColour,
+        options: makeOptions(
+          buttonColour,
+          shuffle(
+            colours.filter((colour) => colour !== buttonColour),
+          ),
+        ),
+        focusKey: "buttonColour",
+      }
+    : {
+        prompt: "WHAT WAS THE TOTAL?",
+        category: "number",
+        correctAnswer: totalLabel,
+        options: makeOptions(totalLabel, [
+          `₦${(total + 5000).toLocaleString()}`,
+          `₦${Math.max(1000, total - 7000).toLocaleString()}`,
+          `₦${(total + 12000).toLocaleString()}`,
+        ]),
+        focusKey: "total",
+      };
 
   return {
     id: crypto.randomUUID(),
@@ -80,20 +107,10 @@ function checkoutStimulus(): Stimulus {
     data: {
       item,
       quantity: randomInt(1, 3),
-      total: label,
-      buttonColour: randomItem(colours),
+      total: totalLabel,
+      buttonColour,
     },
-    question: {
-      prompt: "WHAT WAS THE TOTAL?",
-      category: "number",
-      correctAnswer: label,
-      options: makeOptions(label, [
-        `₦${(total + 5000).toLocaleString()}`,
-        `₦${Math.max(1000, total - 7000).toLocaleString()}`,
-        `₦${(total + 12000).toLocaleString()}`,
-      ]),
-      focusKey: "total",
-    },
+    question,
   };
 }
 
@@ -126,8 +143,9 @@ function flightStimulus(): Stimulus {
 }
 
 function musicStimulus(): Stimulus {
-  const song = randomItem(songNames);
-  const artist = randomItem(artists);
+  const trackIndex = randomInt(0, songNames.length - 1);
+  const song = songNames[trackIndex];
+  const artist = artists[trackIndex];
 
   return {
     id: crypto.randomUUID(),
