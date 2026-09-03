@@ -18,7 +18,9 @@ import {
   getNextExposure,
 } from "./lib/game";
 import {
+  loadRecords,
   loadStats,
+  saveRecord,
   saveStats,
 } from "./lib/storage";
 import { IntroScreen } from "./components/IntroScreen";
@@ -29,7 +31,10 @@ import { StimulusRenderer } from "./components/StimulusRenderer";
 import { QuestionScreen } from "./components/QuestionScreen";
 import { FeedbackScreen } from "./components/FeedbackScreen";
 import { ResultsScreen } from "./components/ResultScreen";
+import { RecordsScreen } from "./components/RecordsScreen";
 import { SettingsModal } from "./components/SettingsModal";
+import { AboutPanel } from "./components/AboutPanel";
+import { playTone } from "./lib/sound";
 
 const TOTAL_ROUNDS = 10;
 
@@ -48,10 +53,12 @@ export default function App() {
   const [countdown, setCountdown] = useState("3");
   const [results, setResults] = useState<RoundResult[]>([]);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
   const [sound, setSound] = useState(false);
   const [challenge, setChallenge] = useState(false);
 
   const [storedStats, setStoredStats] = useState(loadStats);
+  const [records, setRecords] = useState(loadRecords);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   const startGame = (faster = false) => {
@@ -140,9 +147,21 @@ export default function App() {
     };
 
     saveStats(updated);
+    setRecords(
+      saveRecord({
+        id: crypto.randomUUID(),
+        playedAt: new Date().toISOString(),
+        score,
+        correct: results.filter((result) => result.correct).length,
+        bestStreak,
+        threshold: shortest,
+        challenge,
+        results,
+      }),
+    );
     setStoredStats(updated);
     setPhase("results");
-  }, [bestStreak, results, score, storedStats]);
+  }, [bestStreak, challenge, results, score, storedStats]);
 
   useEffect(() => {
     if (phase !== "reveal") {
@@ -165,7 +184,7 @@ export default function App() {
     return () => window.clearTimeout(timer);
   }, [finishGame, phase, round]);
 
-  const handleAnswer = (option: AnswerOption) => {
+  const handleAnswer = useCallback((option: AnswerOption) => {
     if (!stimulus || selected !== null) {
       return;
     }
@@ -188,6 +207,13 @@ export default function App() {
         Math.max(value, nextStreak),
       );
     }
+
+    if (sound) {
+  playTone(
+    correct ? 720 : 220,
+    0.1,
+  );
+}
 
     setStreak(nextStreak);
     setLastCorrect(correct);
@@ -216,7 +242,35 @@ export default function App() {
     );
 
     setPhase("feedback");
-  };
+  }, [challenge, exposure, round, selected, sound, streak, stimulus]);
+
+  useEffect(() => {
+    if (
+      phase !== "question" ||
+      !stimulus ||
+      selected !== null
+    ) {
+      return;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const index = Number(event.key) - 1;
+
+      if (index < 0 || index > 3) {
+        return;
+      }
+
+      const option = stimulus.question.options[index];
+
+      if (option) {
+        handleAnswer(option);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleAnswer, phase, selected, stimulus]);
 
   const handleShare = async () => {
     if (!resultsRef.current) {
@@ -261,10 +315,18 @@ export default function App() {
   if (phase === "intro") {
     return (
       <div className="min-h-screen bg-[#f8f7f5] text-neutral-900">
-        <GameHeader />
+        <GameHeader
+          onRecords={() => setPhase("records")}
+          onAbout={() => setAboutOpen(true)}
+        />
 
         <IntroScreen
           onStart={() => startGame(false)}
+        />
+
+        <AboutPanel
+          open={aboutOpen}
+          onClose={() => setAboutOpen(false)}
         />
       </div>
     );
@@ -287,6 +349,17 @@ export default function App() {
         onReplay={() => startGame(false)}
         onFaster={() => startGame(true)}
         onShare={handleShare}
+        onMenu={() => setPhase("intro")}
+      />
+    );
+  }
+
+  if (phase === "records") {
+    return (
+      <RecordsScreen
+        records={records}
+        stats={storedStats}
+        onBack={() => setPhase("intro")}
       />
     );
   }

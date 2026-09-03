@@ -44,7 +44,7 @@ export const projects: Project[] = [
       },
     ],
     liveUrl: "https://day-1-cursor-chaos.vercel.app/",
-    githubUrl: "https://github.com/Adesmith001/30-days-building",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
     twitterUrl: "https://x.com/yourcoderboy18/status/2094816204133159369?s=20",
     learned:
       "I learned how to sync Matter.js physics with Three.js rendering, turn cursor movement into real-time forces, and keep the simulation smooth by separating high-frequency physics updates from React state.",
@@ -93,7 +93,7 @@ export const projects: Project[] = [
       }
     ],
     liveUrl: "https://day-2-meeting-cost.vercel.app/",
-    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge-challenge",
     twitterUrl: "https://x.com/yourcoderboy18/status/2095163490214228275",
     learned:
       "I learned how to turn salary and working-hour inputs into a live meeting burn rate, keep elapsed time accurate with real timestamps, persist meeting history locally, and export a receipt view as an image without sending private salary data outside the browser.",

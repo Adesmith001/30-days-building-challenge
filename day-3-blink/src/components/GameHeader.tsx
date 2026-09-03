@@ -10,6 +10,8 @@ type Props = {
   streak?: number;
   gameplay?: boolean;
   onSettings?: () => void;
+  onRecords?: () => void;
+  onAbout?: () => void;
 };
 
 export function GameHeader({
@@ -18,6 +20,8 @@ export function GameHeader({
   streak = 0,
   gameplay = false,
   onSettings,
+  onRecords,
+  onAbout,
 }: Props) {
   if (!gameplay) {
     return (
@@ -34,15 +38,24 @@ export function GameHeader({
           </p>
 
           <nav className="flex justify-end gap-6 font-mono text-xs">
-            <a
-              href="#about"
+            <button
+              type="button"
+              onClick={onRecords}
+              className="hidden md:block"
+            >
+              RECORDS
+            </button>
+
+            <button
+              type="button"
+              onClick={onAbout}
               className="hidden md:block"
             >
               ABOUT
-            </a>
+            </button>
 
             <a
-              href="https://github.com/"
+              href="https://github.com/Adesmith001/30-days-building-challenge"
               target="_blank"
               rel="noreferrer"
               className="hidden md:block"

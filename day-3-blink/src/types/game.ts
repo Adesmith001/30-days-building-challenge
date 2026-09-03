@@ -19,7 +19,8 @@ export type GamePhase =
   | "question"
   | "feedback"
   | "reveal"
-  | "results";
+  | "results"
+  | "records";
 
 export type AnswerOption = {
   id: string;
@@ -52,6 +53,17 @@ export type RoundResult = {
   correct: boolean;
   exposure: number;
   points: number;
+};
+
+export type SessionRecord = {
+  id: string;
+  playedAt: string;
+  score: number;
+  correct: number;
+  bestStreak: number;
+  threshold: number;
+  challenge: boolean;
+  results: RoundResult[];
 };
 
 export type GameStats = {

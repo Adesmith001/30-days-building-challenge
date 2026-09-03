@@ -27,6 +27,7 @@ type Props = {
   onReplay: () => void;
   onFaster: () => void;
   onShare: () => void;
+  onMenu: () => void;
 };
 
 const categories: {
@@ -52,13 +53,14 @@ export const ResultsScreen = forwardRef<HTMLDivElement, Props>(
       onReplay,
       onFaster,
       onShare,
+      onMenu,
     },
     ref,
   ) {
     const accuracy = Math.round((correct / 10) * 100);
 
     return (
-      <main className="min-h-screen bg-black px-5 py-16 text-white">
+      <main className="min-h-screen bg-white px-5 py-16 text-neutral-900">
         <div
           ref={ref}
           className="mx-auto max-w-6xl"
@@ -167,6 +169,14 @@ export const ResultsScreen = forwardRef<HTMLDivElement, Props>(
           >
             SHARE RESULT
             <Share2 className="size-4" />
+          </button>
+
+          <button
+            type="button"
+            onClick={onMenu}
+            className="flex items-center gap-4 border border-slate-300 px-7 py-4 font-mono text-xs text-neutral-900"
+          >
+            GO TO MENU
           </button>
         </div>
       </main>
