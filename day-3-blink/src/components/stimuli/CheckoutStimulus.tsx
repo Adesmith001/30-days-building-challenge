@@ -11,12 +11,44 @@ type Props = {
   reveal?: boolean;
 };
 
+const colourValues: Record<string, string> = {
+  Blue: "#2563eb",
+  Violet: "#7c3aed",
+  Green: "#16a34a",
+  Orange: "#ea580c",
+  Red: "#dc2626",
+  Yellow: "#eab308",
+  Pink: "#db2777",
+  Teal: "#0d9488",
+  Indigo: "#4f46e5",
+  Cyan: "#0891b2",
+  Magenta: "#c026d3",
+  Crimson: "#be123c",
+  Coral: "#f97316",
+  Maroon: "#9f1239",
+  Navy: "#1e3a8a",
+  Mint: "#10b981",
+  Lime: "#65a30d",
+  Gold: "#ca8a04",
+  Silver: "#64748b",
+  Charcoal: "#374151",
+  Ivory: "#fffff0",
+  Turquoise: "#14b8a6",
+  Lavender: "#a78bfa",
+  Pearl: "#e2e8f0",
+  Plum: "#7e22ce",
+};
+
 export function CheckoutStimulus({
   stimulus,
   reveal = false,
 }: Props) {
   const { data, question } = stimulus;
-  const highlight = reveal && question.focusKey === "total";
+  const highlight = reveal && [
+    "total",
+    "buttonColour",
+  ].includes(question.focusKey);
+  const buttonColour = String(data.buttonColour);
 
   return (
     <div className="w-full max-w-3xl border border-slate-300 bg-white p-6 md:p-10">
@@ -87,7 +119,10 @@ export function CheckoutStimulus({
 
           <button
             type="button"
-            className="mt-8 w-full bg-blue-700 px-4 py-4 text-sm font-semibold text-white"
+            className="mt-8 w-full px-4 py-4 text-sm font-semibold text-white"
+            style={{
+              backgroundColor: colourValues[buttonColour] ?? "#2563eb",
+            }}
           >
             Pay now
           </button>

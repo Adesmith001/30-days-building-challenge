@@ -98,4 +98,49 @@ export const projects: Project[] = [
     learned:
       "I learned how to turn salary and working-hour inputs into a live meeting burn rate, keep elapsed time accurate with real timestamps, persist meeting history locally, and export a receipt view as an image without sending private salary data outside the browser.",
   },
+  {
+    day: 3,
+    title: "Blink",
+    tagline:
+      "A fast visual memory game that measures how much detail you can catch in an instant.",
+    description:
+      "Blink presents short visual scenes, then tests recall across numbers, text, colours, and positions. Adaptive exposure times reward accurate answers with faster rounds, while local records track scores, streaks, category accuracy, and latency across sessions.",
+    date: "2026-09-03",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Motion",
+      "LocalStorage",
+      "html-to-image",
+    ],
+    images: [
+      {
+        src: "/projects/day-03/image1.png",
+        alt: "Blink project preview",
+      },
+      {
+        src: "/projects/day-03/image2.png",
+        alt: "Blink project preview",
+      },
+      {
+        src: "/projects/day-03/image3.png",
+        alt: "Blink project preview",
+      },
+      {
+        src: "/projects/day-03/image4.png",
+        alt: "Blink project preview",
+      },
+      {
+        src: "/projects/day-03/image.png",
+        alt: "Blink project preview",
+      },
+    ],
+    liveUrl: "https://day-3-blink.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "https://x.com/yourcoderboy18",
+    learned:
+      "I learned how to build timed visual-memory interactions, adjust difficulty from round performance, persist detailed session records locally, and tailor generated stimulus content with Nigerian states, weather, music, and store items.",
+  },
 ];
