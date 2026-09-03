@@ -41,7 +41,7 @@ export function Header({
         </button>
 
         <a
-          href="https://github.com/Adesmith001/30-days-building"
+          href="https://github.com/Adesmith001/30-days-building-challenge"
           target="_blank"
           rel="noreferrer"
           className="hover:underline"
