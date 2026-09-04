@@ -4,6 +4,24 @@ import type {
   ScoredRound,
 } from '../types/game'
 
+export function beep() {
+  const context = new AudioContext()
+  const oscillator = context.createOscillator()
+  const gain = context.createGain()
+
+  oscillator.frequency.value = 880
+  gain.gain.setValueAtTime(0.08, context.currentTime)
+  gain.gain.exponentialRampToValueAtTime(
+    0.001,
+    context.currentTime + 0.08,
+  )
+
+  oscillator.connect(gain)
+  gain.connect(context.destination)
+  oscillator.start()
+  oscillator.stop(context.currentTime + 0.08)
+}
+
 const STORAGE_KEY =
   'reflex-lab-naija-pb-v1'
 
