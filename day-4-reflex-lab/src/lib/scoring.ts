@@ -1,3 +1,8 @@
+import type {
+  RoundInput,
+  ScoredRound,
+} from '../types/game'
+
 const pick = (items: string[]) => {
   return items[
     Math.floor(Math.random() * items.length)
@@ -141,4 +146,45 @@ export function comboCopy(
     return 'GBAM! E DON FINISH.'
   }
   return ''
+}
+
+export function scoreRound(
+  input: RoundInput,
+  combo: number,
+  _rounds: ScoredRound[],
+  modePb: number | null,
+): ScoredRound {
+  const successful =
+    input.valid &&
+    input.falseStart !== true &&
+    input.correct !== false
+
+  const speedPoints =
+    successful && input.reactionMs !== undefined
+      ? Math.max(0, 500 - input.reactionMs)
+      : 0
+
+  const comboCount = successful ? combo + 1 : 0
+  const comboMultiplier = successful
+    ? 1 + Math.min(combo, 5) * 0.1
+    : 0
+  const points = Math.round(
+    speedPoints * comboMultiplier,
+  )
+
+  return {
+    ...input,
+    id: crypto.randomUUID(),
+    points,
+    speedPoints,
+    bonus: 0,
+    comboCount,
+    comboMultiplier,
+    ...(successful
+      ? reactionCopy(input.reactionMs)
+      : failureCopy(input.reason)),
+    ...(modePb !== null && input.reactionMs !== undefined
+      ? { deltaVsPb: input.reactionMs - modePb }
+      : {}),
+  }
 }
