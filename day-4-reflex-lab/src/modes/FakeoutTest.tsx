@@ -15,10 +15,6 @@ import {
 } from '../components/ReactionResult'
 
 import {
-  waitDelay,
-} from '../data/gameConfig'
-
-import {
   useGameInput,
 } from '../hooks/useGameInput'
 
@@ -26,10 +22,6 @@ import type {
   RoundInput,
   ScoredRound,
 } from '../types/game'
-
-type Direction =
-  | 'left'
-  | 'right'
 
 type Props = {
   score: number
@@ -44,7 +36,15 @@ type Props = {
   ) => void
 }
 
-export function ChoiceTest({
+const DECOYS = [
+  'NOW?',
+  'OYA—',
+  'ALMOST',
+  'WAIT',
+  'READY?',
+]
+
+export function FakeoutTest({
   score,
   combo,
   onRound,
@@ -59,16 +59,16 @@ export function ChoiceTest({
     phase,
     setPhase,
   ] = useState<
-    'wait' |
-    'active' |
-    'feedback'
+    | 'wait'
+    | 'decoy'
+    | 'go'
+    | 'feedback'
   >('wait')
 
   const [
-    direction,
-    setDirection,
-  ] =
-    useState<Direction>('left')
+    message,
+    setMessage,
+  ] = useState('WAIT')
 
   const [
     result,
@@ -83,272 +83,281 @@ export function ChoiceTest({
     setClean,
   ] = useState(0)
 
-  const timer =
-    useRef<number | null>(
-      null,
-    )
+  const [
+    decoyCount,
+    setDecoyCount,
+  ] = useState(0)
+
+  const timers =
+    useRef<number[]>([])
 
   const startedAt =
     useRef(0)
 
+  const clearTimers = () => {
+    timers.current.forEach(
+      (timer) =>
+        window.clearTimeout(
+          timer,
+        ),
+    )
+
+    timers.current = []
+  }
+
   const arm =
     useCallback(() => {
-      setPhase('wait')
-      setResult(null)
+      clearTimers()
 
-      timer.current =
+      setResult(null)
+      setMessage('WAIT')
+      setPhase('wait')
+      setDecoyCount(0)
+
+      const target =
+        1 +
+        Math.floor(
+          Math.random() * 3,
+        )
+
+      let elapsed =
+        800 +
+        Math.random() * 500
+
+      for (
+        let index = 0;
+        index < target;
+        index += 1
+      ) {
+        timers.current.push(
+          window.setTimeout(
+            () => {
+              setDecoyCount(
+                index + 1,
+              )
+
+              setMessage(
+                DECOYS[
+                  Math.floor(
+                    Math.random() *
+                      DECOYS.length,
+                  )
+                ],
+              )
+
+              setPhase('decoy')
+            },
+            elapsed,
+          ),
+        )
+
+        elapsed += 320
+
+        timers.current.push(
+          window.setTimeout(
+            () => {
+              setMessage('WAIT')
+              setPhase('wait')
+            },
+            elapsed,
+          ),
+        )
+
+        elapsed +=
+          650 +
+          Math.random() * 600
+      }
+
+      timers.current.push(
         window.setTimeout(
           () => {
-            setDirection(
-              Math.random() > 0.5
-                ? 'left'
-                : 'right',
-            )
+            setMessage('GO!')
 
             startedAt.current =
               performance.now()
 
-            setPhase('active')
+            setPhase('go')
           },
-          waitDelay(),
-        )
+          elapsed + 300,
+        ),
+      )
     }, [])
 
   useEffect(() => {
     arm()
 
     return () => {
-      if (timer.current) {
-        window.clearTimeout(
-          timer.current,
-        )
-      }
+      clearTimers()
     }
   }, [arm])
 
-  const choose =
-    useCallback(
-      (
-        choice: Direction,
-      ) => {
-        if (
-          phase === 'feedback'
-        ) {
-          return
-        }
+  const handleInput =
+    useCallback(() => {
+      if (
+        phase === 'feedback'
+      ) {
+        return
+      }
 
-        if (timer.current) {
-          window.clearTimeout(
-            timer.current,
-          )
-        }
+      clearTimers()
 
-        if (phase === 'wait') {
-          const scored =
-            onRound({
-              mode: 'choice',
-              valid: false,
-              falseStart: true,
-              reason:
-                'false-start',
-            })
-
-          setResult(scored)
-          setPhase('feedback')
-
-          timer.current =
-            window.setTimeout(
-              arm,
-              900,
-            )
-
-          return
-        }
-
-        const correct =
-          choice === direction
+      if (phase !== 'go') {
+        const reason =
+          phase === 'decoy'
+            ? 'fakeout'
+            : 'false-start'
 
         const scored =
           onRound({
-            mode: 'choice',
-
-            reactionMs:
-              performance.now() -
-              startedAt.current,
-
-            valid: correct,
-            correct,
-
-            reason: correct
-              ? undefined
-              : 'wrong-choice',
+            mode: 'fakeout',
+            valid: false,
+            falseStart: true,
+            reason,
+            decoys:
+              decoyCount,
           })
 
-        const nextClean =
-          clean +
-          (correct ? 1 : 0)
-
-        setClean(nextClean)
         setResult(scored)
         setPhase('feedback')
 
-        timer.current =
+        timers.current.push(
           window.setTimeout(
-            () => {
-              if (round === 5) {
-                onComplete(
-                  nextClean,
-                )
+            arm,
+            950,
+          ),
+        )
 
-                return
-              }
+        return
+      }
 
-              setRound(
-                (value) =>
-                  value + 1,
+      const scored =
+        onRound({
+          mode: 'fakeout',
+
+          reactionMs:
+            performance.now() -
+            startedAt.current,
+
+          valid: true,
+          correct: true,
+          decoys:
+            decoyCount,
+        })
+
+      const nextClean =
+        clean + 1
+
+      setClean(nextClean)
+      setResult(scored)
+      setPhase('feedback')
+
+      timers.current.push(
+        window.setTimeout(
+          () => {
+            if (round === 5) {
+              onComplete(
+                nextClean,
               )
 
-              arm()
-            },
-            1000,
-          )
-      },
-      [
-        arm,
-        clean,
-        direction,
-        onComplete,
-        onRound,
-        phase,
-        round,
-      ],
-    )
+              return
+            }
+
+            setRound(
+              (value) =>
+                value + 1,
+            )
+
+            arm()
+          },
+          1050,
+        ),
+      )
+    }, [
+      arm,
+      clean,
+      decoyCount,
+      onComplete,
+      onRound,
+      phase,
+      round,
+    ])
 
   useGameInput(
     (key) => {
       if (
-        key === 'ArrowLeft'
+        key === ' ' ||
+        key === 'Enter'
       ) {
-        choose('left')
-      }
-
-      if (
-        key === 'ArrowRight'
-      ) {
-        choose('right')
+        handleInput()
       }
     },
   )
 
   return (
     <GameFrame
-      mode="choice"
+      mode="fakeout"
       round={round}
       score={score}
       combo={combo}
+      active={phase === 'go'}
+      onPointerDown={
+        handleInput
+      }
     >
-      <div
-        className="
-          w-full
-          text-center
-        "
-      >
-        {phase === 'wait' && (
-          <>
-            <h1
-              className="
-                font-mono
-                text-7xl
-                font-black
-                md:text-8xl
-              "
-            >
-              READY?
-            </h1>
-
-            <p
-              className="
-                mt-4
-                text-lg
-                text-[#4f5344]
-              "
-            >
-              No overthink am.
-            </p>
-          </>
-        )}
-
-        {phase ===
-          'active' && (
-          <h1
-            className="
-              text-[9rem]
-              font-black
-              leading-none
-              md:text-[13rem]
-            "
-          >
-            {direction ===
-            'left'
-              ? '←'
-              : '→'}
-          </h1>
-        )}
-
-        {phase ===
-          'feedback' &&
-          result && (
-            <ReactionResult
-              result={result}
-            />
-          )}
-
-        {phase !==
-          'feedback' && (
+      {phase !==
+        'feedback' && (
+        <div className="text-center">
           <div
             className="
-              mx-auto
-              mt-16
-              grid
-              max-w-md
-              grid-cols-2
-              gap-4
+              font-mono
+              text-[10px]
+              tracking-[0.2em]
+              text-[#666a59]
             "
           >
-            <button
-              onPointerDown={() =>
-                choose('left')
-              }
-              className="
-                border
-                border-[#9f9f8f]
-                py-5
-                font-mono
-                text-xl
-                hover:bg-[#e9e6dc]
-              "
-            >
-              ← LEFT
-            </button>
-
-            <button
-              onPointerDown={() =>
-                choose('right')
-              }
-              className="
-                border
-                border-[#9f9f8f]
-                py-5
-                font-mono
-                text-xl
-                hover:bg-[#e9e6dc]
-              "
-            >
-              RIGHT →
-            </button>
+            ONLY REACT TO GO
           </div>
+
+          <h1
+            className={`
+              mt-5
+              text-7xl
+              font-black
+              uppercase
+              tracking-[-0.06em]
+              md:text-9xl
+
+              ${
+                phase ===
+                'decoy'
+                  ? 'text-[#bd360f]'
+                  : ''
+              }
+            `}
+          >
+            {message}
+          </h1>
+
+          <p
+            className="
+              mt-5
+              text-lg
+              text-[#4f5344]
+            "
+          >
+            Anything fit happen.
+            No fall for am.
+          </p>
+        </div>
+      )}
+
+      {phase ===
+        'feedback' &&
+        result && (
+          <ReactionResult
+            result={result}
+          />
         )}
-      </div>
     </GameFrame>
   )
 }

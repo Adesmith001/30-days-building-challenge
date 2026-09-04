@@ -4,8 +4,20 @@ import type {
   ScoredRound,
 } from '../types/game'
 
+let audioContext: AudioContext | null = null
+
+export function initAudio() {
+  audioContext ??= new AudioContext()
+
+  if (audioContext.state === 'suspended') {
+    void audioContext.resume()
+  }
+}
+
 export function beep() {
-  const context = new AudioContext()
+  initAudio()
+
+  const context = audioContext!
   const oscillator = context.createOscillator()
   const gain = context.createGain()
 
