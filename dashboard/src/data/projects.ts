@@ -185,6 +185,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-4-reflex-lab.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl:"https://x.com/yourcoderboy18/status/2095887016147702123",
     learned:
       "I learned how to build timed reaction tests, generate varied stimuli without immediate repeats, use the Web Audio API for playable signals, score combos across different challenge types, and keep personal bests locally in the browser.",
   },
