@@ -89,11 +89,9 @@ export function ModeSelect({
               text-[#55594a]
             "
           >
-            Choose one
-            Nigerian-flavoured
-            stimulus test, or
-            run the full
-            continuous battery.
+            New here? Start with the full battery below
+            to experience every test. You can still jump
+            straight into any mode above.
           </p>
         </div>
 
@@ -114,6 +112,15 @@ export function ModeSelect({
               return (
                 <motion.article
                   key={mode}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => onQuick(mode)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault()
+                      onQuick(mode)
+                    }
+                  }}
                   initial={{
                     opacity: 0,
                     y: 10,
@@ -139,6 +146,12 @@ export function ModeSelect({
                     xl:border-b-0
                     xl:[&:nth-child(2)]:border-r
                     xl:last:border-r-0
+                    cursor-pointer
+                    transition-colors
+                    hover:bg-[#eeece6]
+                    focus-visible:outline
+                    focus-visible:outline-2
+                    focus-visible:outline-offset-[-2px]
                   "
                   style={{
                     borderTop:
@@ -233,6 +246,23 @@ export function ModeSelect({
                     >
                       {item.description}
                     </p>
+
+                    <p
+                      className="
+                        mt-4
+                        border-l-2
+                        pl-3
+                        font-mono
+                        text-xs
+                        leading-5
+                        text-[#687b1a]
+                      "
+                      style={{
+                        borderColor: item.color,
+                      }}
+                    >
+                      {item.challenge}
+                    </p>
                   </div>
 
                   <div
@@ -274,9 +304,25 @@ export function ModeSelect({
                         </div>
                       </div>
 
+                      <span
+                        className="
+                          font-mono
+                          text-[10px]
+                          font-bold
+                          tracking-[0.14em]
+                          text-[#858773]
+                        "
+                      >
+                        {item.difficulty}
+                      </span>
+
                       <button
-                        onClick={() =>
+                        onClick={(event) => {
+                          event.stopPropagation()
                           onQuick(mode)
+                        }}
+                        onPointerDown={(event) =>
+                          event.stopPropagation()
                         }
                         className="
                           font-mono
@@ -297,23 +343,43 @@ export function ModeSelect({
           )}
         </div>
 
-        <button
-          onClick={onFull}
-          className="
-            mt-8
-            w-full
-            bg-[#171717]
-            px-8 py-5
-            font-mono
-            text-sm
-            font-bold
-            tracking-[0.14em]
-            text-white
-            hover:bg-black
-          "
-        >
-          RUN FULL BATTERY →
-        </button>
+        <div className="mt-8">
+          <div
+            className="
+              mb-3
+              flex
+              items-center
+              justify-center
+              gap-3
+              font-mono
+              text-[10px]
+              font-bold
+              tracking-[0.16em]
+              text-[#687b1a]
+            "
+          >
+            <span className="h-px w-10 bg-[#687b1a]" />
+            START HERE
+            <span className="h-px w-10 bg-[#687b1a]" />
+          </div>
+
+          <button
+            onClick={onFull}
+            className="
+              w-full
+              bg-[#171717]
+              px-8 py-5
+              font-mono
+              text-sm
+              font-bold
+              tracking-[0.14em]
+              text-white
+              hover:bg-black
+            "
+          >
+            RUN FULL BATTERY →
+          </button>
+        </div>
       </section>
     </main>
   )

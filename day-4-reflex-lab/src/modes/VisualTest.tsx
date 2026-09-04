@@ -15,6 +15,8 @@ import {
 } from '../components/ReactionResult'
 
 import {
+  nextVariantIndex,
+  VISUAL_VARIANTS,
   waitDelay,
 } from '../data/gameConfig'
 
@@ -73,6 +75,13 @@ export function VisualTest({
     setClean,
   ] = useState(0)
 
+  const [
+    variantIndex,
+    setVariantIndex,
+  ] = useState(0)
+
+  const variantRef = useRef(0)
+
   const timer =
     useRef<number | null>(
       null,
@@ -85,6 +94,14 @@ export function VisualTest({
     useCallback(() => {
       setPhase('wait')
       setResult(null)
+
+      const nextVariant = nextVariantIndex(
+        VISUAL_VARIANTS.length,
+        variantRef.current,
+      )
+
+      variantRef.current = nextVariant
+      setVariantIndex(nextVariant)
 
       timer.current =
         window.setTimeout(
@@ -239,8 +256,7 @@ export function VisualTest({
               text-[#4f5344]
             "
           >
-            Light never
-            come yet.
+            {VISUAL_VARIANTS[variantIndex].cue}
           </p>
         </div>
       )}
@@ -256,7 +272,7 @@ export function VisualTest({
               md:text-9xl
             "
           >
-            UP NEPA!
+            {VISUAL_VARIANTS[variantIndex].signal}
           </h1>
 
           <p
@@ -266,6 +282,9 @@ export function VisualTest({
               text-sm
               tracking-[0.16em]
             "
+            style={{
+              color: VISUAL_VARIANTS[variantIndex].color,
+            }}
           >
             TAP NOW
           </p>

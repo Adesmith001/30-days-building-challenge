@@ -15,6 +15,11 @@ import {
 } from '../components/ReactionResult'
 
 import {
+  FAKEOUT_VARIANTS,
+  nextVariantIndex,
+} from '../data/gameConfig'
+
+import {
   useGameInput,
 } from '../hooks/useGameInput'
 
@@ -35,14 +40,6 @@ type Props = {
     clean: number,
   ) => void
 }
-
-const DECOYS = [
-  'NOW?',
-  'OYA—',
-  'ALMOST',
-  'WAIT',
-  'READY?',
-]
 
 export function FakeoutTest({
   score,
@@ -88,6 +85,8 @@ export function FakeoutTest({
     setDecoyCount,
   ] = useState(0)
 
+  const variantRef = useRef(0)
+
   const timers =
     useRef<number[]>([])
 
@@ -114,6 +113,15 @@ export function FakeoutTest({
       setPhase('wait')
       setDecoyCount(0)
 
+      const nextVariant = nextVariantIndex(
+        FAKEOUT_VARIANTS.length,
+        variantRef.current,
+      )
+
+      variantRef.current = nextVariant
+      const variant =
+        FAKEOUT_VARIANTS[nextVariant]
+
       const target =
         1 +
         Math.floor(
@@ -137,10 +145,10 @@ export function FakeoutTest({
               )
 
               setMessage(
-                DECOYS[
+                variant.decoys[
                   Math.floor(
                     Math.random() *
-                      DECOYS.length,
+                      variant.decoys.length,
                   )
                 ],
               )
@@ -151,7 +159,7 @@ export function FakeoutTest({
           ),
         )
 
-        elapsed += 320
+        elapsed += variant.pause
 
         timers.current.push(
           window.setTimeout(
@@ -171,7 +179,7 @@ export function FakeoutTest({
       timers.current.push(
         window.setTimeout(
           () => {
-            setMessage('GO!')
+            setMessage(variant.goLabel)
 
             startedAt.current =
               performance.now()

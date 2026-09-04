@@ -15,6 +15,8 @@ import {
 } from '../components/ReactionResult'
 
 import {
+  CHOICE_VARIANTS,
+  nextVariantIndex,
   waitDelay,
 } from '../data/gameConfig'
 
@@ -83,6 +85,13 @@ export function ChoiceTest({
     setClean,
   ] = useState(0)
 
+  const [
+    variantIndex,
+    setVariantIndex,
+  ] = useState(0)
+
+  const variantRef = useRef(0)
+
   const timer =
     useRef<number | null>(
       null,
@@ -95,6 +104,14 @@ export function ChoiceTest({
     useCallback(() => {
       setPhase('wait')
       setResult(null)
+
+      const nextVariant = nextVariantIndex(
+        CHOICE_VARIANTS.length,
+        variantRef.current,
+      )
+
+      variantRef.current = nextVariant
+      setVariantIndex(nextVariant)
 
       timer.current =
         window.setTimeout(
@@ -263,7 +280,7 @@ export function ChoiceTest({
                 md:text-8xl
               "
             >
-              READY?
+              {CHOICE_VARIANTS[variantIndex].prompt}
             </h1>
 
             <p
@@ -328,7 +345,7 @@ export function ChoiceTest({
                 hover:bg-[#e9e6dc]
               "
             >
-              ← LEFT
+              ← {CHOICE_VARIANTS[variantIndex].leftLabel}
             </button>
 
             <button
@@ -344,7 +361,7 @@ export function ChoiceTest({
                 hover:bg-[#e9e6dc]
               "
             >
-              RIGHT →
+              {CHOICE_VARIANTS[variantIndex].rightLabel} →
             </button>
           </div>
         )}

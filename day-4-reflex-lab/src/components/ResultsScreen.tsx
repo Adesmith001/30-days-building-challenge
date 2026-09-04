@@ -94,6 +94,25 @@ export function ResultsScreen({
   const profile =
     reflexProfile(rounds)
 
+  const profileEntries =
+    Object.entries(profile).filter(
+      ([label]) => {
+        if (kind === 'full') {
+          return true
+        }
+
+        const mode = rounds[0]?.mode
+        const profileLabel =
+          mode === 'choice'
+            ? 'decision'
+            : mode === 'fakeout'
+              ? 'control'
+              : mode
+
+        return label === profileLabel
+      },
+    )
+
   const rank =
     getRank(total)
 
@@ -619,9 +638,7 @@ export function ResultsScreen({
                 REFLEX PROFILE
               </div>
 
-              {Object.entries(
-                profile,
-              ).map(
+              {profileEntries.map(
                 ([
                   label,
                   value,
