@@ -14,24 +14,29 @@ export function initAudio() {
   }
 }
 
-export function beep() {
+export function beep(
+  frequency = 880,
+  duration = 0.08,
+  wave: OscillatorType = 'sine',
+) {
   initAudio()
 
   const context = audioContext!
   const oscillator = context.createOscillator()
   const gain = context.createGain()
 
-  oscillator.frequency.value = 880
+  oscillator.frequency.value = frequency
+  oscillator.type = wave
   gain.gain.setValueAtTime(0.08, context.currentTime)
   gain.gain.exponentialRampToValueAtTime(
     0.001,
-    context.currentTime + 0.08,
+    context.currentTime + duration,
   )
 
   oscillator.connect(gain)
   gain.connect(context.destination)
   oscillator.start()
-  oscillator.stop(context.currentTime + 0.08)
+  oscillator.stop(context.currentTime + duration)
 }
 
 const STORAGE_KEY =

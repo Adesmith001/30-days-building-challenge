@@ -1,7 +1,15 @@
 import {
+  useState,
+} from 'react'
+
+import {
   Settings,
   SquareTerminal,
 } from 'lucide-react'
+
+import {
+  AboutPanel,
+} from './AboutPanel'
 
 type Props = {
   calibrated?: boolean
@@ -10,6 +18,8 @@ type Props = {
 export function LabHeader({
   calibrated = false,
 }: Props) {
+  const [aboutOpen, setAboutOpen] = useState(false)
+
   return (
     <>
       <header
@@ -75,16 +85,21 @@ export function LabHeader({
             text-[#4a4d3f]
           "
         >
-          <a
+          <button
+            type="button"
+            onClick={() => setAboutOpen(true)}
             className="
               hidden
+              border-0
+              bg-transparent
+              p-0
+              font-inherit
               hover:text-black
               md:inline
             "
-            href="#about"
           >
             ABOUT
-          </a>
+          </button>
 
           <span
             className="
@@ -102,7 +117,7 @@ export function LabHeader({
               hover:text-black
               md:inline
             "
-            href="https://github.com/Adesmith001/30-days-of-building"
+            href="https://github.com/Adesmith001/30-days-building-challenge"
             target="_blank"
             rel="noreferrer"
           >
@@ -187,6 +202,11 @@ export function LabHeader({
             : 'STABLE'}
         </span>
       </div>
+
+      <AboutPanel
+        open={aboutOpen}
+        onClose={() => setAboutOpen(false)}
+      />
     </>
   )
 }

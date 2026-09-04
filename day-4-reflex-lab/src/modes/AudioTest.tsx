@@ -15,6 +15,8 @@ import {
 } from '../components/ReactionResult'
 
 import {
+  AUDIO_VARIANTS,
+  nextVariantIndex,
   waitDelay,
 } from '../data/gameConfig'
 
@@ -77,6 +79,13 @@ export function AudioTest({
     setClean,
   ] = useState(0)
 
+  const [
+    variantIndex,
+    setVariantIndex,
+  ] = useState(0)
+
+  const variantRef = useRef(0)
+
   const timer =
     useRef<number | null>(
       null,
@@ -90,13 +99,28 @@ export function AudioTest({
       setPhase('wait')
       setResult(null)
 
+      const nextVariant = nextVariantIndex(
+        AUDIO_VARIANTS.length,
+        variantRef.current,
+      )
+
+      variantRef.current = nextVariant
+      setVariantIndex(nextVariant)
+
       timer.current =
         window.setTimeout(
           () => {
             startedAt.current =
               performance.now()
 
-            beep()
+            const variant =
+              AUDIO_VARIANTS[variantRef.current]
+
+            beep(
+              variant.frequency,
+              variant.duration,
+              variant.wave,
+            )
 
             setPhase('active')
           },
@@ -242,7 +266,20 @@ export function AudioTest({
             "
           >
             No visual clue.
-            Wait for the tone.
+            Wait for the {AUDIO_VARIANTS[variantIndex].label.toLowerCase()}.
+          </p>
+
+          <p
+            className="
+              mt-4
+              font-mono
+              text-xs
+              font-bold
+              tracking-[0.14em]
+              text-[#687b1a]
+            "
+          >
+            TURN UP YOUR VOLUME
           </p>
         </div>
       )}
@@ -269,7 +306,7 @@ export function AudioTest({
               tracking-[0.18em]
             "
           >
-            SIGNAL_TRANSMITTED
+              {AUDIO_VARIANTS[variantIndex].label}
           </p>
         </div>
       )}

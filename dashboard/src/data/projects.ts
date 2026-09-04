@@ -143,4 +143,49 @@ export const projects: Project[] = [
     learned:
       "I learned how to build timed visual-memory interactions, adjust difficulty from round performance, persist detailed session records locally, and tailor generated stimulus content with Nigerian states, weather, music, and store items.",
   },
+  {
+    day: 4,
+    title: "Reflex Lab",
+    tagline:
+      "A Nigerian-flavoured reflex battery for testing speed, accuracy, and self-control.",
+    description:
+      "Reflex Lab puts users through visual, audio, choice, and fakeout tests with randomized stimuli, varied sounds, decoys, combo scoring, personal bests, and quick or full-battery sessions.",
+    date: "2026-09-04",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Motion",
+      "Web Audio API",
+      "LocalStorage",
+      "html-to-image",
+    ],
+    images: [
+      {
+        src: "/projects/day-04/image.png",
+        alt: "Reflex Lab project preview",
+      },
+      {
+        src: "/projects/day-04/image1.png",
+        alt: "Reflex Lab project preview",
+      },
+      {
+        src: "/projects/day-04/image2.png",
+        alt: "Reflex Lab project preview",
+      },
+      {
+        src: "/projects/day-04/image3.png",
+        alt: "Reflex Lab project preview",
+      },
+      {
+        src: "/projects/day-04/image4.png",
+        alt: "Reflex Lab project preview",
+      }
+    ],
+    liveUrl: "https://day-4-reflex-lab.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    learned:
+      "I learned how to build timed reaction tests, generate varied stimuli without immediate repeats, use the Web Audio API for playable signals, score combos across different challenge types, and keep personal bests locally in the browser.",
+  },
 ];
