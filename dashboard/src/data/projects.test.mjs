@@ -5,6 +5,7 @@ import test from "node:test";
 const source = readFileSync(new URL("./projects.ts", import.meta.url), "utf8");
 const appSource = readFileSync(new URL("../App.tsx", import.meta.url), "utf8");
 const stylesSource = readFileSync(new URL("../styles.css", import.meta.url), "utf8");
+const modalSource = readFileSync(new URL("../components/ProjectModal.tsx", import.meta.url), "utf8");
 
 test("dashboard registers day 1 Cursor Chaos", () => {
   assert.match(source, /day:\s*1/);
@@ -26,7 +27,13 @@ test("dashboard registers day 5 Do Not Touch", () => {
 });
 
 test("project sheets expose a full-size image gallery", () => {
-  assert.match(appSource, /gallery/);
-  assert.match(appSource, /aria-label=.*image/i);
+  assert.match(modalSource, /gallery/);
+  assert.match(modalSource, /aria-label=.*image/i);
   assert.match(stylesSource, /\.modal__media img[\s\S]*object-fit:\s*contain/);
+});
+
+test("dashboard app is composed from focused components", () => {
+  assert.match(appSource, /from "\.\/components\/ProjectModal"/);
+  assert.match(appSource, /from "\.\/components\/ProjectArchive"/);
+  assert.match(appSource, /from "\.\/components\/SiteHeader"/);
 });
