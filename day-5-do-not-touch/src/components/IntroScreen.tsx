@@ -13,7 +13,7 @@ export function IntroScreen({ onStart }: Props) {
       <main className="relative flex flex-1 flex-col items-center justify-center overflow-hidden px-6">
         <div className="absolute top-[18%] h-[1px] w-[44%] bg-[#d6d9e4] opacity-40" />
 
-        <div className="max-w-[980px] text-center">
+        <div className="relative z-10 max-w-[980px] text-center">
           <h1 className="font-serif text-[clamp(4rem,10vw,9rem)] font-bold leading-[0.78] tracking-[-0.055em]">
             TOUCH THE
             <br />
