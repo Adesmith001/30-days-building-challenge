@@ -1,48 +1,62 @@
+import { motion } from "motion/react";
+import type { Point } from "../types/game";
+
 interface Props {
-  level: number;
-  score: number;
-  streak: number;
+  position: Point;
+  width: number;
+  scale: number;
+  label: string;
+  movement: "dodge" | "teleport";
+  frozen: boolean;
+  disabled: boolean;
+  onAttempt: (pointerType: string) => void;
 }
 
-export function GameHUD({
-  level,
-  score,
-  streak,
+export function EscapeButton({
+  position,
+  width,
+  scale,
+  label,
+  movement,
+  frozen,
+  disabled,
+  onAttempt,
 }: Props) {
   return (
-    <section className="mx-auto grid w-full max-w-[1040px] grid-cols-3 border-b border-[#cfd3df] px-1 py-7">
-      <div>
-        <div className="font-mono text-[10px] tracking-[0.14em] text-[#646a7d]">
-          CURRENT LEVEL
-        </div>
-
-        <div className="mt-1 font-mono text-[25px] font-bold">
-          {String(level).padStart(2, "0")}{" "}
-          <span className="text-[12px] text-[#8c91a2]">
-            / 10
-          </span>
-        </div>
-      </div>
-
-      <div className="text-center">
-        <div className="font-mono text-[10px] tracking-[0.14em] text-[#646a7d]">
-          SCORE
-        </div>
-
-        <div className="mt-1 font-mono text-[26px] font-bold">
-          {score.toLocaleString()}
-        </div>
-      </div>
-
-      <div className="text-right">
-        <div className="font-mono text-[10px] tracking-[0.14em] text-[#646a7d]">
-          MOMENTUM
-        </div>
-
-        <div className="mt-1 font-mono text-[24px] font-bold text-[#1248ff]">
-          STREAK ×{streak}
-        </div>
-      </div>
-    </section>
+    <motion.button
+      type="button"
+      data-game-button="true"
+      disabled={disabled}
+      initial={false}
+      animate={{
+        left: position.x,
+        top: position.y,
+        width,
+        scale,
+      }}
+      transition={{
+        duration: movement === "teleport" ? 0 : 0.16,
+        ease: "easeOut",
+      }}
+      onPointerDown={(event) => {
+        event.stopPropagation();
+      }}
+      onPointerUp={(event) => {
+        event.stopPropagation();
+        onAttempt(event.pointerType);
+      }}
+      onClick={(event) => {
+        if (event.detail === 0) {
+          onAttempt("keyboard");
+        }
+      }}
+      className="absolute z-20 min-h-11 -translate-x-1/2 -translate-y-1/2 bg-[#f04a2f] px-4 font-mono text-[14px] font-bold text-white disabled:cursor-default"
+      style={{
+        height: Math.max(44, 54 * scale),
+        opacity: frozen ? 0.72 : 1,
+      }}
+    >
+      {label}
+    </motion.button>
   );
 }
