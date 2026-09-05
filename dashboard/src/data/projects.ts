@@ -236,6 +236,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-5-do-not-touch.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2096239663874752636",
     learned:
       "I learned how to build a multi-level pointer game with evasive movement, decoy interactions, escalating difficulty, boss states, local personal bests, and shareable result cards.",
   },
