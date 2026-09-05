@@ -55,11 +55,31 @@ function ProjectModal({
   project: Project | null;
   onClose: () => void;
 }) {
+  const [galleryIndex, setGalleryIndex] = useState<number | null>(null);
+
   useEffect(() => {
-    if (!project) return;
+    if (!project) {
+      setGalleryIndex(null);
+      return;
+    }
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") {
+        if (galleryIndex !== null) {
+          setGalleryIndex(null);
+        } else {
+          onClose();
+        }
+      }
+
+      if (galleryIndex !== null && project.images.length > 1) {
+        if (event.key === "ArrowRight") {
+          setGalleryIndex((index) => index === null ? null : (index + 1) % project.images.length);
+        }
+        if (event.key === "ArrowLeft") {
+          setGalleryIndex((index) => index === null ? null : (index - 1 + project.images.length) % project.images.length);
+        }
+      }
     };
 
     document.body.classList.add("has-modal");
@@ -69,10 +89,18 @@ function ProjectModal({
       document.body.classList.remove("has-modal");
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [project, onClose]);
+  }, [galleryIndex, onClose, project]);
 
   if (!project) return null;
   const primaryImage = project.images[0];
+  const galleryImage = galleryIndex === null ? null : project.images[galleryIndex];
+
+  const openGallery = (index: number) => setGalleryIndex(index);
+
+  const moveGallery = (direction: number) => {
+    if (project.images.length < 2) return;
+    setGalleryIndex((index) => index === null ? 0 : (index + direction + project.images.length) % project.images.length);
+  };
 
   return (
     <div
@@ -90,7 +118,14 @@ function ProjectModal({
         </button>
         <div className="modal__media">
           {primaryImage ? (
-            <img src={primaryImage.src} alt={primaryImage.alt} />
+            <button
+              className="modal__media-button"
+              type="button"
+              onClick={() => openGallery(0)}
+              aria-label="Open image gallery"
+            >
+              <img src={primaryImage.src} alt={primaryImage.alt} />
+            </button>
           ) : (
             <Poster project={project} />
           )}
@@ -107,8 +142,16 @@ function ProjectModal({
           <div>
             <h3>Pictures</h3>
             <div className="picture-grid">
-              {project.images.map((image) => (
-                <img key={image.src} src={image.src} alt={image.alt} loading="lazy" />
+              {project.images.map((image, index) => (
+                <button
+                  className="picture-grid__item"
+                  key={image.src}
+                  type="button"
+                  onClick={() => openGallery(index)}
+                  aria-label={`View image ${index + 1} full size`}
+                >
+                  <img src={image.src} alt={image.alt} loading="lazy" />
+                </button>
               ))}
             </div>
           </div>
@@ -135,6 +178,49 @@ function ProjectModal({
           </div>
         </div>
       </section>
+      {galleryImage ? (
+        <div
+          className="gallery"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Project image gallery"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setGalleryIndex(null);
+          }}
+        >
+          <div className="gallery__panel">
+            <div className="gallery__toolbar">
+              <span>{galleryIndex! + 1} / {project.images.length}</span>
+              <button type="button" onClick={() => setGalleryIndex(null)} aria-label="Close image gallery">
+                Close
+              </button>
+            </div>
+            <div className="gallery__stage">
+              <button type="button" className="gallery__nav" onClick={() => moveGallery(-1)} aria-label="Previous image">
+                ←
+              </button>
+              <img className="gallery__image" src={galleryImage.src} alt={galleryImage.alt} />
+              <button type="button" className="gallery__nav" onClick={() => moveGallery(1)} aria-label="Next image">
+                →
+              </button>
+            </div>
+            <div className="gallery__thumbs" aria-label="Gallery images">
+              {project.images.map((image, index) => (
+                <button
+                  key={image.src}
+                  className={index === galleryIndex ? "is-active" : ""}
+                  type="button"
+                  onClick={() => openGallery(index)}
+                  aria-label={`View image ${index + 1}`}
+                  aria-current={index === galleryIndex ? "true" : undefined}
+                >
+                  <img src={image.src} alt="" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

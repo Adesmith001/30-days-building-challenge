@@ -115,7 +115,7 @@ export const levels: LevelConfig[] = [
     difficulty: 2.25,
     dangerRadius: 140,
     moveDistance: 130,
-    cooldownMs: 3000,
+    cooldownMs: 340,
     buttonWidth: 154,
     mechanics: ["dodge", "teleport", "shrink", "decoy"],
     decoys: 2,

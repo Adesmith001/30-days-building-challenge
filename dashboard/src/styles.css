@@ -579,6 +579,30 @@ a:focus-visible {
   background: var(--surface);
 }
 
+.modal__media img {
+  object-fit: contain;
+  background: var(--surface);
+}
+
+.modal__media-button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.modal__media-button:focus-visible,
+.picture-grid__item:focus-visible,
+.gallery__thumbs button:focus-visible,
+.gallery__nav:focus-visible,
+.gallery__toolbar button:focus-visible {
+  outline: 2px solid var(--black);
+  outline-offset: -4px;
+}
+
 .modal__content {
   display: grid;
   align-content: start;
@@ -642,6 +666,128 @@ a:focus-visible {
   object-fit: cover;
   border: 1px solid var(--border);
   background: var(--surface);
+}
+
+.picture-grid__item {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.picture-grid__item img {
+  transition: transform 180ms ease;
+}
+
+.picture-grid__item:hover img {
+  transform: scale(1.025);
+}
+
+.gallery {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: clamp(16px, 4vw, 56px);
+  background: rgba(10, 10, 10, 0.94);
+  animation: fade-in 160ms ease both;
+}
+
+.gallery__panel {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  width: min(1280px, 100%);
+  height: min(900px, 100%);
+  color: var(--white);
+}
+
+.gallery__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gallery__toolbar button {
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  padding: 9px 12px;
+  background: transparent;
+  color: var(--white);
+  font: inherit;
+  cursor: pointer;
+}
+
+.gallery__toolbar button:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+.gallery__stage {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  align-items: center;
+  gap: 12px;
+  min-height: 0;
+}
+
+.gallery__image {
+  justify-self: center;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.gallery__nav {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  background: transparent;
+  color: var(--white);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.gallery__nav:hover {
+  background: var(--white);
+  color: var(--black);
+}
+
+.gallery__thumbs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-top: 14px;
+}
+
+.gallery__thumbs button {
+  flex: 0 0 64px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: transparent;
+  opacity: 0.55;
+  cursor: pointer;
+}
+
+.gallery__thumbs button.is-active {
+  border-color: var(--white);
+  opacity: 1;
+}
+
+.gallery__thumbs img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .modal__actions {
