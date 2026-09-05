@@ -90,10 +90,11 @@ export const projects: Project[] = [
       {
         src: "/projects/day-02/image6.jpg",
         alt: "Meeting Cost project preview",
-      }
+      },
     ],
     liveUrl: "https://day-2-meeting-cost.vercel.app/",
-    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge-challenge",
+    githubUrl:
+      "https://github.com/Adesmith001/30-days-building-challenge-challenge",
     twitterUrl: "https://x.com/yourcoderboy18/status/2095163490214228275",
     learned:
       "I learned how to turn salary and working-hour inputs into a live meeting burn rate, keep elapsed time accurate with real timestamps, persist meeting history locally, and export a receipt view as an image without sending private salary data outside the browser.",
@@ -181,12 +182,61 @@ export const projects: Project[] = [
       {
         src: "/projects/day-04/image4.png",
         alt: "Reflex Lab project preview",
-      }
+      },
     ],
     liveUrl: "https://day-4-reflex-lab.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
-    twitterUrl:"https://x.com/yourcoderboy18/status/2095887016147702123",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2095887016147702123",
     learned:
       "I learned how to build timed reaction tests, generate varied stimuli without immediate repeats, use the Web Audio API for playable signals, score combos across different challenge types, and keep personal bests locally in the browser.",
+  },
+  {
+    day: 5,
+    title: "Do Not Touch",
+    tagline:
+      "A mischievous button-chasing game that tests patience, speed, and self-control.",
+    description:
+      "Do Not Touch puts one evasive button through ten levels of movement, shrinking, teleporting, decoys, and boss-level mischief. Catch the real button, protect your streak, and try not to lose your cool.",
+    date: "2026-09-05",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Motion",
+      "Lucide",
+      "LocalStorage",
+      "html-to-image",
+    ],
+    images: [
+      {
+        src: "/projects/day-05/image.png",
+        alt: "Do Not Touch project preview",
+      },
+      {
+        src: "/projects/day-05/image1.png",
+        alt: "Do Not Touch project preview",
+      },
+      {
+        src: "/projects/day-05/image2.png",
+        alt: "Do Not Touch project preview",
+      },
+      {
+        src: "/projects/day-05/image3.png",
+        alt: "Do Not Touch project preview",
+      },
+      {
+        src: "/projects/day-05/image4.png",
+        alt: "Do Not Touch project preview",
+      },
+      {
+        src: "/projects/day-05/image5.png",
+        alt: "Do Not Touch project preview",
+      },
+    ],
+    liveUrl: "https://day-5-do-not-touch.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    learned:
+      "I learned how to build a multi-level pointer game with evasive movement, decoy interactions, escalating difficulty, boss states, local personal bests, and shareable result cards.",
   },
 ];

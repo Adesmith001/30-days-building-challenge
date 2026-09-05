@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 
 const source = readFileSync(new URL("./projects.ts", import.meta.url), "utf8");
+const appSource = readFileSync(new URL("../App.tsx", import.meta.url), "utf8");
 
 test("dashboard registers day 1 Cursor Chaos", () => {
   assert.match(source, /day:\s*1/);
@@ -15,4 +16,16 @@ test("dashboard registers day 2 Meeting Cost", () => {
   assert.match(source, /day:\s*2/);
   assert.match(source, /title:\s*"Meeting Cost"/);
   assert.match(source, /liveUrl:\s*"[^"]*day-2-meeting-cost/);
+});
+
+test("dashboard registers day 5 Do Not Touch", () => {
+  assert.match(source, /day:\s*5/);
+  assert.match(source, /title:\s*"Do Not Touch"/);
+  assert.match(source, /liveUrl:\s*"[^"]*day-5-do-not-touch/);
+});
+
+test("project sheets expose a full-size image gallery", () => {
+  assert.match(appSource, /gallery/);
+  assert.match(appSource, /aria-label=.*image/i);
+  assert.match(appSource, /object-fit/);
 });
