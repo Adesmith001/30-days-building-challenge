@@ -32,12 +32,12 @@ export function IntroScreen({ onStart }: Props) {
             onClick={onStart}
             className="min-h-14 w-[210px] bg-[#1248ff] px-8 font-mono text-[18px] font-bold text-white"
           >
-            TOUCH ME
+            TOUCH AM
           </motion.button>
         </div>
 
         <div className="absolute bottom-10 font-mono text-[11px] tracking-[0.08em] text-[#777d90]">
-          10 LEVELS · ONE VERY ANNOYING BUTTON
+          10 LEVELS · ONE BUTTON WEY DEY VEX
         </div>
       </main>
     </div>

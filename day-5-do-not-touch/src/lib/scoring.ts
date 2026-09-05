@@ -36,11 +36,11 @@ export function scoreCatch(
     multiplied + speedBonus + cleanBonus + perfectBonus,
   );
 
-  let label = "CAUGHT.";
+  let label = "YOU CATCH AM.";
 
-  if (clean) label = "CLEAN CATCH";
-  if (fast) label = "GOTCHA";
-  if (perfect) label = "PERFECT CATCH";
+  if (clean) label = "NO MISS";
+  if (fast) label = "I CATCH YOU";
+  if (perfect) label = "PERFECT CATCH AM";
 
   return {
     elapsedMs,

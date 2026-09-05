@@ -4,7 +4,7 @@ export function getButtonLabel(
   bossHits: number,
 ) {
   if (level === 10) {
-    const labels = ["ABEG STOP", "SERIOUSLY?", "LAST ONE"];
+    const labels = ["ABEG STOP", "NA SERIOUS?", "NA THE LAST ONE"];
     return labels[Math.min(bossHits, labels.length - 1)];
   }
 

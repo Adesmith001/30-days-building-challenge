@@ -22,10 +22,10 @@ export function ShareActions({
     stats.score.toLocaleString(),
     rank.name,
     "",
-    `${stats.levelsCleared} / 10 CLEARED`,
-    `MISSES ${stats.misses}`,
+    `${stats.levelsCleared} / 10 WE CLEAR`,
+    `MISS ${stats.misses}`,
     "",
-    "THE BUTTON LOST.",
+    "THE BUTTON DON LOSE.",
   ].join("\n");
 
   const share = async () => {
@@ -39,7 +39,7 @@ export function ShareActions({
     }
 
     await navigator.clipboard.writeText(shareText);
-    window.alert("Result copied to clipboard.");
+    window.alert("Result don copy to clipboard.");
   };
 
   const save = async () => {

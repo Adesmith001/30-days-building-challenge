@@ -51,7 +51,7 @@ export function LevelIntro({
             </span>
 
             <span className="text-[#6d7387]">
-              SPECIMEN TRANSITION
+              SPECIMEN DEY CHANGE
             </span>
           </div>
 
@@ -72,17 +72,17 @@ export function LevelIntro({
               onClick={begin}
               className="flex min-h-14 w-full items-center justify-between bg-[#1248ff] px-7 font-mono text-[15px] font-bold text-white"
             >
-              ENGAGE LEVEL{" "}
+              ENTER LEVEL{" "}
               {String(level.id).padStart(2, "0")}
               <ArrowRight size={20} />
             </button>
           </div>
 
           <div className="mt-5 flex justify-between font-mono text-[9px] tracking-[0.12em] text-[#747b8e]">
-            <span>INPUT: POINTER EVENTS</span>
+            <span>INPUT: POINTER MOVE</span>
 
             <span className="text-[#b92a13]">
-              ZERO ACCIDENTAL ENGAGEMENT
+              NO ACCIDENTAL TOUCH
             </span>
           </div>
         </section>

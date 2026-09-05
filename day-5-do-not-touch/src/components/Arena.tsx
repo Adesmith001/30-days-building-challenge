@@ -211,7 +211,7 @@ export function Arena({
 
   const decoyMiss = () => {
     onMiss();
-    setTaunt("WRONG ONE.");
+    setTaunt("NA WRONG ONE.");
     rearrange();
   };
 
@@ -227,7 +227,7 @@ export function Arena({
     }
 
     onMiss();
-    setTaunt("MISS.");
+    setTaunt("YOU MISS.");
 
     if (event.pointerType !== "mouse") {
       setMovement("teleport");
@@ -260,8 +260,8 @@ export function Arena({
 
       <div className="absolute right-5 top-4 z-30 font-mono text-[9px] tracking-[0.1em] text-[#414653]">
         {frozen
-          ? "[*] VULNERABILITY WINDOW"
-          : "COORDINATE_SYS: CARTESIAN"}
+          ? "[*] SMALL WINDOW OPEN"
+          : "WE DEY TRACK YOUR MOVE"}
       </div>
 
       {level.mechanics.includes("predictive") &&

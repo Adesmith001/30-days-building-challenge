@@ -13,7 +13,7 @@ export function GameHUD({
     <section className="mx-auto grid w-full max-w-[1040px] grid-cols-3 border-b border-[#cfd3df] px-1 py-7">
       <div>
         <div className="font-mono text-[10px] tracking-[0.14em] text-[#646a7d]">
-          CURRENT LEVEL
+          LEVEL WEY WE DEY
         </div>
 
         <div className="mt-1 font-mono text-[25px] font-bold">
@@ -36,11 +36,11 @@ export function GameHUD({
 
       <div className="text-right">
         <div className="font-mono text-[10px] tracking-[0.14em] text-[#646a7d]">
-          MOMENTUM
+          FLOW
         </div>
 
         <div className="mt-1 font-mono text-[24px] font-bold text-[#1248ff]">
-          STREAK ×{streak}
+          RUN ×{streak}
         </div>
       </div>
     </section>

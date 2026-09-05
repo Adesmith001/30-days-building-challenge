@@ -56,7 +56,7 @@ export function ResultsScreen({
 
           {newBest && (
             <div className="mt-8 font-mono text-[10px] font-bold tracking-[0.15em] text-[#1248ff]">
-              [*] NEW PERSONAL BEST
+              [*] NEW PERSONAL BEST OO
             </div>
           )}
 
@@ -72,7 +72,7 @@ export function ResultsScreen({
 
           {nextRank ? (
             <p className="mt-7 max-w-sm font-mono text-[11px] leading-6 tracking-[0.08em] text-[#646a7d]">
-              {nextRank.pointsAway.toLocaleString()} POINTS TO
+              {nextRank.pointsAway.toLocaleString()} POINTS TO REACH
               <br />
               <span className="text-[#171717]">
                 {nextRank.name}
@@ -80,17 +80,17 @@ export function ResultsScreen({
             </p>
           ) : (
             <p className="mt-7 font-mono text-[11px] tracking-[0.08em] text-[#1248ff]">
-              MAXIMUM RANK ACHIEVED
+              YOU DON REACH THE TOP
             </p>
           )}
 
           <div className="mt-12 grid gap-px border-y border-[#cfd3df] bg-[#cfd3df] sm:grid-cols-2 lg:grid-cols-3">
             {[
-              ["LEVELS CLEARED", `${stats.levelsCleared} / 10`],
+              ["LEVELS WE CLEAR", `${stats.levelsCleared} / 10`],
               ["TOTAL TIME", formatTime(stats.totalTimeMs)],
               ["MISSES", String(stats.misses)],
-              ["CLEAN CATCHES", String(stats.cleanCatches)],
-              ["BEST STREAK", `×${stats.bestStreak}`],
+              ["NO-MISS CATCHES", String(stats.cleanCatches)],
+              ["BEST RUN", `×${stats.bestStreak}`],
               [
                 "FASTEST CATCH",
                 stats.fastestCatchMs
@@ -115,7 +115,7 @@ export function ResultsScreen({
 
           <div className="mt-10">
             <div className="font-mono text-[9px] tracking-[0.14em] text-[#73798c]">
-              PERFORMANCE INSIGHT
+              HOW YOU TAKE AM
             </div>
 
             <p className="mt-3 max-w-[700px] text-[18px] leading-7 text-[#373c4b]">
@@ -124,7 +124,7 @@ export function ResultsScreen({
           </div>
 
           <div className="mt-8 border-t border-[#d6d8df] pt-5 font-mono text-[9px] tracking-[0.12em] text-[#70768a]">
-            PERSONAL BEST: {best.score.toLocaleString()} PTS
+            PERSONAL BEST: {best.score.toLocaleString()} PTS OO
           </div>
         </div>
 
@@ -133,7 +133,7 @@ export function ResultsScreen({
             onClick={onReplay}
             className="min-h-14 bg-[#1248ff] px-5 font-mono text-[13px] font-bold text-white"
           >
-            TRY AGAIN →
+            TRY AM AGAIN →
           </button>
 
           <ShareActions

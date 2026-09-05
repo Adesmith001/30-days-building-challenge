@@ -61,7 +61,7 @@ export function LevelComplete({
           <div className="flex justify-between font-mono text-[9px] tracking-[0.13em] text-[#6d7387]">
             <span>
               EVENT {String(level.id).padStart(2, "0")} //
-              HIT DETECTED
+              HIT DON LAND
             </span>
 
             <span>
@@ -70,7 +70,7 @@ export function LevelComplete({
           </div>
 
           <h1 className="mt-20 text-[clamp(4rem,10vw,6rem)] font-black leading-none tracking-[-0.06em]">
-            CAUGHT.
+            YOU CATCH AM.
           </h1>
 
           <div className="mt-3 font-mono text-[48px] leading-none">
@@ -93,12 +93,12 @@ export function LevelComplete({
           <div className="mt-20 grid grid-cols-3 border-t border-[#cfd3df] pt-5 font-mono text-[9px] tracking-[0.12em]">
             <span className="text-left">
               {summary.misses === 0
-                ? "CLEAN CATCH"
-                : `${summary.misses} MISSES`}
+                ? "NO MISS"
+                : `${summary.misses} MISS`}
             </span>
 
             <span className="text-[#1248ff]">
-              STREAK ×{summary.streak}
+              RUN ×{summary.streak}
             </span>
 
             <span className="text-right">
@@ -110,7 +110,7 @@ export function LevelComplete({
             onClick={next}
             className="mt-8 min-h-14 w-full bg-[#1248ff] font-mono text-[13px] font-bold text-white"
           >
-            RESUME TRIAL [SPACEBAR]
+            CONTINUE [SPACEBAR]
           </button>
         </section>
       </main>

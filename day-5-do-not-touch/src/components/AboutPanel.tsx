@@ -50,7 +50,7 @@ export function AboutPanel({ open, onClose }: Props) {
               id="about-title"
               className="mt-2 text-4xl font-black tracking-[-0.06em]"
             >
-              DO NOT TOUCH
+              NO TOUCH AM
             </h2>
           </div>
 
@@ -65,26 +65,26 @@ export function AboutPanel({ open, onClose }: Props) {
         </header>
 
         <p className="mt-8 text-xl leading-8 tracking-[-0.02em]">
-          A ten-level button chase with Nigerian flavour. The button no wan
-          cooperate, so keep your head and catch am.
+          Ten levels of button chase with Nigerian flavour. Button no wan
+          cooperate, so calm down and catch am.
         </p>
 
-        <AboutSection title="HOW IT WORKS">
-          Move your cursor to catch the real button. It dodges, teleports,
-          shrinks, and brings decoys as the levels dey increase.
+        <AboutSection title="HOW E DEY WORK">
+          Move your cursor catch the real button. E go dodge, teleport, shrink,
+          and bring decoys as the levels dey increase.
         </AboutSection>
 
-        <AboutSection title="THE RULE">
+        <AboutSection title="RULE WEY DEY">
           Speed no be everything. Touch the real button, avoid the decoys, and
           no let impatience spoil your streak.
         </AboutSection>
 
-        <AboutSection title="PRIVACY">
-          Your scores stay for this browser. Personal bests save locally and
-          never leave the lab.
+        <AboutSection title="YOUR DATA">
+          Your scores stay for this browser. Personal bests save for here and
+          never comot from the lab.
         </AboutSection>
 
-        <AboutSection title="BUILT WITH">
+        <AboutSection title="NA WETIN BUILD AM">
           <span className="font-mono text-sm">
             React · TypeScript · Tailwind CSS · Motion
           </span>

@@ -18,6 +18,7 @@ export function DecoyButton({
 }: Props) {
   return (
     <motion.button
+      type="button"
       data-game-button="true"
       data-decoy="true"
       initial={{ opacity: 0 }}
@@ -39,7 +40,7 @@ export function DecoyButton({
           onMiss();
         }
       }}
-      className="absolute z-10 min-h-11 -translate-x-1/2 -translate-y-1/2 bg-[#1248ff] px-4 font-mono text-[14px] font-bold text-white"
+      className="absolute z-10 min-h-11 -translate-x-1/2 -translate-y-1/2 bg-[#1248ff] px-4 font-mono text-[14px] font-bold text-white transition-colors hover:bg-[#0d39d4]"
       style={{
         height: Math.max(44, 54 * scale),
       }}

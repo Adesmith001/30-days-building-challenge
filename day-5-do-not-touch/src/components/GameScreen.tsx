@@ -43,7 +43,7 @@ export function GameScreen({
 
             {level.id === 10 && (
               <span className="text-[#1248ff]">
-                BUTTON RESOLVE{" "}
+                BUTTON DON RESOLVE{" "}
                 {"●".repeat(3 - bossHits)}
                 {"○".repeat(bossHits)}
               </span>
@@ -59,11 +59,11 @@ export function GameScreen({
 
           <div className="mt-4 flex justify-between font-mono text-[9px] tracking-[0.12em] text-[#70768a]">
             <span>
-              STATUS: SYSTEM_ARMED · LATENCY: &lt;12MS
+              STATUS: SYSTEM READY · LATENCY: &lt;12MS
             </span>
 
             <span className="hidden md:block">
-              PRECISION_TARGETING: ENABLED
+              EYE SHARP: ON
             </span>
           </div>
         </div>

@@ -40,11 +40,11 @@ export function BossEnding({ onDone }: Props) {
           </h1>
 
           <p className="mt-3 text-[18px] text-[#4b5060]">
-            You don touch am. You do happy, ba?
+            You don touch am. You happy now, abi?
           </p>
 
           <p className="mt-10 font-mono text-[9px] tracking-[0.14em] text-[#777d90]">
-            RESISTANCE DON GO.
+            PALAVA DON FINISH.
           </p>
         </motion.div>
       </main>

@@ -50,7 +50,7 @@ export function EscapeButton({
           onAttempt("keyboard");
         }
       }}
-      className="absolute z-20 min-h-11 -translate-x-1/2 -translate-y-1/2 bg-[#f04a2f] px-4 font-mono text-[14px] font-bold text-white disabled:cursor-default"
+      className="absolute z-20 min-h-11 -translate-x-1/2 -translate-y-1/2 bg-[#1248ff] px-4 font-mono text-[14px] font-bold text-white transition-colors hover:bg-[#0d39d4] disabled:cursor-default"
       style={{
         height: Math.max(44, 54 * scale),
         opacity: frozen ? 0.72 : 1,
