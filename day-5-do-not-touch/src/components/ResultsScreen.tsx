@@ -14,6 +14,7 @@ interface Props {
   best: PersonalBest;
   newBest: boolean;
   onReplay: () => void;
+  onViewRecords: () => void;
   onReset: () => void;
 }
 
@@ -32,6 +33,7 @@ export function ResultsScreen({
   best,
   newBest,
   onReplay,
+  onViewRecords,
   onReset,
 }: Props) {
   const resultRef = useRef<HTMLDivElement>(null);
@@ -128,12 +130,20 @@ export function ResultsScreen({
           </div>
         </div>
 
-        <div className="mt-6 grid gap-3 md:grid-cols-[1fr_1fr]">
+        <div className="mt-6 grid gap-3 md:grid-cols-[1fr_1fr_auto]">
           <button
             onClick={onReplay}
             className="min-h-14 bg-[#1248ff] px-5 font-mono text-[13px] font-bold text-white"
           >
             TRY AM AGAIN →
+          </button>
+
+          <button
+            type="button"
+            onClick={onViewRecords}
+            className="min-h-14 border border-[#171717] px-5 font-mono text-[13px] font-bold transition-colors hover:bg-[#171717] hover:text-white"
+          >
+            SEE YOUR RECORD
           </button>
 
           <ShareActions

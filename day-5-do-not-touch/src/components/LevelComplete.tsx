@@ -56,8 +56,8 @@ export function LevelComplete({
     <div className="flex min-h-screen flex-col bg-[#f8f6f3]">
       <Header />
 
-      <main className="flex flex-1 items-center justify-center px-5 py-12">
-        <section className="relative w-full max-w-[560px] border border-[#cfd3df] px-8 py-12 text-center md:px-12">
+      <main className="flex flex-1 items-center justify-center px-5 py-6 md:py-8">
+        <section className="relative w-full max-w-[780px] border border-[#cfd3df] px-6 py-7 text-center md:px-10 md:py-8">
           <div className="flex justify-between font-mono text-[9px] tracking-[0.13em] text-[#6d7387]">
             <span>
               EVENT {String(level.id).padStart(2, "0")} //
@@ -69,19 +69,19 @@ export function LevelComplete({
             </span>
           </div>
 
-          <h1 className="mt-20 text-[clamp(4rem,10vw,6rem)] font-black leading-none tracking-[-0.06em]">
+          <h1 className="mt-8 text-[clamp(3rem,7vw,5rem)] font-black leading-none tracking-[-0.06em]">
             YOU CATCH AM.
           </h1>
 
-          <div className="mt-3 font-mono text-[48px] leading-none">
+          <div className="mt-2 font-mono text-[40px] leading-none">
             {(summary.elapsedMs / 1000).toFixed(2)}
             <span className="ml-1 text-[19px] text-[#73798a]">
               S
             </span>
           </div>
 
-          <div className="mx-auto mt-5 inline-flex border border-[#cfd3df] px-4 py-2 font-mono">
-            <span className="text-[20px] font-bold text-[#1248ff]">
+          <div className="mx-auto mt-4 inline-flex border border-[#cfd3df] px-4 py-2 font-mono">
+            <span className="text-[18px] font-bold text-[#1248ff]">
               +{summary.points}
             </span>
 
@@ -90,7 +90,7 @@ export function LevelComplete({
             </span>
           </div>
 
-          <div className="mt-20 grid grid-cols-3 border-t border-[#cfd3df] pt-5 font-mono text-[9px] tracking-[0.12em]">
+          <div className="mt-8 grid grid-cols-3 border-t border-[#cfd3df] pt-4 font-mono text-[9px] tracking-[0.12em]">
             <span className="text-left">
               {summary.misses === 0
                 ? "NO MISS"
@@ -108,7 +108,7 @@ export function LevelComplete({
 
           <button
             onClick={next}
-            className="mt-8 min-h-14 w-full bg-[#1248ff] font-mono text-[13px] font-bold text-white"
+            className="mt-6 min-h-12 w-full bg-[#1248ff] font-mono text-[13px] font-bold text-white"
           >
             CONTINUE [SPACEBAR]
           </button>

@@ -20,6 +20,139 @@ body {
   overflow-x: hidden;
 }
 
+.intro-shell {
+  position: relative;
+  isolation: isolate;
+  background-image:
+    linear-gradient(rgba(23, 23, 23, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 23, 23, 0.018) 1px, transparent 1px),
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.92), transparent 48%);
+  background-size: 32px 32px, 32px 32px, auto;
+}
+
+.intro-shell::before,
+.intro-shell::after {
+  position: absolute;
+  z-index: -1;
+  color: #1248ff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+.intro-shell::before {
+  content: "SPECIMEN 05";
+  top: 104px;
+  left: 28px;
+  writing-mode: vertical-rl;
+}
+
+.intro-shell::after {
+  content: "HANDLE WITH CARE";
+  right: 28px;
+  bottom: 104px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.intro-main::before,
+.intro-main::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  border-top: 1px solid rgba(18, 72, 255, 0.42);
+  border-bottom: 1px solid rgba(18, 72, 255, 0.42);
+  transform: translateY(-50%);
+}
+
+.intro-main::before {
+  left: 28px;
+}
+
+.intro-main::after {
+  right: 28px;
+}
+
+.intro-rule {
+  box-shadow: 0 0 0 1px rgba(18, 72, 255, 0.035);
+}
+
+.intro-title {
+  text-shadow: 1px 1px 0 rgba(18, 72, 255, 0.11), 3px 3px 0 rgba(231, 112, 59, 0.08);
+}
+
+.intro-subtitle {
+  letter-spacing: 0.01em;
+}
+
+.intro-action {
+  position: relative;
+}
+
+.intro-action::before,
+.intro-action::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 42px;
+  height: 1px;
+  background: rgba(18, 72, 255, 0.3);
+}
+
+.intro-action::before {
+  right: calc(100% + 18px);
+}
+
+.intro-action::after {
+  left: calc(100% + 18px);
+}
+
+.intro-cta {
+  position: relative;
+  box-shadow: 5px 5px 0 #171717;
+  transition: box-shadow 180ms ease, transform 180ms ease, background-color 180ms ease;
+}
+
+.intro-cta:hover {
+  background-color: #0c39d6;
+  box-shadow: 2px 2px 0 #171717;
+}
+
+.intro-cta:focus-visible {
+  outline: 2px solid #171717;
+  outline-offset: 5px;
+}
+
+.intro-meta {
+  border-top: 1px solid rgba(119, 125, 144, 0.28);
+  padding-top: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-cta {
+    transition: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .intro-shell::before,
+  .intro-shell::after,
+  .intro-main::before,
+  .intro-main::after,
+  .intro-action::before,
+  .intro-action::after {
+    display: none;
+  }
+
+  .intro-meta {
+    font-size: 9px;
+  }
+}
+
 button,
 a {
   -webkit-tap-highlight-color: transparent;

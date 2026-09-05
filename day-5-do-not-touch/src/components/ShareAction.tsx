@@ -58,21 +58,25 @@ export function ShareActions({
   };
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
+    <div className="flex gap-3">
       <button
+        type="button"
         onClick={share}
-        className="flex min-h-14 items-center justify-center gap-3 bg-[#1248ff] px-5 font-mono text-[12px] font-bold text-white"
+        aria-label="Share result"
+        title="Share result"
+        className="flex min-h-14 min-w-14 flex-1 items-center justify-center bg-[#1248ff] text-white transition-colors hover:bg-[#0d39d4]"
       >
         <Share2 size={16} />
-        SHARE RESULT
       </button>
 
       <button
+        type="button"
         onClick={save}
-        className="flex min-h-14 items-center justify-center gap-3 border border-[#171717] px-5 font-mono text-[12px] font-bold"
+        aria-label="Save result"
+        title="Save result"
+        className="flex min-h-14 min-w-14 flex-1 items-center justify-center border border-[#171717] transition-colors hover:bg-[#171717] hover:text-white"
       >
         <Download size={16} />
-        SAVE RESULT
       </button>
     </div>
   );

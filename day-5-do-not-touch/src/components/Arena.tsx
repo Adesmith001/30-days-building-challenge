@@ -239,6 +239,11 @@ export function Arena({
     pointer,
     level.predictionMs ?? 180,
   );
+  const buttonLabel = getButtonLabel(
+    level.id,
+    dodges,
+    bossHits,
+  );
 
   return (
     <div
@@ -293,7 +298,7 @@ export function Arena({
           position={decoy}
           width={buttonWidth}
           scale={scale}
-          label="TOUCH ME"
+          label={buttonLabel}
           onMiss={decoyMiss}
         />
       ))}
@@ -302,7 +307,7 @@ export function Arena({
         position={position}
         width={buttonWidth}
         scale={scale}
-        label={getButtonLabel(level.id, dodges, bossHits)}
+        label={buttonLabel}
         movement={movement}
         frozen={frozen}
         disabled={locked}

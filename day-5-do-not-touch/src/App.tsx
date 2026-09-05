@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useGameSession } from "./hooks/useGameSession";
 import { usePersonalBest } from "./hooks/usePersonalBest";
 import { BossEnding } from "./components/BossEnding";
@@ -7,12 +7,24 @@ import { IntroScreen } from "./components/IntroScreen";
 import { LevelComplete } from "./components/LevelComplete";
 import { LevelIntro } from "./components/LevelIntro";
 import { ResultsScreen } from "./components/ResultsScreen";
+import { RecordsScreen } from "./components/RecordsScreen";
 
 export default function App() {
   const game = useGameSession();
   const personalBest = usePersonalBest();
+  const [showRecords, setShowRecords] = useState(false);
 
   const runSaved = useRef(false);
+
+  const resetToIntro = () => {
+    setShowRecords(false);
+    game.reset();
+  };
+
+  const replay = () => {
+    setShowRecords(false);
+    game.startGame();
+  };
 
   useEffect(() => {
     if (game.phase !== "results") {
@@ -33,6 +45,17 @@ export default function App() {
   if (game.phase === "intro") {
     return (
       <IntroScreen onStart={game.startGame} />
+    );
+  }
+
+  if (showRecords) {
+    return (
+      <RecordsScreen
+        best={personalBest.best}
+        onBack={() => setShowRecords(false)}
+        onReplay={replay}
+        onReset={resetToIntro}
+      />
     );
   }
 
@@ -86,8 +109,9 @@ export default function App() {
       stats={game.stats}
       best={personalBest.best}
       newBest={personalBest.lastUpdates.includes("score")}
-      onReplay={game.startGame}
-      onReset={game.reset}
+      onReplay={replay}
+      onViewRecords={() => setShowRecords(true)}
+      onReset={resetToIntro}
     />
   );
 }
