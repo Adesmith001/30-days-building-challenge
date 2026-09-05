@@ -4,38 +4,38 @@ export function getButtonLabel(
   bossHits: number,
 ) {
   if (level === 10) {
-    const labels = ["STOP", "SERIOUSLY?", "LAST ONE"];
+    const labels = ["ABEG STOP", "SERIOUSLY?", "LAST ONE"];
     return labels[Math.min(bossHits, labels.length - 1)];
   }
 
   if (level === 3) {
-    return dodges > 1 ? "NOPE" : "TOUCH ME";
+    return dodges > 1 ? "NO BE TODAY" : "I DEY HERE";
   }
 
   if (level === 4 && dodges > 2) {
-    return "STILL HERE";
+    return "I STILL DEY HERE";
   }
 
   if (level === 6) {
-    return dodges > 1 ? "I SAW THAT COMING" : "TOUCH ME";
+    return dodges > 1 ? "I SEE YOU OO" : "I DEY HERE";
   }
 
   if (level === 7 && dodges > 2) {
-    return "SLOW DOWN";
+    return "YOU DEY RUN OO";
   }
 
   if (level >= 8 && dodges > 3) {
-    return "CATCH ME";
+    return "CATCH ME IF YOU FIT";
   }
 
-  return "TOUCH ME";
+  return "I DEY HERE";
 }
 
 export const missCopy = [
-  "ALMOST.",
-  "CUTE.",
-  "TOO SLOW.",
-  "YOU THOUGHT.",
-  "NOT EVEN CLOSE.",
-  "THIS IS GETTING AWKWARD.",
+  "E NEARLY HAPPEN.",
+  "ABEG, FOCUS.",
+  "TOO SLOW OO.",
+  "YOU THINK SAY NA PLAY PLAY?",
+  "NO BE TODAY.",
+  "THIS ONE DEY PAINFUL.",
 ];
