@@ -30,6 +30,7 @@ test("project sheets expose a full-size image gallery", () => {
   assert.match(modalSource, /gallery/);
   assert.match(modalSource, /aria-label=.*image/i);
   assert.match(stylesSource, /\.modal__media img[\s\S]*object-fit:\s*contain/);
+  assert.match(stylesSource, /\.gallery__image[\s\S]*max-height:\s*100%/);
 });
 
 test("dashboard app is composed from focused components", () => {
