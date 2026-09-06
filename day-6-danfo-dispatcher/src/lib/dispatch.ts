@@ -71,7 +71,7 @@ export function dispatchDanfo(
   };
 }
 
-export function useHorn(state: GameState) {
+export function activateHorn(state: GameState) {
   const selected = state.danfos.find(
     (danfo) =>
       danfo.id === state.selectedDanfoId,

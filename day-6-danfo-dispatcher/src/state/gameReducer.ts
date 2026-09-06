@@ -1,9 +1,9 @@
 import {
+  activateHorn,
   applyUpgrade,
   buyDanfo,
   dispatchDanfo,
   payPolice,
-  useHorn,
 } from "../lib/dispatch";
 import { createInitialGameState } from "../lib/gameState";
 import { stepSimulation } from "../lib/sim/step";
@@ -112,7 +112,7 @@ export function gameReducer(
   }
 
   if (action.type === "USE_HORN") {
-    return useHorn(state);
+    return activateHorn(state);
   }
 
   if (action.type === "PAY_POLICE") {
