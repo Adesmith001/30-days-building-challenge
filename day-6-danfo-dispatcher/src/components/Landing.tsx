@@ -164,6 +164,7 @@ export function Landing({
               >
                 {(best?.score ?? 0).toLocaleString()}
               </div>
+              {best && <div className="mt-1 text-xs uppercase">{best.difficulty ?? "standard"} mode</div>}
             </div>
 
             <div className="text-right text-xs">

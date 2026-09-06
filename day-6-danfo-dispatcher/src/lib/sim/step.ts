@@ -29,6 +29,12 @@ export function stepSimulation(
   const dt =
     Math.min(realDt, 0.1) * state.gameSpeed;
 
+  // Let players learn dispatching before the shift clock and city pressure start.
+  if (state.tutorial) {
+    const practice = moveVehicles(state, dt);
+    return { ...practice, tutorial: practice.stats.delivered === 0 };
+  }
+
   let next: GameState = {
     ...state,
     now: state.now + dt * 1_000,

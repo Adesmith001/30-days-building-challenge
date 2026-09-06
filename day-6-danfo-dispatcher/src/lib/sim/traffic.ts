@@ -1,3 +1,4 @@
+import { DIFFICULTIES } from "../difficulty";
 import { ROUTES } from "../../data/routes";
 import type {
   GameState,
@@ -47,7 +48,7 @@ export function updateTraffic(
     },
     nextTrafficAt:
       state.now +
-      14_000 +
+      14_000 * DIFFICULTIES[state.difficulty].incidents +
       Math.random() * 9_000,
   };
 }

@@ -34,6 +34,7 @@ export function saveRun(
 
   const record: RunRecord = {
     runId: state.runId,
+    difficulty: state.difficulty,
     date: new Date().toISOString(),
     score: state.score,
     delivered: state.stats.delivered,
@@ -47,14 +48,12 @@ export function saveRun(
     rank: getRank(state.score).name,
   };
 
-  const records = [...existing, record]
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 20);
+  const ranked = [...existing, record].sort((a, b) => b.score - a.score);
+  const records = (["standard", "relaxed"] as const).flatMap((mode) =>
+    ranked.filter((item) => (item.difficulty ?? "standard") === mode).slice(0, 20),
+  ).sort((a, b) => b.score - a.score);
 
-  localStorage.setItem(
-    KEY,
-    JSON.stringify(records),
-  );
+  try { localStorage.setItem(KEY, JSON.stringify(records)); } catch { /* Keep the current run available when browser storage is full or disabled. */ }
 
   return records;
 }

@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { DIFFICULTIES } from "../lib/difficulty";
 import {
   RotateCcw,
   Share2,
@@ -10,6 +12,7 @@ import { GlobalHeader } from "./GlobalHeader";
 interface Props {
   state: GameState;
   onAgain(): void;
+  onSettings(): void;
   onHome(): void;
   onAbout(): void;
 }
@@ -17,9 +20,20 @@ interface Props {
 export function Results({
   state,
   onAgain,
+  onSettings,
   onHome,
   onAbout,
 }: Props) {
+  const [shareStatus, setShareStatus] = useState("");
+  const tip = state.danfos.some((d) => d.status === "out-of-fuel")
+    ? "Keep buses moving: visit Ikeja or CMS before fuel falls below 25%, or use roadside refuel when stranded."
+    : state.stats.overflows > 0
+    ? "Rescue full stops during their warning countdown. Send an idle bus on a route matching the waiting passengers."
+    : state.stats.lost > 0
+    ? "Prioritize urgent queues: passengers close to leaving need a matching route before a larger, newer queue."
+    : state.stats.delivered === 0
+    ? "Start with Danfo 01 at Yaba, preview CMS Marina and dispatch to complete your first delivery."
+    : "Try a repeating shuttle on a busy corridor, then use Next Idle Danfo to cover the rest of the map.";
   const rank = getRank(state.score);
   const next = getNextRank(state.score);
 
@@ -32,6 +46,7 @@ export function Results({
     "DANFO DISPATCHER",
     "",
     "DAY 06 / 30",
+    `${DIFFICULTIES[state.difficulty].label.toUpperCase()} MODE`,
     "",
     state.score.toLocaleString(),
     rank.name,
@@ -44,18 +59,18 @@ export function Results({
   ].join("\n");
 
   async function share() {
-    if (navigator.share) {
-      await navigator.share({
-        title: "Danfo Dispatcher",
-        text: shareText,
-      });
-
-      return;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "Danfo Dispatcher", text: shareText });
+        setShareStatus("Result shared.");
+      } else {
+        await navigator.clipboard.writeText(shareText);
+        setShareStatus("Result copied to clipboard.");
+      }
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") return;
+      setShareStatus("Sharing is unavailable. You can select and copy your results here.");
     }
-
-    await navigator.clipboard.writeText(
-      shareText,
-    );
   }
 
   return (
@@ -79,7 +94,7 @@ export function Results({
           <div className="grid lg:grid-cols-2">
             <section className="border-b border-black p-8 lg:border-b-0 lg:border-r">
               <div className="text-xs">
-                CITY SCORE
+                {DIFFICULTIES[state.difficulty].label.toUpperCase()} / CITY SCORE
               </div>
 
               <div
@@ -111,7 +126,7 @@ export function Results({
               </div>
 
               <p className="mt-2 text-[#686052]">
-                That's impressive, actually.
+                {tip}
               </p>
             </section>
 
@@ -171,7 +186,7 @@ export function Results({
                   "
                 >
                   <RotateCcw size={18} />
-                  RUN IT BACK
+                  PLAY AGAIN
                 </button>
 
                 <button
@@ -188,6 +203,9 @@ export function Results({
                 </button>
               </div>
 
+              <p role="status" className="mt-3 text-xs">{shareStatus}</p>
+              <p className="mt-2 text-xs text-[#686052]">Replay starts immediately in {DIFFICULTIES[state.difficulty].label} mode, without the tutorial.</p>
+              <button onClick={onSettings} className="mt-4 min-h-11 text-xs underline">CHANGE MODE / VIEW GUIDE</button>
               <button
                 onClick={onHome}
                 className="mt-5 text-xs underline"

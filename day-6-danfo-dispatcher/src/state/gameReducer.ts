@@ -14,6 +14,11 @@ import type {
 } from "../types/game";
 
 export type GameAction =
+  | { type: "TOGGLE_REPEAT" }
+  | { type: "SET_DIFFICULTY"; difficulty: GameState["difficulty"] }
+  | { type: "REPLAY" }
+  | { type: "REFUEL" }
+  | { type: "SKIP_TUTORIAL" }
   | {
       type: "OPEN_BRIEFING";
     }
@@ -66,8 +71,34 @@ export function gameReducer(
   state: GameState,
   action: GameAction,
 ): GameState {
+  if (action.type === "SET_DIFFICULTY" && state.phase === "briefing") {
+    return createInitialGameState("briefing", action.difficulty);
+  }
+  if (action.type === "REPLAY") {
+    return { ...createInitialGameState("playing", state.difficulty), tutorial: false };
+  }
+  if (action.type === "REFUEL") {
+    if (state.cash < 300 || state.phase !== "playing") return state;
+    const selected = state.danfos.find((d) => d.id === state.selectedDanfoId);
+    if (!selected || (selected.status !== "out-of-fuel" && selected.status !== "idle") || selected.fuel >= 100) return state;
+    return { ...state, cash: state.cash - 300, danfos: state.danfos.map((d) => d.id === selected.id ? {
+      ...d, fuel: 100, status: d.pathIndex < d.path.length - 1 ? "moving" : "idle", arrival: null,
+    } : d) };
+  }
+  if (action.type === "TOGGLE_REPEAT") {
+    return {
+      ...state,
+      danfos: state.danfos.map((danfo) => {
+        if (danfo.id !== state.selectedDanfoId) return danfo;
+        if (danfo.repeatRoute) return { ...danfo, repeatRoute: null };
+        if (danfo.status !== "moving" || !danfo.destination) return danfo;
+        return { ...danfo, repeatRoute: [danfo.path[0], danfo.destination] as [StopId, StopId] };
+      }),
+    };
+  }
+  if (action.type === "SKIP_TUTORIAL") return { ...state, tutorial: false };
   if (action.type === "OPEN_BRIEFING") {
-    return createInitialGameState("briefing");
+    return createInitialGameState("briefing", state.difficulty);
   }
 
   if (action.type === "START") {
@@ -147,7 +178,7 @@ export function gameReducer(
   }
 
   if (action.type === "HOME") {
-    return createInitialGameState("landing");
+    return createInitialGameState("landing", state.difficulty);
   }
 
   return state;

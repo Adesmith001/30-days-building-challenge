@@ -30,11 +30,8 @@ export default function App() {
       return;
     }
 
-    setRecords(saveRun(game.state));
-  }, [
-    game.state.phase,
-    game.state.runId,
-  ]);
+    saveRun(game.state);
+  }, [game.state]);
 
   const commonAbout = {
     onAbout: () => setAbout(true),
@@ -47,7 +44,7 @@ export default function App() {
           {...commonAbout}
           best={personalBest(records)}
           onStart={game.openBriefing}
-          onRecords={game.records}
+          onRecords={() => { setRecords(loadRecords()); game.records(); }}
         />
       )}
 
@@ -55,6 +52,8 @@ export default function App() {
         <Briefing
           {...commonAbout}
           onStart={game.start}
+          difficulty={game.state.difficulty}
+          onDifficulty={game.setDifficulty}
         />
       )}
 
@@ -63,6 +62,9 @@ export default function App() {
           {...commonAbout}
           state={game.state}
           onSelectDanfo={game.selectDanfo}
+          onSkipTutorial={game.skipTutorial}
+          onToggleRepeat={game.toggleRepeat}
+          onRefuel={game.refuel}
           onDispatch={game.dispatchTo}
           onHorn={game.horn}
           onPolice={game.payPolice}
@@ -85,8 +87,9 @@ export default function App() {
         <Results
           {...commonAbout}
           state={game.state}
-          onAgain={game.openBriefing}
-          onHome={game.home}
+          onAgain={game.replay}
+          onSettings={game.openBriefing}
+          onHome={() => { setRecords(loadRecords()); game.home(); }}
         />
       )}
 

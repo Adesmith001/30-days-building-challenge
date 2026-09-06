@@ -7,6 +7,7 @@ import {
   gameReducer,
 } from "../state/gameReducer";
 import type {
+  GameState,
   StopId,
   UpgradeId,
 } from "../types/game";
@@ -35,6 +36,15 @@ export function useGame() {
 
   return {
     state,
+    setDifficulty(difficulty: GameState["difficulty"]) { dispatch({ type: "SET_DIFFICULTY", difficulty }); },
+    replay() { dispatch({ type: "REPLAY" }); },
+    refuel() { dispatch({ type: "REFUEL" }); },
+    toggleRepeat() {
+      dispatch({ type: "TOGGLE_REPEAT" });
+    },
+    skipTutorial() {
+      dispatch({ type: "SKIP_TUTORIAL" });
+    },
 
     openBriefing() {
       dispatch({

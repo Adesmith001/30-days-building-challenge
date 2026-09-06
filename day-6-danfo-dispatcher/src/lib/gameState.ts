@@ -22,6 +22,7 @@ function emptyStops() {
   STOPS.forEach((stop) => {
     stops[stop.id] = {
       waiting: [],
+      fullSince: null,
       lastOverflowAt: -20_000,
     };
   });
@@ -63,6 +64,8 @@ function createDanfo(
     heldUntil: 0,
     tripStartedAt: 0,
     tripDifficulty: 1,
+    repeatRoute: null,
+    arrival: null,
   };
 }
 
@@ -91,6 +94,7 @@ function addStartingPassengers(
 
 export function createInitialGameState(
   phase: GamePhase = "landing",
+  difficulty: GameState["difficulty"] = "standard",
 ): GameState {
   const stops = emptyStops();
   const startingPassengers =
@@ -98,13 +102,15 @@ export function createInitialGameState(
 
   return {
     runId: id(),
+    tutorial: true,
+    difficulty,
     phase,
     now: 0,
     shift: 1,
     shiftStartedAt: 0,
     nextSpawnAt: 2_200,
     nextTrafficAt: 14_000,
-    nextEventAt: 22_000,
+    nextEventAt: difficulty === "relaxed" ? 40_000 : 30_000,
     score: 0,
     cash: 4_200,
     flow: 0,
@@ -129,6 +135,7 @@ export function createInitialGameState(
     ],
     incident: null,
     burst: null,
+    delivery: null,
     modifiers: {
       speed: 1,
       fuelEfficiency: 1,

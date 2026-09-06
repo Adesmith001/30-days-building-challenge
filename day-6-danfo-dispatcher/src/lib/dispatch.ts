@@ -1,3 +1,4 @@
+import { DIFFICULTIES } from "./difficulty";
 import { STOP_IDS } from "../data/stops";
 import type {
   Danfo,
@@ -17,8 +18,8 @@ import {
 export function dispatchDanfo(
   state: GameState,
   destination: StopId,
+  id: string | null = state.selectedDanfoId,
 ) {
-  const id = state.selectedDanfoId;
 
   if (!id) return state;
 
@@ -50,6 +51,7 @@ export function dispatchDanfo(
     pathIndex: 0,
     progress: 0,
     status: "moving",
+    arrival: null,
     tripStartedAt: state.now,
     tripDifficulty: getTripDifficulty(path),
   };
@@ -163,6 +165,8 @@ export function buyDanfo(state: GameState) {
     heldUntil: 0,
     tripStartedAt: state.now,
     tripDifficulty: 1,
+    repeatRoute: null,
+    arrival: null,
   };
 
   return {
@@ -205,6 +209,7 @@ export function applyUpgrade(
     next.danfos = next.danfos.map((danfo) => ({
       ...danfo,
       fuel: 100,
+      status: danfo.status === "out-of-fuel" ? (danfo.pathIndex < danfo.path.length - 1 ? "moving" : "idle") : danfo.status,
     }));
   }
 
@@ -231,8 +236,13 @@ export function applyUpgrade(
     shiftStartedAt: state.now,
     nextSpawnAt: state.now + 1_500,
     nextTrafficAt: state.now + 10_000,
-    nextEventAt: state.now + 16_000,
+    nextEventAt: state.now + 20_000 * DIFFICULTIES[state.difficulty].incidents,
     selectedDanfoId: null,
     incident: null,
+    danfos: next.danfos.map((danfo) => danfo.status === "held" ? {
+      ...danfo,
+      heldUntil: state.now,
+      status: danfo.pathIndex < danfo.path.length - 1 ? "moving" : "idle",
+    } : danfo),
   };
 }

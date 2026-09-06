@@ -50,6 +50,7 @@ export interface Passenger {
 }
 
 export interface StopRuntime {
+  fullSince: number | null;
   waiting: Passenger[];
   lastOverflowAt: number;
 }
@@ -77,6 +78,8 @@ export interface Danfo {
   heldUntil: number;
   tripStartedAt: number;
   tripDifficulty: number;
+  repeatRoute: [StopId, StopId] | null;
+  arrival: { at: number; message: string } | null;
 }
 
 export interface Incident {
@@ -113,7 +116,9 @@ export interface GameStats {
 }
 
 export interface GameState {
+  difficulty: "standard" | "relaxed";
   runId: string;
+  tutorial: boolean;
   phase: GamePhase;
   now: number;
   shift: number;
@@ -133,6 +138,7 @@ export interface GameState {
   danfos: Danfo[];
   incident: Incident | null;
   burst: ScoreBurst | null;
+  delivery: { id: string; at: number; count: number; fare: number; milestone: number | null } | null;
   modifiers: GameModifiers;
   upgrades: UpgradeId[];
   stats: GameStats;
@@ -140,6 +146,7 @@ export interface GameState {
 }
 
 export interface RunRecord {
+  difficulty?: GameState["difficulty"];
   runId: string;
   date: string;
   score: number;

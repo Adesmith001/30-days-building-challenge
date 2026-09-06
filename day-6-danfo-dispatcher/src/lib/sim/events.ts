@@ -1,3 +1,4 @@
+import { DIFFICULTIES } from "../difficulty";
 import { ROUTES } from "../../data/routes";
 import type {
   Danfo,
@@ -207,7 +208,7 @@ export function maybeTriggerEvent(
   return {
     ...next,
     nextEventAt:
-      state.now + delay + Math.random() * 5_000,
+      state.now + delay * DIFFICULTIES[state.difficulty].incidents + Math.random() * 5_000,
   };
 }
 

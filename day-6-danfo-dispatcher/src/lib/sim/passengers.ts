@@ -7,6 +7,7 @@ import type {
   Passenger,
   StopId,
 } from "../../types/game";
+import { DIFFICULTIES, passengerPatience } from "../difficulty";
 import { award } from "./service";
 
 function randomStop(): StopId {
@@ -73,7 +74,8 @@ export function spawnPassengers(
   return {
     ...state,
     stops,
-    nextSpawnAt: state.now + interval,
+    nextSpawnAt: state.now + interval * DIFFICULTIES[state.difficulty].demand *
+      (1 + 0.6 * Math.max(0, 1 - (state.now - state.shiftStartedAt) / 30_000)),
     stats: {
       ...state.stats,
       spawned: state.stats.spawned + spawned,
@@ -84,10 +86,7 @@ export function spawnPassengers(
 export function expirePassengers(
   state: GameState,
 ): GameState {
-  const patience = Math.max(
-    30_000,
-    52_000 - state.shift * 2_000,
-  );
+  const patience = passengerPatience(state);
 
   let lost = 0;
   const stops = { ...state.stops };
@@ -135,13 +134,22 @@ export function expirePassengers(
 export function checkOverflows(
   state: GameState,
 ): GameState {
+  let nextState = state;
   for (const id of STOP_IDS) {
-    const runtime = state.stops[id];
+    const runtime = nextState.stops[id];
     const capacity = STOP_BY_ID[id].capacity;
 
     if (runtime.waiting.length < capacity) {
+      if (runtime.fullSince !== null) nextState = {
+        ...nextState, stops: { ...nextState.stops, [id]: { ...runtime, fullSince: null } },
+      };
       continue;
     }
+    if (runtime.fullSince === null) {
+      nextState = { ...nextState, stops: { ...nextState.stops, [id]: { ...runtime, fullSince: state.now } } };
+      continue;
+    }
+    if (state.now - runtime.fullSince < DIFFICULTIES[state.difficulty].overflowGrace) continue;
 
     if (
       state.now - runtime.lastOverflowAt <
@@ -153,13 +161,14 @@ export function checkOverflows(
     const waiting = runtime.waiting.slice(2);
 
     const next: GameState = {
-      ...state,
+      ...nextState,
       health: state.health - 1,
       flow: 0,
       stops: {
-        ...state.stops,
+        ...nextState.stops,
         [id]: {
           waiting,
+          fullSince: null,
           lastOverflowAt: state.now,
         },
       },
@@ -177,5 +186,5 @@ export function checkOverflows(
     );
   }
 
-  return state;
+  return nextState;
 }

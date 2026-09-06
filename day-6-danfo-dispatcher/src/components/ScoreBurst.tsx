@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import type { GameState } from "../types/game";
 
 interface Props {
@@ -9,6 +9,7 @@ export function ScoreBurst({
   state,
 }: Props) {
   const burst = state.burst;
+  const reducedMotion = useReducedMotion();
 
   if (!burst) return null;
 
@@ -19,7 +20,7 @@ export function ScoreBurst({
   return (
     <motion.div
       key={burst.id}
-      initial={{
+      initial={reducedMotion ? false : {
         opacity: 0,
         scale: 0.8,
         y: 15,

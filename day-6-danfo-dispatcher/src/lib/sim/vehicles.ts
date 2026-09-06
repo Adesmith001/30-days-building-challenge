@@ -13,6 +13,7 @@ import {
   deliverAtStop,
 } from "./service";
 import { rainModifier } from "./events";
+import { dispatchDanfo } from "../dispatch";
 
 interface Movement {
   danfo: Danfo;
@@ -194,6 +195,7 @@ function service(
       pathIndex: 0,
       progress: 0,
       status: "idle",
+      arrival: { at: state.now, message: `Arrived at ${STOP_BY_ID[stopId].name}` },
     };
   }
 
@@ -233,8 +235,25 @@ export function moveVehicles(
     danfos.push(danfo);
   }
 
-  return {
+  nextState = {
     ...nextState,
     danfos,
   };
+
+  // Dispatch only after every vehicle has been serviced, preserving all queue updates.
+  for (const danfo of danfos) {
+    if (danfo.status !== "idle" || !danfo.repeatRoute) continue;
+    const destination = danfo.repeatRoute.find((stop) => stop !== danfo.node)!;
+    if (danfo.fuel >= 20) nextState = dispatchDanfo(nextState, destination, danfo.id);
+    if (nextState.danfos.find((item) => item.id === danfo.id)?.status === "moving") continue;
+    nextState = {
+      ...nextState,
+      danfos: nextState.danfos.map((item) => item.id === danfo.id ? {
+        ...item,
+        repeatRoute: null,
+        arrival: { at: state.now, message: danfo.fuel < 20 ? "Shuttle stopped: low fuel. Dispatch to a refuel stop." : "Shuttle stopped: no clear route. Choose a new destination." },
+      } : item),
+    };
+  }
+  return nextState;
 }

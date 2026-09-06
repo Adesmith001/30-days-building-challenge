@@ -6,7 +6,12 @@ import {
 import { GlobalHeader } from "./GlobalHeader";
 import { MiniNetwork } from "./MiniNetwork";
 
+import { DIFFICULTIES } from "../lib/difficulty";
+import type { GameState } from "../types/game";
+
 interface Props {
+  difficulty: GameState["difficulty"];
+  onDifficulty(mode: GameState["difficulty"]): void;
   onStart(): void;
   onAbout(): void;
 }
@@ -25,7 +30,7 @@ const briefing = [
     number: "02",
     title: "SEND DANFOS WHERE THEY'RE NEEDED.",
     text:
-      "Select a yellow danfo, then click its destination. Traffic changes route costs in real time.",
+      "Select a yellow danfo, preview a destination, then confirm dispatch. Your first delivery is guided, with the shift clock and city pressure on hold.",
     footer: "NOMINAL PAYLOAD",
     value: "8 COMMUTERS",
     icon: Network,
@@ -34,7 +39,7 @@ const briefing = [
     number: "03",
     title: "DON'T LET STOPS OVERFLOW.",
     text:
-      "Full terminals damage City Health. Three serious failures and Lagos stops moving.",
+      "Full terminals flash a warning before damaging City Health. Dispatch help during the countdown. Three overflows end the run.",
     footer: "FAIL CONDITION",
     value: "3 STRIKES",
     icon: Zap,
@@ -44,6 +49,8 @@ const briefing = [
 export function Briefing({
   onStart,
   onAbout,
+  difficulty,
+  onDifficulty,
 }: Props) {
   return (
     <div className="min-h-screen bg-[#f7f4ef]">
@@ -75,6 +82,15 @@ export function Briefing({
           </div>
         </div>
 
+        <fieldset className="mt-8 border border-[#918976] p-5">
+          <legend className="px-2 text-sm font-black">CHOOSE YOUR PACE</legend>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {(["standard", "relaxed"] as const).map((mode) => <label key={mode} className={`flex cursor-pointer items-start gap-3 border p-4 ${difficulty === mode ? "border-black bg-[#fff3bd]" : "border-[#918976]"}`}>
+              <input type="radio" name="difficulty" checked={difficulty === mode} onChange={() => onDifficulty(mode)} className="mt-1 accent-black" />
+              <span><strong>{DIFFICULTIES[mode].label}</strong><span className="mt-1 block text-sm text-[#676052]">{DIFFICULTIES[mode].description}</span></span>
+            </label>)}
+          </div>
+        </fieldset>
         <section
           className="
             mt-14 grid border
@@ -112,7 +128,7 @@ export function Briefing({
 
                 <div className="mt-8 flex items-center justify-between border-t border-[#aaa18d] pt-5 text-xs">
                   <span>{item.footer}</span>
-                  <strong>{item.value}</strong>
+                  <strong>{item.number === "01" ? `${50 * DIFFICULTIES[difficulty].patience} SEC AT START` : item.value}</strong>
                 </div>
               </article>
             );

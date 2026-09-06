@@ -63,6 +63,15 @@ export function deliverAtStop(
     ...state,
     flow,
     cash: state.cash + delivered.length * 150,
+    delivery: {
+      id: `${state.now}-${danfo.id}-${stopId}`,
+      at: state.now,
+      count: delivered.length + (state.delivery?.at === state.now ? state.delivery.count : 0),
+      fare: delivered.length * 150 + (state.delivery?.at === state.now ? state.delivery.fare : 0),
+      milestone: [1, 10, 25, 50, 100, 250, 500].filter((target) =>
+        state.stats.delivered < target && state.stats.delivered + delivered.length >= target,
+      ).pop() ?? (state.delivery?.at === state.now ? state.delivery.milestone : null),
+    },
     stats: {
       ...state.stats,
       delivered:

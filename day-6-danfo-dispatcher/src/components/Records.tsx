@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { RunRecord } from "../types/game";
 import { GlobalHeader } from "./GlobalHeader";
 
@@ -8,10 +9,12 @@ interface Props {
 }
 
 export function Records({
-  records,
+  records: allRecords,
   onBack,
   onAbout,
 }: Props) {
+  const [mode, setMode] = useState<"standard" | "relaxed">("standard");
+  const records = allRecords.filter((record) => (record.difficulty ?? "standard") === mode);
   const bestScore =
     records[0]?.score ?? 0;
 
@@ -59,6 +62,9 @@ export function Records({
           </button>
         </div>
 
+        <div className="mt-6 flex gap-3" aria-label="Record difficulty">
+          {(["standard", "relaxed"] as const).map((item) => <button key={item} onClick={() => setMode(item)} aria-pressed={mode === item} className={`min-h-11 border border-black px-5 py-2 text-sm capitalize ${mode === item ? "bg-[#ffd000] font-black" : ""}`}>{item}</button>)}
+        </div>
         <div className="mt-8 grid gap-3 sm:grid-cols-4">
           {[
             [
@@ -131,7 +137,7 @@ export function Records({
                     record.date,
                   ).toLocaleDateString()}
                   {" · "}
-                  {record.efficiency}% EFF.
+                  {record.efficiency}% EFF. / {record.difficulty ?? "standard"}
                 </div>
               </div>
 
