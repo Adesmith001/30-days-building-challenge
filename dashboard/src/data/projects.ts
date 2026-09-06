@@ -240,4 +240,42 @@ export const projects: Project[] = [
     learned:
       "I learned how to build a multi-level pointer game with evasive movement, decoy interactions, escalating difficulty, boss states, local personal bests, and shareable result cards.",
   },
+  {
+    day: 6,
+    title: "Danfo Dispatcher",
+    tagline:
+      "A real-time 3D Lagos transport simulation about keeping the city moving.",
+    description:
+      "Danfo Dispatcher turns Lagos into a living transport network. Route danfos through changing traffic, board passengers, manage fuel and queue pressure, survive random incidents, and build score through fast deliveries and strong flow.",
+    date: "2026-09-06",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Three.js",
+      "React Three Fiber",
+      "Drei",
+      "Tailwind CSS",
+      "Motion",
+      "LocalStorage",
+    ],
+    images: [
+      {
+        src: "/projects/day-06/1.png",
+        alt: "Danfo Dispatcher project preview",
+      },
+      {
+        src: "/projects/day-06/2.png",
+        alt: "Danfo Dispatcher project preview",
+      },
+      {
+        src: "/projects/day-06/3.png",
+        alt: "Danfo Dispatcher project preview",
+      },
+    ],
+    liveUrl: "https://day-6-danfo-dispatcher.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    learned:
+      "I learned how to combine graph-based routing, real-time simulation state, 3D scene composition, passenger queues, dynamic traffic, events, upgrades, and persistent run records into one playable transport system.",
+  },
 ];
