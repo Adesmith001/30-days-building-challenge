@@ -275,6 +275,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-6-danfo-dispatcher.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2096679849008005448",
     learned:
       "I learned how to combine graph-based routing, real-time simulation state, 3D scene composition, passenger queues, dynamic traffic, events, upgrades, and persistent run records into one playable transport system.",
   },
