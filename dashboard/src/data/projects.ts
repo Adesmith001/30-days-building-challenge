@@ -279,4 +279,54 @@ export const projects: Project[] = [
     learned:
       "I learned how to combine graph-based routing, real-time simulation state, 3D scene composition, passenger queues, dynamic traffic, events, upgrades, and persistent run records into one playable transport system.",
   },
+  {
+    day: 7,
+    title: "Price Am",
+    tagline:
+      "A Nigerian price-guessing game that tests how well you know the market.",
+    description:
+      "Price Am challenges players to estimate the real cost of food, market items, gadgets, home essentials and Lagos life. Score points for accurate guesses, build streaks, track personal records and share your result.",
+    date: "2026-09-07",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Lucide",
+      "Motion",
+      "LocalStorage",
+      "html-to-image",
+    ],
+    images: [
+      {
+        src: "/projects/day-07/1.png",
+        alt: "Price Am project preview",
+      },
+      {
+        src: "/projects/day-07/2.png",
+        alt: "Price Am project preview",
+      },
+      {
+        src: "/projects/day-07/3.png",
+        alt: "Price Am project preview",
+      },
+      {
+        src: "/projects/day-07/4.png",
+        alt: "Price Am project preview",
+      },
+      {
+        src: "/projects/day-07/5.png",
+        alt: "Price Am project preview",
+      },
+      {
+        src: "/projects/day-07/6.png",
+        alt: "Price Am project preview",
+      }
+    ],
+    liveUrl: "https://day-7-price-am.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to build a price-guessing game with local market data, accuracy-based scoring, streaks, persistent records, result sharing and downloadable result cards.",
+  },
 ];
