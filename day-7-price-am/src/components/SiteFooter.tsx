@@ -13,8 +13,8 @@ export function SiteFooter() {
           text-[#788078]
         "
       >
-        Lagos Market Census · Real-Time Pricing Archive
-        · Day 07 / 30
+        Naija price check - Food, market, gadgets and
+        Lagos life - Day 07 / 30
       </div>
     </footer>
   );

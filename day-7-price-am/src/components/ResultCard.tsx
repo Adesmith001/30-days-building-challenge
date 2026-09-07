@@ -39,7 +39,7 @@ export function ResultCard({
         "
       >
         <span>
-          ● {result.item.category} · VERIFIED
+          * {result.item.category} - PRICE CHECKED
         </span>
 
         <span>{result.item.location}</span>
@@ -70,7 +70,7 @@ export function ResultCard({
               tracking-[0.12em] text-[#075d38]
             "
           >
-            ● VERIFIED ARCHIVE
+            * PRICE CHECKED
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@ export function ResultCard({
             bg-[#faf7f1] p-4
           "
         >
-          <Label>YOU SAID</Label>
+          <Label>YOU TALK</Label>
 
           <div
             className="
@@ -100,7 +100,7 @@ export function ResultCard({
             bg-[#f0f6f1] p-4
           "
         >
-          <Label>ACTUAL PRICE</Label>
+          <Label>REAL PRICE</Label>
 
           <div
             className="
@@ -120,7 +120,7 @@ export function ResultCard({
         />
 
         <Stat
-          label="AWARDED"
+          label="POINTS"
           value={`+${formatNumber(result.points)}`}
           green
         />
@@ -144,7 +144,7 @@ export function ResultCard({
             tracking-[0.13em] text-[#737b74]
           "
         >
-          VERDICT:
+          TALK TRUE:
         </span>
 
         <strong className="ml-2 text-lg">
@@ -162,13 +162,13 @@ export function ResultCard({
             text-[#9a5704]
           "
         >
-          SHARP SHARP · SPEED BONUS +
+          SHARP SHARP - SPEED BONUS +
           {result.speedBonus}
         </div>
       )}
 
       <Button className="mt-5 w-full" onClick={onNext}>
-        DEAL NEXT SPECIMEN →
+        NEXT CARD
       </Button>
     </motion.article>
   );

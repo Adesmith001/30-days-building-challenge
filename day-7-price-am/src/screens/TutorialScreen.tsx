@@ -25,16 +25,16 @@ export function TutorialScreen({
               font-bold tracking-[0.14em]
             "
           >
-            ● TUTORIAL · STEP 01
+            * PRACTICE - STEP 01
           </div>
 
           <h1 className="mt-4 text-3xl font-black">
-            SWIPE THIS CARD AWAY.
+            SWIPE THIS CARD.
           </h1>
 
           <p className="mt-2 text-[#606860]">
-            Master deck navigation before facing real
-            marketplace odds.
+            Learn how to pass a card before real prices
+            start to enter your matter.
           </p>
         </div>
 
@@ -59,7 +59,7 @@ export function TutorialScreen({
               tracking-[0.13em] text-[#075d38]
             "
           >
-            ● DRILL BRIEFING COMPLETED
+            * YOU DON READY
           </div>
 
           <h1
@@ -68,11 +68,11 @@ export function TutorialScreen({
               tracking-[-0.05em]
             "
           >
-            THAT'S IT.
+            NA SO.
           </h1>
 
           <p className="mt-3 text-lg text-[#555d56]">
-            Now let's see if you actually know market.
+            Now make we see if you really sabi market.
           </p>
         </div>
 
@@ -90,9 +90,9 @@ export function TutorialScreen({
               text-xs font-bold tracking-[0.12em]
             "
           >
-            <span>TUTORIAL PROTOCOL</span>
+            <span>GAME FLOW</span>
             <span className="text-[#075d38]">
-              GUESS · LOCK · SWIPE
+              GUESS - LOCK - PASS
             </span>
           </div>
 
@@ -100,26 +100,26 @@ export function TutorialScreen({
             <Protocol
               number="01"
               title="GUESS"
-              text="Adjust the price controls to match your market instinct."
+              text="Move the price until e match wetin you get for mind."
             />
 
             <Protocol
               number="02"
               title="LOCK"
-              text="Commit your Naira estimate before courage leaves you."
+              text="Submit your Naira guess before second thought enter."
             />
 
             <Protocol
               number="03"
-              title="SWIPE"
-              text="Discard unfamiliar items to preserve your streak."
+              title="PASS"
+              text="Swipe unfamiliar items so your streak no go scatter."
             />
           </div>
         </div>
 
         <div className="mx-auto mt-8 max-w-[520px]">
           <Button className="w-full" onClick={onComplete}>
-            START PRICE RUN →
+            START PRICE RUN
           </Button>
         </div>
       </main>
@@ -135,7 +135,7 @@ export function TutorialScreen({
             tracking-[0.13em] text-[#075d38]
           "
         >
-          ● ORIENTATION MANUAL
+          * HOW TO PLAY
         </div>
 
         <h1
@@ -148,8 +148,8 @@ export function TutorialScreen({
         </h1>
 
         <p className="mt-2 text-[#565f58]">
-          Master the unspoken protocol of Nigerian
-          commerce before the round begins.
+          Guess, lock, and pass. Simple game, but Naija
+          prices no dey always simple.
         </p>
       </div>
 
@@ -167,10 +167,10 @@ export function TutorialScreen({
           "
         >
           <span className="text-[#925506]">
-            ■ FIELD DIRECTIVE
+            GAME GUIDE
           </span>
 
-          <span>SEC. 02 / PROTOCOL</span>
+          <span>NO DULLING</span>
         </div>
 
         <Directive
@@ -178,8 +178,8 @@ export function TutorialScreen({
           title="GUESS THE PRICE"
           side="INPUT"
         >
-          Enter your street valuation in Nigerian Naira
-          based on what you think the item costs.
+          Enter the Naira amount you think the item
+          costs from Nigerian vendors and markets.
         </Directive>
 
         <Directive
@@ -187,17 +187,17 @@ export function TutorialScreen({
           title="LOCK YOUR ANSWER"
           side="CONFIRM"
         >
-          Commit your estimate. Points scale based on
-          proximity to the verified game value.
+          Lock am. Points depend on how close your
+          guess is to the game benchmark.
         </Directive>
 
         <Directive
           number="03"
-          title="DON'T KNOW? SWIPE AWAY."
-          side="DISCARD"
+          title="NO SABI? PASS AM."
+          side="SWIPE"
         >
-          Pass unfamiliar items to protect your current
-          streak. You have three skips per run.
+          Swipe away any card that wants to disgrace
+          you. You get three passes per run.
         </Directive>
       </div>
 
@@ -205,7 +205,7 @@ export function TutorialScreen({
         className="mt-8 w-full"
         onClick={() => setStep(1)}
       >
-        TRY IT →
+        TRY AM
       </Button>
 
       <button
@@ -216,7 +216,7 @@ export function TutorialScreen({
         "
         onClick={onExit}
       >
-        RETURN TO PRICE AM
+        BACK TO PRICE AM
       </button>
     </main>
   );

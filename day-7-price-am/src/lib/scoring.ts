@@ -25,13 +25,13 @@ function getBasePoints(errorPercent: number, exact: boolean) {
 }
 
 function getVerdict(errorPercent: number, direction: string) {
-  if (errorPercent === 0) return "PRICE PERFECT";
-  if (errorPercent <= 2) return "MARKET ORACLE";
-  if (errorPercent <= 10) return "YOU KNOW MARKET.";
-  if (errorPercent <= 20) return "CLOSE ENOUGH.";
-  if (direction === "low") return "WHO IS YOUR VENDOR?";
+  if (errorPercent === 0) return "NA PRICE YOU BORN TO KNOW";
+  if (errorPercent <= 2) return "YOU SABI MARKET WELL";
+  if (errorPercent <= 10) return "YOU GET PRICE SENSE";
+  if (errorPercent <= 20) return "E CLOSE SMALL";
+  if (direction === "low") return "ABEG DROP YOUR VENDOR NUMBER";
 
-  return "IN THIS ECONOMY?";
+  return "FOR THIS ECONOMY?";
 }
 
 export function scoreGuess(
@@ -104,6 +104,6 @@ export function scoreSkip(
     multiplier: 1,
     points: 0,
     nextStreak: currentStreak,
-    verdict: "SKIPPED",
+    verdict: "PASSED",
   };
 }

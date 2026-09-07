@@ -24,8 +24,8 @@ export function RecordsScreen({
           text-[#677068]
         "
       >
-        CAREER LEDGER: {records.gamesPlayed} SESSIONS
-        AUDITED · STATUS: ● VERIFIED
+        YOU DON PLAY: {records.gamesPlayed} TIMES -
+        STATUS: PRICE CHECKED
       </div>
 
       <section
@@ -41,7 +41,7 @@ export function RecordsScreen({
             tracking-[0.13em]
           "
         >
-          ● PERSONAL MARKET LEDGER
+          * YOUR MARKET RECORD
         </div>
 
         <div className="p-7">
@@ -51,7 +51,7 @@ export function RecordsScreen({
               sm:text-5xl
             "
           >
-            YOUR MARKET RECORD
+            HOW YOU DEY PRICE
           </h1>
 
           <p
@@ -60,8 +60,8 @@ export function RecordsScreen({
               text-[#565e57]
             "
           >
-            Historical valuation statistics across
-            completed Nigerian commodity decks.
+            Your best runs across Naija food, market,
+            gadget, home and Lagos life cards.
           </p>
 
           <div
@@ -86,7 +86,7 @@ export function RecordsScreen({
             <Record
               index="03"
               label="BEST STREAK"
-              value={`×${records.bestStreak}`}
+              value={`x${records.bestStreak}`}
               amber
             />
 
@@ -95,7 +95,7 @@ export function RecordsScreen({
               label="CLOSEST CARD"
               value={
                 records.closestPercent === null
-                  ? "—"
+                  ? "-"
                   : `${records.closestPercent.toFixed(1)}%`
               }
               accent
@@ -109,7 +109,7 @@ export function RecordsScreen({
 
             <Record
               index="06"
-              label="VALUE APPRAISED"
+              label="VALUE GUESSED"
               value={formatNaira(
                 records.totalValueAppraised,
               )}
@@ -121,7 +121,7 @@ export function RecordsScreen({
             className="mt-8 w-full"
             onClick={onPlay}
           >
-            DEAL AGAIN →
+            RUN AM AGAIN
           </Button>
         </div>
 
@@ -133,7 +133,7 @@ export function RecordsScreen({
             tracking-[0.13em] text-[#6c746d]
           "
         >
-          LAGOS MARKET CENSUS · ACCURACY REGISTRY
+          NAIJA PRICE CHECK - ACCURACY BOARD
         </div>
       </section>
     </main>
@@ -166,7 +166,7 @@ function Record({
           tracking-[0.12em] text-[#727b73]
         "
       >
-        INDEX {index} // RECORD
+        CARD {index}
       </div>
 
       <div

@@ -2,7 +2,7 @@ export const ranks = [
   {
     min: 0,
     max: 2999,
-    name: "JUST LOOKING",
+    name: "WINDOW SHOPPER",
   },
   {
     min: 3000,
@@ -12,17 +12,17 @@ export const ranks = [
   {
     min: 5000,
     max: 6999,
-    name: "SHARP SHOPPER",
+    name: "SHARP BUYER",
   },
   {
     min: 7000,
     max: 8999,
-    name: "PRICE DETECTIVE",
+    name: "PRICE SABI",
   },
   {
     min: 9000,
     max: Infinity,
-    name: "MARKET ORACLE",
+    name: "MARKET CHAIRMAN",
   },
 ];
 

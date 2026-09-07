@@ -57,7 +57,7 @@ export function PriceInput({
           text-[#737c74]
         "
       >
-        Your Estimated Price
+        Your Guess
       </div>
 
       <input
@@ -74,7 +74,7 @@ export function PriceInput({
           tracking-[-0.04em] outline-none
           sm:text-[38px]
         "
-        aria-label="Your estimated price"
+        aria-label="Your price guess"
       />
 
       <input
@@ -100,7 +100,7 @@ export function PriceInput({
         "
       >
         <span>{formatNaira(item.minPrice)}</span>
-        <span>SLIDE TO TUNE</span>
+        <span>DRAG AM</span>
         <span>{formatNaira(item.maxPrice)}</span>
       </div>
 
@@ -127,7 +127,7 @@ export function PriceInput({
         disabled={disabled}
         onClick={onLock}
       >
-        LOCK PRICE →
+        LOCK AM
       </Button>
 
       <div
@@ -137,7 +137,7 @@ export function PriceInput({
           text-[#7a827a]
         "
       >
-        ← SWIPE CARD TO SKIP →
+        SWIPE CARD IF YOU NO SABI
       </div>
     </section>
   );

@@ -27,9 +27,9 @@ export function SpecimenCard() {
             text-[10px] font-bold tracking-[0.13em]
           "
         >
-          <span>SPECIMEN 01 / 10</span>
+          <span>CARD SAMPLE</span>
           <span className="text-[#8e5300]">
-            MILE 12 MARKET
+            MILE 12 / KETU
           </span>
         </div>
 
@@ -47,17 +47,17 @@ export function SpecimenCard() {
               text-[9px] font-black tracking-[0.12em]
             "
           >
-            BASKET DEPOSIT: CONFIRMED
+            PRICE CHECKED
           </div>
         </div>
 
         <h3 className="mt-4 text-xl font-black">
-          Fresh Paint-Bucket Tomatoes
+          Paint Bucket Tomatoes
         </h3>
 
         <p className="mt-1 text-sm text-[#626862]">
-          Standard 4-litre measurement container.
-          Sourced fresh from Lagos market traders.
+          One paint rubber. Fresh Lagos market pricing,
+          rounded for gameplay.
         </p>
 
         <div
@@ -73,11 +73,11 @@ export function SpecimenCard() {
                 tracking-[0.13em] text-[#717971]
               "
             >
-              ESTIMATED VALUATION
+              YOUR GUESS
             </div>
 
             <div className="font-mono text-xl font-black">
-              ₦ ?,???
+              NGN ?,???
             </div>
           </div>
 
@@ -89,7 +89,7 @@ export function SpecimenCard() {
               tracking-[0.12em]
             "
           >
-            ● READY TO GUESS
+            * OYA GUESS
           </div>
         </div>
       </article>

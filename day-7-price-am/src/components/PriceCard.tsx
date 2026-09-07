@@ -167,7 +167,7 @@ export function PriceCard({
           tracking-[0.12em] text-[#ad361f]
         "
       >
-        SKIP
+        PASS AM
       </motion.div>
 
       {exitDirection && (
@@ -182,7 +182,7 @@ export function PriceCard({
           "
         >
           {exact
-            ? "EXACT."
+            ? "NAILED AM"
             : exitDirection === "low"
               ? "TOO LOW"
               : "TOO HIGH"}
@@ -198,7 +198,7 @@ export function PriceCard({
         "
       >
         <span>
-          ● {item.category} · {item.difficulty}
+          * {item.category} - {item.difficulty}
         </span>
 
         <span>{item.location}</span>
@@ -223,7 +223,7 @@ export function PriceCard({
             tracking-[0.13em] text-white
           "
         >
-          VERIFIED ARCHIVE
+          PRICE CHECKED
         </div>
       </div>
 
@@ -254,7 +254,7 @@ export function PriceCard({
               tracking-[0.13em] text-[#747d75]
             "
           >
-            MARKET VALUE
+            STREET PRICE
           </span>
 
           <span
@@ -263,7 +263,7 @@ export function PriceCard({
               tracking-[0.05em] text-[#075d38]
             "
           >
-            HOW MUCH?
+            HOW MUCH E BE?
           </span>
         </div>
       </div>

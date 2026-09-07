@@ -51,7 +51,7 @@ export function GameHUD({
             text-[#667168]
           "
         >
-          SKIPS {skipsLeft}
+          PASS {skipsLeft}
         </span>
       </div>
     </div>

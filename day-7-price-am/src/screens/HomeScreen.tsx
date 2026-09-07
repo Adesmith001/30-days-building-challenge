@@ -1,7 +1,7 @@
-import { getRank } from "../lib/ranks";
-import type { MarketRecords } from "../types/game";
 import { Button } from "../components/Button";
 import { SpecimenCard } from "../components/SpecimenCard";
+import { getRank } from "../lib/ranks";
+import type { MarketRecords } from "../types/game";
 
 interface Props {
   records: MarketRecords;
@@ -28,7 +28,7 @@ export function HomeScreen({
             text-[#174f37]
           "
         >
-          ● NIGERIAN PRICE CARD GAME
+          * NAIJA PRICE GUESSING GAME
         </div>
 
         <h1
@@ -38,12 +38,12 @@ export function HomeScreen({
             sm:text-5xl
           "
         >
-          HOW WELL DO YOU KNOW MARKET?
+          YOU SABI MARKET PRICE?
         </h1>
 
         <p className="mt-4 text-[#4f5650]">
-          Ten cards. Ten prices. Surely you know what
-          these things cost.
+          Ten cards. Ten prices. Oya prove say you
+          know wetin things dey cost for Naija.
         </p>
       </div>
 
@@ -51,7 +51,7 @@ export function HomeScreen({
 
       <div className="mx-auto mt-10 max-w-[500px]">
         <Button className="w-full" onClick={onStart}>
-          DEAL THE CARDS →
+          START PRICE RUN
         </Button>
 
         <div
@@ -61,9 +61,9 @@ export function HomeScreen({
           "
         >
           <span>10 CARDS</span>
-          <span>·</span>
-          <span>SCORE ATTACK</span>
-          <span>·</span>
+          <span>-</span>
+          <span>NO DULLING</span>
+          <span>-</span>
           <span>~2 MIN</span>
         </div>
 
@@ -82,7 +82,7 @@ export function HomeScreen({
                 tracking-[0.13em] text-[#747c74]
               "
             >
-              PERSONAL BEST
+              BEST SCORE
             </div>
 
             <div className="mt-1 font-mono text-3xl font-black">
@@ -101,7 +101,7 @@ export function HomeScreen({
                 tracking-[0.13em] text-[#747c74]
               "
             >
-              CURRENT TITLE
+              YOUR LEVEL
             </div>
 
             <div
@@ -112,7 +112,7 @@ export function HomeScreen({
                 tracking-[0.1em]
               "
             >
-              ● {rank.name}
+              * {rank.name}
             </div>
           </div>
         </button>

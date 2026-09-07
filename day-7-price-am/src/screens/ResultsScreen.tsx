@@ -81,10 +81,10 @@ export function ResultsScreen({
 
   const instinct =
     stats.under > stats.high
-      ? "YOU UNDERESTIMATE EVERYTHING."
+      ? "YOU DEY PRICE THINGS TOO LOW."
       : stats.high > stats.under
-        ? "YOU EXPECT LAGOS TO COST MORE."
-        : "YOUR MARKET INSTINCT IS BALANCED.";
+        ? "YOU DEY FEAR LAGOS PRICE TOO MUCH."
+        : "YOUR PRICE SENSE BALANCE.";
 
   return (
     <main className="mx-auto max-w-[760px] px-5 pt-8">
@@ -103,8 +103,8 @@ export function ResultsScreen({
             text-[#687169]
           "
         >
-          <span>● ARCHIVAL VALUATION DOCKET</span>
-          <span>EVALUATION SET #22</span>
+          <span>* PRICE RUN RESULT</span>
+          <span>NAIJA CHECK #07</span>
         </div>
 
         <div className="mt-7 flex justify-between gap-5">
@@ -153,7 +153,7 @@ export function ResultsScreen({
                 tracking-[0.1em] text-[#737c74]
               "
             >
-              GRADE: MARKET ARCHIVE
+              LEVEL: PRICE AM
             </div>
           </div>
         </div>
@@ -170,7 +170,7 @@ export function ResultsScreen({
               tracking-[0.13em] text-[#075d38]
             "
           >
-            YOUR INSTINCT
+            YOUR PRICE SENSE
           </div>
 
           <div className="mt-2 text-xl font-black">
@@ -193,17 +193,17 @@ export function ResultsScreen({
           "
         >
           <Metric
-            label="ANSWERED"
+            label="PLAYED"
             value={`${stats.answered.length} / 10`}
           />
 
           <Metric
-            label="SKIPPED"
+            label="PASSED"
             value={String(stats.skipped)}
           />
 
           <Metric
-            label="PRICE ACCURACY"
+            label="ACCURACY"
             value={`${stats.accuracy}%`}
             green
           />
@@ -223,7 +223,7 @@ export function ResultsScreen({
           />
 
           <Metric
-            label="ROUGHEST CARD"
+            label="WORST MISS"
             value={
               stats.worst
                 ? `${stats.worst.errorPercent.toFixed(0)}%`
@@ -253,7 +253,7 @@ export function ResultsScreen({
             </div>
 
             <div className="mt-1 text-sm text-[#616962]">
-              Actual benchmark{" "}
+              Real price{" "}
               {formatNaira(stats.best.item.actualPrice)}
             </div>
           </div>
@@ -268,21 +268,21 @@ export function ResultsScreen({
               tracking-[0.12em] text-[#8c5008]
             "
           >
-            {formatNumber(nextPoints)} POINTS TO NEXT RANK
+            {formatNumber(nextPoints)} POINTS TO NEXT LEVEL
           </div>
         )}
       </div>
 
       <div className="mt-6 grid gap-3 sm:grid-cols-2">
         <Button onClick={onReplay}>
-          DEAL ME AGAIN →
+          PLAY AGAIN
         </Button>
 
         <Button
           variant="secondary"
           onClick={onRecords}
         >
-          VIEW MARKET RECORD
+          SEE RECORD
         </Button>
       </div>
 
@@ -295,7 +295,7 @@ export function ResultsScreen({
           }
         }}
       >
-        SHARE RESULT ↗
+        SHARE RESULT
       </Button>
     </main>
   );

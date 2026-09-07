@@ -88,7 +88,7 @@ export function TutorialCard({
           text-[#99500b]
         "
       >
-        DISMISS / SKIP
+        PASS AM
       </motion.div>
 
       <div
@@ -98,8 +98,8 @@ export function TutorialCard({
           text-[10px] font-bold tracking-[0.13em]
         "
       >
-        <span>TUTORIAL · REF #01-LAG-99</span>
-        <span>☝ SWIPE DEMO</span>
+        <span>QUICK PRACTICE</span>
+        <span>SWIPE DEMO</span>
       </div>
 
       <div
@@ -111,7 +111,9 @@ export function TutorialCard({
         "
       >
         <div className="text-center">
-          <div className="text-7xl">💧</div>
+          <div className="font-mono text-5xl font-black">
+            NGN
+          </div>
 
           <div
             className="
@@ -123,7 +125,7 @@ export function TutorialCard({
           </div>
 
           <div className="font-mono text-xs">
-            500ML
+            50CL SACHET
           </div>
         </div>
       </div>
@@ -133,12 +135,12 @@ export function TutorialCard({
       </h3>
 
       <p className="mt-1 font-mono text-xs text-[#95500f]">
-        ONE SACHET · 50CL
+        ONE SACHET - STREET PRICE
       </p>
 
       <p className="mt-4 text-sm leading-6 text-[#5c655e]">
-        Cards you don't know can be discarded without
-        immediately revealing the answer.
+        If price no clear, swipe the card away. You no
+        go score, but your streak no go scatter.
       </p>
 
       <div
@@ -150,9 +152,9 @@ export function TutorialCard({
           tracking-[0.12em]
         "
       >
-        <span>←</span>
-        <span>☝ DRAG HORIZONTALLY TO SKIP</span>
-        <span>→</span>
+        <span>&lt;</span>
+        <span>DRAG SIDEWAYS TO PASS</span>
+        <span>&gt;</span>
       </div>
     </motion.div>
   );

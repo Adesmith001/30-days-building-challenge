@@ -61,7 +61,7 @@ export function GameScreen({
     if (!didSkip) return;
 
     setSkipFlash(
-      `SKIPPED · ${Math.max(game.skipsLeft - 1, 0)} SKIPS LEFT`,
+      `PASSED - ${Math.max(game.skipsLeft - 1, 0)} PASS LEFT`,
     );
 
     window.setTimeout(() => {
@@ -118,7 +118,7 @@ export function GameScreen({
                   }
                   onSkip={skip}
                   onNoSkips={() => {
-                    setSkipFlash("NO SKIPS LEFT");
+                    setSkipFlash("NO PASS LEFT");
 
                     window.setTimeout(
                       () => setSkipFlash(null),
@@ -149,7 +149,7 @@ export function GameScreen({
           tracking-[0.14em] text-[#737c74]
         "
       >
-        LAGOS MARKET CENSUS · REAL-TIME PRICING ARCHIVE
+        NAIJA PRICE CHECK - MARKET, FOOD, GADGETS, RENT
       </div>
     </main>
   );

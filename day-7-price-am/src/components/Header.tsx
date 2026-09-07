@@ -46,7 +46,7 @@ export function Header({
             ABOUT
           </button>
 
-          <span className="text-[#b6bdb7]">·</span>
+          <span className="text-[#b6bdb7]">-</span>
 
           <a
             href="https://nigerianstat.gov.ng/"
@@ -54,7 +54,7 @@ export function Header({
             rel="noreferrer"
             className="text-[#075d38]"
           >
-            SOURCE ↗
+            SOURCES
           </a>
         </div>
       </div>
