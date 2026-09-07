@@ -1,4 +1,5 @@
 import { useMemo, useRef } from "react";
+import { Download, Share2 } from "lucide-react";
 import { Button } from "../components/Button";
 import {
   formatNaira,
@@ -8,19 +9,24 @@ import {
   getRank,
   pointsToNextRank,
 } from "../lib/ranks";
-import { shareResultCard } from "../lib/share";
+import {
+  saveResultCard,
+  shareResultCard,
+} from "../lib/share";
 import type { RoundResult } from "../types/game";
 
 interface Props {
   results: RoundResult[];
   onReplay: () => void;
   onRecords: () => void;
+  onHome: () => void;
 }
 
 export function ResultsScreen({
   results,
   onReplay,
   onRecords,
+  onHome,
 }: Props) {
   const shareRef = useRef<HTMLDivElement>(null);
 
@@ -273,7 +279,7 @@ export function ResultsScreen({
         )}
       </div>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-2">
+      <div className="mt-6 grid gap-3 sm:grid-cols-3">
         <Button onClick={onReplay}>
           PLAY AGAIN
         </Button>
@@ -284,19 +290,44 @@ export function ResultsScreen({
         >
           SEE RECORD
         </Button>
+
+        <Button
+          variant="secondary"
+          onClick={onHome}
+        >
+          GO HOME
+        </Button>
       </div>
 
-      <Button
-        variant="secondary"
-        className="mt-3 w-full"
-        onClick={() => {
-          if (shareRef.current) {
-            void shareResultCard(shareRef.current);
-          }
-        }}
-      >
-        SHARE RESULT
-      </Button>
+      <div className="mt-3 flex justify-end gap-3">
+        <Button
+          variant="secondary"
+          className="w-13 px-0"
+          aria-label="Share result"
+          title="Share result"
+          onClick={() => {
+            if (shareRef.current) {
+              void shareResultCard(shareRef.current);
+            }
+          }}
+        >
+          <Share2 size={18} aria-hidden="true" />
+        </Button>
+
+        <Button
+          variant="secondary"
+          className="w-13 px-0"
+          aria-label="Save result image"
+          title="Save result image"
+          onClick={() => {
+            if (shareRef.current) {
+              void saveResultCard(shareRef.current);
+            }
+          }}
+        >
+          <Download size={18} aria-hidden="true" />
+        </Button>
+      </div>
     </main>
   );
 }

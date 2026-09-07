@@ -13,7 +13,7 @@ export const prices: PriceItem[] = [
     difficulty: "EASY",
     location: "AGEGE / IFAKO - LAGOS",
     image:
-      "https://source.unsplash.com/1200x900/?egg,crate,market",
+      "https://images.unsplash.com/photo-1635165250545-277ed55a6349?auto=format&fit=crop&w=1200&q=85",
   },
   {
     id: "tomatoes",
@@ -27,21 +27,21 @@ export const prices: PriceItem[] = [
     difficulty: "MEDIUM",
     location: "MILE 12 / KETU - LAGOS",
     image:
-      "https://source.unsplash.com/1200x900/?tomato,bucket,market",
+      "https://chopboku.com/public/uploads/all/ev0dpR7wfarzY2Il6EnuQy3iCooWvDmPN7w5tzUV.png",
   },
   {
     id: "bread",
     category: "MARKET",
     name: "BOKKU BREAD",
-    context: "800G TO 900G FAMILY LOAF - RETAIL CHECK",
+    context: "800G LOAF - QUICKSTREET BOKKU LISTING",
     actualPrice: 1300,
     minPrice: 500,
     maxPrice: 4000,
     step: 100,
     difficulty: "EASY",
-    location: "BOKKU MART - LAGOS",
+    location: "BOKKU BREAD - ONLINE LISTING",
     image:
-      "https://source.unsplash.com/1200x900/?bread,loaf,bakery",
+      "https://cdn.quickstreetmarket.com/16_69b7bc37cc0c6.jpg",
   },
   {
     id: "rice",
@@ -55,7 +55,7 @@ export const prices: PriceItem[] = [
     difficulty: "MEDIUM",
     location: "BOKKU MART - LAGOS",
     image:
-      "https://source.unsplash.com/1200x900/?rice,bag,grocery",
+      "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=1200&q=85",
   },
   {
     id: "shawarma",
@@ -69,7 +69,7 @@ export const prices: PriceItem[] = [
     difficulty: "EASY",
     location: "LEKKI / VI - LAGOS",
     image:
-      "https://source.unsplash.com/1200x900/?shawarma,wrap,chicken",
+      "https://images.unsplash.com/photo-1734772591537-15ac1b3b3c04?auto=format&fit=crop&w=1200&q=85",
   },
   {
     id: "jollof",
@@ -83,7 +83,7 @@ export const prices: PriceItem[] = [
     difficulty: "MEDIUM",
     location: "YABA / LEKKI - LAGOS",
     image:
-      "https://source.unsplash.com/1200x900/?jollof,chicken,rice",
+      "https://images.unsplash.com/photo-1664992960082-0ea299a9c53e?auto=format&fit=crop&w=1200&q=85",
   },
   {
     id: "suya",
@@ -97,7 +97,7 @@ export const prices: PriceItem[] = [
     difficulty: "MEDIUM",
     location: "GLOVER COURT / SURULERE",
     image:
-      "https://source.unsplash.com/1200x900/?suya,beef,kebab",
+      "https://zenaskitchen.com/wp-content/uploads/2024/08/beef-suya-over-coals-1024x576.jpg",
   },
   {
     id: "power-bank",
@@ -111,7 +111,7 @@ export const prices: PriceItem[] = [
     difficulty: "MEDIUM",
     location: "COMPUTER VILLAGE - IKEJA",
     image:
-      "https://source.unsplash.com/1200x900/?power-bank,phone,charger",
+      "https://images.unsplash.com/photo-1610413858117-6423e0b86ca8?auto=format&fit=crop&w=1200&q=85",
   },
   {
     id: "earbuds",
@@ -125,7 +125,7 @@ export const prices: PriceItem[] = [
     difficulty: "MEDIUM",
     location: "IKEJA / ONLINE VENDORS",
     image:
-      "https://source.unsplash.com/1200x900/?earbuds,wireless,case",
+      "https://images.unsplash.com/photo-1722439667098-f32094e3b1d4?auto=format&fit=crop&w=1200&q=85",
   },
   {
     id: "phone",
@@ -139,7 +139,7 @@ export const prices: PriceItem[] = [
     difficulty: "HARD",
     location: "IKEJA / INSTAGRAM VENDORS",
     image:
-      "https://source.unsplash.com/1200x900/?iphone,smartphone,box",
+      "https://images.unsplash.com/photo-1647503380147-e075b24f4cbe?auto=format&fit=crop&w=1200&q=85",
   },
   {
     id: "sneakers",
@@ -153,21 +153,21 @@ export const prices: PriceItem[] = [
     difficulty: "HARD",
     location: "LAGOS ONLINE VENDORS",
     image:
-      "https://source.unsplash.com/1200x900/?sneakers,nike,shoes",
+      "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=1200&q=85",
   },
   {
     id: "fan",
     category: "HOME",
     name: "18-INCH STANDING FAN",
-    context: "BINATONE / OX STYLE - ONLINE STORE RANGE",
-    actualPrice: 55000,
+    context: "BRAND NEW 18 INCH - JIJI LAGOS LISTING",
+    actualPrice: 30000,
     minPrice: 20000,
     maxPrice: 110000,
     step: 1000,
     difficulty: "MEDIUM",
-    location: "JUMIA / ALABA - LAGOS",
+    location: "JIJI - LAGOS ISLAND",
     image:
-      "https://source.unsplash.com/1200x900/?standing-fan,home,appliance",
+      "https://www.khind.ae/cdn/shop/files/SF-1816E-Dark-Grey.webp?v=1760326830",
   },
   {
     id: "cooking-gas",
@@ -181,21 +181,21 @@ export const prices: PriceItem[] = [
     difficulty: "MEDIUM",
     location: "LAGOS MAINLAND",
     image:
-      "https://source.unsplash.com/1200x900/?cooking-gas,cylinder,kitchen",
+      "https://dbz-images.dubizzle.com/images/2025/06/16/06f8062913c64289b045e3049b0eaad4-.jpeg?impolicy=dpc",
   },
   {
     id: "generator",
     category: "HOME",
     name: "3.5KVA GENERATOR",
     context: "PETROL KEY START - JIJI / ALABA RANGE",
-    actualPrice: 480000,
+    actualPrice: 550000,
     minPrice: 180000,
     maxPrice: 900000,
     step: 10000,
     difficulty: "HARD",
     location: "ALABA / ONLINE STORES",
     image:
-      "https://source.unsplash.com/1200x900/?generator,petrol,power",
+      "https://sydneytools.com.au/assets/images/products/4/9/2/7/49271/7A748CB26830300F0F7DD6F8524C46BACDBA86A6F5A259B6321748E3BE10584F.jpeg",
   },
   {
     id: "haircut",
@@ -209,7 +209,7 @@ export const prices: PriceItem[] = [
     difficulty: "EASY",
     location: "YABA / SURULERE",
     image:
-      "https://source.unsplash.com/1200x900/?barber,haircut,clipper",
+      "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=85",
   },
   {
     id: "rent",
@@ -223,6 +223,6 @@ export const prices: PriceItem[] = [
     difficulty: "HARD",
     location: "YABA / ALAGOMEJI",
     image:
-      "https://source.unsplash.com/1200x900/?apartment,room,interior",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=85",
   },
 ];

@@ -1,12 +1,28 @@
 import { toPng } from "html-to-image";
 
-export async function shareResultCard(
+async function createResultImage(
   element: HTMLElement,
 ) {
-  const dataUrl = await toPng(element, {
+  return toPng(element, {
     cacheBust: true,
     pixelRatio: 2,
   });
+}
+
+export async function saveResultCard(
+  element: HTMLElement,
+) {
+  const dataUrl = await createResultImage(element);
+  const link = document.createElement("a");
+  link.href = dataUrl;
+  link.download = "price-am-result.png";
+  link.click();
+}
+
+export async function shareResultCard(
+  element: HTMLElement,
+) {
+  const dataUrl = await createResultImage(element);
 
   const response = await fetch(dataUrl);
   const blob = await response.blob();
@@ -32,8 +48,5 @@ export async function shareResultCard(
     return;
   }
 
-  const link = document.createElement("a");
-  link.href = dataUrl;
-  link.download = "price-am-result.png";
-  link.click();
+  await saveResultCard(element);
 }

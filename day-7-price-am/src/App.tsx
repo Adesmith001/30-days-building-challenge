@@ -103,6 +103,7 @@ export default function App() {
           results={lastResults}
           onReplay={startGame}
           onRecords={() => setScreen("records")}
+          onHome={() => setScreen("home")}
         />
       )}
 
