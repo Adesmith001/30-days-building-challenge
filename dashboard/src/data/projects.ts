@@ -299,6 +299,10 @@ export const projects: Project[] = [
     ],
     images: [
       {
+        src: "/projects/day-07/image.png",
+        alt: "Price Am project preview",
+      },
+      {
         src: "/projects/day-07/1.png",
         alt: "Price Am project preview",
       },
@@ -325,7 +329,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-7-price-am.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
-    twitterUrl: "",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2096928711408791905",
     learned:
       "I learned how to build a price-guessing game with local market data, accuracy-based scoring, streaks, persistent records, result sharing and downloadable result cards.",
   },
