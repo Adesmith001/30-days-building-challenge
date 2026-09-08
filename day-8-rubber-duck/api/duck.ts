@@ -3,6 +3,14 @@ import {
 } from "@google/genai";
 
 import {
+  readFileSync,
+} from "node:fs";
+
+import {
+  resolve,
+} from "node:path";
+
+import {
   buildPrompt,
 } from "../src/prompts/buildPrompt";
 
@@ -45,7 +53,8 @@ export async function POST(
     }
 
     const apiKey =
-      process.env.GEMINI_API_KEY;
+      process.env.GEMINI_API_KEY ||
+      readLocalApiKey();
 
     if (!apiKey) {
       return Response.json(
@@ -134,5 +143,25 @@ export async function POST(
         status: 500,
       },
     );
+  }
+}
+
+function readLocalApiKey() {
+  try {
+    const env = readFileSync(
+      resolve(
+        process.cwd(),
+        ".env.local",
+      ),
+      "utf8",
+    );
+
+    const match = env.match(
+      /^\s*GEMINI_API_KEY\s*=\s*["']?([^"'\r\n]+)["']?\s*$/m,
+    );
+
+    return match?.[1];
+  } catch {
+    return undefined;
   }
 }
