@@ -1,4 +1,21 @@
-# React + TypeScript + Vite
+# Rubber Duck
+
+## Local development
+
+Install dependencies with `pnpm install`, copy `.env.example` to `.env.local`,
+and set `GROQ_API_KEY`. Run `pnpm dev:vercel` to serve both the frontend and
+`/api/duck` at http://localhost:5173. `pnpm dev` runs only the Vite frontend;
+it does not serve the API.
+
+## Deployment
+
+Use `day-8-rubber-duck` as the Vercel project root and configure `GROQ_API_KEY`
+in the project's environment variables. Redeploy after applying the import fix.
+Server-side relative imports use `.js` extensions because Vercel emits the
+TypeScript modules as JavaScript. `pnpm test` checks the emitted handler and
+its Groq request using a mocked upstream response.
+
+## Vite template notes
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
