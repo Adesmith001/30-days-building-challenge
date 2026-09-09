@@ -11,11 +11,11 @@ export default function App() {
   return (
     <div className="app-shell">
       <Topbar
-        onHome={() => app.setStage('idle')}
+        onHome={app.newReceipt}
         onHistory={() => app.setStage('history')}
       />
 
-      {app.stage === 'review' && (
+      {app.stage === 'review' && app.receipt && (
         <div className="context">
           <span>
             MERCHANT: <b>{app.receipt.merchant}</b>
@@ -31,7 +31,7 @@ export default function App() {
 
       {app.stage === 'idle' && (
         <LandingScreen
-          onStart={() => app.scan()}
+          onStart={app.startDemo}
           onUpload={(event) => app.scan(event.target.files?.[0])}
           inputRef={app.inputRef}
         />
@@ -48,15 +48,17 @@ export default function App() {
       {app.stage === 'history' && (
         <HistoryScreen
           receipts={app.saved}
-          onNew={() => app.setStage('idle')}
+          onNew={app.newReceipt}
           onOpen={app.openReceipt}
         />
       )}
 
-      {app.stage === 'review' && (
+      {app.stage === 'review' && app.receipt && app.source && (
         <ReviewScreen
           receipt={app.receipt}
           image={app.image}
+          source={app.source}
+          fileName={app.fileName}
           flags={app.flags}
           confidence={app.confidence}
           tab={app.tab}
@@ -64,8 +66,12 @@ export default function App() {
           json={app.json}
           setJson={app.setJson}
           update={app.update}
+          updateItem={app.updateItem}
+          addItem={app.addItem}
+          removeItem={app.removeItem}
           onSave={app.save}
           onReset={app.reset}
+          onNew={app.newReceipt}
         />
       )}
     </div>

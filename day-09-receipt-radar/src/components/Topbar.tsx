@@ -12,12 +12,11 @@ export function Topbar({ onHome, onHistory }: TopbarProps) {
       <button className="brand" onClick={onHome}>RECEIPT RADAR</button>
       <nav>
         <button onClick={onHistory}>RECEIPTS</button>
-        <span>Â·</span>
+        <span>·</span>
         <button>ABOUT</button>
-        <span>Â·</span>
-        <button>SOURCE â†—</button>
+        <span>·</span>
+        <button>SOURCE ↗</button>
       </nav>
     </header>
   )
 }
-

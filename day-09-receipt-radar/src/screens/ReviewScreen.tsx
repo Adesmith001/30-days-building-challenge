@@ -2,11 +2,14 @@ import { EditableReceipt } from '../components/EditableReceipt'
 import { RadarSummary } from '../components/RadarSummary'
 import { ReceiptPaper } from '../components/ReceiptPaper'
 import { SpendBreakdown } from '../components/SpendBreakdown'
-import type { Flag, Receipt } from '../types/receipt'
+import type { EditableItemField } from '../lib/receipt'
+import type { Flag, Receipt, ReceiptSource } from '../types/receipt'
 
 type ReviewScreenProps = {
   receipt: Receipt
   image?: string
+  source: ReceiptSource
+  fileName: string
   flags: Flag[]
   confidence: number
   tab: 'original' | 'extracted'
@@ -14,13 +17,19 @@ type ReviewScreenProps = {
   json: boolean
   setJson: (value: boolean) => void
   update: (key: keyof Receipt, value: string) => void
+  updateItem: (id: string, key: EditableItemField, value: string) => void
+  addItem: () => void
+  removeItem: (id: string) => void
   onSave: () => void
   onReset: () => void
+  onNew: () => void
 }
 
 export function ReviewScreen({
   receipt,
   image,
+  source,
+  fileName,
   flags,
   confidence,
   tab,
@@ -28,8 +37,12 @@ export function ReviewScreen({
   json,
   setJson,
   update,
+  updateItem,
+  addItem,
+  removeItem,
   onSave,
   onReset,
+  onNew,
 }: ReviewScreenProps) {
   return (
     <main className="review">
@@ -45,10 +58,10 @@ export function ReviewScreen({
       <section className={'pane original ' + (tab === 'original' ? 'mobile-visible' : '')}>
         <div className="pane-head">
           <span>ORIGINAL</span>
-          <small>RAW_SCAN_0909.JPG</small>
+          <small>{source === 'demo' ? 'DEMO' : fileName}</small>
         </div>
         <div className="scan-canvas">
-          <ReceiptPaper image={image} />
+          <ReceiptPaper image={image} demo={source === 'demo'} />
         </div>
       </section>
 
@@ -69,7 +82,13 @@ export function ReviewScreen({
           <pre className="json-view">{JSON.stringify(receipt, null, 2)}</pre>
         ) : (
           <div className="extract-scroll">
-            <EditableReceipt receipt={receipt} update={update} />
+            <EditableReceipt
+              receipt={receipt}
+              update={update}
+              updateItem={updateItem}
+              addItem={addItem}
+              removeItem={removeItem}
+            />
             <RadarSummary flags={flags} />
             <SpendBreakdown receipt={receipt} />
             <div className="privacy inline">
@@ -86,8 +105,10 @@ export function ReviewScreen({
           <small>RECEIPT CONFIDENCE {confidence}</small>
         </div>
         <div>
-          <button className="button" onClick={onReset}>RESET DEMO</button>
-          <button className="button primary" onClick={onSave}>SAVE RECEIPT →</button>
+          <button className="button" onClick={onReset}>RESET CHANGES</button>
+          <button className="button primary" onClick={source === 'demo' ? onNew : onSave}>
+            {source === 'demo' ? 'SCAN YOUR RECEIPT →' : 'SAVE RECEIPT →'}
+          </button>
         </div>
       </footer>
     </main>

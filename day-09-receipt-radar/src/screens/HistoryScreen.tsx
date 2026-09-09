@@ -37,9 +37,9 @@ export function HistoryScreen({
             key={`${receipt.merchant}-${index}`}
             onClick={() => onOpen(receipt)}
           >
-            <span>SEP {String(9 - index).padStart(2, '0')}</span>
+            <span>{receipt.date || 'DATE UNKNOWN'}</span>
             <b>{receipt.merchant}</b>
-            <strong>{money(receipt.total)}</strong>
+            <strong>{money(receipt.total, receipt.currency)}</strong>
             <small>{verify(receipt).length ? 'REVIEW' : 'LOOKS GOOD'}</small>
             <span>→</span>
           </button>

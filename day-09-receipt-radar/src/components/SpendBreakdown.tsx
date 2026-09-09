@@ -22,10 +22,9 @@ export function SpendBreakdown({ receipt }: { receipt: Receipt }) {
           <i>
             <em style={{ width: `${Math.min(100, (value / receipt.total) * 100 * 2.5)}%` }} />
           </i>
-          <b>{money(value)}</b>
+          <b>{money(value, receipt.currency)}</b>
         </div>
       ))}
     </section>
   )
 }
-

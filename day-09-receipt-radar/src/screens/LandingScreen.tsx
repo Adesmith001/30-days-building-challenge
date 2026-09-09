@@ -21,12 +21,18 @@ export function LandingScreen({ onStart, onUpload, inputRef }: LandingScreenProp
       </p>
       <div className="landing-actions">
         <button className="button primary" onClick={onStart}>
-          TRY THE DEMO <span>→</span>
+          OPEN DEMO <span>→</span>
         </button>
         <button className="button" onClick={() => inputRef.current?.click()}>
           UPLOAD RECEIPT
         </button>
-        <input ref={inputRef} hidden type="file" accept="image/*" onChange={onUpload} />
+        <input
+          ref={inputRef}
+          hidden
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          onChange={onUpload}
+        />
       </div>
       <div className="landing-note">
         <span>01</span>
@@ -45,4 +51,3 @@ export function LandingScreen({ onStart, onUpload, inputRef }: LandingScreenProp
     </main>
   )
 }
-

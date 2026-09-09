@@ -18,9 +18,8 @@ export function RadarSummary({ flags }: { flags: Flag[] }) {
           </div>
         ))
       ) : (
-        <div className="resolved">âœ“ All printed totals reconcile within â‚¦1 tolerance.</div>
+        <div className="resolved">✓ All printed totals reconcile within the rounding tolerance.</div>
       )}
     </section>
   )
 }
-

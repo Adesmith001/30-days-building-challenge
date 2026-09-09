@@ -9,7 +9,7 @@ export function verify(receipt: Receipt): Flag[] {
     flags.push({
       type: 'error',
       title: 'SUBTOTAL MISMATCH',
-      detail: `${money(Math.abs(itemSum - receipt.subtotal))} difference`,
+      detail: `${money(Math.abs(itemSum - receipt.subtotal), receipt.currency)} difference`,
       field: 'subtotal',
     })
   }
@@ -19,7 +19,7 @@ export function verify(receipt: Receipt): Flag[] {
     flags.push({
       type: 'error',
       title: 'TOTAL MISMATCH',
-      detail: `${money(Math.abs(expected - receipt.total))} difference`,
+      detail: `${money(Math.abs(expected - receipt.total), receipt.currency)} difference`,
       field: 'total',
     })
   }
@@ -29,7 +29,7 @@ export function verify(receipt: Receipt): Flag[] {
       flags.push({
         type: 'error',
         title: 'LINE ITEM MISMATCH',
-        detail: `${item.name} · ${money(Math.abs(item.quantity * item.unitPrice - item.total))}`,
+        detail: `${item.name} · ${money(Math.abs(item.quantity * item.unitPrice - item.total), receipt.currency)}`,
         field: item.id,
       })
     }

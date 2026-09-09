@@ -11,6 +11,5 @@ export function loadReceipts(): Receipt[] {
 }
 
 export function saveReceipts(receipts: Receipt[]) {
-  localStorage.setItem(KEY, JSON.stringify(receipts))
+  localStorage.setItem(KEY, JSON.stringify(receipts.map(({ image: _image, ...receipt }) => receipt)))
 }
-

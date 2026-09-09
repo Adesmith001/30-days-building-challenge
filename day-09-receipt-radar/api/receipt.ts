@@ -1,3 +1,5 @@
+declare const process: { env: { GROQ_API_KEY?: string } }
+
 type ReceiptItem = {
   id: string
   name: string
@@ -142,7 +144,7 @@ export default async function handler(request: RequestLike, response: ResponseLi
       return response.status(502).json({ error: 'Groq returned an invalid receipt' })
     }
 
-    return response.status(200).json({ ...receipt, image: body.image })
+    return response.status(200).json(receipt)
   } catch {
     return response.status(502).json({ error: 'Unable to scan this receipt' })
   }

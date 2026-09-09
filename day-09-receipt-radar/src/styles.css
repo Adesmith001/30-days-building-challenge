@@ -266,6 +266,14 @@ body {
   border: 1px solid #d4d4d8;
   background: #fff;
 }
+.missing-image {
+  border: 1px dashed #a1a1aa;
+  padding: 48px 20px;
+  background: #f4f3ee;
+  color: #71717a;
+  text-align: center;
+  font: 11px "JetBrains Mono", monospace;
+}
 .extract-scroll {
   padding: 24px;
   overflow: auto;
@@ -311,17 +319,34 @@ body {
   padding-bottom: 7px;
 }
 .item-row {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(150px, 2fr) minmax(100px, 1fr) 58px 92px 92px 28px;
+  align-items: end;
   gap: 16px;
   padding: 12px 0;
   border-bottom: 1px solid #e4e4e7;
 }
-.item-row small {
-  display: block;
+.item-row input {
+  padding: 6px;
+}
+.remove-item,
+.add-item {
+  border: 0;
+  background: none;
   color: #71717a;
-  font-size: 10px;
-  margin-top: 3px;
+  cursor: pointer;
+  font: 11px "JetBrains Mono", monospace;
+}
+.remove-item {
+  height: 31px;
+  font-size: 18px;
+}
+.remove-item:hover {
+  color: #dc2626;
+}
+.add-item {
+  padding: 12px 0;
+  color: #2563eb;
 }
 .totals {
   margin-top: 12px;
@@ -604,6 +629,16 @@ body {
   }
   .meta-grid {
     grid-template-columns: 1fr;
+  }
+  .item-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .item-row label:nth-child(-n + 2) {
+    grid-column: span 2;
+  }
+  .remove-item {
+    justify-self: end;
   }
   .spend-row {
     grid-template-columns: 82px 1fr 76px;

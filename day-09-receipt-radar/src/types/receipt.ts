@@ -30,3 +30,4 @@ export type Flag = {
 
 export type Stage = 'idle' | 'scanning' | 'review' | 'history'
 
+export type ReceiptSource = 'demo' | 'upload' | 'saved'
