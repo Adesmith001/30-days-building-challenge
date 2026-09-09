@@ -367,7 +367,50 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-8-rubber-duck.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2097692255158956517",
     learned:
       "I learned how to build a structured AI conversation with Groq, preserve chat sessions locally, handle incomplete model responses safely, and turn a single-question flow into a more natural back-and-forth thinking experience.",
+  },
+  {
+    day: 9,
+    title: "Receipt Radar",
+    tagline:
+      "A receipt verification tool that turns messy purchases into clear, auditable data.",
+    description:
+      "Receipt Radar extracts receipt details, checks line items against totals, highlights mismatches, and lets you correct and save verified purchases in a local archive.",
+    date: "2026-09-09",
+    status: "completed",
+    stack: ["React", "TypeScript", "Vite", "LocalStorage"],
+    images: [
+      {
+        src: "/projects/day-09/1.png",
+        alt: "Receipt Radar project preview",
+      },
+      {
+        src: "/projects/day-09/2.png",
+        alt: "Receipt Radar project preview",
+      },
+      {
+        src: "/projects/day-09/3.png",
+        alt: "Receipt Radar project preview",
+      },
+      {
+        src: "/projects/day-09/4.png",
+        alt: "Receipt Radar project preview",
+      },
+      {
+        src: "/projects/day-09/5.png",
+        alt: "Receipt Radar project preview",
+      },
+      {
+        src: "/projects/day-09/6.png",
+        alt: "Receipt Radar project preview",
+      },
+    ],
+    liveUrl: "https://day-9-receipt-radar.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2097820307792801976",
+    learned:
+      "I learned how to build a receipt review workflow with editable extracted data, arithmetic verification flags, confidence scoring, local history, and a resilient demo path when no image is uploaded.",
   },
 ];
