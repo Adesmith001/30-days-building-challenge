@@ -359,6 +359,10 @@ export const projects: Project[] = [
         src: "/projects/day-08/2.png",
         alt: "Rubber Duck project preview",
       },
+      {
+        src: "/projects/day-08/3.png",
+        alt: "Rubber Duck project preview",
+      },
 
     ],
     liveUrl: "https://day-8-rubber-duck.vercel.app/",

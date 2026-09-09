@@ -1,5 +1,8 @@
  
  {
+  "git": {
+    "deploymentEnabled": false
+  },
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
     "api/duck.ts": {
