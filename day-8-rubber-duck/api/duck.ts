@@ -7,16 +7,56 @@ import {
 
 import {
   buildPrompt,
-} from "../src/prompts/buildPrompt";
+} from "../src/prompts/buildPrompt.ts";
 import {
   coerceDuckResponse,
-} from "../src/lib/aiResponse";
+} from "../src/lib/aiResponse.ts";
 import {
   SYSTEM_PROMPT,
-} from "../src/prompts/system";
+} from "../src/prompts/system.ts";
 import {
   DuckRequestSchema,
-} from "../src/schemas/ai";
+} from "../src/schemas/ai.ts";
+
+type VercelRequest = {
+  method?: string;
+  headers?: Record<string, string | string[] | undefined>;
+  url?: string;
+  body?: unknown;
+};
+
+type VercelResponse = {
+  statusCode?: number;
+  setHeader(name: string, value: string): void;
+  end(body?: string): void;
+};
+
+export default async function handler(
+  request: VercelRequest,
+  response: VercelResponse,
+) {
+  const body =
+    typeof request.body === "string"
+      ? request.body
+      : JSON.stringify(request.body ?? {});
+
+  const webRequest = new Request(
+    `https://${request.headers?.host ?? "localhost"}${request.url ?? "/api/duck"}`,
+    {
+      method: request.method ?? "POST",
+      headers: request.headers as HeadersInit,
+      body,
+    },
+  );
+
+  const webResponse = await POST(webRequest);
+
+  response.statusCode = webResponse.status;
+  webResponse.headers.forEach((value, key) => {
+    response.setHeader(key, value);
+  });
+  response.end(await webResponse.text());
+}
 
 export async function POST(
   request: Request,

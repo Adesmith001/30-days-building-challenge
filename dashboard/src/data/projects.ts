@@ -333,4 +333,37 @@ export const projects: Project[] = [
     learned:
       "I learned how to build a price-guessing game with local market data, accuracy-based scoring, streaks, persistent records, result sharing and downloadable result cards.",
   },
+  {
+    day: 8,
+    title: "Rubber Duck",
+    tagline:
+      "A Socratic thinking partner that helps you work through one useful question at a time.",
+    description:
+      "Rubber Duck turns vague problems into focused conversations. Chat through decisions, work, learning, writing, code and troubleshooting with an AI guide that surfaces assumptions, collects evidence, tracks clarity and helps you reach a practical next step.",
+    date: "2026-09-08",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Motion",
+      "Groq",
+      "LocalStorage",
+    ],
+    images: [
+      {
+        src: "/projects/day-08/1.png",
+        alt: "Rubber Duck project preview",
+      },
+      {
+        src: "/projects/day-08/2.png",
+        alt: "Rubber Duck project preview",
+      },
+
+    ],
+    liveUrl: "https://day-8-rubber-duck.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    learned:
+      "I learned how to build a structured AI conversation with Groq, preserve chat sessions locally, handle incomplete model responses safely, and turn a single-question flow into a more natural back-and-forth thinking experience.",
+  },
 ];
