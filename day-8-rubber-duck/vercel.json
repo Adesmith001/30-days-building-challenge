@@ -1,14 +1,16 @@
-{
+ 
+ {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
     "api/duck.ts": {
       "maxDuration": 60
     }
   },
-   "rewrites": [
+  "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/:path((?!@vite/|@react-refresh|src/|node_modules/|__vite_ping|api/).*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "trailingSlash": false
 }

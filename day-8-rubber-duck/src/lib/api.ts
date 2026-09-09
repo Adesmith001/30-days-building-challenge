@@ -3,6 +3,10 @@ import {
   type DuckRequest,
 } from "../schemas/ai";
 
+import {
+  formatApiError,
+} from "./apiError";
+
 export async function askDuck(
   payload: DuckRequest,
 ) {
@@ -27,7 +31,10 @@ export async function askDuck(
     await response.text();
 
   const json: {
-    error?: string;
+    error?: unknown;
+    details?: {
+      fieldErrors?: Record<string, unknown>;
+    };
   } = (() => {
     try {
       return body
@@ -40,10 +47,10 @@ export async function askDuck(
 
   if (!response.ok) {
     const error = new Error(
-      json.error ||
-        (response.status === 404
-          ? "The Duck API is not running. Start with pnpm dev:vercel."
-          : `The Duck API returned ${response.status}. Try again.`),
+      formatApiError(
+        json,
+        response.status,
+      ),
     );
 
     throw error;
