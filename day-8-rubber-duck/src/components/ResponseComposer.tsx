@@ -10,13 +10,17 @@ interface Props {
       value: string,
     ) =>
       | void
-      | Promise<void>;
+      | Promise<unknown>;
 
   disabled?: boolean;
 
   placeholder?: string;
 
   buttonLabel?: string;
+
+  suggestions?: string[];
+
+  draftKey?: string;
 }
 
 export function ResponseComposer({
@@ -28,11 +32,21 @@ export function ResponseComposer({
 
   buttonLabel =
     "ANSWER →",
+  suggestions = [
+    "I’m not sure yet",
+    "The main issue is…",
+    "What I’ve tried is…",
+  ],
+  draftKey,
 }: Props) {
   const [
     value,
     setValue,
-  ] = useState("");
+  ] = useState(() =>
+    draftKey
+      ? localStorage.getItem(draftKey) ?? ""
+      : "",
+  );
 
   const ref =
     useRef<
@@ -48,7 +62,19 @@ export function ResponseComposer({
     [placeholder],
   );
 
-  const submit = () => {
+  useEffect(() => {
+    if (!draftKey) {
+      return;
+    }
+
+    if (value) {
+      localStorage.setItem(draftKey, value);
+    } else {
+      localStorage.removeItem(draftKey);
+    }
+  }, [draftKey, value]);
+
+  const submit = async () => {
     const trimmed =
       value.trim();
 
@@ -59,11 +85,16 @@ export function ResponseComposer({
       return;
     }
 
-    void onSubmit(
+    const result = await onSubmit(
       trimmed,
     );
 
-    setValue("");
+    if (
+      result !== null &&
+      result !== false
+    ) {
+      setValue("");
+    }
   };
 
   return (
@@ -85,9 +116,24 @@ export function ResponseComposer({
             event.target.value,
           )
         }
+        onInput={(event) => {
+          event.currentTarget.style.height = "auto";
+          event.currentTarget.style.height = `${event.currentTarget.scrollHeight}px`;
+        }}
         onKeyDown={(
           event,
         ) => {
+          if (
+            event.key === "Enter" &&
+            !event.shiftKey &&
+            !event.metaKey &&
+            !event.ctrlKey
+          ) {
+            event.preventDefault();
+            submit();
+            return;
+          }
+
           if (
             (
               event.metaKey ||
@@ -103,6 +149,7 @@ export function ResponseComposer({
           placeholder
         }
         rows={5}
+        maxLength={12000}
         disabled={
           disabled
         }
@@ -119,6 +166,21 @@ export function ResponseComposer({
           disabled:opacity-50
         "
       />
+
+      {!value && !disabled && suggestions.length ? (
+        <div className="mt-3 flex flex-wrap gap-2">
+          {suggestions.map((suggestion) => (
+            <button
+              key={suggestion}
+              type="button"
+              onClick={() => setValue(suggestion)}
+              className="border border-rule px-3 py-2 font-mono text-[9px] tracking-[0.1em] text-graphite hover:border-ink"
+            >
+              {suggestion}
+            </button>
+          ))}
+        </div>
+      ) : null}
 
       <div
         className="

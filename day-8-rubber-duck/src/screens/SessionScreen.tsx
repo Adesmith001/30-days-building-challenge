@@ -11,8 +11,8 @@ import {
 } from "motion/react";
 
 import {
-  LoadingState,
-} from "../components/LoadingState";
+  ConversationView,
+} from "../components/ConversationView";
 
 import {
   Modal,
@@ -33,6 +33,10 @@ import {
 import type {
   DuckSession,
 } from "../schemas/session";
+
+import {
+  sessionMessages,
+} from "../lib/chat";
 
 interface Props {
   session:
@@ -80,15 +84,6 @@ export function SessionScreen({
     setResolveOpen,
   ] = useState(false);
 
-  if (
-    busy &&
-    !session.currentQuestion
-  ) {
-    return (
-      <LoadingState />
-    );
-  }
-
   return (
     <main
       className="
@@ -110,11 +105,21 @@ export function SessionScreen({
           lg:gap-16
         "
       >
-        <section>
+        <section className="min-w-0 lg:sticky lg:top-24 lg:h-[calc(100vh-250px)]">
+          <ConversationView
+            messages={
+              session.messages ??
+              sessionMessages(session)
+            }
+            busy={busy}
+            className="mb-6 max-h-[46vh] overflow-y-auto pr-2 lg:h-[min(46vh,470px)] lg:max-h-none"
+          />
+
           <AnimatePresence
             mode="wait"
           >
             <motion.div
+              className="hidden"
               key={`
                 ${session.questionCount}
                 -
@@ -233,10 +238,10 @@ export function SessionScreen({
                 className="
                   mt-10
                   font-serif
-                  text-4xl
+                  text-3xl
                   leading-[1.08]
                   tracking-[-0.02em]
-                  md:text-6xl
+                  md:text-5xl
                 "
               >
                 {session
@@ -364,8 +369,9 @@ export function SessionScreen({
                 </div>
               ) : null}
 
-              <div className="mt-10">
+              <div className="sticky bottom-14 z-10 mt-8 bg-paper/95 pt-3 backdrop-blur-sm">
                 <ResponseComposer
+                  draftKey={undefined}
                   onSubmit={
                     async (text) => {
                       await onAnswer(
@@ -469,6 +475,55 @@ export function SessionScreen({
               </div>
             </motion.div>
           </AnimatePresence>
+
+          <div className="border-t border-rule pt-5">
+            <div className="mb-4 flex items-center justify-between font-mono text-[9px] tracking-[0.15em] text-muted">
+              <span>
+                NEXT RESPONSE · QUESTION {String(session.questionCount).padStart(2, "0")}
+              </span>
+              <span className="border border-rule px-2 py-1 text-graphite">
+                {(session.currentQuestion?.type ?? "clarify").toUpperCase()}
+              </span>
+            </div>
+
+            <ResponseComposer
+              draftKey={`rubber-duck:draft:${session.id}`}
+              onSubmit={async (text) => {
+                await onAnswer(text);
+              }}
+              disabled={busy}
+            />
+
+            <div className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-3 font-mono text-[9px] tracking-[0.13em] text-graphite">
+              <button
+                onClick={() => void onHint()}
+                disabled={busy || session.hintLevel >= 3}
+                className="border-b border-ink pb-1 disabled:border-rule disabled:text-muted"
+              >
+                {session.hintLevel ? "STRONGER HINT" : "GIVE ME A HINT"} →
+              </button>
+              <button
+                onClick={() => void onExplain()}
+                disabled={busy}
+                className="border-b border-rule pb-1 hover:border-ink"
+              >
+                JUST EXPLAIN IT TO ME
+              </button>
+              <button
+                onClick={() => setResolveOpen(true)}
+                disabled={busy}
+                className="border-b border-rule pb-1 hover:border-ink"
+              >
+                I THINK I GOT IT →
+              </button>
+              <button
+                onClick={onPause}
+                className="ml-auto text-muted hover:text-ink"
+              >
+                PAUSE
+              </button>
+            </div>
+          </div>
         </section>
 
         <SideRail
@@ -550,6 +605,7 @@ export function SessionScreen({
 
         <div className="mt-8">
           <ResponseComposer
+            draftKey={`rubber-duck:resolution-draft:${session.id}`}
             disabled={
               busy
             }

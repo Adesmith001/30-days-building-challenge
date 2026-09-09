@@ -1,11 +1,6 @@
 import {
-  GoogleGenAI,
-} from "@google/genai";
-
-import {
   readFileSync,
 } from "node:fs";
-
 import {
   resolve,
 } from "node:path";
@@ -13,117 +8,116 @@ import {
 import {
   buildPrompt,
 } from "../src/prompts/buildPrompt";
-
+import {
+  coerceDuckResponse,
+} from "../src/lib/aiResponse";
 import {
   SYSTEM_PROMPT,
 } from "../src/prompts/system";
-
 import {
   DuckRequestSchema,
-  DuckResponseSchema,
-  duckResponseJsonSchema,
 } from "../src/schemas/ai";
 
 export async function POST(
   request: Request,
 ) {
   try {
-    const raw =
-      await request.json();
-
     const parsed =
       DuckRequestSchema.safeParse(
-        raw,
+        await request.json(),
       );
 
     if (!parsed.success) {
       return Response.json(
         {
-          error:
-            "Invalid request",
-
-          details:
-            parsed.error.flatten(),
+          error: "Invalid request",
+          details: parsed.error.flatten(),
         },
-
-        {
-          status: 400,
-        },
+        { status: 400 },
       );
     }
 
     const apiKey =
-      process.env.GEMINI_API_KEY ||
+      process.env.GROQ_API_KEY ||
       readLocalApiKey();
 
     if (!apiKey) {
       return Response.json(
         {
           error:
-            "GEMINI_API_KEY is not configured.",
+            "GROQ_API_KEY is not configured. Add it to .env.local.",
         },
-
-        {
-          status: 500,
-        },
+        { status: 500 },
       );
     }
 
-    const ai =
-      new GoogleGenAI({
-        apiKey,
-      });
-
-    const interaction =
-      await ai.interactions.create({
-        model:
-          process.env.GEMINI_MODEL ||
-          "gemini-3.8-flash",
-
-        input:
-          buildPrompt(
-            parsed.data,
-          ),
-
-        system_instruction:
-          SYSTEM_PROMPT,
-
-        response_format: {
-          type: "text",
-
-          mime_type:
-            "application/json",
-
-          schema:
-            duckResponseJsonSchema,
+    const upstream = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          model:
+            process.env.GROQ_MODEL ||
+            "openai/gpt-oss-20b",
+          messages: [
+            {
+              role: "system",
+              content: SYSTEM_PROMPT,
+            },
+            {
+              role: "user",
+              content: buildPrompt(parsed.data),
+            },
+          ],
+          temperature: 0.2,
+          response_format: {
+            type: "json_object",
+          },
+        }),
+      },
+    );
 
-        generation_config: {
-          thinking_level: "low",
-        },
+    const body = await upstream.text();
+    const json = parseJson(body);
+
+    if (!upstream.ok) {
+      const error = new Error(
+        getErrorMessage(json) ||
+          `Groq returned ${upstream.status}.`,
+      );
+      Object.assign(error, {
+        statusCode: upstream.status,
+        retryAfter: upstream.headers.get(
+          "retry-after",
+        ),
       });
+      throw error;
+    }
 
-    const text =
-      interaction.output_text;
+    const text = getChoiceText(json);
 
     if (!text) {
       throw new Error(
-        "Gemini returned an empty response.",
+        "Groq returned an empty response.",
       );
     }
 
-    const data =
-      DuckResponseSchema.parse(
-        JSON.parse(text),
-      );
-
     return Response.json(
-      data,
-
+      coerceDuckResponse(
+        JSON.parse(text),
+        {
+          ...parsed.data,
+          currentQuestion:
+            parsed.data.currentQuestion,
+        },
+      ),
       {
         headers: {
-          "Cache-Control":
-            "no-store",
+          "Cache-Control": "no-store",
         },
       },
     );
@@ -133,15 +127,32 @@ export async function POST(
       error,
     );
 
+    const statusCode =
+      getNumber(error, "statusCode") ||
+      500;
+
+    if (statusCode === 429) {
+      const retryAfter =
+        getNumber(error, "retryAfter") ||
+        extractRetryAfter(error);
+
+      return Response.json(
+        {
+          error: retryAfter
+            ? `The Duck is at capacity. Try again in ${retryAfter} seconds.`
+            : "The Duck is at capacity. Try again shortly.",
+          retryAfter,
+        },
+        { status: 429 },
+      );
+    }
+
     return Response.json(
       {
         error:
-          "Lost my train of thought. Try that again.",
+          "The Duck could not answer right now. Your response is still here—try again.",
       },
-
-      {
-        status: 500,
-      },
+      { status: 500 },
     );
   }
 }
@@ -149,19 +160,117 @@ export async function POST(
 function readLocalApiKey() {
   try {
     const env = readFileSync(
-      resolve(
-        process.cwd(),
-        ".env.local",
-      ),
+      resolve(process.cwd(), ".env.local"),
       "utf8",
     );
-
-    const match = env.match(
-      /^\s*GEMINI_API_KEY\s*=\s*["']?([^"'\r\n]+)["']?\s*$/m,
-    );
-
-    return match?.[1];
+    return env.match(
+      /^\s*GROQ_API_KEY\s*=\s*["']?([^"'\r\n]+)["']?\s*$/m,
+    )?.[1];
   } catch {
     return undefined;
   }
+}
+
+function parseJson(body: string) {
+  try {
+    return body
+      ? (JSON.parse(body) as Record<string, unknown>)
+      : {};
+  } catch {
+    return {};
+  }
+}
+
+function getNumber(
+  value: unknown,
+  key: string,
+) {
+  if (
+    typeof value !== "object" ||
+    value === null
+  ) {
+    return undefined;
+  }
+
+  const candidate =
+    (value as Record<string, unknown>)[key];
+
+  return typeof candidate === "number"
+    ? candidate
+    : undefined;
+}
+
+function getErrorMessage(
+  value: Record<string, unknown>,
+) {
+  const error = value.error;
+
+  if (
+    typeof error === "object" &&
+    error !== null
+  ) {
+    const message =
+      (error as Record<string, unknown>)
+        .message;
+
+    return typeof message === "string"
+      ? message
+      : undefined;
+  }
+
+  return undefined;
+}
+
+function getChoiceText(
+  value: Record<string, unknown>,
+) {
+  const choices = value.choices;
+
+  if (!Array.isArray(choices)) {
+    return undefined;
+  }
+
+  const first = choices[0];
+
+  if (
+    typeof first !== "object" ||
+    first === null
+  ) {
+    return undefined;
+  }
+
+  const message =
+    (first as Record<string, unknown>)
+      .message;
+
+  if (
+    typeof message !== "object" ||
+    message === null
+  ) {
+    return undefined;
+  }
+
+  const content =
+    (message as Record<string, unknown>)
+      .content;
+
+  return typeof content === "string"
+    ? content
+    : undefined;
+}
+
+function extractRetryAfter(error: unknown) {
+  const message =
+    typeof error === "object" &&
+    error !== null &&
+    "message" in error &&
+    typeof error.message === "string"
+      ? error.message
+      : "";
+  const match = message.match(
+    /retry in ([\d.]+)s/i,
+  );
+  return match
+    ? Math.ceil(Number(match[1]))
+    : undefined;
 }

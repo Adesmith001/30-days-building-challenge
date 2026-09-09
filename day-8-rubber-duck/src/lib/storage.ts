@@ -2,6 +2,10 @@ import type {
   DuckSession,
 } from "../schemas/session";
 
+import {
+  sessionMessages,
+} from "./chat";
+
 const KEY =
   "rubber-duck:sessions:v1";
 
@@ -11,9 +15,16 @@ export function loadSessions():
     const raw =
       localStorage.getItem(KEY);
 
-    return raw
-      ? JSON.parse(raw)
+    const sessions = raw
+      ? JSON.parse(raw) as DuckSession[]
       : [];
+
+    return sessions.map((session) => ({
+      ...session,
+      messages:
+        session.messages ??
+        sessionMessages(session),
+    }));
   } catch {
     return [];
   }

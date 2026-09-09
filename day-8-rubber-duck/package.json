@@ -6,12 +6,12 @@
   "scripts": {
     "dev": "vite",
     "dev:vercel": "vercel dev --local --listen 5173",
+    "test": "node --experimental-strip-types --test tests/chat.test.ts tests/ai-response.test.ts",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@google/genai": "^2.21.0",
     "motion": "^13.2.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

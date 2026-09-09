@@ -165,6 +165,11 @@ export function LandingScreen({
             >
               {latest.title}
             </p>
+
+            <p className="mt-2 line-clamp-2 font-serif text-sm italic text-muted">
+              {latest.messages?.at(-1)?.content ??
+                "Continue where you left off."}
+            </p>
           </button>
         ) : null}
       </section>

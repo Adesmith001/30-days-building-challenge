@@ -104,7 +104,7 @@ export function SideRail({
           tracking-[0.14em]
         "
       >
-        YOUR THREAD (
+        REASONING MAP (
         {session.turns.length}
         ) →
       </button>

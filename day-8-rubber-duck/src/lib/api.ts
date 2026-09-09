@@ -23,17 +23,33 @@ export async function askDuck(
       },
     );
 
-  const json =
-    await response.json();
+  const body =
+    await response.text();
+
+  const json: {
+    error?: string;
+  } = (() => {
+    try {
+      return body
+        ? JSON.parse(body)
+        : {};
+    } catch {
+      return {};
+    }
+  })();
 
   if (!response.ok) {
-    throw new Error(
+    const error = new Error(
       json.error ||
-        "The duck lost its train of thought.",
+        (response.status === 404
+          ? "The Duck API is not running. Start with pnpm dev:vercel."
+          : `The Duck API returned ${response.status}. Try again.`),
     );
+
+    throw error;
   }
 
   return DuckResponseSchema.parse(
-    json,
+    JSON.parse(body),
   );
 }

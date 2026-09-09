@@ -7,6 +7,11 @@ import type {
   ProblemMode,
 } from "../schemas/session";
 
+import {
+  sessionMessages,
+  responseMessage,
+} from "./chat";
+
 export function createSession(
   input: {
     problem: string;
@@ -61,6 +66,15 @@ export function createSession(
     reasoningSummary:
       "",
 
+    messages: [
+      {
+        id: "problem",
+        role: "user",
+        content: input.problem.trim(),
+        createdAt: now,
+      },
+    ],
+
     turns:
       [],
 
@@ -105,6 +119,9 @@ export function applyAIResponse(
               "reflection" as const,
           }
         : session.currentQuestion;
+
+  const assistantMessage =
+    responseMessage(data);
 
   return {
     ...session,
@@ -159,6 +176,15 @@ export function applyAIResponse(
 
     reasoningSummary:
       data.summary,
+
+    messages: assistantMessage
+      ? [
+          ...(session.messages ??
+            sessionMessages(session)),
+          assistantMessage,
+        ]
+      : session.messages ??
+        sessionMessages(session),
 
     insights:
       mergeUnique(

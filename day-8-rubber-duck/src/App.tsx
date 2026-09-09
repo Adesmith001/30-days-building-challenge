@@ -24,6 +24,10 @@ import {
 } from "./components/SessionHUD";
 
 import {
+  Toast,
+} from "./components/Toast";
+
+import {
   useRubberDuck,
 } from "./hooks/useRubberDuck";
 
@@ -164,39 +168,10 @@ export default function App() {
       ) : null}
 
       {duck.error ? (
-        <div
-          className="
-            border-b
-            border-ink
-            bg-white
-            px-5
-            py-3
-            text-center
-            font-mono
-            text-[10px]
-            tracking-[0.12em]
-            md:px-8
-          "
-        >
-          LOST MY TRAIN OF
-          THOUGHT.{" "}
-          {duck.error}
-
-          <button
-            onClick={() =>
-              duck.setError(
-                null,
-              )
-            }
-            className="
-              ml-4
-              border-b
-              border-ink
-            "
-          >
-            DISMISS
-          </button>
-        </div>
+        <Toast
+          message={duck.error}
+          onDismiss={() => duck.setError(null)}
+        />
       ) : null}
 
       {view ===

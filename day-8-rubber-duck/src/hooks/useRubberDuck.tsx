@@ -9,6 +9,11 @@ import {
 } from "../lib/api";
 
 import {
+  createUserMessage,
+  sessionMessages,
+} from "../lib/chat";
+
+import {
   applyAIResponse,
   createSession,
 } from "../lib/session";
@@ -219,6 +224,14 @@ export function useRubberDuck() {
         DuckSession = {
         ...current,
 
+        messages: [
+          ...(current.messages ??
+            sessionMessages(current)),
+          createUserMessage(
+            text,
+          ),
+        ],
+
         turns: [
           ...current.turns,
           turn,
@@ -233,6 +246,8 @@ export function useRubberDuck() {
         updatedAt:
           Date.now(),
       };
+
+      replace(withTurn);
 
       return run(
         withTurn,
@@ -297,8 +312,19 @@ export function useRubberDuck() {
         return null;
       }
 
+      const withAnswer: DuckSession = {
+        ...current,
+        messages: [
+          ...(current.messages ??
+            sessionMessages(current)),
+          createUserMessage(text),
+        ],
+      };
+
+      replace(withAnswer);
+
       return run(
-        current,
+        withAnswer,
 
         makePayload(
           current,

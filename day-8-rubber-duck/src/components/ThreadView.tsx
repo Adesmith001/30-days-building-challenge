@@ -18,7 +18,7 @@ export function ThreadView({
           text-muted
         "
       >
-        SESSION ARTIFACT
+        REASONING MAP
       </p>
 
       <h2
@@ -28,7 +28,7 @@ export function ThreadView({
           md:text-5xl
         "
       >
-        YOUR THREAD
+        HOW YOU GOT THERE
       </h2>
 
       <p
@@ -41,10 +41,9 @@ export function ThreadView({
           text-graphite
         "
       >
-        The reasoning trail from
-        the problem you started
-        with to what is becoming
-        clear.
+        The important turns,
+        assumptions, and insights
+        behind your conclusion.
       </p>
 
       <div

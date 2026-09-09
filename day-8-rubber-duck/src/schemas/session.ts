@@ -21,6 +21,14 @@ export interface QuestionCard {
   type: QuestionType;
 }
 
+export interface ChatMessage {
+  id: string;
+  role: "user" | "assistant";
+  content: string;
+  questionType?: QuestionType;
+  createdAt: number;
+}
+
 export interface ThreadTurn {
   id: string;
 
@@ -69,6 +77,8 @@ export interface DuckSession {
   progressNote?: string;
 
   reasoningSummary: string;
+
+  messages: ChatMessage[];
 
   turns: ThreadTurn[];
 
