@@ -2,7 +2,7 @@ import {
   DuckResponseSchema,
   type DuckRequest,
   type DuckResponse,
-} from "../schemas/ai.ts";
+} from "../schemas/ai.js";
 
 type ResponseContext = Pick<
   DuckRequest,
