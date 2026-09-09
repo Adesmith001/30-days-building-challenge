@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:vercel": "vercel dev --local --listen 5173",
-    "test": "node --experimental-strip-types --test tests/api-error.test.ts",
+    "test": "node --experimental-strip-types --test tests/api-import.test.ts",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
