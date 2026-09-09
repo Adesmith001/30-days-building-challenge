@@ -7,16 +7,16 @@ import {
 
 import {
   buildPrompt,
-} from "../src/prompts/buildPrompt.ts";
+} from "../src/prompts/buildPrompt";
 import {
   coerceDuckResponse,
-} from "../src/lib/aiResponse.ts";
+} from "../src/lib/aiResponse";
 import {
   SYSTEM_PROMPT,
-} from "../src/prompts/system.ts";
+} from "../src/prompts/system";
 import {
   DuckRequestSchema,
-} from "../src/schemas/ai.ts";
+} from "../src/schemas/ai";
 
 type VercelRequest = {
   method?: string;
