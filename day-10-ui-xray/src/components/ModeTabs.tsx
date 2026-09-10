@@ -1,81 +1,60 @@
-import { motion } from "motion/react";
-
 import type {
-  ImageAsset,
+  XRayMode,
 } from "../types/ui-analysis";
 
-const PHASES = [
-  "READING STRUCTURE",
-  "SAMPLING COLORS",
-  "FINDING TYPE",
-  "GROUPING COMPONENTS",
-  "BUILDING TOKENS",
+const MODES: {
+  value: XRayMode;
+  label: string;
+}[] = [
+  {
+    value: "structure",
+    label: "STRUCTURE",
+  },
+  {
+    value: "colors",
+    label: "COLORS",
+  },
+  {
+    value: "type",
+    label: "TYPE",
+  },
+  {
+    value: "spacing",
+    label: "SPACING",
+  },
+  {
+    value: "components",
+    label: "COMPONENTS",
+  },
 ];
 
 interface Props {
-  asset: ImageAsset;
-  step: number;
+  value: XRayMode;
+  onChange: (mode: XRayMode) => void;
 }
 
-export function ProcessingState({
-  asset,
-  step,
+export function ModeTabs({
+  value,
+  onChange,
 }: Props) {
-  const active = Math.min(step, 4);
-
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      <div className="flex-1 overflow-hidden p-4 sm:p-6">
-        <div className="relative mx-auto flex h-full max-w-5xl items-center justify-center overflow-hidden border border-line bg-panel">
-          <img
-            src={asset.previewUrl}
-            alt={asset.name}
-            className="max-h-full max-w-full object-contain opacity-35 grayscale-[25%]"
-          />
-
-          <motion.div
-            initial={{ top: "0%" }}
-            animate={{ top: "100%" }}
-            transition={{
-              duration: 1.8,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            className="absolute left-0 h-px w-full bg-accent"
-          />
-
-          <div className="absolute bottom-4 left-4 bg-ink px-3 py-2 font-mono text-[10px] text-white">
-            {String(active + 1).padStart(2, "0")} / 05
-            <span className="ml-3 text-white/65">
-              {PHASES[active]}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      <div className="border-t border-line px-4 py-3">
-        <div className="mx-auto flex max-w-5xl items-center gap-1">
-          {PHASES.map((phase, index) => (
-            <div
-              key={phase}
-              className="flex-1"
-            >
-              <div
-                className={[
-                  "h-0.5",
-                  index <= active
-                    ? "bg-accent"
-                    : "bg-line",
-                ].join(" ")}
-              />
-
-              <div className="mt-1 hidden font-mono text-[8px] text-muted md:block">
-                {phase}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className="flex h-10 shrink-0 overflow-x-auto border-t border-line bg-canvas">
+      {MODES.map((mode) => (
+        <button
+          key={mode.value}
+          onClick={() =>
+            onChange(mode.value)
+          }
+          className={[
+            "min-w-max border-r border-line px-4 font-mono text-[9px] font-semibold tracking-[0.07em]",
+            value === mode.value
+              ? "bg-ink text-white"
+              : "text-muted hover:bg-panel hover:text-ink",
+          ].join(" ")}
+        >
+          {mode.label}
+        </button>
+      ))}
     </div>
   );
 }
