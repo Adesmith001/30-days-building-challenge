@@ -1,6 +1,7 @@
 import {
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from "react";
 
@@ -11,6 +12,7 @@ import { rawAnalysisSchema } from "../schemas/analysis";
 import type {
   DesignSystem,
   ImageAsset,
+  UIAnalysis,
 } from "../types/ui-analysis";
 
 const MIN_PROCESSING_TIME = 2600;
@@ -18,6 +20,24 @@ const MIN_PROCESSING_TIME = 2600;
 function wait(ms: number) {
   return new Promise((resolve) =>
     window.setTimeout(resolve, ms),
+  );
+}
+
+export async function readAnalysisResponse(
+  response: Response,
+): Promise<UIAnalysis> {
+  if (!response.ok) {
+    const body = await response
+      .json()
+      .catch(() => null);
+
+    throw new Error(
+      body?.error ?? "The analysis failed.",
+    );
+  }
+
+  return rawAnalysisSchema.parse(
+    await response.json(),
   );
 }
 
@@ -33,6 +53,15 @@ export function useImageAnalysis(
     useState<string | null>(null);
 
   const [attempt, setAttempt] = useState(0);
+
+  const inFlightRef = useRef<{
+    asset: ImageAsset;
+    attempt: number;
+    promise: Promise<[
+      UIAnalysis,
+      Awaited<ReturnType<typeof sampleDominantColors>>,
+    ]>;
+  } | null>(null);
 
   const retry = useCallback(() => {
     setResult(null);
@@ -60,50 +89,59 @@ export function useImageAnalysis(
       try {
         setError(null);
 
-        const localPromise =
-          sampleDominantColors(
-            currentAsset.analysisDataUrl,
-          );
+        const existingRequest =
+          inFlightRef.current;
 
-        const requestPromise = fetch(
-          "/api/analyze-ui",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              image: currentAsset.analysisDataUrl,
-              meta: {
-                width: currentAsset.width,
-                height: currentAsset.height,
-                name: currentAsset.name,
+        if (
+          !existingRequest ||
+          existingRequest.asset !== currentAsset ||
+          existingRequest.attempt !== attempt
+        ) {
+          const localPromise =
+            sampleDominantColors(
+              currentAsset.analysisDataUrl,
+            );
+
+          const requestPromise = fetch(
+            "/api/analyze-ui",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
               },
-            }),
-          },
-        );
-
-        const [response, localColors] =
-          await Promise.all([
-            requestPromise,
-            localPromise,
-            wait(MIN_PROCESSING_TIME),
-          ]);
-
-        if (!response.ok) {
-          const body = await response
-            .json()
-            .catch(() => null);
-
-          throw new Error(
-            body?.error ??
-              "The analysis failed.",
+              body: JSON.stringify({
+                image: currentAsset.analysisDataUrl,
+                meta: {
+                  width: currentAsset.width,
+                  height: currentAsset.height,
+                  name: currentAsset.name,
+                },
+              }),
+            },
           );
+
+          inFlightRef.current = {
+            asset: currentAsset,
+            attempt,
+            promise: Promise.all([
+              requestPromise,
+              localPromise,
+              wait(MIN_PROCESSING_TIME),
+            ]).then(async ([response, localColors]) => [
+              await readAnalysisResponse(response),
+              localColors,
+            ]),
+          };
         }
 
-        const json = await response.json();
-        const raw =
-          rawAnalysisSchema.parse(json);
+        const inFlight = inFlightRef.current;
+
+        if (!inFlight) {
+          throw new Error("The analysis could not start.");
+        }
+
+        const [raw, localColors] =
+          await inFlight.promise;
 
         const normalized =
           normalizeAnalysis(

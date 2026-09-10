@@ -413,4 +413,57 @@ export const projects: Project[] = [
     learned:
       "I learned how to build a receipt review workflow with editable extracted data, arithmetic verification flags, confidence scoring, local history, and a resilient demo path when no image is uploaded.",
   },
+  {
+    day: 10,
+    title: "UI X-Ray",
+    tagline:
+      "A screenshot analyzer that reveals the design system hiding inside any interface.",
+    description:
+      "UI X-Ray turns a UI screenshot into a practical design system. Upload an interface and inspect its colors, typography, spacing, components, tokens, and reusable visual patterns, then export the analysis for later use.",
+    date: "2026-09-10",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Motion",
+      "Groq",
+      "LocalStorage",
+    ],
+    images: [
+      {
+        src: "/projects/day-10/1.png",
+        alt: "UI X-Ray project preview",
+      },
+      {
+        src: "/projects/day-10/2.png",
+        alt: "UI X-Ray project preview",
+      },
+      {
+        src: "/projects/day-10/3.png",
+        alt: "UI X-Ray project preview",
+      },
+      {
+        src: "/projects/day-10/4.png",
+        alt: "UI X-Ray project preview",
+      },
+      {
+        src: "/projects/day-10/5.png",
+        alt: "UI X-Ray project preview",
+      },
+      {
+        src: "/projects/day-10/6.png",
+        alt: "UI X-Ray project preview",
+      },
+      {
+        src: "/projects/day-10/7.png",
+        alt: "UI X-Ray project preview",
+      },
+    ],
+    liveUrl: "https://day-10-ui-xray.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to turn screenshots into structured design-system data with AI, validate and normalize model responses, preserve analysis history locally, and present visual rules as inspectable tokens and reusable components.",
+  },
 ];
