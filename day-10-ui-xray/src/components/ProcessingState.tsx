@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 
 import type {
   ImageAsset,
-} from "../types/ui-anaylsis";
+} from "../types/ui-analysis";
 
 const PHASES = [
   "READING STRUCTURE",

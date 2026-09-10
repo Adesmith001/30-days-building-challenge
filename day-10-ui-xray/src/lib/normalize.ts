@@ -10,7 +10,7 @@ import type {
   TypographySample,
   TypeToken,
   UIAnalysis,
-} from "../types/ui-anaylsis";
+} from "../types/ui-analysis";
 
 import type {
   SampledColor,

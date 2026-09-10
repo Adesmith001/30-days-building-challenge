@@ -7,7 +7,7 @@ import {
 import type {
   DesignSystem,
   HistoryRecord,
-} from "../types/ui-anaylsis";
+} from "../types/ui-analysis";
 
 const STORAGE_KEY = "ui-xray-history";
 

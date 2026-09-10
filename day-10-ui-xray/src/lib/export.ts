@@ -1,6 +1,6 @@
 import type {
   DesignSystem,
-} from "../types/ui-anaylsis";
+} from "../types/ui-analysis";
 
 function activeColors(system: DesignSystem) {
   return system.colors.filter(

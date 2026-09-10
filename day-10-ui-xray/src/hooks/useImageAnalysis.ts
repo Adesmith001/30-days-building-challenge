@@ -11,7 +11,7 @@ import { rawAnalysisSchema } from "../schemas/analysis";
 import type {
   DesignSystem,
   ImageAsset,
-} from "../types/ui-anaylsis";
+} from "../types/ui-analysis";
 
 const MIN_PROCESSING_TIME = 2600;
 
@@ -72,14 +72,14 @@ export function useImageAnalysis(
             headers: {
               "Content-Type": "application/json",
             },
-              body: JSON.stringify({
-                image: currentAsset.analysisDataUrl,
-                meta: {
-                  width: currentAsset.width,
-                  height: currentAsset.height,
-                  name: currentAsset.name,
-                },
-              }),
+            body: JSON.stringify({
+              image: currentAsset.analysisDataUrl,
+              meta: {
+                width: currentAsset.width,
+                height: currentAsset.height,
+                name: currentAsset.name,
+              },
+            }),
           },
         );
 

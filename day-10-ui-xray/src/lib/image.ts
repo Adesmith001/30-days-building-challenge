@@ -1,4 +1,4 @@
-import type { ImageAsset } from "../types/ui-anaylsis";
+import type { ImageAsset } from "../types/ui-analysis";
 
 const ACCEPTED_TYPES = [
   "image/png",
