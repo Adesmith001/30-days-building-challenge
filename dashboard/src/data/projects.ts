@@ -462,7 +462,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-10-ui-xray.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
-    twitterUrl: "",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2098161019818311904",
     learned:
       "I learned how to turn screenshots into structured design-system data with AI, validate and normalize model responses, preserve analysis history locally, and present visual rules as inspectable tokens and reusable components.",
   },
