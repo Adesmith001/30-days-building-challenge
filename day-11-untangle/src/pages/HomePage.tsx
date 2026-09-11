@@ -1,6 +1,5 @@
 import {
   AlertCircle,
-  Command,
 } from "lucide-react";
 import {
   useEffect,
@@ -10,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { AppHeader } from "../components/AppHeader";
 import { ProcessingState } from "../components/ProcessingState";
+import { ThoughtComposer } from "../components/ThoughtComposer";
 import { untangleText } from "../lib/api";
 import { saveSession } from "../lib/storage";
 import { createId } from "../lib/utils";
@@ -165,73 +165,20 @@ export function HomePage() {
             </div>
           )}
 
-          <div className="rounded-xl border border-line-dark/75 bg-panel p-5 shadow-[0_1px_2px_rgba(0,0,0,0.025)] transition focus-within:border-black sm:p-6">
-            <textarea
-              ref={textareaRef}
-              value={text}
-              maxLength={2000}
-              rows={8}
-              onChange={(event) =>
-                setText(event.target.value)
-              }
-              onKeyDown={(event) => {
-                if (
-                  (event.metaKey || event.ctrlKey) &&
-                  event.key === "Enter"
-                ) {
-                  event.preventDefault();
-                  void submit();
-                }
-              }}
-              placeholder="I need to finish my assignment, reply to Sarah, buy groceries, figure out what I'm doing this weekend, and I've been thinking about..."
-              className="min-h-[230px] w-full resize-none border-0 bg-transparent text-[18px] leading-8 text-black outline-none placeholder:text-zinc-400"
-            />
-
-            <div className="mt-4 flex items-center justify-between border-t border-line pt-4 text-xs text-muted sm:text-sm">
-              <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-line-dark" />
-                <span>
-                  Don&apos;t organize it. That&apos;s our job.
-                </span>
-              </div>
-
-              <span className="font-mono text-xs">
-                {text.length.toLocaleString()} / 2,000
-              </span>
-            </div>
-          </div>
-
-          <button
-            type="button"
-            disabled={!canSubmit}
-            onClick={() => void submit()}
-            className="mt-6 flex w-full items-center justify-center gap-3 rounded-xl bg-black px-5 py-4 text-sm font-medium text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-35"
-          >
-            Untangle my thoughts →
-            <span className="hidden items-center gap-1 rounded-md border border-zinc-700 bg-zinc-900 px-2 py-1 font-mono text-[11px] text-zinc-400 sm:flex">
-              <Command size={11} />
-              Enter
-            </span>
-          </button>
-
-          <div className="mt-5 text-center">
-            <button
-              type="button"
-              onClick={() => {
-                setText(example);
-                setStatus("idle");
-                requestAnimationFrame(() =>
-                  textareaRef.current?.focus(),
-                );
-              }}
-              className="text-sm text-zinc-600 transition hover:text-black"
-            >
-              Not sure what to write?{" "}
-              <span className="underline underline-offset-4">
-                Try an example
-              </span>
-            </button>
-          </div>
+          <ThoughtComposer
+            text={text}
+            textareaRef={textareaRef}
+            canSubmit={canSubmit}
+            onTextChange={setText}
+            onSubmit={() => void submit()}
+            onTryExample={() => {
+              setText(example);
+              setStatus("idle");
+              requestAnimationFrame(() =>
+                textareaRef.current?.focus(),
+              );
+            }}
+          />
         </div>
       </main>
 

@@ -466,4 +466,57 @@ export const projects: Project[] = [
     learned:
       "I learned how to turn screenshots into structured design-system data with AI, validate and normalize model responses, preserve analysis history locally, and present visual rules as inspectable tokens and reusable components.",
   },
+  {
+    day: 11,
+    title: "Untangle",
+    tagline:
+      "A thoughtful workspace that turns the noise in your head into one clear next step.",
+    description:
+      "Untangle helps you dump tasks, ideas, worries, and reminders into one place, then organizes them into focused actions, ideas, and things you can let go of.",
+    date: "2026-09-11",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Motion",
+      "Groq",
+      "LocalStorage",
+    ],
+    images: [
+      {
+        src: "/projects/day-11/1.png",
+        alt: "Untangle project preview",
+      },
+      {
+        src: "/projects/day-11/2.png",
+        alt: "Untangle project preview",
+      },
+      {
+        src: "/projects/day-11/3.png",
+        alt: "Untangle project preview",
+      },
+      {
+        src: "/projects/day-11/4.png",
+        alt: "Untangle project preview",
+      },
+      {
+        src: "/projects/day-11/5.png",
+        alt: "Untangle project preview",
+      },
+      {
+        src: "/projects/day-11/6.png",
+        alt: "Untangle project preview",
+      },
+      {
+        src: "/projects/day-11/7.png",
+        alt: "Untangle project preview",
+      },
+    ],
+    liveUrl: "https://day-11-untangle.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to turn an unstructured brain dump into categorized, prioritized actions with AI, preserve sessions locally, and design a calmer workflow for choosing what deserves attention next.",
+  },
 ];

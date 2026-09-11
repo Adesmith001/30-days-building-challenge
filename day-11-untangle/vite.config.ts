@@ -10,6 +10,7 @@ import {
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import untangleHandler from "./api/untangle.js";
+import transcribeHandler from "./api/transcribe.js";
 
 type LocalRequest = IncomingMessage & {
   body?: unknown;
@@ -46,14 +47,17 @@ function localApi() {
         ) => void;
       };
     }) {
-      server.middlewares.use(
-        "/api/untangle",
+      for (const [path, handler] of [
+        ["/api/untangle", untangleHandler],
+        ["/api/transcribe", transcribeHandler],
+      ] as const) server.middlewares.use(
+        path,
         async (
           request: LocalRequest,
           response: LocalResponse,
           _next?: () => void,
         ) => {
-          if (request.method === "POST") {
+          if (request.method === "POST" && path === "/api/untangle") {
             try {
               request.body = await parseJsonBody(request);
             } catch {
@@ -79,7 +83,7 @@ function localApi() {
             localResponse.end(JSON.stringify(value));
           };
 
-          await untangleHandler(
+          await handler(
             request as never,
             localResponse as never,
           );
