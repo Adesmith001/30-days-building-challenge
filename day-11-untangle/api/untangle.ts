@@ -7,8 +7,8 @@ import {
   planPrompt,
   simplifyPrompt,
   untanglePrompt,
-} from "./_lib/prompts";
-import { structuredGroq } from "./_lib/groq";
+} from "./_lib/prompts.js";
+import { structuredGroq } from "./_lib/groq.js";
 import {
   nextActionJsonSchema,
   nextActionSchema,
@@ -17,7 +17,7 @@ import {
   requestSchema,
   untangleJsonSchema,
   untangleResultSchema,
-} from "./_lib/schemas";
+} from "./_lib/schemas.js";
 
 export default async function handler(
   req: VercelRequest,

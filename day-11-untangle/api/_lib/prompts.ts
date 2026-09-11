@@ -1,5 +1,5 @@
 import type { z } from "zod";
-import type { aiItemSchema } from "./schemas";
+import type { aiItemSchema } from "./schemas.js";
 
 type Item = z.infer<typeof aiItemSchema>;
 

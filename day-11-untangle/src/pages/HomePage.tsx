@@ -135,7 +135,10 @@ export function HomePage() {
           )}
 
           {status === "error" && (
-            <div className="mb-5 flex items-start gap-3 rounded-xl border border-line bg-panel p-4">
+            <div
+              role="alert"
+              className="fixed right-4 top-4 z-50 flex w-[min(380px,calc(100vw-2rem))] items-start gap-3 rounded-xl border border-line bg-panel p-4 shadow-[0_12px_30px_rgba(0,0,0,0.12)]"
+            >
               <AlertCircle
                 size={18}
                 className="mt-0.5 text-muted"
