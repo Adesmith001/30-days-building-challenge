@@ -1,242 +1,270 @@
 import {
   ArrowLeft,
-  Check,
+  Clock3,
+  Play,
 } from "lucide-react";
-import {
-  useEffect,
-  useState,
-} from "react";
 import {
   useNavigate,
   useParams,
 } from "react-router-dom";
-import {
-  getSession,
-  saveSession,
-} from "../lib/storage";
-import { getNextItem } from "../lib/utils";
-import type { Session } from "../types";
+import { AppHeader } from "../components/AppHeader";
+import { getSession } from "../lib/storage";
 
-export function FocusPage() {
-  const { sessionId, itemId } = useParams();
+function formatMinutes(minutes: number) {
+  if (minutes < 60) {
+    return `~${minutes} min`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+  const rest = minutes % 60;
+
+  if (!rest) {
+    return `~${hours} hr`;
+  }
+
+  return `~${hours} hr ${rest} min`;
+}
+
+function icsDate(date: Date) {
+  return date
+    .toISOString()
+    .replace(/[-:]/g, "")
+    .replace(/\.\d{3}/, "");
+}
+
+export function PlanPage() {
+  const { sessionId } = useParams();
   const navigate = useNavigate();
 
-  const [session, setSession] =
-    useState<Session | null>(() =>
-      sessionId ? getSession(sessionId) : null,
-    );
+  const session = sessionId
+    ? getSession(sessionId)
+    : null;
 
-  const [done, setDone] = useState(false);
-
-  const item = session?.items.find(
-    (entry) => entry.id === itemId,
-  );
-
-  function goBack() {
-    if (sessionId) {
-      navigate(`/session/${sessionId}`);
-    } else {
-      navigate("/");
-    }
-  }
-
-  function complete() {
-    if (!session || !item) return;
-
-    const updated: Session = {
-      ...session,
-      updatedAt: new Date().toISOString(),
-      items: session.items.map((entry) =>
-        entry.id === item.id
-          ? { ...entry, completed: true }
-          : entry,
-      ),
-    };
-
-    saveSession(updated);
-    setSession(updated);
-    setDone(true);
-  }
-
-  function next() {
-    if (!session) return;
-
-    const nextItem = getNextItem(session);
-
-    if (!nextItem) {
-      navigate(`/session/${session.id}`);
-      return;
-    }
-
-    setDone(false);
-
-    navigate(
-      `/focus/${session.id}/${nextItem.id}`,
-      { replace: true },
-    );
-  }
-
-  useEffect(() => {
-    function shortcut(event: KeyboardEvent) {
-      if (
-        (event.metaKey || event.ctrlKey) &&
-        event.key === "Enter"
-      ) {
-        event.preventDefault();
-
-        if (!done) {
-          complete();
-        } else {
-          next();
-        }
-      }
-
-      if (event.key === "Escape") {
-        goBack();
-      }
-    }
-
-    window.addEventListener("keydown", shortcut);
-
-    return () =>
-      window.removeEventListener(
-        "keydown",
-        shortcut,
-      );
-  });
-
-  if (!session || !item) {
+  if (!session || !session.plan?.length) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-canvas p-6 text-center">
-        <button
-          onClick={goBack}
-          className="text-sm underline"
-        >
-          Return to your board
-        </button>
-      </div>
-    );
-  }
+      <div className="min-h-screen bg-canvas">
+        <AppHeader showNewDump />
 
-  if (done) {
-    return (
-      <div className="flex min-h-screen flex-col bg-canvas">
-        <header className="flex items-center justify-between p-6 sm:p-10">
+        <main className="mx-auto max-w-[900px] px-6 py-20 text-center">
+          <h1 className="text-2xl font-semibold">
+            No plan has been generated yet.
+          </h1>
+
           <button
-            onClick={goBack}
-            className="flex items-center gap-2 text-sm text-muted hover:text-black"
+            onClick={() =>
+              sessionId
+                ? navigate(`/session/${sessionId}`)
+                : navigate("/")
+            }
+            className="mt-6 rounded-lg bg-black px-5 py-3 text-sm text-white"
           >
-            <ArrowLeft size={17} />
-            Back to list
+            Back to categories
           </button>
-
-          <span className="text-xl font-medium text-zinc-300">
-            Untangle
-          </span>
-        </header>
-
-        <main className="flex flex-1 items-center justify-center px-6 pb-24 text-center">
-          <div className="max-w-[600px]">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-black text-white">
-              <Check size={22} />
-            </div>
-
-            <h1 className="mt-7 text-[36px] font-semibold tracking-[-0.035em]">
-              Done.
-            </h1>
-
-            <p className="mt-3 text-lg text-muted">
-              One less thing taking up space.
-            </p>
-
-            <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-              <button
-                onClick={next}
-                className="rounded-full bg-black px-6 py-3 text-sm font-medium text-white"
-              >
-                What&apos;s next? →
-              </button>
-
-              <button
-                onClick={goBack}
-                className="px-5 py-3 text-sm text-muted hover:text-black"
-              >
-                Back to board
-              </button>
-            </div>
-          </div>
         </main>
       </div>
     );
   }
 
-  const remaining = session.items.filter(
-    (entry) =>
-      !entry.completed &&
-      !entry.released &&
-      entry.id !== item.id,
-  ).length;
+  const plan = session.plan;
+  const currentSessionId = session.id;
+
+  const total = plan.reduce(
+    (sum, step) =>
+      sum + Math.max(step.estimateMinutes, 1),
+    0,
+  );
+
+  function startFocus(itemId: string) {
+    navigate(
+      `/focus/${currentSessionId}/${itemId}`,
+    );
+  }
+
+  function exportCalendar() {
+    let cursor = new Date();
+
+    const events = plan
+      .map((step) => {
+        const start = new Date(cursor);
+        const end = new Date(
+          start.getTime() +
+            Math.max(step.estimateMinutes, 5) *
+              60_000,
+        );
+
+        cursor = end;
+
+        return [
+          "BEGIN:VEVENT",
+          `UID:${crypto.randomUUID()}@untangle`,
+          `DTSTAMP:${icsDate(new Date())}`,
+          `DTSTART:${icsDate(start)}`,
+          `DTEND:${icsDate(end)}`,
+          `SUMMARY:${step.title.replace(/\n/g, " ")}`,
+          `DESCRIPTION:${step.reason.replace(/\n/g, " ")}`,
+          "END:VEVENT",
+        ].join("\r\n");
+      })
+      .join("\r\n");
+
+    const body = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Untangle//Action Plan//EN",
+      events,
+      "END:VCALENDAR",
+    ].join("\r\n");
+
+    const blob = new Blob([body], {
+      type: "text/calendar;charset=utf-8",
+    });
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "untangle-plan.ics";
+    link.click();
+
+    URL.revokeObjectURL(url);
+  }
 
   return (
-    <div className="flex min-h-screen flex-col bg-canvas">
-      <header className="flex items-center justify-between p-6 sm:p-10">
+    <div className="min-h-screen bg-canvas">
+      <AppHeader showNewDump />
+
+      <main className="mx-auto w-full max-w-[900px] px-4 pb-20 pt-8 sm:px-6">
         <button
-          onClick={goBack}
+          onClick={() =>
+            navigate(`/session/${currentSessionId}`)
+          }
           className="flex items-center gap-2 text-sm text-muted hover:text-black"
         >
-          <ArrowLeft size={17} />
-          Back to list
+          <ArrowLeft size={15} />
+          Back to categories
         </button>
 
-        <span className="text-xl font-medium text-zinc-300">
-          Untangle
-        </span>
-      </header>
+        <section className="mb-12 mt-8">
+          <div className="flex flex-col gap-4 md:flex-row md:items-baseline md:justify-between">
+            <h1 className="text-[34px] font-semibold tracking-[-0.04em]">
+              Here&apos;s your way through it.
+            </h1>
 
-      <main className="flex flex-1 items-center justify-center px-6 pb-20 text-center">
-        <div className="max-w-[680px]">
-          <div className="mb-5 flex items-center justify-center gap-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-
-            <span className="text-xs font-medium uppercase tracking-[0.1em] text-muted">
-              One thing.
+            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-line bg-soft px-3 py-1.5 text-xs text-muted">
+              <Clock3
+                size={14}
+                className="text-accent"
+              />
+              Total estimated time:{" "}
+              {formatMinutes(total)}
             </span>
           </div>
 
-          <h1 className="text-[34px] font-semibold leading-tight tracking-[-0.04em] sm:text-[44px]">
-            {item.title}
-          </h1>
-
-          <p className="mx-auto mt-5 max-w-[500px] text-[17px] leading-7 text-muted">
-            Forget the other {remaining}{" "}
-            {remaining === 1 ? "thing" : "things"} for now.
-            Give this your undivided attention.
+          <p className="mt-3 max-w-2xl text-[17px] leading-7 text-muted">
+            A chronological sequence to build quiet
+            momentum. Focus on one step at a time.
           </p>
+        </section>
 
-          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <section>
+          {plan.map((step, index) => {
+            const last =
+              index === plan.length - 1;
+
+            return (
+              <div
+                key={`${step.itemId}-${index}`}
+                className="flex items-stretch"
+              >
+                <div className="mr-5 flex w-8 flex-col items-center">
+                  <div
+                    className={
+                      index === 0
+                        ? "z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-black text-sm font-medium text-white ring-4 ring-canvas"
+                        : "z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line-dark bg-panel text-sm font-medium ring-4 ring-canvas"
+                    }
+                  >
+                    {index + 1}
+                  </div>
+
+                  {!last && (
+                    <div className="my-1 w-px flex-1 bg-line-dark" />
+                  )}
+                </div>
+
+                <div
+                  className={
+                    last
+                      ? "flex-1"
+                      : "flex-1 pb-10"
+                  }
+                >
+                  <div className="relative rounded-xl border border-line-dark/70 bg-panel p-5">
+                    {index === 0 && (
+                      <span className="absolute bottom-3 left-0 top-3 w-[2px] rounded-r bg-black" />
+                    )}
+
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <div className="flex flex-wrap items-center gap-2">
+                          <h2 className="text-lg font-medium">
+                            {step.title}
+                          </h2>
+
+                          <span className="rounded bg-soft px-2 py-1 font-mono text-[10px] text-muted">
+                            {formatMinutes(
+                              step.estimateMinutes,
+                            )}
+                          </span>
+                        </div>
+
+                        <p className="mt-2 text-sm leading-6 text-muted">
+                          {step.reason}
+                        </p>
+                      </div>
+
+                      <button
+                        onClick={() =>
+                          startFocus(step.itemId)
+                        }
+                        className="flex shrink-0 items-center justify-center gap-1.5 rounded-lg border border-line-dark bg-soft px-4 py-2 text-sm hover:bg-soft-2"
+                      >
+                        <Play size={14} />
+                        Start focus
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </section>
+
+        <footer className="mt-14 flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <button
-              onClick={complete}
-              className="flex min-w-[140px] items-center justify-center gap-2 rounded-xl bg-black px-6 py-3 text-sm font-medium text-white hover:bg-zinc-800"
+              onClick={() =>
+                startFocus(plan[0].itemId)
+              }
+              className="rounded-lg bg-black px-6 py-3 text-sm font-medium text-white"
             >
-              <Check size={17} />
-              Done
+              Start from step 1
             </button>
 
             <button
-              onClick={goBack}
-              className="rounded-xl border border-line-dark bg-panel px-5 py-3 text-sm hover:bg-soft"
+              onClick={exportCalendar}
+              className="px-4 py-3 text-sm text-muted hover:text-black"
             >
-              Take a break
+              Export plan to calendar
             </button>
           </div>
-        </div>
-      </main>
 
-      <footer className="pb-8 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-line bg-soft px-3 py-1.5 font-mono text-[10px] text-muted">
-          ⌘ Enter when done · Esc to exit
-        </span>
-      </footer>
+          <div className="flex items-center gap-2 text-xs text-muted">
+            <span className="h-1.5 w-1.5 rounded-full bg-success" />
+            Ready for deep flow
+          </div>
+        </footer>
+      </main>
     </div>
   );
 }
