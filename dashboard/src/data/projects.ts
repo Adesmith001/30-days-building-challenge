@@ -515,7 +515,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-11-untangle.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
-    twitterUrl: "",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2098458080958652649",
     learned:
       "I learned how to turn an unstructured brain dump into categorized, prioritized actions with AI, preserve sessions locally, and design a calmer workflow for choosing what deserves attention next.",
   },
