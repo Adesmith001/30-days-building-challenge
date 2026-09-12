@@ -519,4 +519,57 @@ export const projects: Project[] = [
     learned:
       "I learned how to turn an unstructured brain dump into categorized, prioritized actions with AI, preserve sessions locally, and design a calmer workflow for choosing what deserves attention next.",
   },
+  {
+    day: 12,
+    title: "Either",
+    tagline:
+      "A focused decision-making tool for choosing between options one comparison at a time.",
+    description:
+      "Either helps you stop overthinking by turning a long list of options into simple head-to-head choices. Compare, undo, reveal your ranking, and revisit the decisions you have made.",
+    date: "2026-09-12",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Motion",
+      "Lucide",
+      "LocalStorage",
+    ],
+    images: [
+      {
+        src: "/projects/day-12/1.png",
+        alt: "Either project preview",
+      },
+      {
+        src: "/projects/day-12/2.png",
+        alt: "Either project preview",
+      },
+      {
+        src: "/projects/day-12/3.png",
+        alt: "Either project preview",
+      },
+      {
+        src: "/projects/day-12/4.png",
+        alt: "Either project preview",
+      },
+      {
+        src: "/projects/day-12/5.png",
+        alt: "Either project preview",
+      },
+      {
+        src: "/projects/day-12/6.png",
+        alt: "Either project preview",
+      },
+      {
+        src: "/projects/day-12/7.png",
+        alt: "Either project preview",
+      },
+    ],
+    liveUrl: "https://day-12-either.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to turn pairwise comparisons into a complete ranking flow, persist an undoable sorting session locally, and make decision history useful after the initial choice is complete.",
+  },
 ];
