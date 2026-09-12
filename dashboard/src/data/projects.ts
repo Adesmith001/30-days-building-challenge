@@ -568,7 +568,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-12-either.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
-    twitterUrl: "",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2098792490606182400",
     learned:
       "I learned how to turn pairwise comparisons into a complete ranking flow, persist an undoable sorting session locally, and make decision history useful after the initial choice is complete.",
   },
