@@ -614,7 +614,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-13-later.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
-    twitterUrl: "https://x.com/yourcoderboy18",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2099170993751081024",
     learned:
       "I learned how to model a commitment through waiting, due, and completed states, keep postponement history useful, schedule browser notifications, and make a time-based workflow feel calm instead of punitive.",
   },
