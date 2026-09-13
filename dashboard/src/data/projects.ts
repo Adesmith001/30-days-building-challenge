@@ -572,4 +572,50 @@ export const projects: Project[] = [
     learned:
       "I learned how to turn pairwise comparisons into a complete ranking flow, persist an undoable sorting session locally, and make decision history useful after the initial choice is complete.",
   },
+  {
+    day: 13,
+    title: "Later",
+    tagline:
+      "A calm commitment tracker for deciding what can wait — and knowing when later is now.",
+    description:
+      "Later gives postponed tasks a clear home. Create commitments, choose an exact time or a softer window, get a notification when they are due, and keep the full postponement history visible without losing context.",
+    date: "2026-09-13",
+    status: "completed",
+    stack: ["React", "TypeScript", "CSS", "LocalStorage", "Notifications API"],
+    images: [
+      {
+        src: "/projects/day-13/1.png",
+        alt: "Later project home screen",
+      },
+      {
+        src: "/projects/day-13/2.png",
+        alt: "Later project commitment screen",
+      },
+      {
+        src: "/projects/day-13/3.png",
+        alt: "Later project scheduling screen",
+      },
+      {
+        src: "/projects/day-13/4.png",
+        alt: "Later project dashboard",
+      },
+      {
+        src: "/projects/day-13/5.png",
+        alt: "Later project due commitment screen",
+      },
+      {
+        src: "/projects/day-13/6.png",
+        alt: "Later project commitment details",
+      },
+      {
+        src: "/projects/day-13/7.png",
+        alt: "Later project completed commitment screen",
+      },
+    ],
+    liveUrl: "https://day-13-later.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "https://x.com/yourcoderboy18",
+    learned:
+      "I learned how to model a commitment through waiting, due, and completed states, keep postponement history useful, schedule browser notifications, and make a time-based workflow feel calm instead of punitive.",
+  },
 ];
