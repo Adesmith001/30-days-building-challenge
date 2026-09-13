@@ -26,11 +26,21 @@ test("dashboard registers day 5 Do Not Touch", () => {
   assert.match(source, /liveUrl:\s*"[^"]*day-5-do-not-touch/);
 });
 
+test("dashboard registers day 13 Later with its project screenshots", () => {
+  assert.match(source, /day:\s*13/);
+  assert.match(source, /title:\s*"Later"/);
+  assert.match(source, /\/projects\/day-13\/1\.png/);
+  assert.match(source, /\/projects\/day-13\/7\.png/);
+});
+
 test("project sheets expose a full-size image gallery", () => {
   assert.match(modalSource, /gallery/);
   assert.match(modalSource, /aria-label=.*image/i);
   assert.match(stylesSource, /\.modal__media img[\s\S]*object-fit:\s*contain/);
   assert.match(stylesSource, /\.gallery__image[\s\S]*max-height:\s*100%/);
+  assert.match(stylesSource, /\.modal__panel[\s\S]*overflow:\s*hidden/);
+  assert.match(stylesSource, /\.modal__content[\s\S]*overflow-y:\s*auto/);
+  assert.match(stylesSource, /\.modal__panel\s*\{[\s\S]*grid-template-rows:\s*minmax\(330px, auto\) minmax\(0, 1fr\)/);
 });
 
 test("dashboard app is composed from focused components", () => {

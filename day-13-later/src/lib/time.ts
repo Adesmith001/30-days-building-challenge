@@ -116,6 +116,7 @@ export function formatFullDate(
 
 export function getTimeRemaining(
   timestamp: number,
+  showSeconds = false,
 ) {
   const difference = timestamp - Date.now();
 
@@ -123,9 +124,22 @@ export function getTimeRemaining(
     return "Later is now.";
   }
 
-  const totalMinutes = Math.floor(
-    difference / 60_000,
+  const totalSeconds = Math.floor(
+    difference / 1_000,
   );
+
+  if (showSeconds) {
+    const days = Math.floor(totalSeconds / 86_400);
+    const hours = Math.floor((totalSeconds % 86_400) / 3_600);
+    const minutes = Math.floor((totalSeconds % 3_600) / 60);
+    const seconds = totalSeconds % 60;
+
+    if (days > 0) return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    if (hours > 0) return `${hours}h ${minutes}m ${seconds}s`;
+    return `${minutes}m ${seconds}s`;
+  }
+
+  const totalMinutes = Math.floor(totalSeconds / 60);
 
   const days = Math.floor(
     totalMinutes / 1440,

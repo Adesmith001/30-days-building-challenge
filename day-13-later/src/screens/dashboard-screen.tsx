@@ -6,6 +6,7 @@ import { Plus } from "lucide-react";
 
 import { AppShell } from "../components/app-shell";
 import { CommitmentCard } from "../components/commitment-card";
+import { Countdown } from "../components/countdown";
 import { EmptyState } from "../components/empty-state";
 
 import type {
@@ -126,6 +127,20 @@ export function DashboardScreen({
         <p className="mt-1 text-[14px] text-[#71717a]">
           Things you said you'd do.
         </p>
+
+        {active[0] && (
+          <div className="mt-9 rounded-2xl bg-[#111111] px-5 py-5 text-white">
+            <p className="text-[10px] font-medium uppercase tracking-[0.08em] text-[#a1a1aa]">
+              Next up
+            </p>
+            <p className="mt-3 truncate text-[18px] font-medium">
+              {active[0].title}
+            </p>
+            <p className="mt-2 text-[32px] font-semibold tracking-[-0.04em]">
+              <Countdown timestamp={active[0].scheduledFor} showSeconds />
+            </p>
+          </div>
+        )}
 
         {active.length === 0 ? (
           <div className="mt-14">

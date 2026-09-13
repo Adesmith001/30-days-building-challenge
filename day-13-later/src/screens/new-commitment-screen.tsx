@@ -62,6 +62,16 @@ export function NewCommitmentScreen({ task, onBack, onCreate }: Props) {
     setStep(step === "period" ? "when" : step === "exact" ? "period" : "when");
   }
 
+  function handleCommit() {
+    if ("Notification" in window && Notification.permission === "default") {
+      void Notification.requestPermission();
+    }
+
+    if (selectedDate) {
+      onCreate(task, selectedDate.getTime());
+    }
+  }
+
   const openCustomPicker = () => setCustomPickerOpen(true);
 
   return (
@@ -83,7 +93,7 @@ export function NewCommitmentScreen({ task, onBack, onCreate }: Props) {
           {step === "period" && <PeriodStep task={task} onSelect={handlePeriod} onCustom={openCustomPicker} />}
           {step === "exact" && <ExactStep task={task} period={selectedPeriod} hours={suggestedHours} onSelect={handleHour} onCustom={openCustomPicker} />}
           {step === "confirm" && selectedDate && (
-            <ConfirmationStep task={task} date={selectedDate} onCommit={() => onCreate(task, selectedDate.getTime())} onChange={() => setStep("when")} />
+            <ConfirmationStep task={task} date={selectedDate} onCommit={handleCommit} onChange={() => setStep("when")} />
           )}
         </motion.div>
 

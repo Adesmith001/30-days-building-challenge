@@ -1,7 +1,21 @@
-import { motion } from "motion/react";
+import {
+  useState,
+} from "react";
+
+import {
+  addDays,
+  addHours,
+  addMinutes,
+  set,
+} from "date-fns";
 
 import { AppShell } from "../components/app-shell";
+import { OptionRow } from "../components/option-row";
 import { Button } from "../components/ui/button";
+
+import {
+  toDateTimeLocalValue,
+} from "../lib/time";
 
 import type {
   Commitment,
@@ -9,115 +23,217 @@ import type {
 
 type Props = {
   commitment: Commitment;
-  onHome: () => void;
-  onDone: () => void;
-  onPostpone: () => void;
-  onDetails: () => void;
+  onCancel: () => void;
+  onPostpone: (
+    scheduledFor: number,
+  ) => void;
 };
 
-export function DueScreen({
+export function PostponeScreen({
   commitment,
-  onHome,
-  onDone,
+  onCancel,
   onPostpone,
-  onDetails,
 }: Props) {
-  const time =
-    new Intl.DateTimeFormat(
-      "en-US",
+  const [custom, setCustom] =
+    useState(false);
+
+  const now = new Date();
+
+  function tomorrow() {
+    return set(
+      addDays(now, 1),
       {
-        hour: "numeric",
-        minute: "2-digit",
+        hours: 9,
+        minutes: 0,
+        seconds: 0,
+        milliseconds: 0,
       },
-    ).format(
-      commitment.scheduledFor,
     );
+  }
 
   return (
     <AppShell
-      onLogoClick={onHome}
+      onLogoClick={onCancel}
       right={
         <button
-          onClick={onDetails}
           className="text-[12px] text-[#71717a]"
+          onClick={onCancel}
         >
-          Details
+          Cancel
         </button>
       }
     >
       <div
         className={[
-          "flex flex-1",
-          "items-center justify-center",
-          "px-5 py-20",
+          "mx-auto w-full",
+          "max-w-[520px]",
+          "px-5 py-16",
         ].join(" ")}
       >
-        <motion.div
-          initial={{
-            opacity: 0,
-            y: 10,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
+        <p className="text-[12px] text-[#a1a1aa]">
+          {commitment.title}
+        </p>
+
+        <h1
           className={[
-            "w-full max-w-[420px]",
-            "text-center",
+            "mt-3 text-[30px]",
+            "font-semibold",
+            "tracking-[-0.04em]",
           ].join(" ")}
         >
-          <p
-            className={[
-              "text-[11px]",
-              "font-medium uppercase",
-              "tracking-[0.08em]",
-              "text-[#71717a]",
-            ].join(" ")}
-          >
-            Later is now.
-          </p>
+          We're doing this again?
+        </h1>
 
-          <h1
-            className={[
-              "mt-5 text-[28px]",
-              "font-semibold",
-              "tracking-[-0.04em]",
-            ].join(" ")}
-          >
-            {commitment.title}
-          </h1>
+        <p className="mt-2 text-[15px] text-[#71717a]">
+          How much more time do you
+          need?
+        </p>
 
-          <p className="mt-2 text-[13px] text-[#71717a]">
-            You said {time}.
-          </p>
+        {!custom ? (
+          <div className="mt-8 space-y-2">
+            <OptionRow
+              title="10 minutes"
+              onClick={() =>
+                onPostpone(
+                  addMinutes(
+                    now,
+                    10,
+                  ).getTime(),
+                )
+              }
+            />
 
-          <div className="mt-9 space-y-2">
-            <Button
-              className="w-full"
-              onClick={onDone}
-            >
-              Done ✓
-            </Button>
+            <OptionRow
+              title="30 minutes"
+              onClick={() =>
+                onPostpone(
+                  addMinutes(
+                    now,
+                    30,
+                  ).getTime(),
+                )
+              }
+            />
 
-            <Button
-              variant="secondary"
-              className="w-full"
-              onClick={onPostpone}
-            >
-              Not yet
-            </Button>
+            <OptionRow
+              title="1 hour"
+              onClick={() =>
+                onPostpone(
+                  addHours(
+                    now,
+                    1,
+                  ).getTime(),
+                )
+              }
+            />
+
+            <OptionRow
+              title="Tomorrow"
+              onClick={() =>
+                onPostpone(
+                  tomorrow().getTime(),
+                )
+              }
+            />
+
+            <OptionRow
+              title="Pick a time"
+              onClick={() =>
+                setCustom(true)
+              }
+            />
           </div>
+        ) : (
+          <CustomPostpone
+            onCancel={() =>
+              setCustom(false)
+            }
+            onSubmit={
+              onPostpone
+            }
+          />
+        )}
 
-          <p className="mt-8 text-[11px] text-[#a1a1aa]">
-            Postponed{" "}
-            {commitment.postponements}{" "}
-            {commitment.postponements ===
-            1
-              ? "time"
-              : "times"}
-          </p>
-        </motion.div>
+        <p
+          className={[
+            "mt-8 border-t",
+            "border-[#e4e4e7]",
+            "pt-5 text-[12px]",
+            "text-[#71717a]",
+          ].join(" ")}
+        >
+          Times postponed:{" "}
+          {commitment.postponements}
+        </p>
       </div>
     </AppShell>
+  );
+}
+
+function CustomPostpone({
+  onCancel,
+  onSubmit,
+}: {
+  onCancel: () => void;
+  onSubmit: (
+    value: number,
+  ) => void;
+}) {
+  const minimum =
+    toDateTimeLocalValue(
+      new Date(),
+    );
+
+  const [value, setValue] =
+    useState(minimum);
+
+  return (
+    <div
+      className={[
+        "mt-8 rounded-xl border",
+        "border-[#e4e4e7]",
+        "bg-white p-5",
+      ].join(" ")}
+    >
+      <input
+        type="datetime-local"
+        min={minimum}
+        value={value}
+        onChange={(event) =>
+          setValue(
+            event.target.value,
+          )
+        }
+        className={[
+          "w-full rounded-lg",
+          "border border-[#e4e4e7]",
+          "px-4 py-3 outline-none",
+          "focus:border-black",
+        ].join(" ")}
+      />
+
+      <div className="mt-4 flex gap-2">
+        <Button
+          className="flex-1"
+          variant="secondary"
+          onClick={onCancel}
+        >
+          Back
+        </Button>
+
+        <Button
+          className="flex-1"
+          onClick={() =>
+            onSubmit(
+              new Date(
+                value,
+              ).getTime(),
+            )
+          }
+        >
+          Confirm
+        </Button>
+      </div>
+    </div>
   );
 }

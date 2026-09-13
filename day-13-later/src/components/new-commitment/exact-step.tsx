@@ -14,7 +14,7 @@ export function ExactStep({ task, period, hours, onSelect, onCustom }: Props) {
 
   return (
     <div className="mx-auto max-w-[520px]">
-      <p className="text-[12px] text-[#a1a1aa]">{task} â†’ Tomorrow â†’ {label}</p>
+      <p className="text-[12px] text-[#a1a1aa]">{task} Tomorrow {label}</p>
 
       <h1 className={["mt-3 text-[30px]", "font-semibold", "tracking-[-0.04em]"].join(" ")}>
         {label} is still pretty vague.
