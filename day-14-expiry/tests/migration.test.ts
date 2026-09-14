@@ -1,9 +1,12 @@
-import { readFileSync } from 'node:fs'
+import { readdirSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
 describe('Supabase migration', () => {
-  const sql = () => readFileSync(resolve(process.cwd(), 'supabase/migrations/202609140001_expiry.sql'), 'utf8').toLowerCase()
+  const sql = () => {
+    const directory = resolve(process.cwd(), 'supabase/migrations')
+    return readdirSync(directory).sort().map((file) => readFileSync(resolve(directory, file), 'utf8')).join('\n').toLowerCase()
+  }
 
   it('protects all application tables with RLS and grants owner history access', () => {
     const source = sql()
@@ -19,5 +22,11 @@ describe('Supabase migration', () => {
     expect(source).toContain('ciphertext = null')
     expect(source).toContain('consume_rate_limit')
     expect(source).toContain('revoke execute on function public.reveal_secret')
+  })
+
+  it('uses an unambiguous timestamp variable in the rate limiter', () => {
+    const latestDefinition = sql().split('create or replace function public.consume_rate_limit').at(-1) ?? ''
+    expect(latestDefinition).toContain('v_now timestamptz := now()')
+    expect(latestDefinition).not.toContain('current_time')
   })
 })
