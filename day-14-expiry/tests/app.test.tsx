@@ -1,4 +1,4 @@
-import { act, render, screen } from '@testing-library/react'
+import { act, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it } from 'vitest'
 import App from '../src/App'
@@ -34,6 +34,16 @@ describe('Expiry app', () => {
     const user = userEvent.setup()
     render(<App />)
     await user.click(screen.getByRole('button', { name: /Continue in demo mode/ }))
+    expect(screen.getByRole('heading', { name: /Share something/ })).toBeVisible()
+  })
+
+  it('shows an empty history state and returns to create', async () => {
+    const user = userEvent.setup()
+    render(<App />)
+    await user.click(screen.getByRole('button', { name: /Continue in demo mode/ }))
+    await user.click(within(screen.getByRole('navigation')).getByRole('button', { name: 'History' }))
+    expect(await screen.findByRole('heading', { name: 'Nothing here yet.' })).toBeVisible()
+    await user.click(screen.getByRole('button', { name: 'Create a private link' }))
     expect(screen.getByRole('heading', { name: /Share something/ })).toBeVisible()
   })
 })
