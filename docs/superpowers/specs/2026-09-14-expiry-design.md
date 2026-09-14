@@ -4,13 +4,14 @@
 
 Expiry is a privacy-focused web application for sharing encrypted text through temporary links. Creators authenticate with Google, create named secrets, choose an expiration rule, and retain a private metadata history. Recipients do not need an account. The central product rule is: **the history survives; the secret does not.**
 
-The implementation will recreate `day-14-expiry` as a React 19, Vite, and TypeScript application consistent with the surrounding 30-days repository. Vercel-compatible API routes will isolate privileged Appwrite access from the browser. A local demo adapter will keep the complete interface usable without credentials while making its same-browser limitation explicit.
+The implementation will recreate `day-14-expiry` as a React 19, Vite, and TypeScript application consistent with the surrounding 30-days repository. Vercel-compatible API routes will isolate privileged Supabase access from the browser. A local demo adapter will keep the complete interface usable without credentials while making its same-browser limitation explicit.
 
 ## Scope
 
 ### Included
 
-- Google OAuth through Appwrite for production creators
+- Google OAuth and email/password authentication through Supabase
+- Email verification and password-reset flows
 - A credential-free local demo sign-in for development and review
 - Auth-protected create and history experiences
 - Public recipient links with no login requirement
@@ -27,17 +28,17 @@ The implementation will recreate `day-14-expiry` as a React 19, Vite, and TypeSc
 - Copy deterrence within the revealed-secret surface
 - Responsive desktop and mobile layouts
 - Automated unit, component, API-contract, and browser-flow tests
-- Appwrite provisioning documentation and a schema setup script
+- Supabase migration, RLS policies, and deployment documentation
+- Database-backed rate limits for authentication, creation, and reveal requests
 
 ### Excluded
 
 - File uploads
-- Email/password authentication
 - Recipient authentication
 - Teams, workspaces, folders, profiles, analytics, or statistics
 - Recovery of expired or destroyed plaintext
 - Claims that browser-delivered text is impossible to extract
-- A durable production rate limiter outside Appwrite/platform limits
+- Redis or another external rate-limit service
 
 ## Product Experience
 
@@ -49,15 +50,15 @@ The content column remains narrow enough to feel private and focused. Controls a
 
 ### Authentication
 
-Unauthenticated creators see the minimal login screen from the PRD with the Expiry wordmark, product statement, and `Continue with Google`. When Appwrite is not configured in development, the same screen shows a clearly labeled `Continue in demo mode` action. Demo mode is never presented as production authentication.
+Unauthenticated creators see the minimal login screen from the PRD with the Expiry wordmark, product statement, `Continue with Google`, and restrained email/password controls. The screen supports sign-up, sign-in, email verification feedback, forgotten-password requests, and setting a new password after a recovery redirect. When Supabase is not configured in development, the same screen shows a clearly labeled `Continue in demo mode` action. Demo mode is never presented as production authentication.
 
-Appwrite OAuth returns to the create route. The application restores the Appwrite session on load, exposes the creator's name and email in a compact avatar menu, and supports sign-out. Authentication failures return to the login screen with a calm inline error.
+Supabase OAuth returns to the create route. The application restores the Supabase session on load, exposes the creator's name and email in a compact avatar menu, and supports sign-out. Authentication failures return to the login screen with a calm inline error. Password recovery returns to `/reset-password` with a recovery session and requires two matching passwords of at least eight characters.
 
 ### Create flow
 
 The authenticated home route is the creation interface. It contains a message textarea, live `0 / 10,000` counter, required name, expiry selector, custom date/time field when selected, create button, and browser-encryption note.
 
-Submitting validates trimmed message and title, validates that a custom expiry is in the future, creates a random AES-GCM key and IV in the browser, encrypts the message, and sends only ciphertext and metadata to the API. The generated link has the form `/s/{secretId}#{base64urlKey}`. The key is never sent in the request body, stored in Appwrite, written to history, or logged by application code.
+Submitting validates trimmed message and title, validates that a custom expiry is in the future, creates a random AES-GCM key and IV in the browser, encrypts the message, and sends only ciphertext and metadata to the API. The generated link has the form `/s/{secretId}#{base64urlKey}`. The key is never sent in the request body, stored in Supabase, written to history, or logged by application code.
 
 The success state shows the title, expiration explanation, visible link, `Share link`, `Show link`, and `Create another`. Native sharing is used when available. The fallback reveals/selects the URL and provides a deliberate copy action only where the browser cannot share; the product does not pretend that links can be shared without exposing them.
 
@@ -92,12 +93,13 @@ Primary route shapes:
 - `/history/{historyId}` — creator history detail
 - `/s/{secretId}` — public recipient flow; fragment contains the key
 
-The application shell owns session restoration and navigation. Creator APIs obtain a fresh Appwrite JWT and pass it as a Bearer token. The public reveal API requires no creator session.
+The application shell owns session restoration and navigation. Creator APIs pass the active Supabase access token as a Bearer token. The public reveal API requires no creator session.
 
 ### Server API
 
 Vercel-compatible handlers expose:
 
+- `POST /api/auth/email` — rate-limited email sign-up, sign-in, and recovery request
 - `POST /api/secrets` — authenticated creation
 - `GET /api/history` — authenticated history listing
 - `GET /api/history/{id}` — authenticated history detail
@@ -105,48 +107,65 @@ Vercel-compatible handlers expose:
 - `POST /api/secrets/{id}/reveal` — public reveal and consumption
 - `POST /api/secrets/{id}/destroy` — authenticated manual destruction
 
-Shared server utilities parse and validate JSON, enforce body limits, normalize responses, validate Appwrite JWTs, avoid leaking resource existence, and map expected errors to stable status codes. Secret IDs are generated with Appwrite's unique ID facility or equivalent cryptographically random bytes.
+Shared server utilities parse and validate JSON, enforce body limits, normalize responses, validate Supabase access tokens, avoid leaking resource existence, derive a keyed hash from the request IP for rate limiting, and map expected errors to stable status codes. Secret IDs use cryptographically random bytes encoded as base64url.
 
-The public reveal endpoint uses an Appwrite transaction. It reads the current secret state in transaction context, rejects unavailable or elapsed records, stages the secret mutation/deletion and matching history update, and commits. Transaction conflicts retry once; a second conflict returns the generic unavailable response. A one-view reveal removes encrypted content as part of the committed operation. Time-based reveal increments `viewCount` and preserves ciphertext until expiry or manual destruction.
+The public reveal endpoint calls a `security definer` PostgreSQL function that locks the secret row with `FOR UPDATE`, checks the server clock and status, mutates the secret and matching history in one transaction, and returns ciphertext and IV only for a successful reveal. A one-view reveal nulls encrypted content before the function returns. Time-based reveal increments `view_count` and preserves ciphertext until expiry or manual destruction. The function uses an empty `search_path`, schema-qualified relation names, and narrowly granted execute permission.
 
-### Appwrite data model
+### Supabase data model
 
-The implementation uses one database and two tables.
+The implementation uses the Supabase Postgres database with three application tables.
 
 `secrets` columns:
 
-- `$id`: string identifier
-- `ownerId`: required string
-- `ciphertext`: required string
-- `iv`: required string
-- `expiresAt`: nullable datetime
-- `expiryType`: required enum-like string (`after_opening`, `time`)
-- `maxViews`: nullable integer; `1` for after-opening
-- `viewCount`: required integer, default `0`
-- `status`: required enum-like string (`active`, `consumed`, `expired`, `destroyed`)
-- `consumedAt`: nullable datetime
-- `$createdAt`: Appwrite timestamp
+- `id`: text primary key
+- `owner_id`: required UUID referencing `auth.users`
+- `ciphertext`: nullable text; cleared after destruction or one-view reveal
+- `iv`: nullable text; cleared with ciphertext
+- `expires_at`: nullable timestamptz
+- `expiry_type`: required text constrained to (`after_opening`, `time`)
+- `max_views`: nullable integer; `1` for after-opening
+- `view_count`: required integer, default `0`
+- `status`: required text constrained to (`active`, `consumed`, `expired`, `destroyed`)
+- `consumed_at`: nullable timestamptz
+- `created_at`: required timestamptz, default `now()`
 
 `history` columns:
 
-- `$id`: string identifier
-- `secretId`: required string, indexed
-- `ownerId`: required string, indexed
-- `title`: required string, maximum 120 characters
-- `expiryType`: required string
-- `expiresAt`: nullable datetime
-- `status`: required string
-- `viewCount`: required integer, default `0`
-- `consumedAt`: nullable datetime
-- `$createdAt`: Appwrite timestamp
+- `id`: UUID primary key, default `gen_random_uuid()`
+- `secret_id`: required text, unique and indexed
+- `owner_id`: required UUID referencing `auth.users`, indexed
+- `title`: required text, maximum 120 characters
+- `expiry_type`: required text
+- `expires_at`: nullable timestamptz
+- `status`: required text
+- `view_count`: required integer, default `0`
+- `consumed_at`: nullable timestamptz
+- `created_at`: required timestamptz, default `now()`
 
-Secret rows are server-only. History rows receive creator-specific read/update/delete permissions and are queried through a JWT-scoped Appwrite client where practical. The API key is used only for public reveal and maintenance operations and is never exposed through a `VITE_` variable.
+`rate_limits` columns:
 
-Expired encrypted payloads are deleted lazily when encountered by reveal/history operations. The setup documentation also describes an optional scheduled cleanup function for production hygiene, but the Day 14 application does not require a scheduler to enforce expiry because reveal always checks the server-side deadline.
+- `bucket_key`: text primary key containing only a keyed hash, never a raw IP
+- `window_started_at`: required timestamptz
+- `request_count`: required integer
+- `expires_at`: required timestamptz, indexed for cleanup
+
+RLS is enabled on every application table. Direct access to `secrets` and `rate_limits` is revoked from `anon` and `authenticated`; they are reachable only through narrowly granted database functions or server-side secret-key access. History policies require `auth.uid() = owner_id` for select and delete. The Supabase secret key is used only in Vercel handlers and is never exposed through a `VITE_` variable.
+
+Expired encrypted payloads are cleared lazily when encountered by reveal/history operations. The migration includes a cleanup function suitable for Supabase Cron, but the application does not require a scheduler to enforce expiry because reveal always checks the database clock.
+
+### Rate limiting
+
+The server hashes the normalized client IP with `HMAC-SHA-256` and `RATE_LIMIT_HASH_SECRET`, then calls a transactional `consume_rate_limit` PostgreSQL function. Raw IP addresses are not persisted. Fixed-window limits are:
+
+- authentication submissions: 10 requests per IP per 15 minutes
+- secret creation: 20 requests per authenticated user per hour
+- public reveal: 60 requests per IP per 10 minutes
+
+The function inserts or locks the bucket row, resets elapsed windows, increments accepted requests, and returns the remaining count and reset time. Exceeded requests return HTTP 429 with `Retry-After`. Login and sign-up are proxied through the API so their rate limit cannot be bypassed through the application UI; Supabase's own abuse controls remain an additional layer.
 
 ### Demo adapter
 
-When the public Appwrite configuration is absent, the frontend uses a demo repository backed by localStorage. It implements the same domain operations and enforces the same expiry rules in the current browser. Demo links are explicitly labeled `This-browser demo link`; they cannot be opened on another device or browser profile. This adapter exists for local development and visual review, not as a production fallback.
+When the public Supabase configuration is absent, the frontend uses a demo repository backed by localStorage. It implements the same domain operations and enforces the same expiry rules in the current browser. Demo links are explicitly labeled `This-browser demo link`; they cannot be opened on another device or browser profile. This adapter exists for local development and visual review, not as a production fallback.
 
 The domain layer does not branch throughout the UI. It selects either the remote API adapter or the demo adapter once at startup.
 
@@ -155,18 +174,15 @@ The domain layer does not branch throughout the UI. It selects either the remote
 The gitignored `.env` and committed `.env.example` contain:
 
 ```text
-VITE_APPWRITE_ENDPOINT=
-VITE_APPWRITE_PROJECT_ID=
+VITE_SUPABASE_URL=
+VITE_SUPABASE_PUBLISHABLE_KEY=
 VITE_APP_URL=http://localhost:5173
-APPWRITE_ENDPOINT=
-APPWRITE_PROJECT_ID=
-APPWRITE_API_KEY=
-APPWRITE_DATABASE_ID=expiry
-APPWRITE_SECRETS_TABLE_ID=secrets
-APPWRITE_HISTORY_TABLE_ID=history
+SUPABASE_URL=
+SUPABASE_SECRET_KEY=
+RATE_LIMIT_HASH_SECRET=
 ```
 
-Real credentials cannot be fabricated. Empty values intentionally activate demo mode. The README will document Google provider configuration, allowed web origins, OAuth success/failure URLs, required API key scopes, schema provisioning, local development, testing, and Vercel deployment.
+Real credentials cannot be fabricated. Empty public values intentionally activate demo mode. The README will document Google provider configuration, email confirmation and redirect URLs, applying the SQL migration, local development, testing, and Vercel deployment.
 
 ## Validation and Error Handling
 
@@ -188,7 +204,7 @@ Real credentials cannot be fabricated. Empty values intentionally activate demo 
 - The API never accepts plaintext and application logging excludes request bodies.
 - Ciphertext alone remains sensitive metadata and is readable only by privileged server code.
 - All production traffic must use HTTPS.
-- API validation and platform rate limits provide baseline abuse resistance. A globally durable rate limiter is deferred until real traffic justifies an external rate-limit store.
+- API validation, Supabase Auth controls, and the database-backed rate limiter provide baseline abuse resistance without another service.
 - Copy blocking is a usability deterrent only. Recipients can still use developer tools, accessibility tooling, screenshots, cameras, or modified clients.
 
 ## Testing Strategy
@@ -216,6 +232,7 @@ Repository/API contract tests cover:
 - history retaining metadata after secret destruction
 - recreation prefilling title only
 - owner isolation for history actions
+- rate-limit reset, increment, rejection, and privacy-preserving bucket hashing
 
 Component/browser tests cover:
 
@@ -235,9 +252,9 @@ Final verification runs type checking, tests, lint, production build, browser in
 The build is complete when:
 
 1. A user can enter demo mode without credentials and exercise every core screen in one browser.
-2. With documented Appwrite credentials, a creator can sign in through Google and create a secret whose plaintext and key never reach Appwrite.
+2. With documented Supabase credentials, a creator can sign up or sign in with email/password or Google and create a secret whose plaintext and key never reach Supabase.
 3. A recipient can open a shared link without authentication, explicitly reveal it, and decrypt it locally.
-4. An after-opening secret cannot be successfully revealed twice, including competing reveal attempts.
+4. An after-opening secret cannot be successfully revealed twice, including competing reveal attempts, because reveal uses a row-locking database function.
 5. A time-based secret becomes unavailable when its deadline passes regardless of client clock display.
 6. Creator history retains title and lifecycle metadata but never plaintext or encryption keys.
 7. Active links can be re-shared and destroyed; expired entries can be recreated with title only or removed from history.
@@ -251,7 +268,7 @@ The build is complete when:
 2. Build and test domain types, validation, expiry, routing, and encryption.
 3. Build and test the demo repository for credential-free end-to-end behavior.
 4. Implement the visual shell and all creator/recipient states against the repository interface.
-5. Add Appwrite authentication and the remote API adapter.
-6. Add Vercel API handlers, Appwrite transactions, and provisioning tooling.
+5. Add Supabase authentication and the remote API adapter.
+6. Add Vercel API handlers, Supabase migrations/RLS/functions, and persistent rate limiting.
 7. Complete responsive, accessibility, and copy-deterrence behavior.
 8. Run the full verification and visual QA loop.
