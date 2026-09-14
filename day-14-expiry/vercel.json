@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "devCommand": "vite --port $PORT",
+  "rewrites": [
+    { "source": "/s/:id", "destination": "/index.html" },
+    { "source": "/history", "destination": "/index.html" },
+    { "source": "/history/:id", "destination": "/index.html" },
+    { "source": "/reset-password", "destination": "/index.html" }
+  ]
+}
