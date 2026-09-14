@@ -6,7 +6,7 @@ Expiry creates temporary, browser-encrypted text links. Creators keep private li
 
 ```bash
 pnpm install
-pnpm dev
+pnpm dev:api
 ```
 
 With blank Supabase values the app starts in an explicitly labeled same-browser demo mode. This exercises create, reveal, expiration, destruction, and history without an account. Demo links do not work across browsers or devices.
