@@ -618,4 +618,61 @@ export const projects: Project[] = [
     learned:
       "I learned how to model a commitment through waiting, due, and completed states, keep postponement history useful, schedule browser notifications, and make a time-based workflow feel calm instead of punitive.",
   },
+  {
+    day: 14,
+    title: "Expiry",
+    tagline:
+      "Private links for messages that should disappear when they have done their job.",
+    description:
+      "Expiry creates browser-encrypted messages with controlled lifetimes. Share a private link, reveal it once, and keep a private archive of the messages you have created without storing plaintext on the server.",
+    date: "2026-09-14",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Supabase",
+      "AES-GCM",
+      "Vercel Functions",
+    ],
+    images: [
+      {
+        src: "/projects/day-14/01-login-desktop.png",
+        alt: "Expiry login screen",
+      },
+      {
+        src: "/projects/day-14/02-create-desktop.png",
+        alt: "Expiry create message screen",
+      },
+      {
+        src: "/projects/day-14/03-ready-desktop.png",
+        alt: "Expiry private link ready screen",
+      },
+      {
+        src: "/projects/day-14/04-pre-reveal-desktop.png",
+        alt: "Expiry private message reveal screen",
+      },
+      {
+        src: "/projects/day-14/05-revealed-desktop.png",
+        alt: "Expiry revealed message screen",
+      },
+      {
+        src: "/projects/day-14/06-gone-desktop.png",
+        alt: "Expiry expired message screen",
+      },
+      {
+        src: "/projects/day-14/07-create-mobile.png",
+        alt: "Expiry mobile create message screen",
+      },
+      {
+        src: "/projects/day-14/08-history-mobile.png",
+        alt: "Expiry mobile history screen",
+      },
+    ],
+    liveUrl: "https://day-14-expiry.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to encrypt messages in the browser with AES-GCM, build one-time reveal and expiry flows, protect lifecycle operations with serverless functions and Supabase, and keep creator history separate from message content.",
+  },
 ];
