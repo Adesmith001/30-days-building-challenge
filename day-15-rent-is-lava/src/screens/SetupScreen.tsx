@@ -92,24 +92,28 @@ export function SetupScreen({
           <div className="flex items-center justify-end gap-3">
             <input
               inputMode="numeric"
-              value={formatNumber(
-                profile.rentDueInMonths,
-              )}
+              value={
+                profile.rentDueInMonths > 0
+                  ? formatNumber(
+                      profile.rentDueInMonths,
+                    )
+                  : ""
+              }
               onChange={(event) => {
-                const value = Math.min(
-                  12,
-                  Math.max(
-                    1,
-                    Number(
-                      event.target.value.replace(
-                        /\D/g,
-                        "",
-                      ),
-                    ) || 1,
-                  ),
+                const digits = event.target.value.replace(
+                  /\D/g,
+                  "",
                 )
 
-                update("rentDueInMonths", value)
+                if (!digits) {
+                  update("rentDueInMonths", 0)
+                  return
+                }
+
+                update(
+                  "rentDueInMonths",
+                  Math.min(12, Number(digits)),
+                )
               }}
               className="w-16 bg-transparent text-right font-mono text-3xl outline-none"
             />
@@ -159,7 +163,8 @@ export function SetupScreen({
           onClick={onContinue}
           disabled={
             profile.monthlyIncome <= 0 ||
-            profile.annualRent <= 0
+            profile.annualRent <= 0 ||
+            profile.rentDueInMonths <= 0
           }
           className="bg-ink px-8 py-4 font-mono text-[10px] tracking-[0.15em] text-paper disabled:opacity-30"
         >

@@ -38,7 +38,7 @@ export function MoneyInput({
 
         <input
           inputMode="numeric"
-          value={formatNumber(value)}
+          value={value > 0 ? formatNumber(value) : ""}
           onChange={(event) =>
             onChange(parseMoney(event.target.value))
           }
