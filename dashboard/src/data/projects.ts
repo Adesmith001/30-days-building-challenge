@@ -675,4 +675,69 @@ export const projects: Project[] = [
     learned:
       "I learned how to encrypt messages in the browser with AES-GCM, build one-time reveal and expiry flows, protect lifecycle operations with serverless functions and Supabase, and keep creator history separate from message content.",
   },
+  {
+    day: 15,
+    title: "Rent Is Lava",
+    tagline:
+      "A 12-month financial survival simulator for staying ready when rent is due.",
+    description:
+      "Rent Is Lava turns budgeting into a seeded survival run. Balance income, normal expenses, emergency buffers, and rent savings across a simulated year while unexpected costs and difficult choices test your stability.",
+    date: "2026-09-15",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Motion",
+      "LocalStorage",
+    ],
+    images: [
+      {
+        src: "/projects/day-15/1.png",
+        alt: "Rent Is Lava project preview",
+      },
+      {
+        src: "/projects/day-15/2.png",
+        alt: "Rent Is Lava project preview",
+      },
+      {
+        src: "/projects/day-15/3.png",
+        alt: "Rent Is Lava project preview",
+      },
+      {
+        src: "/projects/day-15/4.png",
+        alt: "Rent Is Lava project preview",
+      },
+      {
+        src: "/projects/day-15/5.png",
+        alt: "Rent Is Lava project preview",
+      },
+      {
+        src: "/projects/day-15/6.png",
+        alt: "Rent Is Lava project preview",
+      },
+      {
+        src: "/projects/day-15/7.png",
+        alt: "Rent Is Lava project preview",
+      },
+      {
+        src: "/projects/day-15/8.png",
+        alt: "Rent Is Lava project preview",
+      },
+      {
+        src: "/projects/day-15/9.png",
+        alt: "Rent Is Lava project preview",
+      },
+      {
+        src: "/projects/day-15/10.png",
+        alt: "Rent Is Lava project preview",
+      },
+    ],
+    liveUrl: "https://day-15-rent-is-lava.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to model a seeded 12-month financial simulation, turn unexpected costs into meaningful funding decisions, and score stability across rent readiness, spending, buffers, and deficits.",
+  },
 ];

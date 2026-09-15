@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import type { FinancialProfile } from "../types/simulation"
 
 import { MoneyInput } from "../components/MoneyInput"
@@ -20,6 +22,19 @@ export function SetupScreen({
   onChange,
   onContinue,
 }: Props) {
+  const [monthInput, setMonthInput] = useState<
+    string | null
+  >(null)
+
+  const displayedMonth =
+    monthInput !== null &&
+    (Number(monthInput.replace(/\D/g, "")) || 0) ===
+      profile.rentDueInMonths
+      ? monthInput
+      : profile.rentDueInMonths > 0
+        ? formatNumber(profile.rentDueInMonths)
+        : ""
+
   const update = (
     key: keyof FinancialProfile,
     value: number,
@@ -92,18 +107,14 @@ export function SetupScreen({
           <div className="flex items-center justify-end gap-3">
             <input
               inputMode="numeric"
-              value={
-                profile.rentDueInMonths > 0
-                  ? formatNumber(
-                      profile.rentDueInMonths,
-                    )
-                  : ""
-              }
+              value={displayedMonth}
               onChange={(event) => {
                 const digits = event.target.value.replace(
                   /\D/g,
                   "",
                 )
+
+                setMonthInput(digits)
 
                 if (!digits) {
                   update("rentDueInMonths", 0)

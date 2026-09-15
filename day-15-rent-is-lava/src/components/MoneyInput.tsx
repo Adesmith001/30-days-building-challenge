@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import {
   formatNumber,
   parseMoney,
@@ -16,6 +18,18 @@ export function MoneyInput({
   value,
   onChange,
 }: Props) {
+  const [inputValue, setInputValue] = useState<
+    string | null
+  >(null)
+
+  const displayedValue =
+    inputValue !== null &&
+    parseMoney(inputValue) === value
+      ? inputValue
+      : value > 0
+        ? formatNumber(value)
+        : ""
+
   return (
     <div className="group grid gap-4 border-t border-rule py-6 md:grid-cols-[1fr_1.2fr] md:items-center md:py-7">
       <div>
@@ -38,10 +52,13 @@ export function MoneyInput({
 
         <input
           inputMode="numeric"
-          value={value > 0 ? formatNumber(value) : ""}
-          onChange={(event) =>
-            onChange(parseMoney(event.target.value))
-          }
+          value={displayedValue}
+          onChange={(event) => {
+            const nextValue = event.target.value
+
+            setInputValue(nextValue)
+            onChange(parseMoney(nextValue))
+          }}
           className="w-full bg-transparent text-right font-mono text-2xl font-medium tracking-[-0.04em] outline-none md:max-w-md md:text-3xl"
         />
       </div>
