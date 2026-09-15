@@ -671,7 +671,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-14-expiry.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
-    twitterUrl: "",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2099576696458338673",
     learned:
       "I learned how to encrypt messages in the browser with AES-GCM, build one-time reveal and expiry flows, protect lifecycle operations with serverless functions and Supabase, and keep creator history separate from message content.",
   },
