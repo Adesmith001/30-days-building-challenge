@@ -96,7 +96,7 @@ function prepareMonth(
     ...state,
     monthIndex: index,
     current,
-    phase: "payday",
+    phase: "payday" as const,
     pendingPayment: null,
     willEndAfterSummary: false,
   }
@@ -208,7 +208,7 @@ export function confirmAllocation(
 
   return {
     ...next,
-    phase: "event",
+    phase: "event" as const,
   }
 }
 
