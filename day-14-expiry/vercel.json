@@ -1,5 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "git": {
+    "deploymentEnabled": false
+  },
   "devCommand": "vite --port $PORT",
   "rewrites": [
     { "source": "/s/:id", "destination": "/index.html" },
