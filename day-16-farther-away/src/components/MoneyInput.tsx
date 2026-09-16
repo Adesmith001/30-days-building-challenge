@@ -1,3 +1,8 @@
+import {
+  digitsOnly,
+  formatInputMoney,
+} from "../lib/currency";
+
 interface Props {
   label: string;
   value: number;
@@ -5,18 +10,14 @@ interface Props {
   onChange:
     (value: number) => void;
 
-  min?: number;
-  max?: number;
-  suffix?: string;
+  hint?: string;
 }
 
-export default function NumberField({
+export default function MoneyInput({
   label,
   value,
   onChange,
-  min = 0,
-  max,
-  suffix,
+  hint,
 }: Props) {
   return (
     <label
@@ -48,18 +49,30 @@ export default function NumberField({
           gap-2
         "
       >
+        <span
+          className="
+            font-mono
+            text-xl
+          "
+        >
+          ₦
+        </span>
+
         <input
-          type="number"
-          min={min}
-          max={max}
-          value={value}
+          inputMode="numeric"
+          value={
+            formatInputMoney(value)
+          }
           onChange={(event) =>
             onChange(
               Number(
-                event.target.value,
+                digitsOnly(
+                  event.target.value,
+                ),
               ),
             )
           }
+          placeholder="0"
           className="
             min-w-0
             flex-1
@@ -71,7 +84,7 @@ export default function NumberField({
           "
         />
 
-        {suffix && (
+        {hint && (
           <span
             className="
               pb-1
@@ -80,7 +93,7 @@ export default function NumberField({
               text-muted
             "
           >
-            {suffix}
+            {hint}
           </span>
         )}
       </div>
