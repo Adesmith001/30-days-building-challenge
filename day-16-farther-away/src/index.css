@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-paper: #fcf9f5;
+  --color-paper-deep: #f0edea;
+  --color-paper-soft: #f6f3ef;
+
+  --color-ink: #1c1c1a;
+  --color-muted: #686862;
+  --color-line: #e5e2de;
+
+  --color-cobalt: #1d4ed8;
+  --color-savings: #166534;
+  --color-time: #c2410c;
+}
+
+:root {
+  color-scheme: light;
+  font-family: var(--font-sans);
+  background: #fcf9f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #fcf9f5;
+  color: #1c1c1a;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: #dce1ff;
+  color: #001551;
+}
+
+.range {
+  accent-color: #1d4ed8;
+}
+
+.range::-webkit-slider-thumb {
+  border-radius: 0;
+}

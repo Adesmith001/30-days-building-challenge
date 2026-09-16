@@ -8,9 +8,10 @@ import { ProgressSection } from "./components/ProgressSection";
 import { ReservedSlots } from "./components/ReservedSlots";
 import { SiteFooter } from "./components/SiteFooter";
 import { SiteHeader } from "./components/SiteHeader";
+import { AboutPage } from "./components/AboutPage";
 import { buildSlots, getChallengeDay } from "./lib/challenge";
 
-function App() {
+function DashboardPage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const currentDay = getChallengeDay(challengeStartDate);
   const completedProjects = projects.filter((project) => project.status === "completed");
@@ -33,6 +34,18 @@ function App() {
       <SiteFooter />
       <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
     </>
+  );
+}
+
+function App() {
+  return window.location.pathname === "/about" ? (
+    <>
+      <SiteHeader />
+      <AboutPage />
+      <SiteFooter />
+    </>
+  ) : (
+    <DashboardPage />
   );
 }
 
