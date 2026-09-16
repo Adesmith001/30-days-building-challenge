@@ -33,6 +33,20 @@ test("dashboard registers day 13 Later with its project screenshots", () => {
   assert.match(source, /\/projects\/day-13\/7\.png/);
 });
 
+test("dashboard registers day 16 with its project screenshots", () => {
+  assert.match(source, /day:\s*16/);
+  assert.match(source, /title:\s*"Farther Away"/);
+  assert.match(source, /\/projects\/day-16\/1\.png/);
+  assert.match(source, /\/projects\/day-16\/7\.png/);
+});
+
+test("site navigation exposes home, projects, and about routes", () => {
+  assert.match(appSource, /pathname/);
+  assert.match(appSource, /AboutPage/);
+  assert.match(readFileSync(new URL("../components/SiteHeader.tsx", import.meta.url), "utf8"), /href="\/about"/);
+  assert.match(readFileSync(new URL("../components/SiteHeader.tsx", import.meta.url), "utf8"), /href="\/"/);
+});
+
 test("project sheets expose a full-size image gallery", () => {
   assert.match(modalSource, /gallery/);
   assert.match(modalSource, /aria-label=.*image/i);

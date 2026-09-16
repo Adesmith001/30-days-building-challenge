@@ -1,5 +1,6 @@
 import {
   useState,
+  useEffect,
 } from "react";
 
 import AppHeader from "./components/AppHeader";
@@ -26,28 +27,39 @@ import HomeScreen from "./screens/HomeScreen";
 import LandingScreen from "./screens/LandingScreen";
 import RoutineScreen from "./screens/RoutineScreen";
 
+import {
+  pathToScreen,
+  screenToPath,
+} from "./lib/routes";
+
 import type {
   ComparisonDraft,
   ComparisonPrefs,
   SavedComparison,
 } from "./types/comparison";
 
-type Screen =
-  | "landing"
-  | "routine"
-  | "homeA"
-  | "homeB"
-  | "compare"
-  | "history"
-  | "about";
+import type { Screen } from "./lib/routes";
 
 export default function App() {
   const [
     screen,
     setScreen,
   ] = useState<Screen>(
-    "landing",
+    () => pathToScreen(window.location.pathname),
   );
+
+  const navigate = (next: Screen) => {
+    window.history.pushState({}, "", screenToPath(next));
+    setScreen(next);
+  };
+
+  useEffect(() => {
+    const onPopState = () =>
+      setScreen(pathToScreen(window.location.pathname));
+
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
 
   const [
     draft,
@@ -81,7 +93,7 @@ export default function App() {
       defaultPrefs,
     );
 
-    setScreen(
+    navigate(
       "routine",
     );
   };
@@ -103,7 +115,7 @@ export default function App() {
       "homes",
     );
 
-    setScreen(
+    navigate(
       "compare",
     );
   };
@@ -119,7 +131,7 @@ export default function App() {
       item.prefs,
     );
 
-    setScreen(
+    navigate(
       "compare",
     );
   };
@@ -135,17 +147,17 @@ export default function App() {
       <AppHeader
         xp={game.xp}
         onHome={() =>
-          setScreen(
+          navigate(
             "landing",
           )
         }
         onHistory={() =>
-          setScreen(
+          navigate(
             "history",
           )
         }
         onAbout={() =>
-          setScreen(
+          navigate(
             "about",
           )
         }
@@ -178,7 +190,7 @@ export default function App() {
               "routine",
             );
 
-            setScreen(
+            navigate(
               "homeA",
             );
           }}
@@ -200,7 +212,7 @@ export default function App() {
             })
           }
           onNext={() =>
-            setScreen(
+            navigate(
               "homeB",
             )
           }
@@ -226,7 +238,7 @@ export default function App() {
               "homes",
             );
 
-            setScreen(
+            navigate(
               "compare",
             );
           }}
@@ -249,7 +261,7 @@ export default function App() {
             setPrefs
           }
           onEdit={() =>
-            setScreen(
+            navigate(
               "routine",
             )
           }

@@ -740,4 +740,29 @@ export const projects: Project[] = [
     learned:
       "I learned how to model a seeded 12-month financial simulation, turn unexpected costs into meaningful funding decisions, and score stability across rent readiness, spending, buffers, and deficits.",
   },
+  {
+    day: 16,
+    title: "Farther Away",
+    tagline:
+      "A financial planning simulator for seeing how today's choices shape the year ahead.",
+    description:
+      "Farther Away turns long-term financial planning into an interactive scenario. Explore income, spending, savings, and trade-offs across a full year to understand what it takes to move a little farther from financial uncertainty.",
+    date: "2026-09-16",
+    status: "completed",
+    stack: ["React", "TypeScript", "Vite", "CSS", "LocalStorage"],
+    images: [
+      { src: "/projects/day-16/1.png", alt: "Farther Away project preview" },
+      { src: "/projects/day-16/2.png", alt: "Farther Away project preview" },
+      { src: "/projects/day-16/3.png", alt: "Farther Away project preview" },
+      { src: "/projects/day-16/4.png", alt: "Farther Away project preview" },
+      { src: "/projects/day-16/5.png", alt: "Farther Away project preview" },
+      { src: "/projects/day-16/6.png", alt: "Farther Away project preview" },
+      { src: "/projects/day-16/7.png", alt: "Farther Away project preview" },
+    ],
+    liveUrl: "https://day-16-farther-away.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to turn a long-term financial model into a clear interactive experience, make scenario trade-offs legible, and use a year-at-a-glance view to connect small decisions with future outcomes.",
+  },
 ];
