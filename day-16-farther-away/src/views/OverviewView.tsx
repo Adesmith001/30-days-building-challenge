@@ -2,7 +2,7 @@ import {
   motion,
 } from "motion/react";
 
-import ResultStrip from "../components/ResultSlip";
+import ResultStrip from "../components/ResultStrip";
 
 import {
   formatNairaCompact,
