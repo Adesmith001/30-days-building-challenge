@@ -765,4 +765,37 @@ export const projects: Project[] = [
     learned:
       "I learned how to turn a long-term financial model into a clear interactive experience, make scenario trade-offs legible, and use a year-at-a-glance view to connect small decisions with future outcomes.",
   },
+  {
+    day: 17,
+    title: "Sabi Search",
+    tagline:
+      "A Nigerian word game for finding the Naija word hiding inside the clue.",
+    description:
+      "Sabi Search gives you a meaning, context, or bit of street wisdom and five tries to find the Nigerian word behind it. Play the shared Daily Sabi, run endless random rounds, use one contextual hint, track your streak locally, and share your score.",
+    date: "2026-09-17",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Motion",
+      "Lucide",
+      "LocalStorage",
+      "Web Share API",
+    ],
+    images: [
+      { src: "/projects/day-17/1.png", alt: "Sabi Search home screen" },
+      { src: "/projects/day-17/2.png", alt: "Sabi Search daily game screen" },
+      { src: "/projects/day-17/3.png", alt: "Sabi Search clue screen" },
+      { src: "/projects/day-17/4.png", alt: "Sabi Search keyboard screen" },
+      { src: "/projects/day-17/5.png", alt: "Sabi Search result screen" },
+      { src: "/projects/day-17/6.png", alt: "Sabi Search stats screen" },
+    ],
+    liveUrl: "https://day-17-sabi-search.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to build a Wordle-style word game around Nigerian language and culture, seed a shared daily puzzle, evaluate repeated letters correctly, persist local stats, and add shareable results without a backend.",
+  },
 ];
