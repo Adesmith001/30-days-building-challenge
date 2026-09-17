@@ -1,122 +1,134 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useEffect, useMemo, useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+import { Header } from "./components/Header";
+import { HowToPlay } from "./components/HowToPlay";
+import { StatsPanel } from "./components/StatsPanel";
+import { getDailyWord, getRandomWord, getUtcDateKey } from "./lib/daily";
+import { loadStats } from "./lib/storage";
+import { GameScreen } from "./screens/GameScreen";
+import { HomeScreen } from "./screens/HomeScreen";
+import type { GameMode, SabiWord } from "./types/game";
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+type Screen = "home" | "game";
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+function routeFromPath(pathname: string): { screen: Screen; mode: GameMode } {
+  if (pathname === "/game/daily") return { screen: "game", mode: "daily" };
+  if (pathname === "/game/run") return { screen: "game", mode: "run" };
+  return { screen: "home", mode: "run" };
 }
 
-export default App
+export default function App() {
+  const dateKey = useMemo(() => getUtcDateKey(), []);
+  const initialRoute = useMemo(
+    () => routeFromPath(window.location.pathname),
+    [],
+  );
+  const [screen, setScreen] = useState<Screen>(initialRoute.screen);
+  const [mode, setMode] = useState<GameMode>(initialRoute.mode);
+  const [entry, setEntry] = useState<SabiWord>(() =>
+    initialRoute.mode === "daily" ? getDailyWord(dateKey) : getRandomWord(),
+  );
+  const [gameKey, setGameKey] = useState(0);
+  const [stats, setStats] = useState(loadStats);
+  const [showHowTo, setShowHowTo] = useState(false);
+  const [showStats, setShowStats] = useState(false);
+
+  const dailyPlayed = stats.history.some(
+    (item) => item.mode === "daily" && item.date === dateKey,
+  );
+
+  useEffect(() => {
+    function handlePopState() {
+      const route = routeFromPath(window.location.pathname);
+      setScreen(route.screen);
+      setMode(route.mode);
+
+      if (route.screen === "game") {
+        setEntry(
+          route.mode === "daily"
+            ? getDailyWord(dateKey)
+            : getRandomWord(),
+        );
+        setGameKey((value) => value + 1);
+      }
+    }
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [dateKey]);
+
+  function navigate(path: string) {
+    if (window.location.pathname !== path) {
+      window.history.pushState({}, "", path);
+    }
+  }
+
+  function refreshStats() {
+    setStats(loadStats());
+  }
+
+  function goHome() {
+    navigate("/");
+    setScreen("home");
+  }
+
+  function startGame(nextMode: GameMode) {
+    if (nextMode === "daily" && dailyPlayed) return;
+
+    window.scrollTo(0, 0);
+    setMode(nextMode);
+    setEntry(
+      nextMode === "daily" ? getDailyWord(dateKey) : getRandomWord(),
+    );
+    setGameKey((value) => value + 1);
+    navigate(`/game/${nextMode}`);
+    setScreen("game");
+  }
+
+  function nextRun() {
+    setEntry((current) => getRandomWord(current.answer));
+    setGameKey((value) => value + 1);
+  }
+
+  return (
+    <div className="min-h-dvh bg-[#fbf7f2] text-[#171513]">
+      <div className="flex min-h-dvh flex-col">
+        <Header
+          onHome={goHome}
+          onHowTo={() => setShowHowTo(true)}
+          onStats={() => setShowStats(true)}
+        />
+
+        {screen === "home" ? (
+          <HomeScreen
+            stats={stats}
+            dailyPlayed={dailyPlayed}
+            dateKey={dateKey}
+            onStart={startGame}
+          />
+        ) : (
+          <GameScreen
+            key={gameKey}
+            entry={entry}
+            mode={mode}
+            dateKey={dateKey}
+            onHome={goHome}
+            onNext={nextRun}
+            onStatsChange={refreshStats}
+          />
+        )}
+
+        <footer className="mx-auto w-full max-w-7xl px-4 pb-6 pt-2 sm:px-8">
+          <p className="border-t border-[#d9d2c8] pt-4 font-mono text-[9px] tracking-[0.14em] text-[#8a837a]">
+            MADE FOR THE ONES WEY DEY SABI.
+          </p>
+        </footer>
+      </div>
+
+      {showHowTo && <HowToPlay onClose={() => setShowHowTo(false)} />}
+      {showStats && (
+        <StatsPanel stats={stats} onClose={() => setShowStats(false)} />
+      )}
+    </div>
+  );
+}
