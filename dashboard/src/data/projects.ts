@@ -761,7 +761,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-16-farther-away.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
-    twitterUrl: "",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2100300816712089984?s=20",
     learned:
       "I learned how to turn a long-term financial model into a clear interactive experience, make scenario trade-offs legible, and use a year-at-a-glance view to connect small decisions with future outcomes.",
   },
@@ -794,7 +794,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-17-sabi-search.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
-    twitterUrl: "",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2100490242817991118?s=20",
     learned:
       "I learned how to build a Wordle-style word game around Nigerian language and culture, seed a shared daily puzzle, evaluate repeated letters correctly, persist local stats, and add shareable results without a backend.",
   },
