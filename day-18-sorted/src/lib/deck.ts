@@ -106,8 +106,7 @@ function progressionDeck(
       shuffled.filter(
         (puzzle) =>
           (
-            band.allowed
-            as readonly string[]
+            band.allowed as readonly string[]
           ).includes(
             puzzle.difficulty,
           ) &&
@@ -171,10 +170,7 @@ export function createDeck({
   const source =
     category
       ? puzzles.filter(
-          (puzzle) =>
-            puzzle.category ===
-            category,
-        )
+          (puzzle) => puzzle.category === category,)
       : puzzles;
 
   const deck =
