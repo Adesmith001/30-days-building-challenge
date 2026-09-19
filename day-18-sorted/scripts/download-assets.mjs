@@ -54,6 +54,7 @@ const assets = {
     "photo-1441974231531-c6227db76b6e",
 };
 
+
 const outDir = join(
   process.cwd(),
   "public",

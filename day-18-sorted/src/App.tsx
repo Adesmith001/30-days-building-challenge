@@ -1,4 +1,5 @@
 import {
+  useEffect,
   useState,
 } from "react";
 
@@ -9,6 +10,15 @@ import {
 import {
   hasSeenTutorial,
 } from "./lib/storage";
+
+import {
+  pathToScreen,
+  screenToPath,
+} from "./lib/routes";
+
+import type {
+  Screen,
+} from "./lib/routes";
 
 import type {
   PuzzleCategory,
@@ -46,33 +56,106 @@ import {
   TutorialScreen,
 } from "./screens/TutorialScreen";
 
-type Screen =
-  | "home"
-  | "tutorial"
-  | "game"
-  | "results"
-  | "history"
-  | "categories"
-  | "blind"
-  | "gap";
+type NavigationTarget =
+  | Screen
+  | "daily";
 
 export default function App() {
   const [
     screen,
     setScreen,
-  ] =
-    useState<Screen>(
-      "home",
-    );
+  ] = useState<Screen>(() =>
+    pathToScreen(
+      window.location.pathname,
+    ),
+  );
 
   const game =
     useGameSession();
+
+  const navigate = (
+    target: NavigationTarget,
+  ) => {
+    if (
+      target ===
+      "daily"
+    ) {
+      window.history.pushState(
+        {},
+        "",
+        "/daily",
+      );
+      game.start("daily");
+      setScreen("game");
+      return;
+    }
+
+    window.history.pushState(
+      {},
+      "",
+      screenToPath(target),
+    );
+    setScreen(target);
+  };
+
+  useEffect(() => {
+    const syncRoute = () => {
+      const target =
+        pathToScreen(
+          window.location.pathname,
+        );
+
+      if (
+        target ===
+        "daily"
+      ) {
+        game.start("daily");
+        setScreen("game");
+        return;
+      }
+
+      if (
+        (target === "game" ||
+          target === "results") &&
+        !game.session
+      ) {
+        window.history.replaceState(
+          {},
+          "",
+          screenToPath("home"),
+        );
+        setScreen("home");
+        return;
+      }
+
+      setScreen(target);
+    };
+
+    window.addEventListener(
+      "popstate",
+      syncRoute,
+    );
+
+    if (
+      pathToScreen(
+        window.location.pathname,
+      ) === "daily"
+    ) {
+      syncRoute();
+    }
+
+    return () =>
+      window.removeEventListener(
+        "popstate",
+        syncRoute,
+      );
+  }, []);
 
   const startNormal = () => {
     if (
       !hasSeenTutorial()
     ) {
-      setScreen(
+      navigate(
         "tutorial",
       );
 
@@ -83,20 +166,13 @@ export default function App() {
       "normal",
     );
 
-    setScreen(
+    navigate(
       "game",
     );
   };
 
-  const startDaily = () => {
-    game.start(
-      "daily",
-    );
-
-    setScreen(
-      "game",
-    );
-  };
+  const startDaily = () =>
+    navigate("daily");
 
   const startCategory = (
     category:
@@ -107,27 +183,9 @@ export default function App() {
       category,
     );
 
-    setScreen(
+    navigate(
       "game",
     );
-  };
-
-  const navigate = (
-    target:
-      | "home"
-      | "daily"
-      | "history",
-  ) => {
-    if (
-      target ===
-      "daily"
-    ) {
-      startDaily();
-    } else {
-      setScreen(
-        target,
-      );
-    }
   };
 
   if (
@@ -137,7 +195,7 @@ export default function App() {
     return (
       <TutorialScreen
         onHome={() =>
-          setScreen(
+          navigate(
             "home",
           )
         }
@@ -146,7 +204,7 @@ export default function App() {
             "normal",
           );
 
-          setScreen(
+          navigate(
             "game",
           );
         }}
@@ -170,12 +228,12 @@ export default function App() {
           game.nextRound
         }
         onDone={() =>
-          setScreen(
+          navigate(
             "results",
           )
         }
         onHome={() =>
-          setScreen(
+          navigate(
             "home",
           )
         }
@@ -195,7 +253,7 @@ export default function App() {
           .category,
       );
 
-      setScreen(
+      navigate(
         "game",
       );
     };
@@ -209,12 +267,12 @@ export default function App() {
           replay
         }
         onHome={() =>
-          setScreen(
+          navigate(
             "home",
           )
         }
         onHistory={() =>
-          setScreen(
+          navigate(
             "history",
           )
         }
@@ -229,7 +287,7 @@ export default function App() {
     return (
       <HistoryScreen
         onHome={() =>
-          setScreen(
+          navigate(
             "home",
           )
         }
@@ -250,7 +308,7 @@ export default function App() {
           startCategory
         }
         onHome={() =>
-          setScreen(
+          navigate(
             "home",
           )
         }
@@ -265,7 +323,7 @@ export default function App() {
     return (
       <BlindSortScreen
         onHome={() =>
-          setScreen(
+          navigate(
             "home",
           )
         }
@@ -280,7 +338,7 @@ export default function App() {
     return (
       <GapSortScreen
         onHome={() =>
-          setScreen(
+          navigate(
             "home",
           )
         }
@@ -297,27 +355,27 @@ export default function App() {
         startDaily
       }
       onTutorial={() =>
-        setScreen(
+        navigate(
           "tutorial",
         )
       }
       onCategories={() =>
-        setScreen(
+        navigate(
           "categories",
         )
       }
       onBlind={() =>
-        setScreen(
+        navigate(
           "blind",
         )
       }
       onGap={() =>
-        setScreen(
+        navigate(
           "gap",
         )
       }
       onHistory={() =>
-        setScreen(
+        navigate(
           "history",
         )
       }

@@ -798,4 +798,34 @@ export const projects: Project[] = [
     learned:
       "I learned how to build a Wordle-style word game around Nigerian language and culture, seed a shared daily puzzle, evaluate repeated letters correctly, persist local stats, and add shareable results without a backend.",
   },
+  {
+    day: 18,
+    title: "Sorted.",
+    tagline:
+      "A visual ordering game that tests how well you know what comes first.",
+    description:
+      "Sorted. challenges you to put four things in the correct order across daily, blind, category, and gap-sorting modes. Play through topics from Nigerian culture to science, learn from each reveal, and track your runs locally.",
+    date: "2026-09-18",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Motion",
+      "LocalStorage",
+      "html-to-image",
+    ],
+    images: [
+      { src: "/projects/day-18/1.png", alt: "Sorted. project preview" },
+      { src: "/projects/day-18/2.png", alt: "Sorted. project preview" },
+      { src: "/projects/day-18/3.png", alt: "Sorted. project preview" },
+      { src: "/projects/day-18/4.png", alt: "Sorted. project preview" },
+      { src: "/projects/day-18/5.png", alt: "Sorted. project preview" },
+    ],
+    liveUrl: "https://day-18-sorted.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    learned:
+      "I learned how to turn factual ordering puzzles into a reusable game loop, build multiple sorting modes, seed daily runs, persist local history, and generate shareable result cards in the browser.",
+  },
 ];

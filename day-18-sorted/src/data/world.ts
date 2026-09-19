@@ -77,7 +77,7 @@ export const worldPuzzles:
         value: 346,
         displayValue:
           "346 km",
-        image: assets.city,
+        image: assets.bridge,
       },
       {
         id: "rhine",
@@ -85,7 +85,7 @@ export const worldPuzzles:
         value: 1230,
         displayValue:
           "1,230 km",
-        image: assets.city,
+        image: assets.forest,
       },
       {
         id: "danube",
@@ -101,7 +101,7 @@ export const worldPuzzles:
         value: 6650,
         displayValue:
           "≈ 6,650 km",
-        image: assets.city,
+        image: assets.beach,
       },
     ],
   },

@@ -27,6 +27,14 @@ import {
   worldPuzzles,
 } from "./world";
 
+import {
+  cardImage,
+} from "./itemImages";
+
+import {
+  validatePuzzleAssets,
+} from "./validateAssets";
+
 export const puzzles:
   SortPuzzle[] = [
   ...techPuzzles,
@@ -36,6 +44,25 @@ export const puzzles:
   ...nigeriaPuzzles,
   ...miscPuzzles,
 ];
+
+for (const puzzle of puzzles) {
+  puzzle.items = puzzle.items.map(
+    (item) => ({
+      ...item,
+      image: cardImage(puzzle.id, item.id),
+    }),
+  );
+}
+
+const assetErrors = validatePuzzleAssets(
+  puzzles,
+);
+
+if (assetErrors.length > 0) {
+  throw new Error(
+    `Invalid puzzle assets:\n${assetErrors.join("\n")}`,
+  );
+}
 
 export const puzzleMap =
   new Map(
