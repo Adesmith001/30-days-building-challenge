@@ -1,304 +1,68 @@
 import {
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-
-import {
-  BenchmarkMetrics,
-} from "../components/BenchmarkMetrics";
+  FrameStrip,
+} from "../components/FrameStrip";
 
 import {
   PrimaryButton,
 } from "../components/PrimaryButton";
 
 import {
-  PulseProbe,
-} from "../components/PulseProbe";
-
-import {
   SectionLabel,
 } from "../components/SectionLabel";
+
+import {
+  ThreadComparison,
+} from "../components/ThreadComparison";
 
 import {
   WorkloadCanvas,
 } from "../components/WorkloadCanvas";
 
 import {
-  runBenchmark,
-} from "../lib/benchmark";
-
-import {
-  buildTaskSpec,
-} from "../lib/calibration";
-
-import {
-  GUIDED_LOADS,
-  TASK_META,
-} from "../lib/taskMeta";
+  getComparisonInsight,
+} from "../lib/insights";
 
 import type {
   BenchmarkComparison,
-  BenchmarkTask,
   CalibrationProfile,
-  RunOutcome,
 } from "../types/benchmark";
 
-type Phase =
-  | "intro"
-  | "main-ready"
-  | "main-result"
-  | "worker-ready"
-  | "worker-result";
-
 interface Props {
-  task:
-    BenchmarkTask;
+  comparison:
+    BenchmarkComparison;
 
   profile:
     CalibrationProfile;
 
-  onComplete:
-    (
-      comparison:
-        BenchmarkComparison,
-    ) => void;
+  finalRound:
+    boolean;
+
+  onContinue:
+    () => void;
 }
 
-export function GuidedRoundScreen({
-  task,
+export function ComparisonScreen({
+  comparison,
   profile,
-  onComplete,
+  finalRound,
+  onContinue,
 }: Props) {
-  const [
-    phase,
-    setPhase,
-  ] =
-    useState<Phase>(
-      "intro",
+  const insight =
+    getComparisonInsight(
+      comparison,
     );
 
-  const [
-    running,
-    setRunning,
-  ] =
-    useState(false);
+  const main =
+    comparison.main
+      .measurement;
 
-  const [
-    main,
-    setMain,
-  ] =
-    useState<RunOutcome | null>(
-      null,
-    );
+  const worker =
+    comparison.worker
+      .measurement;
 
-  const [
-    worker,
-    setWorker,
-  ] =
-    useState<RunOutcome | null>(
-      null,
-    );
-
-  const [
-    taps,
-    setTaps,
-  ] =
-    useState(0);
-
-  const [
-    error,
-    setError,
-  ] =
-    useState("");
-
-  const tapRef =
-    useRef(0);
-
-  const tapWindow =
-    useRef(false);
-
-  const meta =
-    TASK_META[task];
-
-  const spec =
-    useMemo(
-      () =>
-        buildTaskSpec(
-          task,
-          profile,
-          GUIDED_LOADS[
-            task
-          ],
-        ),
-      [
-        task,
-        profile,
-      ],
-    );
-
-  const registerTap =
-    () => {
-      if (
-        !tapWindow.current
-      ) {
-        return;
-      }
-
-      tapRef.current += 1;
-
-      setTaps(
-        tapRef.current,
-      );
-    };
-
-  const run =
-    async (
-      mode:
-        | "main"
-        | "worker",
-    ) => {
-      setRunning(true);
-
-      setError("");
-
-      tapRef.current = 0;
-
-      setTaps(0);
-
-      try {
-        const result =
-          await runBenchmark(
-            spec,
-            {
-              mode,
-
-              targetFrameMs:
-                profile.frameIntervalMs,
-
-              readTaps:
-                () =>
-                  tapRef.current,
-
-              setTapWindow:
-                (
-                  active,
-                ) => {
-                  tapWindow.current =
-                    active;
-                },
-            },
-          );
-
-        if (
-          mode === "main"
-        ) {
-          setMain(
-            result,
-          );
-
-          setPhase(
-            "main-result",
-          );
-        } else {
-          setWorker(
-            result,
-          );
-
-          setPhase(
-            "worker-result",
-          );
-        }
-      } catch (
-        cause
-      ) {
-        setError(
-          cause instanceof
-              Error &&
-            cause.message ===
-              "TEST_INTERRUPTED"
-            ? "TEST INTERRUPTED. Keep this tab visible and focused, then run again."
-            : "The benchmark failed. Try the round again.",
-        );
-      } finally {
-        setRunning(
-          false,
-        );
-      }
-    };
-
-  if (
-    phase === "intro"
-  ) {
-    return (
-      <Centered>
-        <SectionLabel tone="lime">
-          {meta.kicker}
-        </SectionLabel>
-
-        <h1
-          className="
-            mt-4
-            text-4xl
-            font-semibold
-            tracking-[-.045em]
-            sm:text-6xl
-          "
-        >
-          {meta.title}
-        </h1>
-
-        <p
-          className="
-            mt-4
-            max-w-2xl
-            text-sm
-            leading-6
-            text-muted
-          "
-        >
-          {
-            meta.description
-          }
-        </p>
-
-        <SpecReadout
-          spec={
-            spec
-          }
-        />
-
-        <PrimaryButton
-          className="mt-6"
-          onClick={() =>
-            setPhase(
-              "main-ready",
-            )
-          }
-        >
-          START ROUND →
-        </PrimaryButton>
-      </Centered>
-    );
-  }
-
-  const mode =
-    phase.startsWith(
-      "main",
-    )
-      ? "main"
-      : "worker";
-
-  const result =
-    mode === "main"
-      ? main
-      : worker;
-
-  const ready =
-    phase ===
-      "main-ready" ||
-    phase ===
-      "worker-ready";
+  const sameOutput =
+    main.outputSignature ===
+    worker.outputSignature;
 
   return (
     <main
@@ -310,278 +74,240 @@ export function GuidedRoundScreen({
         md:px-6
       "
     >
-      <div
+      <SectionLabel tone="lime">
+        ROUND COMPARISON / REAL DEVICE DATA
+      </SectionLabel>
+
+      <h1
         className="
-          mb-6
-          flex
-          flex-wrap
-          items-end
-          justify-between
-          gap-4
-          border-b
-          border-line
-          pb-5
+          mt-3
+          text-4xl
+          font-semibold
+          tracking-[-.045em]
+          sm:text-5xl
         "
       >
-        <div>
-          <SectionLabel
-            tone={
-              mode ===
-              "main"
-                ? "amber"
-                : "cyan"
-            }
-          >
-            {meta.kicker}
-          </SectionLabel>
+        SAME WORK. DIFFERENT THREAD.
+      </h1>
 
-          <h1
-            className="
-              mt-2
-              text-3xl
-              font-semibold
-              tracking-[-.04em]
-              sm:text-4xl
-            "
-          >
-            {running
-              ? mode ===
-                "main"
-                ? "CRUNCHING…"
-                : "WORKER CRUNCHING…"
-              : mode ===
-                  "main"
-                ? "FIRST: MAIN THREAD."
-                : "SAME WORK. DIFFERENT THREAD."}
-          </h1>
-        </div>
-
-        <span
-          className={`
-            border
-            px-2
-            py-1
-            font-mono
-            text-[9px]
-            ${
-              mode ===
-              "main"
-                ? "border-amber/50 text-amber"
-                : "border-cyan/50 text-cyan"
-            }
-          `}
-        >
-          {mode ===
-          "main"
-            ? "MAIN_THREAD"
-            : "OFF_THREAD_WORKER"}
-        </span>
-      </div>
+      <p
+        className="
+          mt-3
+          max-w-2xl
+          text-sm
+          leading-6
+          text-muted
+        "
+      >
+        Completion time and interface responsiveness are separate measurements. Workers are not guaranteed to finish sooner.
+      </p>
 
       <div
         className="
+          mt-7
+        "
+      >
+        <ThreadComparison
+          comparison={
+            comparison
+          }
+        />
+      </div>
+
+      {comparison.task !==
+        "primes" && (
+        <div
+          className="
+            mt-4
+            grid
+            gap-4
+            md:grid-cols-2
+          "
+        >
+          <div>
+            <div
+              className="
+                mb-2
+                font-mono
+                text-[9px]
+                text-amber
+              "
+            >
+              MAIN OUTPUT
+            </div>
+
+            <WorkloadCanvas
+              compact
+              output={
+                comparison
+                  .main
+                  .output
+              }
+            />
+          </div>
+
+          <div>
+            <div
+              className="
+                mb-2
+                font-mono
+                text-[9px]
+                text-cyan
+              "
+            >
+              WORKER OUTPUT
+            </div>
+
+            <WorkloadCanvas
+              compact
+              output={
+                comparison
+                  .worker
+                  .output
+              }
+            />
+          </div>
+        </div>
+      )}
+
+      <div
+        className="
+          mt-4
           grid
           gap-4
-          lg:grid-cols-[1.25fr_.75fr]
+          md:grid-cols-2
         "
       >
-        <PulseProbe
-          active={
-            running
+        <FrameStrip
+          samples={
+            main.frameSamples
           }
-          taps={
-            taps
+          targetFrameMs={
+            profile.frameIntervalMs
           }
-          onTap={
-            registerTap
-          }
+          mode="main"
         />
 
-        <WorkloadCanvas
-          output={
-            result?.output
+        <FrameStrip
+          samples={
+            worker.frameSamples
           }
+          targetFrameMs={
+            profile.frameIntervalMs
+          }
+          mode="worker"
         />
       </div>
 
-      {result && (
+      <section
+        className="
+          mt-4
+          border
+          border-line
+          bg-panel
+          p-5
+          sm:p-7
+        "
+      >
         <div
           className="
-            mt-4
-          "
-        >
-          <BenchmarkMetrics
-            measurement={
-              result.measurement
-            }
-          />
-        </div>
-      )}
-
-      {error && (
-        <div
-          className="
-            mt-4
-            border
-            border-danger/40
-            bg-danger/5
-            p-4
             font-mono
-            text-xs
-            text-danger
+            text-[9px]
+            text-muted
           "
         >
-          {error}
+          OUTPUT CHECK ·{" "}
+          {sameOutput ? (
+            <span
+              className="
+                text-lime
+              "
+            >
+              MATCHED
+            </span>
+          ) : (
+            <span
+              className="
+                text-danger
+              "
+            >
+              MISMATCH
+            </span>
+          )}
         </div>
-      )}
+
+        <h2
+          className="
+            mt-5
+            text-3xl
+            font-semibold
+            tracking-[-.04em]
+            text-muted
+            sm:text-5xl
+          "
+        >
+          {insight.line1}
+        </h2>
+
+        <h2
+          className="
+            mt-1
+            text-3xl
+            font-semibold
+            tracking-[-.04em]
+            text-lime
+            sm:text-5xl
+          "
+        >
+          {insight.line2}
+        </h2>
+
+        <p
+          className="
+            mt-5
+            max-w-3xl
+            text-sm
+            leading-6
+            text-muted
+          "
+        >
+          {insight.body}
+        </p>
+
+        {comparison.task ===
+          "mandelbrot" &&
+          sameOutput && (
+            <div
+              className="
+                mt-5
+                font-mono
+                text-[10px]
+                tracking-[.12em]
+                text-cyan
+              "
+            >
+              SAME IMAGE. SAME MATH. DIFFERENT RESPONSIVENESS.
+            </div>
+          )}
+      </section>
 
       <div
         className="
           mt-6
           flex
-          flex-wrap
-          items-center
-          justify-between
-          gap-4
+          justify-end
         "
       >
-        <span
-          className="
-            font-mono
-            text-[10px]
-            text-dim
-          "
+        <PrimaryButton
+          onClick={
+            onContinue
+          }
         >
-          {mode ===
-          "main"
-            ? "THE PAGE MAY FREEZE BRIEFLY."
-            : "KEEP TAPPING WHILE THE WORKER RUNS."}
-        </span>
-
-        {ready && (
-          <PrimaryButton
-            tone={
-              mode ===
-              "main"
-                ? "lime"
-                : "cyan"
-            }
-            disabled={
-              running
-            }
-            onClick={() =>
-              run(
-                mode,
-              )
-            }
-          >
-            {meta.action} →
-          </PrimaryButton>
-        )}
-
-        {phase ===
-          "main-result" && (
-          <PrimaryButton
-            tone="cyan"
-            onClick={() =>
-              setPhase(
-                "worker-ready",
-              )
-            }
-          >
-            NOW TRY A WORKER →
-          </PrimaryButton>
-        )}
-
-        {phase ===
-          "worker-result" &&
-          main &&
-          worker && (
-            <PrimaryButton
-              onClick={() =>
-                onComplete(
-                  {
-                    task,
-                    main,
-                    worker,
-                  },
-                )
-              }
-            >
-              COMPARE →
-            </PrimaryButton>
-          )}
+          {finalRound
+            ? "SEE FINAL RESULTS →"
+            : "NEXT ROUND →"}
+        </PrimaryButton>
       </div>
     </main>
-  );
-}
-
-function Centered({
-  children,
-}: {
-  children:
-    React.ReactNode;
-}) {
-  return (
-    <main
-      className="
-        mx-auto
-        grid
-        min-h-[calc(100vh-56px)]
-        max-w-5xl
-        place-items-center
-        px-4
-        py-12
-        md:px-6
-      "
-    >
-      <section
-        className="
-          w-full
-          border
-          border-line
-          bg-panel
-          p-6
-          sm:p-10
-        "
-      >
-        {children}
-      </section>
-    </main>
-  );
-}
-
-function SpecReadout({
-  spec,
-}: {
-  spec:
-    ReturnType<
-      typeof buildTaskSpec
-    >;
-}) {
-  const text =
-    spec.task ===
-    "primes"
-      ? `${spec.limit.toLocaleString()} CANDIDATES`
-      : spec.task ===
-          "pixels"
-        ? `${spec.width} × ${spec.height} · ${spec.passes} PASSES`
-        : `${spec.width} × ${spec.height} · ${spec.maxIterations} ITER · ${spec.samples}× SAMPLES`;
-
-  return (
-    <div
-      className="
-        mt-7
-        border
-        border-line
-        bg-canvas
-        p-4
-        font-mono
-        text-sm
-        text-lime
-      "
-    >
-      {text}
-    </div>
   );
 }
