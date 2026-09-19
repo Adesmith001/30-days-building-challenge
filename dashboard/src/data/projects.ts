@@ -828,4 +828,37 @@ export const projects: Project[] = [
     learned:
       "I learned how to turn factual ordering puzzles into a reusable game loop, build multiple sorting modes, seed daily runs, persist local history, and generate shareable result cards in the browser.",
   },
+  {
+    day: 19,
+    title: "Beat Your Browser",
+    tagline:
+      "A browser performance lab that shows what your device can do under real interactive workloads.",
+    description:
+      "Beat Your Browser runs calibrated benchmark workloads in the main thread and a Web Worker, then compares the results across guided experiments and an open lab. Explore rendering, computation, and responsiveness without treating the results as a universal device ranking.",
+    date: "2026-09-19",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Motion",
+      "Web Workers",
+      "Canvas",
+      "LocalStorage",
+    ],
+    images: [
+      { src: "/projects/day-19/1.png", alt: "Beat Your Browser project preview" },
+      { src: "/projects/day-19/2.png", alt: "Beat Your Browser project preview" },
+      { src: "/projects/day-19/3.png", alt: "Beat Your Browser project preview" },
+      { src: "/projects/day-19/4.png", alt: "Beat Your Browser project preview" },
+      { src: "/projects/day-19/5.png", alt: "Beat Your Browser project preview" },
+      { src: "/projects/day-19/6.png", alt: "Beat Your Browser project preview" },
+      { src: "/projects/day-19/7.png", alt: "Beat Your Browser project preview" },
+    ],
+    liveUrl: "https://day-19-beat-your-browser.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    learned:
+      "I learned how to build a calibrated browser benchmark with deterministic workloads, compare main-thread and worker execution, keep high-frequency measurements out of React state, and present performance results with the right caveats.",
+  },
 ];
