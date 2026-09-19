@@ -1,0 +1,1249 @@
+[
+  {
+    "key": "tech-social-launch/whatsapp",
+    "file": "tech-social-launch-whatsapp.jpg",
+    "source": "https://unsplash.com/photos/yQTmiYLYkNs",
+    "photographer": "Eyestetix Studio",
+    "provider": "Unsplash"
+  },
+  {
+    "key": "tech-social-launch/instagram",
+    "file": "tech-social-launch-instagram.jpg",
+    "source": "https://unsplash.com/photos/_tF3vug2FhQ",
+    "photographer": "Alexander Shatov",
+    "provider": "Unsplash"
+  },
+  {
+    "key": "tech-social-launch/tiktok",
+    "file": "tech-social-launch-tiktok.jpg",
+    "source": "https://unsplash.com/photos/gVQLAbGVB6Q",
+    "photographer": "Igor Omilaev",
+    "provider": "Unsplash"
+  },
+  {
+    "key": "science-body-size/moon",
+    "file": "science-body-size-moon.png",
+    "source": "Generated for this project with OpenAI ImageGen",
+    "provider": "OpenAI ImageGen"
+  },
+  {
+    "key": "science-body-size/mercury",
+    "file": "science-body-size-mercury.png",
+    "source": "Generated for this project with OpenAI ImageGen",
+    "provider": "OpenAI ImageGen"
+  },
+  {
+    "key": "science-body-size/mars",
+    "file": "science-body-size-mars.png",
+    "source": "Generated for this project with OpenAI ImageGen",
+    "provider": "OpenAI ImageGen"
+  },
+  {
+    "key": "science-body-size/earth",
+    "file": "science-body-size-earth.png",
+    "source": "Generated for this project with OpenAI ImageGen",
+    "provider": "OpenAI ImageGen"
+  },
+  {
+    "key": "tech-social-launch/chatgpt",
+    "file": "tech-social-launch-chatgpt.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:ChatGPT_circuit_board_(52917380933).jpg",
+    "photographer": "Jernej Furman from Slovenia",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "ChatGPT photo",
+    "title": "File:ChatGPT circuit board (52917380933).jpg"
+  },
+  {
+    "key": "tech-apple-devices/ipod",
+    "file": "tech-apple-devices-ipod.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IPod_classic_in_dock.jpg",
+    "photographer": "Andrew from New York, USA",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "iPod photo",
+    "title": "File:IPod classic in dock.jpg"
+  },
+  {
+    "key": "tech-apple-devices/iphone",
+    "file": "tech-apple-devices-iphone.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Original_iPhone_-_iPhone_3G_-_iPhone_4_-_Flickr_-_Yutaka_Tsutano.jpg",
+    "photographer": "Yutaka Tsutano from Lincoln, United States",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "iPhone photo",
+    "title": "File:Original iPhone - iPhone 3G - iPhone 4 - Flickr - Yutaka Tsutano.jpg"
+  },
+  {
+    "key": "tech-apple-devices/ipad",
+    "file": "tech-apple-devices-ipad.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Always_someone_taking_a_photo_with_an_iPad!_(7527907176).jpg",
+    "photographer": "Simon Q from United Kingdom",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "iPad photo",
+    "title": "File:Always someone taking a photo with an iPad! (7527907176).jpg"
+  },
+  {
+    "key": "tech-apple-devices/watch",
+    "file": "tech-apple-devices-watch.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Apple_Watch_Pride_56192_(17919636384).jpg",
+    "photographer": "Ted Eytan",
+    "license": "CC BY-SA 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Apple Watch photo",
+    "title": "File:Apple Watch Pride 56192 (17919636384).jpg"
+  },
+  {
+    "key": "tech-playstation/ps1",
+    "file": "tech-playstation-ps1.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:PlayStation_SCPH-1000_and_PlayStation_Controller_20070713.jpg",
+    "photographer": "Nicholas Wang from Tokyo, Japan",
+    "license": "CC BY-SA 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "PlayStation photo",
+    "title": "File:PlayStation SCPH-1000 and PlayStation Controller 20070713.jpg"
+  },
+  {
+    "key": "tech-playstation/ps2",
+    "file": "tech-playstation-ps2.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:PlayStation_Comparaci%C3%B3n.jpg",
+    "photographer": "Michel Ngilen from Des Moines, United States",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "PlayStation 2 photo",
+    "title": "File:PlayStation Comparación.jpg"
+  },
+  {
+    "key": "tech-playstation/ps4",
+    "file": "tech-playstation-ps4.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Sony-PlayStation-Move-Navigator.jpg",
+    "photographer": "Evan-Amos",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "PlayStation 4 photo",
+    "title": "File:Sony-PlayStation-Move-Navigator.jpg"
+  },
+  {
+    "key": "tech-playstation/ps5",
+    "file": "tech-playstation-ps5.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:PlayStation_and_SCE_logos_on_PlayStation_Incubation_Center_Taiwan_20101031.jpg",
+    "photographer": "othree",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "PlayStation 5 photo",
+    "title": "File:PlayStation and SCE logos on PlayStation Incubation Center Taiwan 20101031.jpg"
+  },
+  {
+    "key": "tech-web-services/google",
+    "file": "tech-web-services-google.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Joseph_Mallord_William_Turner_-_The_Sun_of_Venice_Going_to_Sea_-_Google_Art_Project.jpg",
+    "photographer": "J. M. W. Turner",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Google photo",
+    "title": "File:Joseph Mallord William Turner - The Sun of Venice Going to Sea - Google Art Project.jpg"
+  },
+  {
+    "key": "tech-web-services/wikipedia",
+    "file": "tech-web-services-wikipedia.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Wikipedia_for_Peace_2017_Photo_Tour,_Berlin_(DSC06458).jpg",
+    "photographer": "Matti Blume",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Wikipedia photo",
+    "title": "File:Wikipedia for Peace 2017 Photo Tour, Berlin (DSC06458).jpg"
+  },
+  {
+    "key": "tech-web-services/youtube",
+    "file": "tech-web-services-youtube.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Vanspati_Vigyan_YouTube_channel_YouTube_home_page_photo.jpg",
+    "photographer": "Indianhitesh1",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "YouTube photo",
+    "title": "File:Vanspati Vigyan YouTube channel YouTube home page photo.jpg"
+  },
+  {
+    "key": "tech-web-services/spotify",
+    "file": "tech-web-services-spotify.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Spotify_Photo.jpg",
+    "photographer": "Kozy34",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Spotify photo",
+    "title": "File:Spotify Photo.jpg"
+  },
+  {
+    "key": "tech-storage/floppy",
+    "file": "tech-storage-floppy.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Floppy_disk_5.25_inch.JPG",
+    "photographer": "Unknown",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Floppy Disk photo",
+    "title": "File:Floppy disk 5.25 inch.JPG"
+  },
+  {
+    "key": "tech-storage/cd",
+    "file": "tech-storage-cd.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Kodak_photo_cd_package.jpg",
+    "photographer": "Wikiwikiyarou",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "CD photo",
+    "title": "File:Kodak photo cd package.jpg"
+  },
+  {
+    "key": "tech-storage/dvd",
+    "file": "tech-storage-dvd.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Panasonic_DVD_player_DVD-S29_20091018.jpg",
+    "photographer": "MaryMozqueda / Mary Mozqueda",
+    "license": "CC BY 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "DVD photo",
+    "title": "File:Panasonic DVD player DVD-S29 20091018.jpg"
+  },
+  {
+    "key": "tech-storage/bluray",
+    "file": "tech-storage-bluray.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IFA_2005_Panasonic_BDP_100_Blu-ray_Disc_Player_(by_HDTVTotalDOTcom).jpg",
+    "photographer": "Andreas -horn- Hornig",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Blu-ray photo",
+    "title": "File:IFA 2005 Panasonic BDP 100 Blu-ray Disc Player (by HDTVTotalDOTcom).jpg"
+  },
+  {
+    "key": "science-sun-distance/mercury",
+    "file": "science-sun-distance-mercury.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Planet_Mercury_-_GPN-2000-000465.jpg",
+    "photographer": "NASA/JPL/USGS",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "planet Mercury NASA",
+    "title": "File:Planet Mercury - GPN-2000-000465.jpg"
+  },
+  {
+    "key": "science-sun-distance/venus",
+    "file": "science-sun-distance-venus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Venus_globe.jpg",
+    "photographer": "NASA/JPL",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "planet Venus NASA",
+    "title": "File:Venus globe.jpg"
+  },
+  {
+    "key": "science-sun-distance/earth",
+    "file": "science-sun-distance-earth.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:NASA_Earth_America_2002.jpg",
+    "photographer": "NASA Goddard Space Flight Center Image by Reto Stöckl",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "planet Earth NASA",
+    "title": "File:NASA Earth America 2002.jpg"
+  },
+  {
+    "key": "science-sun-distance/mars",
+    "file": "science-sun-distance-mars.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:NASA_Mars_Rover.jpg",
+    "photographer": "NASA/JPL/Cornell University, Maas Digital LLC",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "planet Mars NASA",
+    "title": "File:NASA Mars Rover.jpg"
+  },
+  {
+    "key": "science-day-length/jupiter",
+    "file": "science-day-length-jupiter.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Jupiter_and_its_four_planet-size_moons.jpg",
+    "photographer": "NASA",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "planet Jupiter NASA",
+    "title": "File:Jupiter and its four planet-size moons.jpg"
+  },
+  {
+    "key": "science-day-length/saturn",
+    "file": "science-day-length-saturn.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Saturn_(planet)_large.jpg",
+    "photographer": "Voyager 2",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "planet Saturn NASA",
+    "title": "File:Saturn (planet) large.jpg"
+  },
+  {
+    "key": "science-day-length/earth",
+    "file": "science-day-length-earth.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Etna_eruption_seen_from_the_International_Space_Station.jpg",
+    "photographer": "NASA",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Earth from space NASA",
+    "title": "File:Etna eruption seen from the International Space Station.jpg"
+  },
+  {
+    "key": "science-day-length/mars",
+    "file": "science-day-length-mars.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:NASA_Mars_Rover_kakamigahara.jpg",
+    "photographer": "雪融",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "planet Mars NASA",
+    "title": "File:NASA Mars Rover kakamigahara.jpg"
+  },
+  {
+    "key": "science-orbit/mercury",
+    "file": "science-orbit-mercury.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:First_ever_photograph_from_Mercury_orbit_(annotated).jpg",
+    "photographer": "NASA/Johns Hopkins University Applied Physics Laboratory/Carnegie Institution of Washington",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Mercury planet orbit NASA",
+    "title": "File:First ever photograph from Mercury orbit (annotated).jpg"
+  },
+  {
+    "key": "science-orbit/venus",
+    "file": "science-orbit-venus.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Magellan_orbit.jpg",
+    "photographer": "NASA/JPL",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Venus planet orbit NASA",
+    "title": "File:Magellan orbit.jpg"
+  },
+  {
+    "key": "science-orbit/earth",
+    "file": "science-orbit-earth.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Spider_in_Earth_Orbit_-_GPN-2000-001106.jpg",
+    "photographer": "NASA David Scott",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Earth orbit NASA",
+    "title": "File:Spider in Earth Orbit - GPN-2000-001106.jpg"
+  },
+  {
+    "key": "science-orbit/mars",
+    "file": "science-orbit-mars.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:This_illustration_shows_NASA%27s_Mars_Ascent_Vehicle_(MAV)_in_coast_phase_in_Low_Mars_orbit_after_Main_engine_cutoff_awaiting_stage_separation_and_second_engine_startup.jpg",
+    "photographer": "NASA",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Mars orbit NASA",
+    "title": "File:This illustration shows NASA's Mars Ascent Vehicle (MAV) in coast phase in Low Mars orbit after Main engine cutoff awaiting stage separation and second engine startup.jpg"
+  },
+  {
+    "key": "science-temperature/freezer",
+    "file": "science-temperature-freezer.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Alderfer_Home_In_Scottdale,_Pennsylvania_(6881532271).jpg",
+    "photographer": "Mennonite Church USA Archives",
+    "license": "No restrictions",
+    "provider": "Wikimedia Commons",
+    "query": "home freezer interior photo",
+    "title": "File:Alderfer Home In Scottdale, Pennsylvania (6881532271).jpg"
+  },
+  {
+    "key": "science-temperature/room",
+    "file": "science-temperature-room.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Dimago_photo_-_Living_room_interior_in_Omsk.jpg",
+    "photographer": "DimagoMolot",
+    "license": "CC BY 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "living room interior photo",
+    "title": "File:Dimago photo - Living room interior in Omsk.jpg"
+  },
+  {
+    "key": "science-temperature/body",
+    "file": "science-temperature-body.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Dr._Hood%27s_plain_talks_about_the_human_system_-_the_habits_of_men_and_women_-_the_causes_and_prevention_of_disease_-_our_sexual_relations_and_social_natures_-_embracing_common_sense_medical_adviser..._(14589660088).jpg",
+    "photographer": "Internet Archive Book Images",
+    "license": "No restrictions",
+    "provider": "Wikimedia Commons",
+    "query": "human body temperature thermometer photo",
+    "title": "File:Dr. Hood's plain talks about the human system - the habits of men and women - the causes and prevention of disease - our sexual relations and social natures - embracing common sense medical adviser... (14589660088).jpg"
+  },
+  {
+    "key": "science-temperature/boil",
+    "file": "science-temperature-boil.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:2008-07-05_Water_boiling_in_cooking_pot.jpg",
+    "photographer": "Ildar Sagdejev (Specious)",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "boiling water pot photo",
+    "title": "File:2008-07-05 Water boiling in cooking pot.jpg"
+  },
+  {
+    "key": "world-mountains/ben-nevis",
+    "file": "world-mountains-ben-nevis.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Ben_Nevis_from_the_Nevis_Forest_-_geograph.org.uk_-_2155066.jpg",
+    "photographer": "Peter S",
+    "license": "CC BY-SA 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Ben Nevis photo",
+    "title": "File:Ben Nevis from the Nevis Forest - geograph.org.uk - 2155066.jpg"
+  },
+  {
+    "key": "world-mountains/fuji",
+    "file": "world-mountains-fuji.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Fuji_Speedway_with_Mount_Fuji.jpg",
+    "photographer": "MATSUOKA Kohei",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Mount Fuji photo",
+    "title": "File:Fuji Speedway with Mount Fuji.jpg"
+  },
+  {
+    "key": "world-mountains/kilimanjaro",
+    "file": "world-mountains-kilimanjaro.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Bhawna_Dehariya_Mount_Kilimanjaro_Photo.jpg",
+    "photographer": "Mahim6785",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Kilimanjaro photo",
+    "title": "File:Bhawna Dehariya Mount Kilimanjaro Photo.jpg"
+  },
+  {
+    "key": "world-mountains/everest",
+    "file": "world-mountains-everest.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Everest_West_Ridge,_Mount_Everest,_Himalayas.jpg",
+    "photographer": "Vyacheslav Argenberg",
+    "license": "CC BY 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Everest photo",
+    "title": "File:Everest West Ridge, Mount Everest, Himalayas.jpg"
+  },
+  {
+    "key": "world-rivers/thames",
+    "file": "world-rivers-thames.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:M.V_Thomas_Doggett_Thames_River_Services_Viscount_Cruises_River_Thames_London_England_darker.jpg",
+    "photographer": "Acabashi",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "River Thames London photo",
+    "title": "File:M.V Thomas Doggett Thames River Services Viscount Cruises River Thames London England darker.jpg"
+  },
+  {
+    "key": "world-rivers/rhine",
+    "file": "world-rivers-rhine.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:June_Colors_of_Glottertal_Delta,_Grand_Panorama_The_Kaiserstuhl_and_River_Rhine_-_Master_Landscape_Rhine_Valley_Photography_2013_-_panoramio.jpg",
+    "photographer": "pictures Jettcom",
+    "license": "CC BY 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Rhine river landscape photo",
+    "title": "File:June Colors of Glottertal Delta, Grand Panorama The Kaiserstuhl and River Rhine - Master Landscape Rhine Valley Photography 2013 - panoramio.jpg"
+  },
+  {
+    "key": "world-rivers/danube",
+    "file": "world-rivers-danube.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Historical_River_Mill_At_The_Danube_River_(131474641).jpeg",
+    "photographer": "Henry Vagrant",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Danube river landscape photo",
+    "title": "File:Historical River Mill At The Danube River (131474641).jpeg"
+  },
+  {
+    "key": "world-rivers/nile",
+    "file": "world-rivers-nile.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Nile_River_mosaic_landscape,_from_House_of_the_Faun,_Pompeii_(48451596636).jpg",
+    "photographer": "Gary Todd from Xinzheng, China",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Nile river landscape photo",
+    "title": "File:Nile River mosaic landscape, from House of the Faun, Pompeii (48451596636).jpg"
+  },
+  {
+    "key": "world-towers/eiffel",
+    "file": "world-towers-eiffel.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Eiffel_Tower_(500px_photo_(38901000)).jpg",
+    "photographer": "Dorron",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Eiffel Tower photo",
+    "title": "File:Eiffel Tower (500px photo (38901000)).jpg"
+  },
+  {
+    "key": "world-towers/empire",
+    "file": "world-towers-empire.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:New_York_City_(New_York,_USA),_Empire_State_Building,_Blick_auf_Flatiron_Building_--_2012_--_6459.jpg",
+    "photographer": "Dietmar Rabich",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Empire State Building New York photo",
+    "title": "File:New York City (New York, USA), Empire State Building, Blick auf Flatiron Building -- 2012 -- 6459.jpg"
+  },
+  {
+    "key": "world-towers/cn",
+    "file": "world-towers-cn.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Toronto_-_ON_-_Schaft_des_CN_Tower.jpg",
+    "photographer": "Wladyslaw (talk)",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "CN Tower Toronto photo",
+    "title": "File:Toronto - ON - Schaft des CN Tower.jpg"
+  },
+  {
+    "key": "world-towers/burj",
+    "file": "world-towers-burj.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Burj_Khalifa_2008-12-02.jpg",
+    "photographer": "Soonadracula at en.wikipedia",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Burj Khalifa photo",
+    "title": "File:Burj Khalifa 2008-12-02.jpg"
+  },
+  {
+    "key": "world-islands/barbados",
+    "file": "world-islands-barbados.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Barbados_Advocate_newspaper_building,_(Barbados).jpg",
+    "photographer": "CaribDigita",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Barbados photo",
+    "title": "File:Barbados Advocate newspaper building, (Barbados).jpg"
+  },
+  {
+    "key": "world-islands/singapore",
+    "file": "world-islands-singapore.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Cijin_Island,_Kaohsiung_(52832080443).jpg",
+    "photographer": "Jirka Matousek from Brussels Taipei Hong Kong Singapore Prague Shenzhen",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Singapore island skyline photo",
+    "title": "File:Cijin Island, Kaohsiung (52832080443).jpg"
+  },
+  {
+    "key": "world-islands/tenerife",
+    "file": "world-islands-tenerife.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Auditorio_de_Tenerife,_Santa_Cruz_de_Tenerife,_Espa%C3%B1a,_2012-12-15,_DD_17.jpg",
+    "photographer": "Diego Delso",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Tenerife photo",
+    "title": "File:Auditorio de Tenerife, Santa Cruz de Tenerife, España, 2012-12-15, DD 17.jpg"
+  },
+  {
+    "key": "world-islands/bali",
+    "file": "world-islands-bali.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Bali,_Mount_Seraya,_Forest,_East_Bali,_Indonesia.jpg",
+    "photographer": "Vyacheslav Argenberg",
+    "license": "CC BY 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Bali photo",
+    "title": "File:Bali, Mount Seraya, Forest, East Bali, Indonesia.jpg"
+  },
+  {
+    "key": "world-oceans/arctic",
+    "file": "world-oceans-arctic.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Daily_Arctic_Sea_Ice,_By_Year_(SVS5046_-_arctic_sea_ice_w_dates_2024001_print).jpg",
+    "photographer": "NASA's Scientific Visualization Studio - USRA/Trent L. Schindler, Global Science and Technology, Inc./Cindy Starr",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Arctic Ocean ice photo",
+    "title": "File:Daily Arctic Sea Ice, By Year (SVS5046 - arctic sea ice w dates 2024001 print).jpg"
+  },
+  {
+    "key": "world-oceans/southern",
+    "file": "world-oceans-southern.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Icebergs_and_a_Giant_Petrel_in_the_Southern_Ocean_(5914290666).jpg",
+    "photographer": "Liam Quinn from Canada",
+    "license": "CC BY-SA 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Southern Ocean Antarctica photo",
+    "title": "File:Icebergs and a Giant Petrel in the Southern Ocean (5914290666).jpg"
+  },
+  {
+    "key": "world-oceans/indian",
+    "file": "world-oceans-indian.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_HMS_Jupiter_(F60)_underway_in_the_Indian_Ocean_on_26_September_1985_(6418853).jpg",
+    "photographer": "PH2 Frank Davidson, USN",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Indian Ocean aerial photo",
+    "title": "File:Aerial view of HMS Jupiter (F60) underway in the Indian Ocean on 26 September 1985 (6418853).jpg"
+  },
+  {
+    "key": "world-oceans/atlantic",
+    "file": "world-oceans-atlantic.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Atlantic_Ocean_inlet_SE_of_Bunbeg_-_geograph.org.uk_-_1159671.jpg",
+    "photographer": "Sue Mischyshyn",
+    "license": "CC BY-SA 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Atlantic Ocean aerial photo",
+    "title": "File:Aerial view of Atlantic Ocean inlet SE of Bunbeg - geograph.org.uk - 1159671.jpg"
+  },
+  {
+    "key": "ent-pixar/toy-story",
+    "file": "ent-pixar-toy-story.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Buzz_Lightyear_sculpture_of_Toy_Story_Hotel_Shanghai.jpg",
+    "photographer": "Edo-biscuit",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Toy Story characters display photo",
+    "title": "File:Buzz Lightyear sculpture of Toy Story Hotel Shanghai.jpg"
+  },
+  {
+    "key": "ent-pixar/nemo",
+    "file": "ent-pixar-nemo.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Finding_Nemo_(131801029).jpeg",
+    "photographer": "Sergio Miranda",
+    "license": "CC BY 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Finding Nemo photography",
+    "title": "File:Finding Nemo (131801029).jpeg"
+  },
+  {
+    "key": "ent-pixar/wall-e",
+    "file": "ent-pixar-wall-e.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:The_Wall_Tiergarten_Berlin_-_Germany_Photography_-_panoramio.jpg",
+    "photographer": "pictures Jettcom",
+    "license": "CC BY 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "WALL-E photography",
+    "title": "File:The Wall Tiergarten Berlin - Germany Photography - panoramio.jpg"
+  },
+  {
+    "key": "ent-pixar/inside-out",
+    "file": "ent-pixar-inside-out.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Portland_Mall_CCTV_monitor_in_shelter,_1987.jpg",
+    "photographer": "Steve Morgan",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Inside Out film characters display photo",
+    "title": "File:Portland Mall CCTV monitor in shelter, 1987.jpg"
+  },
+  {
+    "key": "ent-gta/gta3",
+    "file": "ent-gta-gta3.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Ic-photo-ATI--(X-BOX_360-GPU).jpg",
+    "photographer": "Myself User:ZyMOS",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "video game controller city",
+    "title": "File:Ic-photo-ATI--(X-BOX 360-GPU).jpg"
+  },
+  {
+    "key": "ent-gta/sa",
+    "file": "ent-gta-sa.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Sony_Playstation_2_SCPH-5001_V9_-_Bot%C3%B5es_Eject_e_Reset_Eject_and_Reset_buttons_(19290929960).jpg",
+    "photographer": "Deni Williams from São Paulo, Brasil / Brazil",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Grand Theft Auto San Andreas game display photo",
+    "title": "File:Sony Playstation 2 SCPH-5001 V9 - Botões Eject e Reset Eject and Reset buttons (19290929960).jpg"
+  },
+  {
+    "key": "ent-gta/gta4",
+    "file": "ent-gta-gta4.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Go_Play_One_2010_-_P1370936.jpg",
+    "photographer": "Esby (talk) 21:16, 12 October 2010 (UTC)",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "video game controller city",
+    "title": "File:Go Play One 2010 - P1370936.jpg"
+  },
+  {
+    "key": "ent-gta/gta5",
+    "file": "ent-gta-gta5.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Aaron_Carter_performing_in_2013.jpg",
+    "photographer": "Will Fisher",
+    "license": "CC BY-SA 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "GTA V photography",
+    "title": "File:Aaron Carter performing in 2013.jpg"
+  },
+  {
+    "key": "ent-marvel/iron-man",
+    "file": "ent-marvel-iron-man.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:IRON_MAN.JPG",
+    "photographer": "Maxpax",
+    "license": "CC BY 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Iron Man photography",
+    "title": "File:IRON MAN.JPG"
+  },
+  {
+    "key": "ent-marvel/avengers",
+    "file": "ent-marvel-avengers.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Navy_photographer_on_Iwo_Jima,_Capt._Ed._J._Steichen,_head_of_the_Navy%27s_combat_photography_and_director_of_the_Naval..._-_NARA_-_520733.jpg",
+    "photographer": "Unknown authorUnknown author or not provided",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "The Avengers photography",
+    "title": "File:Navy photographer on Iwo Jima, Capt. Ed. J. Steichen, head of the Navy's combat photography and director of the Naval... - NARA - 520733.jpg"
+  },
+  {
+    "key": "ent-marvel/panther",
+    "file": "ent-marvel-panther.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Model_Rosie_on_a_bed_-_In_Black_and_White_(14192377223).jpg",
+    "photographer": "Lies Thru a Lens ",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Black Panther photography",
+    "title": "File:Model Rosie on a bed - In Black and White (14192377223).jpg"
+  },
+  {
+    "key": "ent-marvel/endgame",
+    "file": "ent-marvel-endgame.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:The_United_States_Interdiction_Coordinator_Award_Program_(44753956365).jpg",
+    "photographer": "CBP Photography",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Endgame photography",
+    "title": "File:The United States Interdiction Coordinator Award Program (44753956365).jpg"
+  },
+  {
+    "key": "ent-harry-potter/stone",
+    "file": "ent-harry-potter-stone.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Warner_Brothers_studio_tour_(13085068534).jpg",
+    "photographer": "Alan Light",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Harry Potter Philosopher Stone display photo",
+    "title": "File:Warner Brothers studio tour (13085068534).jpg"
+  },
+  {
+    "key": "ent-harry-potter/azkaban",
+    "file": "ent-harry-potter-azkaban.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:London_Film_Museum_-_Harry_Potter_Sir_Cadogans_Armour_from_The_Prisoner_of_Azkaban_(5755425716).jpg",
+    "photographer": "cezzie901",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Harry Potter Azkaban display photo",
+    "title": "File:London Film Museum - Harry Potter Sir Cadogans Armour from The Prisoner of Azkaban (5755425716).jpg"
+  },
+  {
+    "key": "ent-harry-potter/half-blood",
+    "file": "ent-harry-potter-half-blood.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:London_Film_Museum_-_Harry_Potter_Headless_Knight_Armour_from_The_Half-Blood_Prince_(5755425294).jpg",
+    "photographer": "cezzie901",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Harry Potter Half Blood Prince display photo",
+    "title": "File:London Film Museum - Harry Potter Headless Knight Armour from The Half-Blood Prince (5755425294).jpg"
+  },
+  {
+    "key": "ent-harry-potter/hallows2",
+    "file": "ent-harry-potter-hallows2.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Dartford_buses_in_Liverpool_1.JPG",
+    "photographer": "Rept0n1x",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Harry Potter Deathly Hallows display photo",
+    "title": "File:Dartford buses in Liverpool 1.JPG"
+  },
+  {
+    "key": "ent-music-formats/vinyl",
+    "file": "ent-music-formats-vinyl.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:12in-Vinyl-LP-Record-Angle.jpg",
+    "photographer": "Evan-Amos",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "LP Record photo",
+    "title": "File:12in-Vinyl-LP-Record-Angle.jpg"
+  },
+  {
+    "key": "ent-music-formats/cassette",
+    "file": "ent-music-formats-cassette.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Compact_Cassette_IV_(14631385000).jpg",
+    "photographer": "Christian Schnettelker from Essen, Deutschland",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Compact Cassette photo",
+    "title": "File:Compact Cassette IV (14631385000).jpg"
+  },
+  {
+    "key": "ent-music-formats/cd",
+    "file": "ent-music-formats-cd.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Compact_Disc_Recordable_(3866059494).jpg",
+    "photographer": "Javier Rodríguez from Palma de Mallorca, España",
+    "license": "CC BY-SA 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Compact Disc photo",
+    "title": "File:Compact Disc Recordable (3866059494).jpg"
+  },
+  {
+    "key": "ent-music-formats/mp3",
+    "file": "ent-music-formats-mp3.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Piaggio_MP3_L_rearview.jpg",
+    "photographer": "camposancos",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "MP3 photo",
+    "title": "File:Piaggio MP3 L rearview.jpg"
+  },
+  {
+    "key": "ng-states-created/lagos",
+    "file": "ng-states-created-lagos.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:2008_Lagos_Lagos_Nigeria_2363479089.jpg",
+    "photographer": "Robert",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Lagos Nigeria city photo",
+    "title": "File:2008 Lagos Lagos Nigeria 2363479089.jpg"
+  },
+  {
+    "key": "ng-states-created/ogun",
+    "file": "ng-states-created-ogun.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Side_view_of_the_Centenary_Hall_Abeokuta_Ogun_State_Nigeria.jpg",
+    "photographer": "Smilesnmore Digital Photography",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Ogun photography",
+    "title": "File:Side view of the Centenary Hall Abeokuta Ogun State Nigeria.jpg"
+  },
+  {
+    "key": "ng-states-created/akwa-ibom",
+    "file": "ng-states-created-akwa-ibom.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:A_photo_taken_during_the_training_session_of_Preserving_Nigeria_Minority_Language_Names_on_Wikimedia_in_Uyo_Akwa_Ibom_State_Nigeria.jpg",
+    "photographer": "Phina001",
+    "license": "CC BY 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Akwa Ibom Nigeria photo",
+    "title": "File:A photo taken during the training session of Preserving Nigeria Minority Language Names on Wikimedia in Uyo Akwa Ibom State Nigeria.jpg"
+  },
+  {
+    "key": "ng-states-created/ekiti",
+    "file": "ng-states-created-ekiti.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:After_rainfall_in_Afe_babalola_university,_Ado-Ekiti,Ekiti_state_,Nigeria.jpg",
+    "photographer": "Kiyah Kiara",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Ekiti photography",
+    "title": "File:After rainfall in Afe babalola university, Ado-Ekiti,Ekiti state ,Nigeria.jpg"
+  },
+  {
+    "key": "ng-nollywood/living",
+    "file": "ng-nollywood-living.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Snapped_with_the_greatest_of_all_time_in_Nigerian_movie_industry.jpg",
+    "photographer": "Sadiq dt",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Nigerian cinema actor",
+    "title": "File:Snapped with the greatest of all time in Nigerian movie industry.jpg"
+  },
+  {
+    "key": "ng-nollywood/osuofia",
+    "file": "ng-nollywood-osuofia.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:GamelanScale.jpg",
+    "photographer": "Unknown",
+    "license": "CC BY-SA 2.5",
+    "provider": "Wikimedia Commons",
+    "query": "Nigerian cinema actor",
+    "title": "File:GamelanScale.jpg"
+  },
+  {
+    "key": "ng-nollywood/wedding",
+    "file": "ng-nollywood-wedding.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Portrait_of_a_wedding_party_on_the_steps_of_St_Marys_Cathedral,_Sydney_(7290338222).jpg",
+    "photographer": "Australian National Maritime Museum on The Commons",
+    "license": "No restrictions",
+    "provider": "Wikimedia Commons",
+    "query": "The Wedding Party photography",
+    "title": "File:Portrait of a wedding party on the steps of St Marys Cathedral, Sydney (7290338222).jpg"
+  },
+  {
+    "key": "ng-nollywood/kob",
+    "file": "ng-nollywood-kob.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:King%27s_College_Old_Boys_-_address_to_C.T._Major,_56592-a.jpg",
+    "photographer": "Henry Winkelmann",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "King of Boys photography",
+    "title": "File:King's College Old Boys - address to C.T. Major, 56592-a.jpg"
+  },
+  {
+    "key": "ng-city-air-distance/ibadan",
+    "file": "ng-city-air-distance-ibadan.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Irefin%27s_Palace,_Ibadan_City,_Nigeria.jpg",
+    "photographer": "Obiora Micheal",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Ibadan Nigeria city photo",
+    "title": "File:Irefin's Palace, Ibadan City, Nigeria.jpg"
+  },
+  {
+    "key": "ng-city-air-distance/benin",
+    "file": "ng-city-air-distance-benin.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Armlet_(Edo,_Benin_City,_Nigeria),_World_Museum_Liverpool_(2).JPG",
+    "photographer": "Rept0n1x",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Benin City Nigeria photo",
+    "title": "File:Armlet (Edo, Benin City, Nigeria), World Museum Liverpool (2).JPG"
+  },
+  {
+    "key": "ng-city-air-distance/abuja",
+    "file": "ng-city-air-distance-abuja.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Usman_Dam,_Bwari,_Abuja_scenic_view_3.jpg",
+    "photographer": "Uzoma Ozurumba",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Abuja Nigeria skyline photo",
+    "title": "File:Usman Dam, Bwari, Abuja scenic view 3.jpg"
+  },
+  {
+    "key": "ng-city-air-distance/kano",
+    "file": "ng-city-air-distance-kano.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Photo_View_of_the_city_of_Kano_in_northern_Nigeria_1960_-_Touring_Club_Italiano_BBH_151.jpg",
+    "photographer": "Unknown authorUnknown author",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Kano Nigeria city photo",
+    "title": "File:Photo View of the city of Kano in northern Nigeria 1960 - Touring Club Italiano BBH 151.jpg"
+  },
+  {
+    "key": "everyday-length/phone",
+    "file": "everyday-length-phone.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Photo_through_condensation_in_a_phone_both,_a_real_working_phone_booth_(15831083706).jpg",
+    "photographer": "cogdogblog",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Phone photo",
+    "title": "File:Photo through condensation in a phone both, a real working phone booth (15831083706).jpg"
+  },
+  {
+    "key": "everyday-length/bed",
+    "file": "everyday-length-bed.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Combination_table_and_folding_bed-_woman_in_bed_LCCN2004679513.jpg",
+    "photographer": "Miscellaneous Items in High Demand, PPOC, Library of Congress",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Bed photo",
+    "title": "File:Combination table and folding bed- woman in bed LCCN2004679513.jpg"
+  },
+  {
+    "key": "everyday-length/car",
+    "file": "everyday-length-car.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Broke,_baby_sick,_and_car_trouble!_-_Dorothea_Langes_photo_of_a_Missouri_family_of_five_in_the_vicinity_of_Tracy,_California.jpg",
+    "photographer": "Dorothea Lange / Adam Cuerden",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Car photo",
+    "title": "File:Broke, baby sick, and car trouble! - Dorothea Langes photo of a Missouri family of five in the vicinity of Tracy, California.jpg"
+  },
+  {
+    "key": "everyday-length/pitch",
+    "file": "everyday-length-pitch.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Kirkland_football_pitch_-_geograph.org.uk_-_244809.jpg",
+    "photographer": "Richard Human",
+    "license": "CC BY-SA 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Football Pitch photo",
+    "title": "File:Kirkland football pitch - geograph.org.uk - 244809.jpg"
+  },
+  {
+    "key": "history-inventions/telephone",
+    "file": "history-inventions-telephone.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Antique_German_telephone_(28401976212).jpg",
+    "photographer": "Thomas Quine",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "antique telephone photo",
+    "title": "File:Antique German telephone (28401976212).jpg"
+  },
+  {
+    "key": "history-inventions/bulb",
+    "file": "history-inventions-bulb.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Edison_light_bulb_with_plate.jpg",
+    "photographer": "Clayton H. Sharp",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "early incandescent light bulb photo",
+    "title": "File:Edison light bulb with plate.jpg"
+  },
+  {
+    "key": "history-inventions/airplane",
+    "file": "history-inventions-airplane.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Wright_and_Selfridge_in_Wright_flyer_before_flight_(MIS_63-720-5),_National_Museum_of_Health_and_Medicine_(3323202385).jpg",
+    "photographer": "National Museum of  Health and Medicine",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Wright Flyer airplane photo",
+    "title": "File:Wright and Selfridge in Wright flyer before flight (MIS 63-720-5), National Museum of Health and Medicine (3323202385).jpg"
+  },
+  {
+    "key": "history-inventions/television",
+    "file": "history-inventions-television.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Television_set_from_the_early_1950s.jpg",
+    "photographer": "John Atherton",
+    "license": "CC BY-SA 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "early television set photo",
+    "title": "File:Television set from the early 1950s.jpg"
+  },
+  {
+    "key": "history-space/sputnik",
+    "file": "history-space-sputnik.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Sputnik_Satellite_Moscow_(2985084966).jpg",
+    "photographer": "Mikel Vidal from Irún, España",
+    "license": "CC BY-SA 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Sputnik 1 satellite photo",
+    "title": "File:Sputnik Satellite Moscow (2985084966).jpg"
+  },
+  {
+    "key": "history-space/gagarin",
+    "file": "history-space-gagarin.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Gemini_4_Astronauts_Meet_Yuri_Gagarin.jpg",
+    "photographer": "NASA",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Yuri Gagarin astronaut photo",
+    "title": "File:Gemini 4 Astronauts Meet Yuri Gagarin.jpg"
+  },
+  {
+    "key": "history-space/apollo",
+    "file": "history-space-apollo.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Apollo_11_first_photo_on_Moon_after_landing_(48334532882).jpg",
+    "photographer": "Project Apollo Archive",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Apollo 11 Moon landing photo",
+    "title": "File:Apollo 11 first photo on Moon after landing (48334532882).jpg"
+  },
+  {
+    "key": "history-space/iss",
+    "file": "history-space-iss.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Fifteen_Years_Ago,_International_Space_Station_Assembly_Begins.jpg",
+    "photographer": "NASA",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "International Space Station assembly photo",
+    "title": "File:Fifteen Years Ago, International Space Station Assembly Begins.jpg"
+  },
+  {
+    "key": "sports-world-cup-first/uruguay",
+    "file": "sports-world-cup-first-uruguay.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Uruguay_national_football_team_1930.jpg",
+    "photographer": "Unknown authorUnknown author",
+    "license": "Public domain",
+    "provider": "Wikimedia Commons",
+    "query": "Uruguay football national team photo",
+    "title": "File:Uruguay national football team 1930.jpg"
+  },
+  {
+    "key": "sports-world-cup-first/italy",
+    "file": "sports-world-cup-first-italy.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Italy_national_football_team_Euro_2012_vs_England.jpg",
+    "photographer": "Илья Хохлов",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Italy football national team photo",
+    "title": "File:Italy national football team Euro 2012 vs England.jpg"
+  },
+  {
+    "key": "sports-world-cup-first/germany",
+    "file": "sports-world-cup-first-germany.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Adidas_Germany_national_football_team_away_jersey.JPG",
+    "photographer": "BrokenSphere",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Germany football national team photo",
+    "title": "File:Adidas Germany national football team away jersey.JPG"
+  },
+  {
+    "key": "sports-world-cup-first/brazil",
+    "file": "sports-world-cup-first-brazil.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Nike_Brazil_national_football_team_home_jersey.JPG",
+    "photographer": "BrokenSphere",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Brazil football national team photo",
+    "title": "File:Nike Brazil national football team home jersey.JPG"
+  },
+  {
+    "key": "random-speed/elephant",
+    "file": "random-speed-elephant.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Elephant_and_Castle_statue_at_Elephant_and_Castle_-_geograph.org.uk_-_150330.jpg",
+    "photographer": "Jim Champion",
+    "license": "CC BY-SA 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "Elephant photo",
+    "title": "File:Elephant and Castle statue at Elephant and Castle - geograph.org.uk - 150330.jpg"
+  },
+  {
+    "key": "random-speed/ostrich",
+    "file": "random-speed-ostrich.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Yellow_Ostrich_press_photo_2014.jpg",
+    "photographer": "Yellow Ostrich",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Ostrich photo",
+    "title": "File:Yellow Ostrich press photo 2014.jpg"
+  },
+  {
+    "key": "random-speed/horse",
+    "file": "random-speed-horse.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Kazakh_shepard_with_dogs_and_horse.jpg",
+    "photographer": "Airunp",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "query": "Horse photo",
+    "title": "File:Kazakh shepard with dogs and horse.jpg"
+  },
+  {
+    "key": "random-speed/cheetah",
+    "file": "random-speed-cheetah.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Namibia_Otjiwarongo_Cheetah_Conservation_Fund_Cheetah_Feeding_from_Spoon.jpg",
+    "photographer": "AlexanderKlink",
+    "license": "CC BY 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "Cheetah photo",
+    "title": "File:Namibia Otjiwarongo Cheetah Conservation Fund Cheetah Feeding from Spoon.jpg"
+  },
+  {
+    "key": "random-sound/whisper",
+    "file": "random-sound-whisper.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Whispering_Sons_Nocturnal_Culture_Night_13_2018_01.jpg",
+    "photographer": "S. Bollmann",
+    "license": "Attribution",
+    "provider": "Wikimedia Commons",
+    "query": "person whispering photo",
+    "title": "File:Whispering Sons Nocturnal Culture Night 13 2018 01.jpg"
+  },
+  {
+    "key": "random-sound/talk",
+    "file": "random-sound-talk.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Young_people_in_conversation_(Unsplash).jpg",
+    "photographer": "Alexis Brown alexisrbrown",
+    "license": "CC0",
+    "provider": "Wikimedia Commons",
+    "query": "people conversation photo",
+    "title": "File:Young people in conversation (Unsplash).jpg"
+  },
+  {
+    "key": "random-sound/vacuum",
+    "file": "random-sound-vacuum.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Vacuum_cleaner,_Mus%C3%A9e_EDF_Electropolis_photo_2.JPG",
+    "photographer": "Alf van Beem",
+    "license": "CC0",
+    "provider": "Wikimedia Commons",
+    "query": "vacuum cleaner photo",
+    "title": "File:Vacuum cleaner, Musée EDF Electropolis photo 2.JPG"
+  },
+  {
+    "key": "random-sound/concert",
+    "file": "random-sound-concert.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:DFC_3516_A_vibrant_live_concert_on_stage_with_colorful_lights_dancers_and_a_large_illuminated_sign_in_Thai_reading_%E0%B8%A3%E0%B8%81%E0%B9%80%E0%B8%9E%E0%B8%8A%E0%B8%A3_Rak_Phet_-_performers_entertain_a_cheering_crowd_in_Khon_Kaen.jpg",
+    "photographer": "PattayaPatrol",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "query": "live music concert crowd photo",
+    "title": "File:DFC 3516 A vibrant live concert on stage with colorful lights dancers and a large illuminated sign in Thai reading รกเพชร Rak Phet - performers entertain a cheering crowd in Khon Kaen.jpg"
+  },
+  {
+    "key": "random-heights/card",
+    "file": "random-heights-card.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Close-up_of_RFID_tag_and_booster_antenna_on_the_memory_card_(2246942749).jpg",
+    "photographer": "Joe Hall from Takoma Park, MD, USA",
+    "license": "CC BY 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "credit card close up photo",
+    "title": "File:Close-up of RFID tag and booster antenna on the memory card (2246942749).jpg"
+  },
+  {
+    "key": "random-heights/phone",
+    "file": "random-heights-phone.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Close_up_of_mobile_phone,_with_a_hand_showing_a_camouflage_cuff._MOD_45155935.jpg",
+    "photographer": "PO Phot Derek Wade",
+    "license": "OGL v1.0",
+    "provider": "Wikimedia Commons",
+    "query": "smartphone close up photo",
+    "title": "File:Close up of mobile phone, with a hand showing a camouflage cuff. MOD 45155935.jpg"
+  },
+  {
+    "key": "random-heights/door",
+    "file": "random-heights-door.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Pompeii;_its_history,_buildings_and_antiquities_-_an_account_of_the_destruction_of_the_city,_with_a_full_description_of_the_remains,_and_of_the_recent_excavations_and_also_an_itinerary_for_visitors_(14792889743).jpg",
+    "photographer": "Internet Archive Book Images",
+    "license": "No restrictions",
+    "provider": "Wikimedia Commons",
+    "query": "full height doorway photo",
+    "title": "File:Pompeii; its history, buildings and antiquities - an account of the destruction of the city, with a full description of the remains, and of the recent excavations and also an itinerary for visitors (14792889743).jpg"
+  },
+  {
+    "key": "random-heights/hoop",
+    "file": "random-heights-hoop.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Basketball_hoop_at_Bidbury_Mead_-_geograph.org.uk_-_726336.jpg",
+    "photographer": "Basher Eyre",
+    "license": "CC BY-SA 2.0",
+    "provider": "Wikimedia Commons",
+    "query": "basketball hoop photo",
+    "title": "File:Basketball hoop at Bidbury Mead - geograph.org.uk - 726336.jpg"
+  },
+  {
+    "key": "ng-afrobeats-albums/superstar",
+    "file": "ng-afrobeats-albums-superstar.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Wizkid_at_Iyanya%27s_album_launch_concert,_2013.jpg",
+    "photographer": "TCD PHOTOGRAPHY/The TCD Concept Ltd",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "title": "File:Wizkid at Iyanya's album launch concert, 2013.jpg"
+  },
+  {
+    "key": "ng-afrobeats-albums/african-giant",
+    "file": "ng-afrobeats-albums-african-giant.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Afrobeats_star_Burna_Boy_performing_with_at_Nativeland_Concert,_Lagos,_Nigeria_2016.jpg",
+    "photographer": "Catherine Omeresan Sutherland",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "title": "File:Afrobeats star Burna Boy performing with at Nativeland Concert, Lagos, Nigeria 2016.jpg"
+  },
+  {
+    "key": "ng-afrobeats-albums/broken-ears",
+    "file": "ng-afrobeats-albums-broken-ears.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Tems_Afro_Plus_Fest_(55514652102).jpg",
+    "photographer": "Maryland GovPics",
+    "license": "CC BY 4.0",
+    "provider": "Wikimedia Commons",
+    "title": "File:Tems Afro Plus Fest (55514652102).jpg"
+  },
+  {
+    "key": "ng-afrobeats-albums/rave",
+    "file": "ng-afrobeats-albums-rave.png",
+    "source": "https://commons.wikimedia.org/wiki/File:Rema_at_2019_LFW.png",
+    "photographer": "Thealfe Studios",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "title": "File:Rema at 2019 LFW.png"
+  },
+  {
+    "key": "ng-afrobeats-songs/fall",
+    "file": "ng-afrobeats-songs-fall.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Davido9.jpg",
+    "photographer": "Peter Verwimp",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "title": "File:Davido9.jpg"
+  },
+  {
+    "key": "ng-afrobeats-songs/ye",
+    "file": "ng-afrobeats-songs-ye.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Burna_Boy.jpg",
+    "photographer": "Ameyaw Debrah",
+    "license": "CC BY-SA 3.0",
+    "provider": "Wikimedia Commons",
+    "title": "File:Burna Boy.jpg"
+  },
+  {
+    "key": "ng-afrobeats-songs/essence",
+    "file": "ng-afrobeats-songs-essence.jpg",
+    "source": "https://commons.wikimedia.org/wiki/File:Wizkid_in_Canex_-_Algiers_2025_(cropped).jpg",
+    "photographer": "Muhammed amine benloulou",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "title": "File:Wizkid in Canex - Algiers 2025 (cropped).jpg"
+  },
+  {
+    "key": "ng-afrobeats-songs/calm",
+    "file": "ng-afrobeats-songs-calm.png",
+    "source": "https://commons.wikimedia.org/wiki/File:Rema_at_2019_LFW_(cropped)2.png",
+    "photographer": "Thealfe Studios",
+    "license": "CC BY-SA 4.0",
+    "provider": "Wikimedia Commons",
+    "title": "File:Rema at 2019 LFW (cropped)2.png"
+  }
+]
