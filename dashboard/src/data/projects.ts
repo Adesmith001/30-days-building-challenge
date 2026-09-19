@@ -825,6 +825,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-18-sorted.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2101349750096216224",
     learned:
       "I learned how to turn factual ordering puzzles into a reusable game loop, build multiple sorting modes, seed daily runs, persist local history, and generate shareable result cards in the browser.",
   },
@@ -858,6 +859,7 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://day-19-beat-your-browser.vercel.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "https://x.com/yourcoderboy18/status/2101350054988583401",
     learned:
       "I learned how to build a calibrated browser benchmark with deterministic workloads, compare main-thread and worker execution, keep high-frequency measurements out of React state, and present performance results with the right caveats.",
   },
