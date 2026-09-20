@@ -1,0 +1,39 @@
+export function AboutScreen() {
+  return (
+    <main className="about-screen page-shell">
+      <span className="eyebrow">ABOUT THIS CHECK</span>
+      <h1>
+        Useful context,
+        <br />
+        <em>without the theater.</em>
+      </h1>
+      <div className="about-grid">
+        <p>
+          Network Weather measures the connection in front of you with actual same-origin HTTP requests. Quick Scan
+          checks responsiveness and stability. Deep Scan adds an explicit download and upload transfer.
+        </p>
+        <p>
+          It does not collect your location, IP address, ISP, or account details. Results stay in local browser
+          history until you clear them.
+        </p>
+      </div>
+      <div className="method-list">
+        <div>
+          <span>01</span>
+          <strong>Latency</strong>
+          <p>How long a request takes to come back.</p>
+        </div>
+        <div>
+          <span>02</span>
+          <strong>Jitter</strong>
+          <p>How much those response times vary.</p>
+        </div>
+        <div>
+          <span>03</span>
+          <strong>Failures</strong>
+          <p>How many HTTP probes could not complete.</p>
+        </div>
+      </div>
+    </main>
+  )
+}
