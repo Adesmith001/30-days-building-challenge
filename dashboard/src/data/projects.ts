@@ -863,4 +863,34 @@ export const projects: Project[] = [
     learned:
       "I learned how to build a calibrated browser benchmark with deterministic workloads, compare main-thread and worker execution, keep high-frequency measurements out of React state, and present performance results with the right caveats.",
   },
+  {
+    day: 20,
+    title: "Network Weather",
+    tagline:
+      "A plain-language network diagnostic that turns connection quality into a weather report.",
+    description:
+      "Network Weather measures latency, jitter, failed requests, download speed, and upload speed against a remote test API. Quick checks summarize current conditions, while deep scans, live monitoring, and local history make changes easier to understand over time.",
+    date: "2026-09-20",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Vercel Functions",
+      "Network Information API",
+      "LocalStorage",
+    ],
+    images: [
+      { src: "/projects/day-20/1.png", alt: "Network weatherproject preview" },
+      { src: "/projects/day-20/2.png", alt: "Network weatherproject preview" },
+      { src: "/projects/day-20/3.png", alt: "Network weatherproject preview" },
+      { src: "/projects/day-20/4.png", alt: "Network weatherproject preview" },
+
+    ],
+    liveUrl: "https://day-20-network-weather.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to separate browser estimates from measured throughput, avoid misleading localhost speed tests, build adaptive download and upload checks against a remote endpoint, and translate latency, jitter, and failures into useful network conditions.",
+  },
 ];

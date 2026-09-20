@@ -40,6 +40,12 @@ test("dashboard registers day 16 with its project screenshots", () => {
   assert.match(source, /\/projects\/day-16\/7\.png/);
 });
 
+test("dashboard registers day 20 Network Weather", () => {
+  assert.match(source, /day:\s*20/);
+  assert.match(source, /title:\s*"Network Weather"/);
+  assert.match(source, /liveUrl:\s*"[^"]*day-20-network-weather/);
+});
+
 test("site navigation exposes home, projects, and about routes", () => {
   assert.match(appSource, /pathname/);
   assert.match(appSource, /AboutPage/);
