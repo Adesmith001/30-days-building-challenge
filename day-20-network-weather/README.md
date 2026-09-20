@@ -1,4 +1,29 @@
-# React + TypeScript + Vite
+# Network Weather
+
+Network Weather checks latency, stability, download throughput, and upload throughput against a deployed measurement API.
+
+## Accurate local development
+
+Never measure bandwidth against the local Vite server: that measures loopback performance instead of the internet connection. Deploy this project first, then copy `.env.example` to `.env.local` and set:
+
+```env
+VITE_NETWORK_TEST_API_BASE_URL=https://your-deployed-network-weather.example
+```
+
+Production uses its own origin automatically. Local scans stop with a setup message when no remote API is configured.
+
+Throughput checks adapt transfer sizes and aggregate several requests for up to four seconds. Results can differ from other speed-test providers because test-server location, routing, parallelism, and test duration differ.
+
+## Development
+
+```bash
+pnpm install
+pnpm dev
+pnpm test
+pnpm build
+```
+
+## Vite template notes
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

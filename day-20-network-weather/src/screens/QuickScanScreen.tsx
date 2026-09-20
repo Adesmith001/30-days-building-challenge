@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { QUICK_SCAN_PROBES } from '../config/thresholds'
 import { runLatencyScan } from '../lib/latency'
+import { networkTestErrorMessage } from '../lib/networkApi'
 import type { ProbeSample, QuickScanResult } from '../types/network'
 import { ScanStage } from '../components/ScanStage'
 
@@ -11,15 +12,18 @@ interface QuickScanScreenProps {
 
 export function QuickScanScreen({ onComplete, onCancel }: QuickScanScreenProps) {
   const [samples, setSamples] = useState<ProbeSample[]>([])
+  const [error, setError] = useState('')
 
   useEffect(() => {
-    void runLatencyScan(QUICK_SCAN_PROBES, (sample) => setSamples((current) => [...current, sample])).then(onComplete)
+    void runLatencyScan(QUICK_SCAN_PROBES, (sample) => setSamples((current) => [...current, sample]))
+      .then(onComplete)
+      .catch((reason: unknown) => setError(networkTestErrorMessage(reason)))
   }, [onComplete])
 
   return (
     <main className="scan-screen page-shell">
       <div className="scan-intro">
-        <span className="eyebrow">QUICK SCAN / IN PROGRESS</span>
+        <span className="eyebrow">QUICK SCAN / {error ? 'SETUP NEEDED' : 'IN PROGRESS'}</span>
         <h1>
           Reading the
           <br />
@@ -27,7 +31,8 @@ export function QuickScanScreen({ onComplete, onCancel }: QuickScanScreenProps) 
         </h1>
         <p>We're making {QUICK_SCAN_PROBES} small requests to measure responsiveness and stability.</p>
       </div>
-      <div className="scan-list">
+      {error && <p className="error-copy">{error}</p>}
+      {!error && <div className="scan-list">
         <ScanStage
           label="Reachability"
           detail={
@@ -49,12 +54,12 @@ export function QuickScanScreen({ onComplete, onCancel }: QuickScanScreenProps) 
           detail="Classifying your conditions"
           active={samples.length === QUICK_SCAN_PROBES}
         />
-      </div>
-      <div className="progress-line">
+      </div>}
+      {!error && <div className="progress-line">
         <i style={{ width: `${(samples.length / QUICK_SCAN_PROBES) * 100}%` }} />
-      </div>
+      </div>}
       <button className="text-cta" onClick={onCancel}>
-        Cancel scan
+        {error ? 'Back home' : 'Cancel scan'}
       </button>
     </main>
   )

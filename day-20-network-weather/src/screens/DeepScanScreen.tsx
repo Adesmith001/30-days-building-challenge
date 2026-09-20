@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { runLatencyScan } from '../lib/latency'
+import { networkTestErrorMessage } from '../lib/networkApi'
 import { measureDownload, measureUpload } from '../lib/throughput'
 import type { DeepScanResult, ProbeSample } from '../types/network'
 import { ScanStage } from '../components/ScanStage'
@@ -34,8 +35,8 @@ export function DeepScanScreen({ onComplete, onCancel }: DeepScanScreenProps) {
           bytesDownloaded: download.bytes,
           bytesUploaded: upload.bytes,
         })
-      } catch {
-        setError('The deep scan could not complete. You can still use your quick scan result.')
+      } catch (reason) {
+        setError(networkTestErrorMessage(reason))
       }
     })()
 

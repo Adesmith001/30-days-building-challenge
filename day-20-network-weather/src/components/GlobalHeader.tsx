@@ -20,8 +20,8 @@ export function GlobalHeader({ screen, onNavigate }: GlobalHeaderProps) {
         NETWORK WEATHER
       </button>
       <div className="header-tools">
-        <div className="network-speed" aria-label={`Estimated network speed: ${formatNetworkSpeed(downlink)}`}>
-          <span>Speed</span>
+        <div className="network-speed" aria-label={`Browser speed estimate: ${formatNetworkSpeed(downlink)}`}>
+          <span>Browser estimate</span>
           <strong>{formatNetworkSpeed(downlink)}</strong>
         </div>
         <nav aria-label="Primary navigation">

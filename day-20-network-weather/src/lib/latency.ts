@@ -5,6 +5,7 @@ import type {
   QuickScanResult,
 } from "../types/network";
 import { calculateJitter } from "./jitter";
+import { networkApiUrl } from "./networkApi";
 import { median, roundMetric } from "./statistics";
 import { classifyNetworkWeather } from "./weather";
 
@@ -15,13 +16,14 @@ export async function probeLatency(
   id: number,
   timeoutMs = PROBE_TIMEOUT_MS,
 ): Promise<ProbeSample> {
+  const token = crypto.randomUUID?.() ?? `${Date.now()}-${id}`;
+  const url = networkApiUrl(`/api/ping?t=${encodeURIComponent(token)}`);
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
   const startedAt = performance.now();
 
   try {
-    const token = crypto.randomUUID?.() ?? `${Date.now()}-${id}`;
-    const response = await fetch(`/api/ping?t=${encodeURIComponent(token)}`, {
+    const response = await fetch(url, {
       cache: "no-store",
       signal: controller.signal,
     });

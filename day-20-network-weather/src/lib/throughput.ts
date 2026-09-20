@@ -1,9 +1,16 @@
+import { networkApiUrl } from "./networkApi";
 import { roundMetric } from "./statistics";
 
 interface TransferResult {
-  mbps: number;
   bytes: number;
   durationMs: number;
+}
+
+interface AdaptiveTransferOptions {
+  initialBytes: number;
+  maxChunkBytes: number;
+  targetDurationMs: number;
+  maxBytes: number;
 }
 
 function calculateMbps(bytes: number, durationMs: number) {
@@ -12,25 +19,50 @@ function calculateMbps(bytes: number, durationMs: number) {
 
 async function requestDownload(size: number): Promise<TransferResult> {
   const startedAt = performance.now();
-  const response = await fetch(`/api/download?bytes=${size}&t=${Date.now()}`, {
-    cache: "no-store",
-  });
+  const url = networkApiUrl(
+    `/api/download?bytes=${size}&t=${Date.now()}`,
+  );
+  const response = await fetch(url, { cache: "no-store" });
   if (!response.ok) throw new Error("Download test failed");
-  const bytes = (await response.arrayBuffer()).byteLength;
-  const durationMs = performance.now() - startedAt;
-  return { bytes, durationMs, mbps: calculateMbps(bytes, durationMs) };
+
+  return {
+    bytes: (await response.arrayBuffer()).byteLength,
+    durationMs: performance.now() - startedAt,
+  };
 }
 
-export async function measureDownload() {
-  const tests = [await requestDownload(256 * 1024)];
-  if (tests[0].durationMs < 800) tests.push(await requestDownload(1024 * 1024));
-  if (tests.at(-1)!.durationMs < 900)
-    tests.push(await requestDownload(2 * 1024 * 1024));
-  const finalTest = tests.at(-1)!;
-  return {
-    mbps: finalTest.mbps,
-    bytes: tests.reduce((total, test) => total + test.bytes, 0),
-  };
+export async function measureAdaptiveTransfer(
+  request: (size: number) => Promise<TransferResult>,
+  options: AdaptiveTransferOptions,
+) {
+  let nextSize = options.initialBytes;
+  let bytes = 0;
+  let durationMs = 0;
+
+  while (durationMs < options.targetDurationMs && bytes < options.maxBytes) {
+    const size = Math.min(
+      nextSize,
+      options.maxChunkBytes,
+      options.maxBytes - bytes,
+    );
+    const transfer = await request(size);
+    bytes += transfer.bytes;
+    durationMs += transfer.durationMs;
+
+    if (transfer.durationMs < 250) nextSize *= 4;
+    else if (transfer.durationMs <= 1_000) nextSize *= 2;
+  }
+
+  return { mbps: calculateMbps(bytes, durationMs), bytes };
+}
+
+export function measureDownload() {
+  return measureAdaptiveTransfer(requestDownload, {
+    initialBytes: 64 * 1024,
+    maxChunkBytes: 2 * 1024 * 1024,
+    targetDurationMs: 4_000,
+    maxBytes: 32 * 1024 * 1024,
+  });
 }
 
 function randomBuffer(size: number) {
@@ -43,17 +75,30 @@ function randomBuffer(size: number) {
   return bytes.buffer;
 }
 
-export async function measureUpload() {
-  const payload = randomBuffer(768 * 1024);
+async function requestUpload(size: number): Promise<TransferResult> {
+  const payload = randomBuffer(size);
   const startedAt = performance.now();
-  const response = await fetch(`/api/upload?t=${Date.now()}`, {
+  const url = networkApiUrl(`/api/upload?t=${Date.now()}`);
+  const response = await fetch(url, {
     method: "POST",
     cache: "no-store",
     headers: { "Content-Type": "application/octet-stream" },
     body: payload,
   });
   if (!response.ok) throw new Error("Upload test failed");
+
   const result = (await response.json()) as { receivedBytes: number };
-  const bytes = result.receivedBytes;
-  return { mbps: calculateMbps(bytes, performance.now() - startedAt), bytes };
+  return {
+    bytes: result.receivedBytes,
+    durationMs: performance.now() - startedAt,
+  };
+}
+
+export function measureUpload() {
+  return measureAdaptiveTransfer(requestUpload, {
+    initialBytes: 64 * 1024,
+    maxChunkBytes: 2 * 1024 * 1024,
+    targetDurationMs: 4_000,
+    maxBytes: 8 * 1024 * 1024,
+  });
 }

@@ -1,5 +1,8 @@
+import { corsHeaders } from "./_cors";
+
 const MIN_BYTES = 64 * 1024;
 const MAX_BYTES = 2 * 1024 * 1024;
+
 export async function GET(request: Request) {
   const requested = Number(
     new URL(request.url).searchParams.get("bytes") ?? 256 * 1024,
@@ -17,6 +20,7 @@ export async function GET(request: Request) {
 
   return new Response(bytes, {
     headers: {
+      ...corsHeaders,
       "Content-Type": "application/octet-stream",
       "Content-Length": String(size),
       "Cache-Control": "no-store, no-cache, must-revalidate",
