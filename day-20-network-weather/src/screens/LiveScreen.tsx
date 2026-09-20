@@ -3,7 +3,7 @@ import { LIVE_DURATION_MS, LIVE_INTERVAL_MS, LIVE_MAX_PROBES } from '../config/t
 import { metricsFromSamples, probeLatency } from '../lib/latency'
 import { calculateTrend, detectSpike } from '../lib/trend'
 import { classifyNetworkWeather, weatherCopy } from '../lib/weather'
-import type { NetworkSnapshot, ProbeSample, QuickScanResult } from '../types/network'
+import type { NetworkSnapshot, QuickScanResult } from '../types/network'
 import { MetricValue } from '../components/MetricValue'
 import { WeatherScene } from '../components/WeatherScene'
 

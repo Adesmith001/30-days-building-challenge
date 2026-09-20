@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { runLatencyScan } from '../lib/latency'
 import { measureDownload, measureUpload } from '../lib/throughput'
-import type { DeepScanResult, ProbeSample, QuickScanResult } from '../types/network'
+import type { DeepScanResult, ProbeSample } from '../types/network'
 import { ScanStage } from '../components/ScanStage'
 
 export function DeepScanScreen({ onComplete, onCancel }: { onComplete: (result: DeepScanResult) => void; onCancel: () => void }) {
