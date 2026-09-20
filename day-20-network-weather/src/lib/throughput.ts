@@ -1,9 +1,13 @@
 import { roundMetric } from './statistics'
 
-interface TransferResult { mbps: number; bytes: number; durationMs: number }
+interface TransferResult {
+  mbps: number
+  bytes: number
+  durationMs: number
+}
 
 function calculateMbps(bytes: number, durationMs: number) {
-  return roundMetric(bytes * 8 / (durationMs / 1000) / 1_000_000, 1)
+  return roundMetric((bytes * 8) / (durationMs / 1000) / 1_000_000, 1)
 }
 
 async function requestDownload(size: number): Promise<TransferResult> {
@@ -34,9 +38,14 @@ function randomBuffer(size: number) {
 export async function measureUpload() {
   const payload = randomBuffer(768 * 1024)
   const startedAt = performance.now()
-  const response = await fetch(`/api/upload?t=${Date.now()}`, { method: 'POST', cache: 'no-store', headers: { 'Content-Type': 'application/octet-stream' }, body: payload })
+  const response = await fetch(`/api/upload?t=${Date.now()}`, {
+    method: 'POST',
+    cache: 'no-store',
+    headers: { 'Content-Type': 'application/octet-stream' },
+    body: payload,
+  })
   if (!response.ok) throw new Error('Upload test failed')
-  const result = await response.json() as { receivedBytes: number }
+  const result = (await response.json()) as { receivedBytes: number }
   const bytes = result.receivedBytes
   return { mbps: calculateMbps(bytes, performance.now() - startedAt), bytes }
 }

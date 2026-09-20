@@ -13,7 +13,10 @@ export async function probeLatency(id: number, timeoutMs = PROBE_TIMEOUT_MS): Pr
 
   try {
     const token = crypto.randomUUID?.() ?? `${Date.now()}-${id}`
-    const response = await fetch(`/api/ping?t=${encodeURIComponent(token)}`, { cache: 'no-store', signal: controller.signal })
+    const response = await fetch(`/api/ping?t=${encodeURIComponent(token)}`, {
+      cache: 'no-store',
+      signal: controller.signal,
+    })
     if (!response.ok) throw new Error('Probe request failed')
     return { id, timestamp: Date.now(), latencyMs: performance.now() - startedAt, failed: false }
   } catch {
@@ -24,7 +27,9 @@ export async function probeLatency(id: number, timeoutMs = PROBE_TIMEOUT_MS): Pr
 }
 
 export function metricsFromSamples(samples: ProbeSample[]): NetworkMetrics {
-  const successful = samples.filter((sample) => !sample.failed && sample.latencyMs !== undefined).map((sample) => sample.latencyMs as number)
+  const successful = samples
+    .filter((sample) => !sample.failed && sample.latencyMs !== undefined)
+    .map((sample) => sample.latencyMs as number)
   return {
     medianLatencyMs: roundMetric(median(successful)),
     jitterMs: roundMetric(calculateJitter(successful)),
