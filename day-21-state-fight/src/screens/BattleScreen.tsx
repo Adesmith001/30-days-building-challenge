@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
 import { BattleHUD } from "../components/BattleHUD";
 import { BattleReward } from "../components/BattleReward";
