@@ -893,4 +893,36 @@ export const projects: Project[] = [
     learned:
       "I learned how to separate browser estimates from measured throughput, avoid misleading localhost speed tests, build adaptive download and upload checks against a remote endpoint, and translate latency, jitter, and failures into useful network conditions.",
   },
+  {
+    day: 21,
+    title: "State Fight",
+    tagline:
+      "A Nigerian state battle game where real data decides which stronghold wins.",
+    description:
+      "State Fight turns facts about Nigeria's states into head-to-head battles. Compare population, land area, density, local governments, and history across campaign, daily, and sudden-death modes while unlocking every state in the atlas.",
+    date: "2026-09-21",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Motion",
+      "LocalStorage",
+      "html-to-image",
+    ],
+    images: [
+      { src: "/projects/day-21/1.png", alt: "State Fight project preview" },
+      { src: "/projects/day-21/2.png", alt: "State Fight project preview" },
+      { src: "/projects/day-21/3.png", alt: "State Fight project preview" },
+      { src: "/projects/day-21/4.png", alt: "State Fight project preview" },
+      { src: "/projects/day-21/5.png", alt: "State Fight project preview" },
+      { src: "/projects/day-21/6.png", alt: "State Fight project preview" },
+    ],
+    liveUrl: "https://day-21-state-fight.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to turn real Nigerian state data into a replayable comparison game, generate deterministic battle decks, model campaign and sudden-death modes, persist player progress locally, and reveal facts through an unlockable state atlas.",
+  },
 ];
