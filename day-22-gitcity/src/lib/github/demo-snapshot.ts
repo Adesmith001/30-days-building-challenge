@@ -8,7 +8,8 @@ function dateForDay(year: number, index: number) {
 }
 
 function demoDays(year: number): ContributionDay[] {
-  const totalDays = new Date(Date.UTC(year + 1, 0, 0)).getUTCDate() === 29 ? 366 : 365;
+  const isLeapYear = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+  const totalDays = isLeapYear ? 366 : 365;
   const days: ContributionDay[] = [];
 
   for (let index = 0; index < totalDays; index += 1) {

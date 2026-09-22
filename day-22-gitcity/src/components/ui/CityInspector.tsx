@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import type { GitHubYearSnapshot } from "@/types/github";
 
 export function CityInspector({ snapshot }: { snapshot: GitHubYearSnapshot }) {
