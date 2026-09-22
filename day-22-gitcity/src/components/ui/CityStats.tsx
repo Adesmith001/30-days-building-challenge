@@ -6,10 +6,11 @@ export function CityStats({ snapshot }: { snapshot: GitHubYearSnapshot }) {
     ["ACTIVE DAYS", snapshot.stats.activeDays.toLocaleString()],
     ["LONGEST STREAK", `${snapshot.stats.longestStreak} DAYS`],
     ["REPOSITORIES", snapshot.repositories.length.toString().padStart(2, "0")],
+    ["BUSIEST MONTH", snapshot.stats.busiestMonth ? `${snapshot.stats.busiestMonth.month} / ${snapshot.stats.busiestMonth.count}` : "—"],
   ];
 
   return (
-    <div className="grid grid-cols-2 border border-[var(--line)] bg-[#111419]/90 sm:grid-cols-4">
+    <div className="grid grid-cols-2 border border-[var(--line)] bg-[#111419]/90 sm:grid-cols-5">
       {stats.map(([label, value]) => (
         <div key={label} className="border-r border-b border-[var(--line)] px-4 py-3 last:border-r-0 sm:border-b-0">
           <div className="font-[family-name:var(--font-mono)] text-[8px] tracking-[0.16em] text-[var(--muted)]">{label}</div>
