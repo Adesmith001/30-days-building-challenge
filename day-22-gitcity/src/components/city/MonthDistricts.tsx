@@ -1,6 +1,6 @@
 "use client";
 
-import { Text } from "@react-three/drei";
+import { Html } from "@react-three/drei";
 
 import type { CityLot } from "@/types/city";
 import { useSceneStore } from "@/stores/scene-store";
@@ -20,9 +20,11 @@ export function MonthDistricts({ lots }: { lots: CityLot[] }) {
   return (
     <group>
       {districts.map((district) => (
-        <Text key={district.month} position={[district.position[0] - 1.2, 0.04, district.position[2] - 1.2]} rotation={[-Math.PI / 2, 0, 0]} fontSize={0.28} color={theme.accent} anchorX="left" anchorY="middle">
-          {district.month} DISTRICT
-        </Text>
+        <Html key={district.month} position={[district.position[0] - 1.2, 0.08, district.position[2] - 1.2]} center distanceFactor={18}>
+          <div className="pointer-events-none whitespace-nowrap border border-[#263b34] bg-[#0b0d10]/80 px-2 py-1 font-[family-name:var(--font-mono)] text-[7px] tracking-[0.16em]" style={{ color: theme.accent }}>
+            {district.month} DISTRICT
+          </div>
+        </Html>
       ))}
     </group>
   );
