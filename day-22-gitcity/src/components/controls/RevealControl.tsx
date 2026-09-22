@@ -4,13 +4,14 @@ import { Play } from "lucide-react";
 
 import { sceneStore, useSceneStore } from "@/stores/scene-store";
 
-export function RevealControl() {
+export function RevealControl({ onStart }: { onStart?: () => void }) {
   const isRevealing = useSceneStore((value) => value.isRevealing);
 
   function startReveal() {
     sceneStore.setRevealing(true);
     sceneStore.setRevealProgress(0);
     sceneStore.navigateTo("overview");
+    onStart?.();
   }
 
   return (
