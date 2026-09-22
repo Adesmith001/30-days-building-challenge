@@ -28,7 +28,7 @@ function DashboardPage() {
         <HeroSection completed={completed} percent={percent} remaining={remaining} />
         <ProgressSection completed={completed} percent={percent} slots={slots} />
         <ProjectArchive slots={slots} latestCompletedDay={latestCompletedDay} onSelectProject={setSelectedProject} />
-        <ReservedSlots completed={completed} />
+        <ReservedSlots projects={completedProjects} onSelectProject={setSelectedProject} />
         <PrinciplesSection />
       </main>
       <SiteFooter />

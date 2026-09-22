@@ -6,6 +6,7 @@ const source = readFileSync(new URL("./projects.ts", import.meta.url), "utf8");
 const appSource = readFileSync(new URL("../App.tsx", import.meta.url), "utf8");
 const stylesSource = readFileSync(new URL("../styles.css", import.meta.url), "utf8");
 const modalSource = readFileSync(new URL("../components/ProjectModal.tsx", import.meta.url), "utf8");
+const exhibitionSource = readFileSync(new URL("../components/ReservedSlots.tsx", import.meta.url), "utf8");
 
 test("dashboard registers day 1 Cursor Chaos", () => {
   assert.match(source, /day:\s*1/);
@@ -75,4 +76,10 @@ test("dashboard app is composed from focused components", () => {
   assert.match(appSource, /from "\.\/components\/ProjectModal"/);
   assert.match(appSource, /from "\.\/components\/ProjectArchive"/);
   assert.match(appSource, /from "\.\/components\/SiteHeader"/);
+});
+
+test("reserved exhibition features days 6, 14, 17, 18, and 22", () => {
+  assert.match(exhibitionSource, /EXHIBITION_DAYS\s*=\s*\[6, 14, 17, 18, 22\]/);
+  assert.match(exhibitionSource, /onSelectProject/);
+  assert.match(exhibitionSource, /reserved__grid/);
 });
