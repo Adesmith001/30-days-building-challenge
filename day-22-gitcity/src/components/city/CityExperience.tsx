@@ -10,14 +10,14 @@ import { RevealControl } from "../controls/RevealControl";
 import { SceneSettings } from "../controls/SceneSettings";
 import { TourButton } from "../controls/TourButton";
 import { TourController } from "../controls/TourController";
+import { ReplayControls } from "../controls/ReplayControls";
 import type { CityModel } from "@/types/city";
 import type { GitHubYearSnapshot } from "@/types/github";
 import { CityCanvas } from "./CityCanvas";
 import { RevealClock } from "./RevealClock";
-import { GhostSkyline } from "./GhostSkyline";
-import { StreakLights } from "./StreakLights";
 import { CityInspector } from "../ui/CityInspector";
 import { CityStats } from "../ui/CityStats";
+import { CityReport } from "../ui/CityReport";
 
 export function CityExperience({ snapshot, previousSnapshot, city }: { snapshot: GitHubYearSnapshot; previousSnapshot: GitHubYearSnapshot; city: CityModel }) {
   const busiestLot = snapshot.stats.busiestDay ? city.lots.find((lot) => lot.date === snapshot.stats.busiestDay?.date) ?? null : null;
@@ -26,7 +26,7 @@ export function CityExperience({ snapshot, previousSnapshot, city }: { snapshot:
     <main className="relative h-screen overflow-hidden bg-[#0b0d10]">
       <RevealClock />
       <TourController />
-      <div className="absolute inset-0"><CityCanvas city={city} busiestLot={busiestLot} /></div>
+      <div className="absolute inset-0"><CityCanvas city={city} snapshot={snapshot} previousSnapshot={previousSnapshot} busiestLot={busiestLot} /></div>
       <header className="relative z-10 flex h-14 items-center justify-between border-b border-[var(--line)] bg-[#111419]/90 px-5 backdrop-blur-xl md:px-10">
         <Link href="/" className="inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-[9px] tracking-[0.16em] text-[var(--muted)] hover:text-white"><ArrowLeft size={13} /> BACK TO INDEX</Link>
         <div className="absolute left-1/2 -translate-x-1/2 font-[family-name:var(--font-display)] tracking-[0.18em]">GITCITY</div>
@@ -36,6 +36,7 @@ export function CityExperience({ snapshot, previousSnapshot, city }: { snapshot:
         <div className="pointer-events-auto grid gap-3 md:grid-cols-[minmax(0,1fr)_290px]">
           <div className="pointer-events-auto self-start"><CityStats snapshot={snapshot} /></div>
           <div className="pointer-events-auto"><CityInspector snapshot={snapshot} /></div>
+          <div className="pointer-events-auto md:col-span-2"><CityReport snapshot={snapshot} previousSnapshot={previousSnapshot} /></div>
         </div>
         <div className="pointer-events-none flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap gap-2">
@@ -43,6 +44,7 @@ export function CityExperience({ snapshot, previousSnapshot, city }: { snapshot:
             <CameraDock />
             <PhotoMode />
             <TourButton />
+            <ReplayControls snapshot={snapshot} />
           </div>
           <div className="flex flex-wrap gap-2">
             <CitySearch snapshot={snapshot} city={city} />

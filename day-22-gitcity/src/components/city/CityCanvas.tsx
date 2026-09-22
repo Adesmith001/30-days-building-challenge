@@ -6,21 +6,25 @@ import { Canvas } from "@react-three/fiber";
 import { getSceneTheme } from "@/lib/city/themes";
 import { useSceneStore } from "@/stores/scene-store";
 import type { CityModel } from "@/types/city";
+import type { GitHubYearSnapshot } from "@/types/github";
 import { BusiestDayBeacon } from "./BusiestDayBeacon";
 import { CameraRig } from "./CameraRig";
 import { CityGround } from "./CityGround";
 import { CityHall } from "./CityHall";
 import { ContributionBuildings } from "./ContributionBuildings";
+import { DifferenceLayer } from "./DifferenceLayer";
+import { GhostSkyline } from "./GhostSkyline";
 import { LotHoverLabel } from "./LotHoverLabel";
 import { MonthDistricts } from "./MonthDistricts";
 import { RepositoryLandmarks } from "./RepositoryLandmarks";
+import { StreakLights } from "./StreakLights";
 import { WindowFacades } from "./WindowFacades";
 
-export function CityCanvas({ city, busiestLot }: { city: CityModel; busiestLot: CityModel["lots"][number] | null }) {
+export function CityCanvas({ city, snapshot, previousSnapshot, busiestLot }: { city: CityModel; snapshot: GitHubYearSnapshot; previousSnapshot: GitHubYearSnapshot; busiestLot: CityModel["lots"][number] | null }) {
   const themeName = useSceneStore((value) => value.theme);
   const quality = useSceneStore((value) => value.quality);
   const theme = getSceneTheme(themeName);
-  const dpr = quality === "high" ? [1, 2] : quality === "low" ? [0.7, 1] : [1, 1.5];
+  const dpr: [number, number] = quality === "high" ? [1, 2] : quality === "low" ? [0.7, 1] : [1, 1.5];
 
   return (
     <Canvas shadows={quality !== "low"} dpr={dpr} gl={{ antialias: quality !== "low" }}>
@@ -32,6 +36,9 @@ export function CityCanvas({ city, busiestLot }: { city: CityModel; busiestLot: 
       <pointLight intensity={4} color="#44f3a9" distance={18} position={[0, 7, 0]} />
       <CityGround />
       <ContributionBuildings lots={city.lots} />
+      <GhostSkyline lots={city.lots} previousSnapshot={previousSnapshot} />
+      <StreakLights lots={city.lots} snapshot={snapshot} />
+      <DifferenceLayer lots={city.lots} previousSnapshot={previousSnapshot} />
       <WindowFacades lots={city.lots} />
       <MonthDistricts lots={city.lots} />
       <CityHall height={city.hall.height} />
