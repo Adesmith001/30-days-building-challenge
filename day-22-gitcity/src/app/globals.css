@@ -12,6 +12,9 @@
   --gold: #f5c369;
   --mint: #44f3a9;
   --steel: #8ea0af;
+  --font-body: Arial, Helvetica, sans-serif;
+  --font-display: "Trebuchet MS", Arial, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
 }
 
 @theme inline {
