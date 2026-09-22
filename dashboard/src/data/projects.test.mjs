@@ -46,6 +46,14 @@ test("dashboard registers day 20 Network Weather", () => {
   assert.match(source, /liveUrl:\s*"[^"]*day-20-network-weather/);
 });
 
+test("dashboard registers day 22 GitCity with its project screenshots", () => {
+  assert.match(source, /day:\s*22/);
+  assert.match(source, /title:\s*"GitCity"/);
+  assert.match(source, /liveUrl:\s*"https:\/\/gitcityy\.vercel\.app\//);
+  assert.match(source, /\/projects\/day-22\/1\.png/);
+  assert.match(source, /\/projects\/day-22\/4\.png/);
+});
+
 test("site navigation exposes home, projects, and about routes", () => {
   assert.match(appSource, /pathname/);
   assert.match(appSource, /AboutPage/);

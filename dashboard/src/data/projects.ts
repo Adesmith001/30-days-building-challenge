@@ -925,4 +925,35 @@ export const projects: Project[] = [
     learned:
       "I learned how to turn real Nigerian state data into a replayable comparison game, generate deterministic battle decks, model campaign and sudden-death modes, persist player progress locally, and reveal facts through an unlockable state atlas.",
   },
+  {
+    day: 22,
+    title: "GitCity",
+    tagline:
+      "An explorable 3D city generated from a year of GitHub contributions.",
+    description:
+      "GitCity turns contribution days into city lots, repositories into landmarks, and activity patterns into a navigable skyline with camera presets, profile statistics, temporal layers, and responsive controls.",
+    date: "2026-09-22",
+    status: "completed",
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Three.js",
+      "React Three Fiber",
+      "Drei",
+      "Tailwind CSS",
+      "GitHub GraphQL API",
+    ],
+    images: [
+      { src: "/projects/day-22/1.png", alt: "GitCity landing page" },
+      { src: "/projects/day-22/2.png", alt: "GitCity contribution skyline overview" },
+      { src: "/projects/day-22/3.png", alt: "GitCity street-level camera view" },
+      { src: "/projects/day-22/4.png", alt: "GitCity city hall camera view" },
+    ],
+    liveUrl: "https://gitcityy.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to transform GitHub contribution data into deterministic 3D geometry, coordinate React state with a Three.js camera, layer temporal comparisons onto a live scene, and keep a dense WebGL interface usable across desktop and mobile screens.",
+  },
 ];
