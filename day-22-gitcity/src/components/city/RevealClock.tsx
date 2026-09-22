@@ -5,8 +5,10 @@ import { useEffect } from "react";
 import { sceneStore } from "@/stores/scene-store";
 
 export function RevealClock() {
+  const isRevealing = sceneStore.getState().isRevealing;
+
   useEffect(() => {
-    if (!sceneStore.getState().isRevealing) {
+    if (!isRevealing) {
       return;
     }
 
@@ -18,13 +20,14 @@ export function RevealClock() {
       sceneStore.setRevealProgress(progress);
 
       if (progress >= 1) {
+        sceneStore.setRevealing(false);
         sceneStore.setTourActive(false);
         window.clearInterval(timer);
       }
     }, 32);
 
     return () => window.clearInterval(timer);
-  }, []);
+  }, [isRevealing]);
 
   return null;
 }

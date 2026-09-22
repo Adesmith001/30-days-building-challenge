@@ -8,6 +8,7 @@ import { CitySearch } from "../controls/CitySearch";
 import { PhotoMode } from "../controls/PhotoMode";
 import { RevealControl } from "../controls/RevealControl";
 import { SceneSettings } from "../controls/SceneSettings";
+import { TourButton } from "../controls/TourButton";
 import { TourController } from "../controls/TourController";
 import type { CityModel } from "@/types/city";
 import type { GitHubYearSnapshot } from "@/types/github";
@@ -39,6 +40,7 @@ export function CityExperience({ snapshot, city }: { snapshot: GitHubYearSnapsho
             <RevealControl />
             <CameraDock />
             <PhotoMode />
+            <TourButton />
           </div>
           <div className="flex flex-wrap gap-2">
             <CitySearch snapshot={snapshot} city={city} />

@@ -57,6 +57,9 @@ export const sceneStore = {
   setRevealProgress(revealProgress: number) {
     update({ revealProgress });
   },
+  setRevealing(isRevealing: boolean) {
+    update({ isRevealing });
+  },
   setCameraMode(cameraMode: CameraMode) {
     update({ cameraMode });
   },

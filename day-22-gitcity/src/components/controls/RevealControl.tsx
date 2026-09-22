@@ -8,11 +8,11 @@ export function RevealControl() {
   const isRevealing = useSceneStore((value) => value.isRevealing);
 
   function startReveal() {
+    sceneStore.setRevealing(true);
     sceneStore.setRevealProgress(0);
     sceneStore.setTourActive(false);
     sceneStore.setPhotoMode(false);
     sceneStore.setCameraMode("overview");
-    sceneStore.setRevealProgress(0);
   }
 
   return (
