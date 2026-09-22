@@ -8,14 +8,18 @@ export default async function CityPage({ params }: { params: Promise<{ login: st
   const { login } = await params;
   const year = new Date().getFullYear();
   let snapshot;
+  let previousSnapshot;
 
   try {
-    snapshot = await fetchGitHubYear(login, year);
+    [snapshot, previousSnapshot] = await Promise.all([
+      fetchGitHubYear(login, year),
+      fetchGitHubYear(login, year - 1),
+    ]);
   } catch {
     notFound();
   }
 
   const city = generateCity(snapshot);
 
-  return <CityExperience snapshot={snapshot} city={city} />;
+  return <CityExperience snapshot={snapshot} previousSnapshot={previousSnapshot} city={city} />;
 }

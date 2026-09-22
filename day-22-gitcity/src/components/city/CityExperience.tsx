@@ -14,10 +14,12 @@ import type { CityModel } from "@/types/city";
 import type { GitHubYearSnapshot } from "@/types/github";
 import { CityCanvas } from "./CityCanvas";
 import { RevealClock } from "./RevealClock";
+import { GhostSkyline } from "./GhostSkyline";
+import { StreakLights } from "./StreakLights";
 import { CityInspector } from "../ui/CityInspector";
 import { CityStats } from "../ui/CityStats";
 
-export function CityExperience({ snapshot, city }: { snapshot: GitHubYearSnapshot; city: CityModel }) {
+export function CityExperience({ snapshot, previousSnapshot, city }: { snapshot: GitHubYearSnapshot; previousSnapshot: GitHubYearSnapshot; city: CityModel }) {
   const busiestLot = snapshot.stats.busiestDay ? city.lots.find((lot) => lot.date === snapshot.stats.busiestDay?.date) ?? null : null;
 
   return (
