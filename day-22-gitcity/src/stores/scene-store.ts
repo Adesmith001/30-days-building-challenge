@@ -11,11 +11,10 @@ export interface SceneState {
   revealProgress: number;
   isRevealing: boolean;
   cameraMode: CameraMode;
+  cameraMoving: boolean;
   selectedLotId: string | null;
   hoveredLotId: string | null;
   quality: SceneQuality;
-  tourActive: boolean;
-  photoMode: boolean;
 }
 
 const initialState: SceneState = {
@@ -23,11 +22,10 @@ const initialState: SceneState = {
   revealProgress: 1,
   isRevealing: false,
   cameraMode: "overview",
+  cameraMoving: false,
   selectedLotId: null,
   hoveredLotId: null,
   quality: "balanced",
-  tourActive: false,
-  photoMode: false,
 };
 
 let state = initialState;
@@ -60,8 +58,11 @@ export const sceneStore = {
   setRevealing(isRevealing: boolean) {
     update({ isRevealing });
   },
-  setCameraMode(cameraMode: CameraMode) {
-    update({ cameraMode });
+  navigateTo(cameraMode: CameraMode) {
+    update({ cameraMode, cameraMoving: true });
+  },
+  releaseCamera() {
+    update({ cameraMoving: false });
   },
   selectLot(selectedLotId: string | null) {
     update({ selectedLotId });
@@ -71,12 +72,6 @@ export const sceneStore = {
   },
   setQuality(quality: SceneQuality) {
     update({ quality });
-  },
-  setTourActive(tourActive: boolean) {
-    update({ tourActive });
-  },
-  setPhotoMode(photoMode: boolean) {
-    update({ photoMode });
   },
 };
 

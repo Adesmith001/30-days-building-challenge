@@ -4,7 +4,7 @@ import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
 import { getSceneTheme } from "@/lib/city/themes";
-import { useSceneStore } from "@/stores/scene-store";
+import { sceneStore, useSceneStore } from "@/stores/scene-store";
 import type { CityModel } from "@/types/city";
 import type { GitHubYearSnapshot } from "@/types/github";
 import { BusiestDayBeacon } from "./BusiestDayBeacon";
@@ -46,7 +46,7 @@ export function CityCanvas({ city, snapshot, previousSnapshot, busiestLot }: { c
       <BusiestDayBeacon lot={busiestLot} />
       <LotHoverLabel lots={city.lots} />
       <CameraRig />
-      <OrbitControls enablePan={false} minDistance={12} maxDistance={44} maxPolarAngle={Math.PI / 2.15} target={[0, 0, 0]} />
+      <OrbitControls onStart={() => sceneStore.releaseCamera()} enablePan minDistance={2} maxDistance={44} maxPolarAngle={Math.PI / 2.15} target={[0, 0, 0]} />
     </Canvas>
   );
 }

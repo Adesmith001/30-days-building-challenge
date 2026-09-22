@@ -10,9 +10,7 @@ export function RevealControl() {
   function startReveal() {
     sceneStore.setRevealing(true);
     sceneStore.setRevealProgress(0);
-    sceneStore.setTourActive(false);
-    sceneStore.setPhotoMode(false);
-    sceneStore.setCameraMode("overview");
+    sceneStore.navigateTo("overview");
   }
 
   return (

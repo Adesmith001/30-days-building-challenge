@@ -5,12 +5,8 @@ import Link from "next/link";
 
 import { CameraDock } from "../controls/CameraDock";
 import { CitySearch } from "../controls/CitySearch";
-import { PhotoMode } from "../controls/PhotoMode";
 import { RevealControl } from "../controls/RevealControl";
 import { SceneSettings } from "../controls/SceneSettings";
-import { TourButton } from "../controls/TourButton";
-import { TourController } from "../controls/TourController";
-import { ReplayControls } from "../controls/ReplayControls";
 import type { CityModel } from "@/types/city";
 import type { GitHubYearSnapshot } from "@/types/github";
 import { CityCanvas } from "./CityCanvas";
@@ -24,7 +20,6 @@ export function CityExperience({ snapshot, previousSnapshot, city }: { snapshot:
   return (
     <main className="relative h-screen overflow-hidden bg-[#0b0d10]">
       <RevealClock />
-      <TourController />
       <div className="absolute inset-0 z-0"><CityCanvas city={city} snapshot={snapshot} previousSnapshot={previousSnapshot} busiestLot={busiestLot} /></div>
       <header className="relative z-10 flex h-14 items-center justify-between border-b border-[var(--line)] bg-[#111419]/90 px-5 backdrop-blur-xl md:px-10">
         <Link href="/" className="inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-[9px] tracking-[0.16em] text-[var(--muted)] hover:text-white"><ArrowLeft size={13} /> BACK TO INDEX</Link>
@@ -40,9 +35,6 @@ export function CityExperience({ snapshot, previousSnapshot, city }: { snapshot:
           <div className="flex flex-wrap items-center gap-2">
             <RevealControl />
             <CameraDock />
-            <PhotoMode />
-            <TourButton />
-            <ReplayControls snapshot={snapshot} />
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <CitySearch snapshot={snapshot} city={city} />

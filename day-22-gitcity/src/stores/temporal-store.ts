@@ -2,13 +2,9 @@
 
 import { useSyncExternalStore } from "react";
 
-import type { ReplaySpeed, TemporalState } from "@/types/temporal";
+import type { TemporalState } from "@/types/temporal";
 
 const initialState: TemporalState = {
-  replayActive: false,
-  replayPlaying: false,
-  replayCursor: 0,
-  replaySpeed: 2,
   yearShift: 1,
   layers: {
     ghost: false,
@@ -37,21 +33,6 @@ export const temporalStore = {
     listeners.add(listener);
 
     return () => listeners.delete(listener);
-  },
-  beginReplay() {
-    update({ replayActive: true, replayPlaying: true, replayCursor: 0 });
-  },
-  endReplay() {
-    update({ replayActive: false, replayPlaying: false, replayCursor: 0 });
-  },
-  setReplayPlaying(replayPlaying: boolean) {
-    update({ replayPlaying });
-  },
-  setReplayCursor(replayCursor: number) {
-    update({ replayCursor });
-  },
-  setReplaySpeed(replaySpeed: ReplaySpeed) {
-    update({ replaySpeed });
   },
   setYearShift(yearShift: number) {
     update({ yearShift: Math.min(1, Math.max(0, yearShift)) });

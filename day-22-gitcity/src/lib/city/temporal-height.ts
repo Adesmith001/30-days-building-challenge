@@ -3,15 +3,3 @@ export function interpolateTemporalHeight(currentHeight: number, previousHeight:
 
   return previousHeight + (currentHeight - previousHeight) * progress;
 }
-
-export function getReplayFactor(index: number, cursor: number, replayActive: boolean) {
-  if (!replayActive) {
-    return 1;
-  }
-
-  if (index <= cursor) {
-    return 1;
-  }
-
-  return 0;
-}

@@ -21,7 +21,6 @@ export function RevealClock() {
 
       if (progress >= 1) {
         sceneStore.setRevealing(false);
-        sceneStore.setTourActive(false);
         window.clearInterval(timer);
       }
     }, 32);

@@ -1,9 +1,9 @@
 "use client";
 
 import { useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo } from "react";
 
-import { useSceneStore } from "@/stores/scene-store";
+import { sceneStore, useSceneStore } from "@/stores/scene-store";
 import { getRevealState } from "@/lib/city/reveal";
 
 const cameraPositions = {
@@ -16,18 +16,12 @@ const cameraPositions = {
 export function CameraRig() {
   const { camera } = useThree();
   const cameraMode = useSceneStore((value) => value.cameraMode);
+  const cameraMoving = useSceneStore((value) => value.cameraMoving);
   const revealProgress = useSceneStore((value) => value.revealProgress);
   const isRevealing = useSceneStore((value) => value.isRevealing);
-  const tourActive = useSceneStore((value) => value.tourActive);
   const target = useMemo(() => ({ x: 0, y: 1.5, z: 0 }), []);
-  const transitioning = useRef(true);
-
-  useEffect(() => {
-    transitioning.current = true;
-  }, [cameraMode]);
-
   useFrame(() => {
-    if (!transitioning.current && !isRevealing && !tourActive) {
+    if (!cameraMoving && !isRevealing) {
       return;
     }
 
@@ -38,8 +32,8 @@ export function CameraRig() {
     camera.position.lerp({ x, y: y + tilt * 2.5, z } as never, 0.04);
     camera.lookAt(target.x, target.y, target.z);
 
-    if (!isRevealing && !tourActive && camera.position.distanceTo({ x, y: y + tilt * 2.5, z } as never) < 0.2) {
-      transitioning.current = false;
+    if (!isRevealing && camera.position.distanceTo({ x, y: y + tilt * 2.5, z } as never) < 0.2) {
+      sceneStore.releaseCamera();
     }
   });
 
