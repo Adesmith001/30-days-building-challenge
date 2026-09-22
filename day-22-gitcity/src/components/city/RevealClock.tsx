@@ -2,10 +2,10 @@
 
 import { useEffect } from "react";
 
-import { sceneStore } from "@/stores/scene-store";
+import { sceneStore, useSceneStore } from "@/stores/scene-store";
 
 export function RevealClock() {
-  const isRevealing = sceneStore.getState().isRevealing;
+  const isRevealing = useSceneStore((value) => value.isRevealing);
 
   useEffect(() => {
     if (!isRevealing) {

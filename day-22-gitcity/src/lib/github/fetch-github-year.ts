@@ -3,6 +3,26 @@ import { createDemoSnapshot } from "./demo-snapshot";
 import { deriveYearStats } from "@/lib/stats/derive-year-stats";
 import type { ContributionLevel, GitHubYearSnapshot } from "@/types/github";
 
+interface GitHubRepositoryContribution {
+  contributions: {
+    totalCount: number;
+  };
+  repository: {
+    id: string;
+    name: string;
+    nameWithOwner: string;
+    url: string;
+    description: string | null;
+    stargazerCount: number;
+    forkCount: number;
+    pushedAt: string | null;
+    primaryLanguage: {
+      name: string;
+      color: string | null;
+    } | null;
+  };
+}
+
 const query = `
   query GitCityYear($login: String!, $from: DateTime!, $to: DateTime!) {
     user(login: $login) {
@@ -67,7 +87,7 @@ export async function fetchGitHubYear(login: string, year: number): Promise<GitH
     contributionLevel: ContributionLevel;
   }>;
   const days = fillCalendarYear(year, sourceDays);
-  const repositories = collection.commitContributionsByRepository.map((item: any) => ({
+  const repositories = (collection.commitContributionsByRepository as GitHubRepositoryContribution[]).map((item) => ({
     id: item.repository.id,
     name: item.repository.name,
     nameWithOwner: item.repository.nameWithOwner,
