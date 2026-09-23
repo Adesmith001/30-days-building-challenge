@@ -97,6 +97,53 @@ body {
     sans-serif;
 }
 
+.landing-grid::before,
+.landing-grid::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+}
+
+.landing-grid::before {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--foreground) 7%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--foreground) 7%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--foreground) 11%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--foreground) 11%, transparent) 1px,
+      transparent 1px
+    );
+  background-position: center;
+  background-size: 48px 48px, 48px 48px, 192px 192px, 192px 192px;
+  mask-image: radial-gradient(ellipse at center, black 0%, black 42%, transparent 92%);
+  opacity: 0.55;
+  z-index: -2;
+}
+
+.landing-grid::after {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 18%,
+    color-mix(in srgb, var(--background) 45%, transparent) 64%,
+    var(--background) 100%
+  );
+  z-index: -1;
+}
+
 button,
 input,
 textarea {

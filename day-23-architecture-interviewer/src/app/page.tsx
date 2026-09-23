@@ -11,6 +11,8 @@ export default function HomePage() {
         flex min-h-dvh
         flex-col px-6
         md:px-10
+        landing-grid
+        relative isolate overflow-hidden
       "
     >
       <header
@@ -21,6 +23,7 @@ export default function HomePage() {
           text-[11px]
           font-medium
           tracking-[0.12em]
+          relative z-10
         "
       >
         <span>
@@ -54,6 +57,7 @@ export default function HomePage() {
           items-center
           justify-center
           pb-20
+          relative z-10
           text-center
         "
       >
