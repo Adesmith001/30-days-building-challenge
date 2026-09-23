@@ -20,5 +20,6 @@
 - Applied batch 10: `src/lib/export/markdown.ts`, `src/app/api/conversations/[id]/export/route.ts`, `src/app/api/conversations/[id]/route.ts`, `src/app/api/messages/[id]/route.ts`, and `src/app/api/conversations/search/route.ts`.
 - Applied batch 11: `src/components/sidebar/conversation-history.tsx`, `src/components/sidebar/history-search.tsx`, `src/components/account/account-menu.tsx`, `src/components/sidebar/app-sidebar.tsx`, and `src/components/chat/app-shell.tsx`.
 - Applied batch 12: `src/app/chat/layout.tsx`, `src/components/conversation/conversation-menu.tsx`, `src/components/chat/chat-header.tsx`, `src/components/chat/chat-view.tsx`, and `src/app/chat/page.tsx`.
-- Product-file edit count: 60. Checkpoint commit/push in progress.
-- Next: complete existing-conversation/settings/auth loading routes, then add the handoff tests and run the quality checks.
+- Applied batch 13: `src/app/chat/[id]/page.tsx`, `src/app/chat/loading.tsx`, `src/app/api/account/profile/route.ts`, `src/app/api/account/conversations/route.ts`, and `src/app/api/account/route.ts`.
+- Product-file edit count: 65. Checkpoint commit/push in progress.
+- Next: add settings UI, signed-out/title/shortcut support, then checkpoint at 70.
