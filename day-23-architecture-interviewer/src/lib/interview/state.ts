@@ -12,5 +12,6 @@ export function createInitialInterviewState(): InterviewState {
     constraints: [],
     scale: {},
     discussedTopics: [],
+    contradictions: [],
   };
 }

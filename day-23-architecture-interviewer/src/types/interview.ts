@@ -14,24 +14,11 @@ export const interviewStages = [
 export type InterviewStage =
   (typeof interviewStages)[number];
 
-export const assumptionStatuses = [
-  "unverified",
-  "confirmed",
-  "unresolved",
-  "rejected",
-] as const;
-
 export type AssumptionStatus =
-  (typeof assumptionStatuses)[number];
-
-export const decisionStatuses = [
-  "current",
-  "reconsidering",
-  "replaced",
-] as const;
-
-export type DecisionStatus =
-  (typeof decisionStatuses)[number];
+  | "unverified"
+  | "confirmed"
+  | "unresolved"
+  | "rejected";
 
 export interface Assumption {
   id: string;
@@ -45,7 +32,7 @@ export interface ArchitectureDecision {
   decision: string;
   reason?: string;
   tradeoff?: string;
-  status: DecisionStatus;
+  status: "current" | "reconsidering" | "replaced";
 }
 
 export interface ArchitectureRisk {
@@ -53,6 +40,14 @@ export interface ArchitectureRisk {
   title: string;
   description: string;
   severity: "low" | "medium" | "high";
+  resolved: boolean;
+}
+
+export interface ArchitectureContradiction {
+  id: string;
+  earlierStatement: string;
+  laterStatement: string;
+  question: string;
   resolved: boolean;
 }
 
@@ -78,4 +73,5 @@ export interface InterviewState {
   constraints: string[];
   scale: ScaleEstimate;
   discussedTopics: string[];
+  contradictions: ArchitectureContradiction[];
 }
