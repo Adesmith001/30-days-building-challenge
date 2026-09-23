@@ -1,26 +1,149 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f7f4;
+  --foreground: #171716;
+
+  --surface: #fbfbf8;
+  --surface-subtle: #f0f0ec;
+  --surface-hover: #e9e9e4;
+
+  --muted: #74746f;
+  --muted-foreground: #62625e;
+
+  --border: #deded8;
+  --border-strong: #cacac3;
+
+  --accent: #315f4f;
+  --accent-foreground: #ffffff;
+
+  --destructive: #9b3d38;
+  --destructive-soft: #f5e9e7;
+
+  --focus: #315f4f;
+
+  --sidebar-width: 264px;
+  --chat-width: 780px;
+}
+
+.dark {
+  --background: #191918;
+  --foreground: #ecece8;
+
+  --surface: #20201f;
+  --surface-subtle: #252523;
+  --surface-hover: #2d2d2a;
+
+  --muted: #8e8e88;
+  --muted-foreground: #aaa9a2;
+
+  --border: #343431;
+  --border-strong: #484843;
+
+  --accent: #79a78f;
+  --accent-foreground: #101410;
+
+  --destructive: #d9867d;
+  --destructive-soft: #382422;
+
+  --focus: #79a78f;
 }
 
 @theme inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-surface: var(--surface);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-surface-hover: var(--surface-hover);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-soft: var(--destructive-soft);
+
+  --color-focus: var(--focus);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
+}
+
+html {
+  background: var(--background);
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+::selection {
+  background: color-mix(
+    in srgb,
+    var(--accent) 22%,
+    transparent
+  );
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color:
+    var(--border-strong)
+    transparent;
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono), monospace;
+}
+
+textarea {
+  resize: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
