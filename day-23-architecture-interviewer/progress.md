@@ -25,4 +25,7 @@
 - Checkpoint at 65 pushed to `origin/day-23-architecture-interviewer`.
 - Applied batch 14: `src/components/account/settings-view.tsx`, `src/app/settings/page.tsx`, `src/app/signed-out/page.tsx`, `src/app/api/conversations/[id]/title/route.ts`, and `src/hooks/use-chat-shortcuts.ts`.
 - Product-file edit count: 70. Checkpoint commit/push in progress.
-- Next: add auth/chat loading and error boundaries plus test configuration, then checkpoint at 75.
+- Checkpoint at 70 pushed to `origin/day-23-architecture-interviewer`.
+- Applied batch 15: `src/app/auth/loading.tsx`, `src/app/chat/[id]/error.tsx`, `vitest.config.ts`, `src/tests/setup.ts`, and `src/tests/merge-state.test.ts`.
+- Product-file edit count: 75. Checkpoint commit/push in progress.
+- Next: add the remaining context/title/validation/review/proxy tests, then checkpoint at 80.
