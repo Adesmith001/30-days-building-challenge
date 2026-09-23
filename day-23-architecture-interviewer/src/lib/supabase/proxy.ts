@@ -1,18 +1,21 @@
-import { createServerClient } from "@supabase/ssr";
-import { NextResponse, type NextRequest } from "next/server";
+import {
+  createServerClient,
+} from "@supabase/ssr";
+
+import {
+  NextResponse,
+  type NextRequest,
+} from "next/server";
 
 import { publicEnv } from "@/lib/env";
 
-const protectedPrefixes = [
-  "/chat",
-  "/settings",
-];
-
-function isProtectedPath(pathname: string) {
-  return protectedPrefixes.some(
-    (prefix) =>
-      pathname === prefix ||
-      pathname.startsWith(`${prefix}/`),
+export function isProtectedPath(
+  pathname: string,
+) {
+  return (
+    pathname === "/chat" ||
+    pathname.startsWith("/chat/") ||
+    pathname === "/settings"
   );
 }
 
@@ -33,16 +36,25 @@ export async function updateSession(
         },
 
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) => {
-            request.cookies.set(name, value);
-          });
+          cookiesToSet.forEach(
+            ({ name, value }) => {
+              request.cookies.set(
+                name,
+                value,
+              );
+            },
+          );
 
           response = NextResponse.next({
             request,
           });
 
           cookiesToSet.forEach(
-            ({ name, value, options }) => {
+            ({
+              name,
+              value,
+              options,
+            }) => {
               response.cookies.set(
                 name,
                 value,
@@ -55,16 +67,24 @@ export async function updateSession(
     },
   );
 
-  const { data } = await supabase.auth.getClaims();
-  const authenticated = Boolean(data?.claims?.sub);
+  const { data } =
+    await supabase.auth.getClaims();
+
+  const authenticated = Boolean(
+    data?.claims?.sub,
+  );
 
   if (
-    isProtectedPath(request.nextUrl.pathname) &&
+    isProtectedPath(
+      request.nextUrl.pathname,
+    ) &&
     !authenticated
   ) {
-    const url = request.nextUrl.clone();
+    const url =
+      request.nextUrl.clone();
 
     url.pathname = "/auth";
+
     url.searchParams.set(
       "next",
       `${request.nextUrl.pathname}${request.nextUrl.search}`,

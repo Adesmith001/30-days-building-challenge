@@ -10,5 +10,7 @@
 - Product-file edit count: 5. Checkpoint commit/push in progress.
 - Checkpoint 1 pushed to `origin/day-23-architecture-interviewer`.
 - Applied batch 2: `src/lib/utils.ts`, `src/lib/supabase/client.ts`, `src/lib/supabase/server.ts`, `src/lib/supabase/admin.ts`, and `src/lib/supabase/auth.ts`.
-- Product-file edit count: 10. Checkpoint commit/push in progress.
-- Next: apply route protection, visual/layout primitives, landing/auth pages, and callback.
+- Applied batch 3: `src/lib/supabase/proxy.ts`, `src/proxy.ts`, `src/app/globals.css`, `src/components/providers/theme-provider.tsx`, and `src/app/layout.tsx`.
+- Applied batch 4: `src/components/ui/button.tsx`, `src/components/ui/modal.tsx`, `src/components/ui/spinner.tsx`, `src/app/page.tsx`, and `src/components/auth/auth-form.tsx`.
+- Product-file edit count: 20. Checkpoint commit/push in progress.
+- Next: complete the auth callback, database queries, validation, interviewer prompt, and extraction schema.
