@@ -28,4 +28,7 @@
 - Checkpoint at 70 pushed to `origin/day-23-architecture-interviewer`.
 - Applied batch 15: `src/app/auth/loading.tsx`, `src/app/chat/[id]/error.tsx`, `vitest.config.ts`, `src/tests/setup.ts`, and `src/tests/merge-state.test.ts`.
 - Product-file edit count: 75. Checkpoint commit/push in progress.
-- Next: add the remaining context/title/validation/review/proxy tests, then checkpoint at 80.
+- Checkpoint at 75 pushed to `origin/day-23-architecture-interviewer`.
+- Applied batch 16: `src/tests/context.test.ts`, `src/tests/title.test.ts`, `src/tests/chat-validation.test.ts`, `src/tests/review.test.ts`, and `src/tests/proxy.test.ts`.
+- Product-file edit count: 80. Checkpoint commit/push in progress.
+- Next: verify existing `.env.example`/migration/configuration against the handoff, apply the required `.gitignore` entries, and run all quality checks.
