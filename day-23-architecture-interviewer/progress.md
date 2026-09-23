@@ -22,4 +22,7 @@
 - Applied batch 12: `src/app/chat/layout.tsx`, `src/components/conversation/conversation-menu.tsx`, `src/components/chat/chat-header.tsx`, `src/components/chat/chat-view.tsx`, and `src/app/chat/page.tsx`.
 - Applied batch 13: `src/app/chat/[id]/page.tsx`, `src/app/chat/loading.tsx`, `src/app/api/account/profile/route.ts`, `src/app/api/account/conversations/route.ts`, and `src/app/api/account/route.ts`.
 - Product-file edit count: 65. Checkpoint commit/push in progress.
-- Next: add settings UI, signed-out/title/shortcut support, then checkpoint at 70.
+- Checkpoint at 65 pushed to `origin/day-23-architecture-interviewer`.
+- Applied batch 14: `src/components/account/settings-view.tsx`, `src/app/settings/page.tsx`, `src/app/signed-out/page.tsx`, `src/app/api/conversations/[id]/title/route.ts`, and `src/hooks/use-chat-shortcuts.ts`.
+- Product-file edit count: 70. Checkpoint commit/push in progress.
+- Next: add auth/chat loading and error boundaries plus test configuration, then checkpoint at 75.
