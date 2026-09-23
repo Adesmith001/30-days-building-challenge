@@ -23,9 +23,9 @@ Complete the Architecture Interviewer exactly within the pasted handoff: authent
 
 ## Checkpoint ledger
 
-Product files edited: 5
+Product files edited: 10
 
-Next push checkpoint: 10 product files
+Next push checkpoint: 15 product files
 
 ## Definition of done
 

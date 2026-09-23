@@ -19,14 +19,15 @@ export async function createClient() {
           try {
             cookiesToSet.forEach(
               ({ name, value, options }) => {
-                cookieStore.set(name, value, options);
+                cookieStore.set(
+                  name,
+                  value,
+                  options,
+                );
               },
             );
           } catch {
-            /*
-             * Server Components cannot write cookies.
-             * proxy.ts handles refresh persistence.
-             */
+            // Proxy persists refreshed cookies.
           }
         },
       },
