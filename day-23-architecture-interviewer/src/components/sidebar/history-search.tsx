@@ -48,14 +48,6 @@ export function HistorySearch({
       query.trim();
 
     if (!clean) {
-      setResults(
-        initial,
-      );
-
-      setSearching(
-        false,
-      );
-
       return;
     }
 
@@ -96,8 +88,13 @@ export function HistorySearch({
       );
   }, [
     query,
-    initial,
   ]);
+
+  const visibleResults =
+    query.trim() ? results : initial;
+
+  const isSearching =
+    query.trim() && searching;
 
   return (
     <>
@@ -154,7 +151,7 @@ export function HistorySearch({
         )}
       </div>
 
-      {searching ? (
+      {isSearching ? (
         <div
           className="
             space-y-2
@@ -176,7 +173,7 @@ export function HistorySearch({
             ),
           )}
         </div>
-      ) : results.length ===
+      ) : visibleResults.length ===
         0 && query ? (
         <div
           className="
@@ -205,7 +202,7 @@ export function HistorySearch({
       ) : (
         <ConversationHistory
           conversations={
-            results
+            visibleResults
           }
         />
       )}

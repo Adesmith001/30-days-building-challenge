@@ -5,7 +5,7 @@ import {
 } from "react";
 
 import {
-  Github,
+  GitBranch,
   Mail,
 } from "lucide-react";
 
@@ -117,7 +117,7 @@ export function AuthForm({
         }
         disabled={loading}
       >
-        <Github size={16} />
+        <GitBranch size={16} />
         CONTINUE WITH GITHUB
       </Button>
 

@@ -14,18 +14,18 @@ Complete the Architecture Interviewer exactly within the pasted handoff: authent
 
 ## Phases
 
-- [in_progress] Inventory current code and extract the handoff contracts.
-- [pending] Complete shared types, auth, Supabase queries, AI/domain helpers, and tests.
-- [pending] Complete API routes and streaming state flow.
-- [pending] Complete chat, sidebar, settings, and auth UI.
-- [pending] Run tests, lint, build, and fix failures.
-- [pending] Document GitHub, Google OAuth, Supabase, Groq, and deployment setup.
+- [complete] Inventory current code and extract the handoff contracts.
+- [complete] Complete shared types, auth, Supabase queries, AI/domain helpers, and tests.
+- [complete] Complete API routes and streaming state flow.
+- [complete] Complete chat, sidebar, settings, and auth UI.
+- [complete] Run tests, lint, build, and fix failures.
+- [complete] Document GitHub, Google OAuth, Supabase, Groq, and deployment setup.
 
 ## Checkpoint ledger
 
-Product files edited: 80
+Product files edited: 88
 
-Next push checkpoint: 85 product files
+Next push checkpoint: final verification
 
 ## Definition of done
 

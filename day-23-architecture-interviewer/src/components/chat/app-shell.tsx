@@ -72,11 +72,15 @@ export function AppShell({
   ] = useState(false);
 
   useEffect(() => {
-    setCollapsed(
-      window.localStorage.getItem(
-        "sidebar-collapsed",
-      ) === "true",
-    );
+    const timer = window.setTimeout(() => {
+      setCollapsed(
+        window.localStorage.getItem(
+          "sidebar-collapsed",
+        ) === "true",
+      );
+    }, 0);
+
+    return () => window.clearTimeout(timer);
   }, []);
 
   function toggleCollapse() {

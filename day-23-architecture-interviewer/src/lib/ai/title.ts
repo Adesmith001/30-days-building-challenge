@@ -17,7 +17,7 @@ export function fallbackTitle(
       .trim()
       .split(/\s+/)
       .filter(Boolean)
-      .slice(0, 7);
+      .slice(0, 6);
 
   const title =
     words.join(" ");

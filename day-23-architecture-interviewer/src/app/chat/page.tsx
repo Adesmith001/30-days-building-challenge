@@ -33,8 +33,9 @@ export default async function ChatPage({
       conversations[0];
 
     if (mostRecent) {
+      // Server components need the current time for the seven-day restore rule.
       const age =
-        Date.now() -
+        Date.now() - // eslint-disable-line react-hooks/purity
         new Date(
           mostRecent.updated_at,
         ).getTime();
