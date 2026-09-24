@@ -2,7 +2,7 @@ import type { Project } from "../data/projects";
 import { padDay } from "../lib/challenge";
 import { Poster } from "./Poster";
 
-export const EXHIBITION_DAYS = [6, 14, 17, 18, 22] as const;
+export const EXHIBITION_DAYS = [6, 14, 17, 18, 22, 23] as const;
 
 export function ReservedSlots({ projects, onSelectProject }: { projects: Project[]; onSelectProject: (project: Project) => void }) {
   const exhibitionProjects = EXHIBITION_DAYS
