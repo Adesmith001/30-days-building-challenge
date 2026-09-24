@@ -1,24 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="30 Builds in 30 Days">
-  <rect width="1200" height="630" fill="#ffffff"/>
-  <rect x="48" y="48" width="1104" height="534" fill="none" stroke="#0a0a0a" stroke-width="2"/>
-  <text x="78" y="122" fill="#0a0a0a" font-family="Arial, Helvetica, sans-serif" font-size="20" letter-spacing="6">ADESMITH / 2026</text>
-  <text x="78" y="326" fill="#0a0a0a" font-family="Georgia, serif" font-size="138" font-weight="700">30 x 30</text>
-  <text x="82" y="410" fill="#0a0a0a" font-family="Arial, Helvetica, sans-serif" font-size="34" letter-spacing="8">THIRTY BUILDS</text>
-  <text x="82" y="462" fill="#0a0a0a" font-family="Arial, Helvetica, sans-serif" font-size="34" letter-spacing="8">THIRTY DAYS</text>
-  <g fill="#0a0a0a">
-    <rect x="82" y="518" width="24" height="24"/>
-    <rect x="122" y="518" width="24" height="24"/>
-    <rect x="162" y="518" width="24" height="24"/>
-    <rect x="202" y="518" width="24" height="24"/>
-    <rect x="242" y="518" width="24" height="24"/>
-    <rect x="282" y="518" width="24" height="24"/>
-    <rect x="322" y="518" width="24" height="24"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f7f7f7"/>
+  <path d="M0 510H1200" stroke="#e5e5e5"/>
+  <path d="M0 554H1200" stroke="#e5e5e5"/>
+  <g transform="translate(72 72)">
+    <rect width="86" height="86" rx="22" fill="#111111"/>
+    <path d="M23 28c3.4-5 8.3-7.5 14.7-7.5 8.5 0 13.9 4.2 13.9 10.5 0 5-3.1 8.3-8.4 9.7 5.9 1.2 9.2 4.6 9.2 10.2 0 7.2-6.1 12.4-15.4 12.4-7 0-13-2.5-16.4-7.8" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-width="6.5"/>
+    <circle cx="60" cy="43" r="16.2" fill="none" stroke="#ee6a4a" stroke-width="6.5"/>
   </g>
-  <g fill="none" stroke="#0a0a0a">
-    <rect x="362" y="518" width="24" height="24"/>
-    <rect x="402" y="518" width="24" height="24"/>
-    <rect x="442" y="518" width="24" height="24"/>
-    <rect x="482" y="518" width="24" height="24"/>
-    <rect x="522" y="518" width="24" height="24"/>
-  </g>
+  <text x="72" y="275" fill="#111111" font-family="Georgia, Times New Roman, serif" font-size="110" font-weight="700" letter-spacing="-5">30 Builds.</text>
+  <text x="72" y="385" fill="#111111" font-family="Georgia, Times New Roman, serif" font-size="110" font-weight="700" letter-spacing="-5">30 Days.</text>
+  <text x="76" y="454" fill="#666666" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="3">ONE COMPLETE ENGINEERING PROJECT / EVERY DAY</text>
+  <text x="76" y="570" fill="#111111" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="3">ADESMITH / 2026</text>
 </svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f8f8f5"/>
+  <path d="M0 500H1200M0 548H1200" stroke="#deded8"/>
+  <g transform="translate(72 72)">
+    <rect width="88" height="88" rx="22" fill="#315f4f"/>
+    <path d="M18 66V35L44 20l26 15v31M31 66V42l13-8 13 8v24M31 52h26M44 34v18" fill="none" stroke="#f8f8f5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
+    <circle cx="44" cy="52" r="5" fill="#a9d8bc"/>
+  </g>
+  <text x="72" y="278" fill="#181817" font-family="Arial, Helvetica, sans-serif" font-size="86" font-weight="700" letter-spacing="-3">DEFEND</text>
+  <text x="72" y="370" fill="#181817" font-family="Arial, Helvetica, sans-serif" font-size="86" font-weight="700" letter-spacing="-3">YOUR DESIGN.</text>
+  <text x="76" y="444" fill="#62625e" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" letter-spacing="3">AN AI ARCHITECTURE INTERVIEWER</text>
+  <text x="76" y="570" fill="#315f4f" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" letter-spacing="3">ARCHITECTURE INTERVIEWER / DAY 23</text>
+</svg>

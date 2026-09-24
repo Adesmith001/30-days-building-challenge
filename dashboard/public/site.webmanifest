@@ -1,0 +1,17 @@
+{
+  "name": "30 Builds in 30 Days",
+  "short_name": "30 Builds",
+  "description": "Thirty experiments, tools, games and software projects built and shipped in thirty days.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f7f7",
+  "theme_color": "#111111",
+  "icons": [
+    {
+      "src": "/brand/logo-mark.svg",
+      "sizes": "72x72",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

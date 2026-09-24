@@ -4,7 +4,11 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <a className="wordmark" href="/" aria-label="30 Builds in 30 Days home">
-        ADESMITH
+        <img src="/brand/logo-mark.svg" alt="" aria-hidden="true" />
+        <span className="wordmark__copy">
+          <span className="wordmark__title">30 BUILDS</span>
+          <span className="wordmark__maker">ADESMITH</span>
+        </span>
       </a>
       <nav aria-label="Primary navigation">
         <a className={!isAbout ? "is-active" : undefined} href="/#projects">Projects</a>

@@ -69,9 +69,41 @@ a:focus-visible {
 }
 
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.wordmark:hover {
+  text-decoration: none;
+}
+
+.wordmark img {
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+
+.wordmark__copy {
+  display: grid;
+  gap: 2px;
+}
+
+.wordmark__title {
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.wordmark__maker {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  line-height: 1;
 }
 
 .site-header nav,

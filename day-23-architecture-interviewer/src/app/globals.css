@@ -1,0 +1,244 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f8f8f5;
+  --foreground: #181817;
+
+  --surface: #fdfdfb;
+  --surface-subtle: #f1f1ed;
+  --surface-hover: #eaeae5;
+
+  --muted: #777772;
+  --muted-foreground: #62625e;
+
+  --border: #deded8;
+  --border-strong: #c9c9c2;
+
+  --accent: #315f4f;
+  --accent-foreground: #ffffff;
+
+  --destructive: #943e39;
+  --destructive-soft: #f4e7e5;
+
+  --sidebar-width: 264px;
+  --chat-width: 780px;
+}
+
+.dark {
+  --background: #191918;
+  --foreground: #ecece8;
+
+  --surface: #20201f;
+  --surface-subtle: #252523;
+  --surface-hover: #2d2d2a;
+
+  --muted: #8d8d87;
+  --muted-foreground: #aaa9a2;
+
+  --border: #343431;
+  --border-strong: #484843;
+
+  --accent: #7aa68f;
+  --accent-foreground: #111611;
+
+  --destructive: #d9867d;
+  --destructive-soft: #382422;
+}
+
+@theme inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-surface: var(--surface);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-surface-hover: var(--surface-hover);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground:
+    var(--muted-foreground);
+
+  --color-border: var(--border);
+  --color-border-strong:
+    var(--border-strong);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground:
+    var(--accent-foreground);
+
+  --color-destructive:
+    var(--destructive);
+
+  --color-destructive-soft:
+    var(--destructive-soft);
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  background: var(--background);
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+
+  background: var(--background);
+  color: var(--foreground);
+
+  font-family:
+    var(--font-sans),
+    sans-serif;
+}
+
+.landing-grid::before,
+.landing-grid::after {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+}
+
+.landing-grid::before {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--foreground) 7%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--foreground) 7%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--foreground) 11%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--foreground) 11%, transparent) 1px,
+      transparent 1px
+    );
+  background-position: center;
+  background-size: 48px 48px, 48px 48px, 192px 192px, 192px 192px;
+  mask-image: radial-gradient(ellipse at center, black 0%, black 42%, transparent 92%);
+  opacity: 0.55;
+  z-index: -2;
+}
+
+.landing-grid::after {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 18%,
+    color-mix(in srgb, var(--background) 45%, transparent) 64%,
+    var(--background) 100%
+  );
+  z-index: -1;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+textarea {
+  resize: none;
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family:
+    var(--font-mono),
+    monospace;
+}
+
+::selection {
+  background:
+    color-mix(
+      in srgb,
+      var(--accent) 20%,
+      transparent
+    );
+}
+
+:focus-visible {
+  outline:
+    2px solid var(--accent);
+
+  outline-offset: 2px;
+}
+
+* {
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    var(--border-strong)
+    transparent;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.streaming-cursor {
+  display: inline-block;
+
+  width: 2px;
+  height: 1em;
+
+  margin-left: 2px;
+
+  background: currentColor;
+
+  vertical-align: -0.12em;
+
+  animation:
+    blink 0.9s infinite;
+}
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior:
+      auto !important;
+
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+  }
+}
