@@ -956,4 +956,34 @@ export const projects: Project[] = [
     learned:
       "I learned how to transform GitHub contribution data into deterministic 3D geometry, coordinate React state with a Three.js camera, layer temporal comparisons onto a live scene, and keep a dense WebGL interface usable across desktop and mobile screens.",
   },
+  {
+    day: 23,
+    title: "Architecture Interviewer",
+    tagline:
+      "A streamed AI architecture interview that turns an idea into a defensible system design.",
+    description:
+      "Architecture Interviewer guides you through requirements, constraints, trade-offs, scale, risks, and open questions in a persistent architecture interview. It saves conversations, extracts structured design state, generates Mermaid diagrams, and produces a final review you can export.",
+    date: "2026-09-23",
+    status: "completed",
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "Groq",
+      "Mermaid",
+    ],
+    images: [
+      { src: "/projects/day-23/1.png", alt: "Architecture Interviewer landing page" },
+      { src: "/projects/day-23/2.png", alt: "Architecture Interviewer chat interface" },
+      { src: "/projects/day-23/3.png", alt: "Architecture Interviewer architecture diagram" },
+      { src: "/projects/day-23/4.png", alt: "Architecture Interviewer review interface" },
+    ],
+    liveUrl: "https://day-23-architecture-interviewer.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to build a streamed AI workflow with Supabase persistence, structured interview state, authenticated conversation history, Mermaid diagram generation, and review/export flows around one continuous architecture conversation.",
+  },
 ];
