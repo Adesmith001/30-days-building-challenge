@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useState, useSyncExternalStore } from "react"
 import { executePipeline } from "../lib/operations"
 import { generateJavaScript } from "../lib/codegen"
 import { SAMPLE_JSON, SAMPLE_OPERATIONS } from "../lib/samples"
@@ -39,6 +39,7 @@ export default function Home() {
   const [past, setPast] = useState<Snapshot[]>([])
   const [future, setFuture] = useState<Snapshot[]>([])
   const [copied, setCopied] = useState<string | null>(null)
+  const isHydrated = useSyncExternalStore(() => () => {}, () => true, () => false)
   const parsed = useMemo(() => parseSource(source), [source])
   const result = useMemo(() => parsed.value === null ? null : executePipeline(parsed.value, operations), [parsed.value, operations])
   const generatedCode = useMemo(() => generateJavaScript(operations), [operations])
@@ -57,6 +58,6 @@ export default function Home() {
     <Header canUndo={past.length > 0} canRedo={future.length > 0} onNew={newSession} onLoadSample={loadSample} onOpenFile={openFile} onUndo={undo} onRedo={redo} />
     <div className="privacy-note"><span className="privacy-dot" /> Your JSON stays in this browser <span className="privacy-separator">·</span> No uploads, no accounts</div>
     <div className="workspace"><JsonEditor value={source} error={parsed.error} onChange={(value) => commit({ source: value, operations })} /><PipelinePanel operations={operations} onAdd={(type) => updateOperations([...operations, defaultOperation(type)])} onUpdate={updateOperation} onDelete={(operationId) => updateOperations(operations.filter((operation) => operation.id !== operationId))} onMove={moveOperation} /><OutputPanel output={result?.output ?? parsed.value} error={result?.error ?? null} generatedCode={generatedCode} onCopy={copy} onDownload={download} copied={copied} /></div>
-    <footer className="statusbar"><span><i className="status-live" /> {result?.error ? "PIPELINE PAUSED" : "PIPELINE LIVE"}</span><span>{operations.filter((operation) => operation.enabled).length} active steps</span><span>{result?.durationMs ?? 0}ms transform</span><span className="status-spacer" /><span className="mono">DAY 24 / JSON SURGERY</span></footer>
+    <footer className="statusbar"><span><i className="status-live" /> {result?.error ? "PIPELINE PAUSED" : "PIPELINE LIVE"}</span><span>{operations.filter((operation) => operation.enabled).length} active steps</span><span>{isHydrated ? result?.durationMs ?? 0 : 0}ms transform</span><span className="status-spacer" /><span className="mono">DAY 24 / JSON SURGERY</span></footer>
   </main>
 }
