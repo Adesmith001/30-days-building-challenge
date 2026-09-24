@@ -986,4 +986,32 @@ export const projects: Project[] = [
     learned:
       "I learned how to build a streamed AI workflow with Supabase persistence, structured interview state, authenticated conversation history, Mermaid diagram generation, and review/export flows around one continuous architecture conversation.",
   },
+  {
+    day: 24,
+    title: "JSON Surgery",
+    tagline:
+      "A local-first transformation workbench for turning messy JSON into useful data.",
+    description:
+      "JSON Surgery lets you paste or load JSON, compose readable transformation steps, preview the result live, and generate a matching JavaScript transform without sending source data to a server.",
+    date: "2026-09-24",
+    status: "completed",
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Vitest",
+      "Local-first browser APIs",
+    ],
+    images: [
+      { src: "/projects/day-24/1.png", alt: "JSON Surgery input and transformation workbench" },
+      { src: "/projects/day-24/2.png", alt: "JSON Surgery pipeline steps and output preview" },
+      { src: "/projects/day-24/3.png", alt: "JSON Surgery generated JavaScript output" },
+    ],
+    liveUrl: "https://day-24-json-surgery.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to model JSON transformations as a deterministic pipeline, keep the internal executor aligned with generated JavaScript, and design a local-first data tool that makes each step inspectable and reversible.",
+  },
 ];
