@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 import {
   PanelLeftClose,
@@ -25,6 +26,7 @@ interface Props {
 
   name?: string | null;
   email?: string | null;
+  avatarUrl?: string | null;
 
   onCloseMobile?:
     () => void;
@@ -39,6 +41,7 @@ export function AppSidebar({
   conversations,
   name,
   email,
+  avatarUrl,
   onCloseMobile,
   collapsed,
   onCollapse,
@@ -68,7 +71,13 @@ export function AppSidebar({
           "
           aria-label="Expand sidebar"
         >
-          AI
+          <Image
+            src="/brand/architecture-mark.svg"
+            alt="Expand Architecture Interviewer sidebar"
+            className="size-7"
+            width={28}
+            height={28}
+          />
         </button>
 
         <Link
@@ -94,9 +103,17 @@ export function AppSidebar({
             text-[10px]
           "
         >
-          {name?.[0]?.toUpperCase() ||
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              alt={name || "Account avatar"}
+              className="size-full rounded-full object-cover"
+            />
+          ) : (
+            name?.[0]?.toUpperCase() ||
             email?.[0]?.toUpperCase() ||
-            "A"}
+            "A"
+          )}
         </div>
       </aside>
     );
@@ -124,17 +141,27 @@ export function AppSidebar({
         <Link
           href="/chat?new=1"
           className="
-            text-[10px]
-            font-semibold
+            flex items-center gap-2
+            text-[10px] font-semibold
             tracking-[0.09em]
           "
           onClick={
             onCloseMobile
           }
         >
+          <Image
+            src="/brand/architecture-mark.svg"
+            alt=""
+            aria-hidden="true"
+            className="size-7"
+            width={28}
+            height={28}
+          />
+          <span>
           ARCHITECTURE
           <br />
           INTERVIEWER
+          </span>
         </Link>
 
         {onCollapse && (
@@ -207,6 +234,7 @@ export function AppSidebar({
         <AccountMenu
           name={name}
           email={email}
+          avatarUrl={avatarUrl}
         />
       </div>
     </aside>

@@ -10,6 +10,10 @@ import {
   Copy,
 } from "lucide-react";
 
+import {
+  normalizeMermaidCode,
+} from "@/lib/mermaid";
+
 export function DiagramBlock({
   code,
 }: {
@@ -23,6 +27,9 @@ export function DiagramBlock({
 
   const [error, setError] =
     useState(false);
+
+  const normalizedCode =
+    normalizeMermaidCode(code);
 
   useEffect(() => {
     let active = true;
@@ -65,7 +72,7 @@ export function DiagramBlock({
         const result =
           await mermaid.render(
             id,
-            code,
+            normalizedCode,
           );
 
         if (active) {
@@ -86,6 +93,7 @@ export function DiagramBlock({
     };
   }, [
     code,
+    normalizedCode,
     reactId,
   ]);
 
@@ -99,7 +107,7 @@ export function DiagramBlock({
           p-4 text-xs
         "
       >
-        {code}
+        {normalizedCode}
       </pre>
     );
   }
@@ -128,7 +136,7 @@ export function DiagramBlock({
         type="button"
         onClick={() =>
           navigator.clipboard.writeText(
-            code,
+            normalizedCode,
           )
         }
         className="

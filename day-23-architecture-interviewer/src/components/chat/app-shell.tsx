@@ -50,6 +50,7 @@ interface Props {
 
   name?: string | null;
   email?: string | null;
+  avatarUrl?: string | null;
 
   children:
     React.ReactNode;
@@ -59,6 +60,7 @@ export function AppShell({
   conversations,
   name,
   email,
+  avatarUrl,
   children,
 }: Props) {
   const [
@@ -125,6 +127,7 @@ export function AppShell({
             }
             name={name}
             email={email}
+            avatarUrl={avatarUrl}
             collapsed={
               collapsed
             }
@@ -166,6 +169,7 @@ export function AppShell({
                 }
                 name={name}
                 email={email}
+                avatarUrl={avatarUrl}
                 onCloseMobile={() =>
                   setMobileOpen(
                     false,

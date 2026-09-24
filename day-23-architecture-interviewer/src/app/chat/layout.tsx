@@ -15,6 +15,11 @@ import {
   getProfile,
 } from "@/lib/supabase/queries";
 
+import {
+  getProfileAvatarUrl,
+  getProfileDisplayName,
+} from "@/lib/account/profile";
+
 export default async function ChatLayout({
   children,
 }: {
@@ -52,7 +57,16 @@ export default async function ChatLayout({
         conversations
       }
       name={
-        profile?.display_name
+        getProfileDisplayName(
+          profile,
+          user,
+        )
+      }
+      avatarUrl={
+        getProfileAvatarUrl(
+          profile,
+          user,
+        )
       }
       email={
         user.email

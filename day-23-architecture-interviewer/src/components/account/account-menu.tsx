@@ -25,11 +25,13 @@ import {
 interface Props {
   name?: string | null;
   email?: string | null;
+  avatarUrl?: string | null;
 }
 
 export function AccountMenu({
   name,
   email,
+  avatarUrl,
 }: Props) {
   const [
     open,
@@ -172,9 +174,17 @@ export function AccountMenu({
             font-medium
           "
         >
-          {getInitials(
-            name,
-            email,
+          {avatarUrl ? (
+            <img
+              src={avatarUrl}
+              alt={name || "Account avatar"}
+              className="size-full rounded-full object-cover"
+            />
+          ) : (
+            getInitials(
+              name,
+              email,
+            )
           )}
         </span>
 

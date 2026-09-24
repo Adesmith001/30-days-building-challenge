@@ -20,6 +20,10 @@ import {
   getProfile,
 } from "@/lib/supabase/queries";
 
+import {
+  getProfileDisplayName,
+} from "@/lib/account/profile";
+
 export default async function SettingsPage() {
   const supabase =
     await createClient();
@@ -73,7 +77,10 @@ export default async function SettingsPage() {
 
       <SettingsView
         name={
-          profile?.display_name
+          getProfileDisplayName(
+            profile,
+            user,
+          )
         }
         email={
           user.email

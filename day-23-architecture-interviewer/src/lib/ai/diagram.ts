@@ -45,6 +45,7 @@ Rules:
 - Suggested components must not appear.
 - Prefer flowchart TD.
 - Use simple labels.
+- Quote every bracket node label, especially labels containing spaces, punctuation, parentheses, slashes or hyphens. Example: Gateway["Local Payment Gateway (Naira)"].
 - Do not use custom styling.
 - Do not use HTML.
 - Output Mermaid syntax only.

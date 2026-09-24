@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { redirect } from "next/navigation";
 
 import {
@@ -56,11 +57,19 @@ export default async function AuthPage({
         <Link
           href="/"
           className="
-            text-[11px]
-            font-medium
+            flex items-center gap-2
+            text-[11px] font-medium
             tracking-[0.13em]
           "
         >
+          <Image
+            src="/brand/architecture-mark.svg"
+            alt=""
+            aria-hidden="true"
+            className="size-6"
+            width={24}
+            height={24}
+          />
           ARCHITECTURE INTERVIEWER
         </Link>
 

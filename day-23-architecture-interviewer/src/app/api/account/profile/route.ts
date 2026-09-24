@@ -4,6 +4,10 @@ import {
   requireUser,
 } from "@/lib/supabase/auth";
 
+import {
+  buildProfileUpsert,
+} from "@/lib/account/profile";
+
 const schema =
   z.object({
     displayName:
@@ -45,13 +49,14 @@ export async function PATCH(
   } =
     await supabase
       .from("profiles")
-      .update({
-        display_name:
+      .upsert(
+        buildProfileUpsert(
+          user,
           parsed.data.displayName,
-      })
-      .eq(
-        "id",
-        user.id,
+        ),
+        {
+          onConflict: "id",
+        },
       )
       .select("*")
       .single();

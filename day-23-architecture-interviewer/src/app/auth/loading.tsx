@@ -1,6 +1,7 @@
 import {
   Spinner,
 } from "@/components/ui/spinner";
+import Image from "next/image";
 
 export default function AuthLoading() {
   return (
@@ -15,15 +16,23 @@ export default function AuthLoading() {
           text-center
         "
       >
-        <p
+        <div
           className="
-            text-[10px]
-            font-medium
+            flex items-center justify-center gap-2
+            text-[10px] font-medium
             tracking-[0.12em]
           "
         >
+          <Image
+            src="/brand/architecture-mark.svg"
+            alt=""
+            aria-hidden="true"
+            className="size-6"
+            width={24}
+            height={24}
+          />
           ARCHITECTURE INTERVIEWER
-        </p>
+        </div>
 
         <div
           className="

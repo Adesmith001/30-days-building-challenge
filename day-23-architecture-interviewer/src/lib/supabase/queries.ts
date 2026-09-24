@@ -19,7 +19,7 @@ export async function getProfile(
       .from("profiles")
       .select("*")
       .eq("id", userId)
-      .single();
+      .maybeSingle();
 
   return data as Profile | null;
 }

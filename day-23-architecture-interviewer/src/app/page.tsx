@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import {
   ArrowRight,
@@ -32,10 +33,20 @@ export default function HomePage() {
 
         <span
           className="
+            flex items-center
+            justify-center gap-2
             text-center
             max-sm:hidden
           "
         >
+          <Image
+            src="/brand/architecture-mark.svg"
+            alt=""
+            aria-hidden="true"
+            className="size-6"
+            width={24}
+            height={24}
+          />
           ARCHITECTURE INTERVIEWER
         </span>
 
@@ -61,17 +72,26 @@ export default function HomePage() {
           text-center
         "
       >
-        <p
+        <div
           className="
-            mb-5 text-[11px]
-            font-medium
+            mb-5 flex
+            items-center gap-2
+            text-[11px] font-medium
             tracking-[0.16em]
             text-muted
             sm:hidden
           "
         >
+          <Image
+            src="/brand/architecture-mark.svg"
+            alt=""
+            aria-hidden="true"
+            className="size-6"
+            width={24}
+            height={24}
+          />
           ARCHITECTURE INTERVIEWER
-        </p>
+        </div>
 
         <h1
           className="

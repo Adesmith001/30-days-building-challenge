@@ -21,7 +21,15 @@ const geistMono = Geist_Mono({
   variable: "--font-mono",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+  : process.env.VERCEL_URL
+    ? new URL(`https://${process.env.VERCEL_URL}`)
+    : new URL("http://localhost:3000");
+
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
+
   title: {
     default:
       "Architecture Interviewer",
@@ -32,6 +40,36 @@ export const metadata: Metadata = {
 
   description:
     "Defend your design against an AI architecture interviewer.",
+
+  icons: {
+    icon: [
+      {
+        url: "/brand/architecture-mark.svg",
+        type: "image/svg+xml",
+      },
+    ],
+    apple: "/brand/architecture-mark.svg",
+  },
+
+  openGraph: {
+    title: "Architecture Interviewer",
+    description: "Defend your design against an AI architecture interviewer.",
+    images: [
+      {
+        url: "/brand/architecture-og.svg",
+        width: 1200,
+        height: 630,
+        alt: "Architecture Interviewer — defend your design.",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Architecture Interviewer",
+    description: "Defend your design against an AI architecture interviewer.",
+    images: ["/brand/architecture-og.svg"],
+  },
 };
 
 export default function RootLayout({
