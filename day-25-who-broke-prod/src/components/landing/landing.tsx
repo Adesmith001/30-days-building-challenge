@@ -115,7 +115,7 @@ export function Landing() {
             </Button>
           </div>
 
-          <div className="mt-4 flex flex-wrap gap-3">
+          <div className="mt-4 flex flex-wrap gap-5">
             <button
               onClick={startDaily}
               className="flex items-center gap-2 font-mono text-[10px] tracking-[0.15em] text-zinc-500 hover:text-zinc-200"
@@ -130,6 +130,13 @@ export function Landing() {
             >
               <Radio size={13} />
               ON-CALL SHIFT · 3 INCIDENTS
+            </button>
+
+            <button
+              onClick={() => setView("how")}
+              className="font-mono text-[10px] tracking-[0.15em] text-zinc-500 hover:text-zinc-200"
+            >
+              HOW IT WORKS
             </button>
           </div>
 
