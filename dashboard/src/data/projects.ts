@@ -1039,6 +1039,7 @@ export const projects: Project[] = [
       { src: "/projects/day-25/2.png", alt: "Who broke prod? screen 2" },
       { src: "/projects/day-25/3.png", alt: "Who broke prod? screen 3" },
       { src: "/projects/day-25/4.png", alt: "Who broke prod? screen 4" },
+      { src: "/projects/day-25/5.png", alt: "Who broke prod? screen 4" },
     ],
     liveUrl: "https://day-25-who-broke-prodd.netlify.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
