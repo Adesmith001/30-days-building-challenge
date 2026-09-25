@@ -1014,4 +1014,34 @@ export const projects: Project[] = [
     learned:
       "I learned how to model JSON transformations as a deterministic pipeline, keep the internal executor aligned with generated JavaScript, and design a local-first data tool that makes each step inspectable and reversible.",
   },
+  {
+    day: 26,
+    title: "10,000 Danfos",
+    tagline:
+      "A 10,000-agent Lagos traffic simulation built as an interactive spatial-search engineering game.",
+    description:
+      "10,000 Danfos turns a live Three.js city into a technical playground. Calibrate the simulation to your device, scale traffic from 500 to 10,000 vehicles, compare grid, brute-force, and quadtree neighbour search, place roadblocks, inspect agents, reveal flow and density, run benchmarks, and export the result.",
+    date: "2026-09-26",
+    status: "completed",
+    stack: [
+      "Vite",
+      "React",
+      "TypeScript",
+      "Three.js",
+      "React Three Fiber",
+      "Zustand",
+      "Web Workers",
+      "Vitest",
+    ],
+    images: [
+      { src: "/projects/day-26/1.png", alt: "10,000 Danfos cinematic landing screen" },
+      { src: "/projects/day-26/2.png", alt: "Live Lagos-inspired traffic simulation city" },
+      { src: "/projects/day-26/3.png", alt: "10,000 Danfos spatial search engine panel" },
+    ],
+    liveUrl: "https://day-26-10000-danfos.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to keep 10,000 moving agents outside React state, share typed-array snapshots from a worker, render vehicles with instancing, compare spatial data structures with real counters, and turn a performance experiment into a responsive interactive game.",
+  },
 ];

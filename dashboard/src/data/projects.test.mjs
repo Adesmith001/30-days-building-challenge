@@ -78,8 +78,8 @@ test("dashboard app is composed from focused components", () => {
   assert.match(appSource, /from "\.\/components\/SiteHeader"/);
 });
 
-test("reserved exhibition features days 6, 14, 17, 18, and 22", () => {
-  assert.match(exhibitionSource, /EXHIBITION_DAYS\s*=\s*\[6, 14, 17, 18, 22\]/);
+test("reserved exhibition features days 6, 14, 17, 18, 22, and 23", () => {
+  assert.match(exhibitionSource, /EXHIBITION_DAYS\s*=\s*\[6, 14, 17, 18, 22, 23\]/);
   assert.match(exhibitionSource, /onSelectProject/);
   assert.match(exhibitionSource, /reserved__grid/);
 });
