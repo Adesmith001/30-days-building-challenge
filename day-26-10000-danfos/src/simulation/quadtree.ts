@@ -14,8 +14,11 @@ const MAX_DEPTH = 8;
 export class Quadtree {
   private nodes: QuadNode[] = [];
   private used = 0;
+  private halfSize: number;
 
-  constructor(private halfSize = 360) {}
+  constructor(halfSize = 360) {
+    this.halfSize = halfSize;
+  }
 
   private acquire(x: number, z: number, half: number) {
     let node = this.nodes[this.used];
