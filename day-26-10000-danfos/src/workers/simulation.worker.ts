@@ -716,5 +716,3 @@ ctx.onmessage = (event) => {
 };
 
 loop();
-
-export {};

@@ -73,7 +73,12 @@ export function FlowFieldOverlay() {
       counts[cell] += 1;
     }
 
-    let pointer = 0;
+    const attribute =
+      ref.current.geometry.getAttribute(
+        "position",
+      ) as THREE.BufferAttribute;
+
+    let vertex = 0;
 
     for (let z = 0; z < COLS; z += 1) {
       for (let x = 0; x < COLS; x += 1) {
@@ -92,20 +97,15 @@ export function FlowFieldOverlay() {
         const dx = vx[index] / count;
         const dz = vz[index] / count;
 
-        positions[pointer++] = px;
-        positions[pointer++] = 1.25;
-        positions[pointer++] = pz;
-
-        positions[pointer++] = px + dx * 10;
-        positions[pointer++] = 1.25;
-        positions[pointer++] = pz + dz * 10;
+        attribute.setXYZ(vertex++, px, 1.25, pz);
+        attribute.setXYZ(
+          vertex++,
+          px + dx * 10,
+          1.25,
+          pz + dz * 10,
+        );
       }
     }
-
-    const attribute =
-      ref.current.geometry.getAttribute(
-        "position",
-      ) as THREE.BufferAttribute;
 
     attribute.needsUpdate = true;
   });
