@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { badDeploy } from "@/data/incidents/bad-deploy";
 import { cacheStampede } from "@/data/incidents/cache-stampede";
 import { dbPool } from "@/data/incidents/db-pool";
+import { incidents } from "@/data/incidents";
 
 describe("incident scenarios", () => {
   it("use unique identifiers and investigation skills", () => {
@@ -16,5 +17,11 @@ describe("incident scenarios", () => {
       expect(scenario.actions.some((action) => action.effect === "mitigate")).toBe(true);
       expect(scenario.actions.some((action) => action.effect !== "mitigate")).toBe(true);
     }
+  });
+
+  it("ships six distinct production failures", () => {
+    expect(incidents).toHaveLength(6);
+    expect(new Set(incidents.map((scenario) => scenario.id))).toHaveLength(6);
+    expect(new Set(incidents.map((scenario) => scenario.rootCause.cause)).size).toBeGreaterThan(3);
   });
 });
