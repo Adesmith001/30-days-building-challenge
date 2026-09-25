@@ -1015,6 +1015,38 @@ export const projects: Project[] = [
       "I learned how to model JSON transformations as a deterministic pipeline, keep the internal executor aligned with generated JavaScript, and design a local-first data tool that makes each step inspectable and reversible.",
   },
   {
+    day: 25,
+    title: "Who Broke Prod?",
+    tagline:
+      "A production-incident investigation game for finding the signal before the outage finds you.",
+    description:
+      "Who Broke Prod? puts you on call during deterministic production incidents. Correlate telemetry, logs, traces, deployments, and system state, pin evidence, test hypotheses, choose mitigations, verify recovery, and submit a scored root-cause analysis.",
+    date: "2026-09-25",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Zustand",
+      "Recharts",
+      "Motion",
+      "Lucide React",
+      "Vitest",
+    ],
+    images: [
+        { src: "/projects/day-25/1.png", alt: "Who broke prod? landing screen" },
+      { src: "/projects/day-25/2.png", alt: "Who broke prod? screen 2" },
+      { src: "/projects/day-25/3.png", alt: "Who broke prod? screen 3" },
+      { src: "/projects/day-25/4.png", alt: "Who broke prod? screen 4" },
+    ],
+    liveUrl: "https://day-25-who-broke-prodd.netlify.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to model production incidents as deterministic simulations, generate correlated observability data, persist resumable investigations locally, and turn evidence, mitigation choices, recovery verification, and root-cause analysis into an explainable score.",
+  },
+  {
     day: 26,
     title: "10,000 Danfos",
     tagline:
@@ -1038,7 +1070,7 @@ export const projects: Project[] = [
       { src: "/projects/day-26/2.png", alt: "Live Lagos-inspired traffic simulation city" },
       { src: "/projects/day-26/3.png", alt: "10,000 Danfos spatial search engine panel" },
     ],
-    liveUrl: "https://day-26-10000-danfos.vercel.app/",
+    liveUrl: "https://day-26-10000-danfos.netlify.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
     twitterUrl: "",
     learned:
