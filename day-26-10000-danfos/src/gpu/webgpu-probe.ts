@@ -21,6 +21,14 @@ export async function runWebGpuProbe(
   }
 
   const device = await adapter.requestDevice();
+  const bufferUsage = (
+    globalThis as typeof globalThis & {
+      GPUBufferUsage: {
+        STORAGE: number;
+        COPY_DST: number;
+      };
+    }
+  ).GPUBufferUsage;
 
   const source = new Float32Array(count * 4);
 
@@ -34,8 +42,8 @@ export async function runWebGpuProbe(
   const buffer = device.createBuffer({
     size: source.byteLength,
     usage:
-      GPUBufferUsage.STORAGE |
-      GPUBufferUsage.COPY_DST,
+      bufferUsage.STORAGE |
+      bufferUsage.COPY_DST,
   });
 
   device.queue.writeBuffer(buffer, 0, source);
