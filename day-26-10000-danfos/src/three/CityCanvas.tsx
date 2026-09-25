@@ -7,7 +7,7 @@ export function CityCanvas() {
     (state) => state.quality,
   );
 
-  const dpr =
+  const dpr: [number, number] =
     quality === "high"
       ? [1, 1.5]
       : quality === "low"
