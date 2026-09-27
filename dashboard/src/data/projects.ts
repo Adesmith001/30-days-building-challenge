@@ -1039,7 +1039,7 @@ export const projects: Project[] = [
       { src: "/projects/day-25/2.png", alt: "Who broke prod? screen 2" },
       { src: "/projects/day-25/3.png", alt: "Who broke prod? screen 3" },
       { src: "/projects/day-25/4.png", alt: "Who broke prod? screen 4" },
-      { src: "/projects/day-25/5.png", alt: "Who broke prod? screen 4" },
+      { src: "/projects/day-25/5.png", alt: "Who broke prod? screen 5" },
     ],
     liveUrl: "https://day-25-who-broke-prodd.netlify.app/",
     githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
@@ -1076,5 +1076,35 @@ export const projects: Project[] = [
     twitterUrl: "",
     learned:
       "I learned how to keep 10,000 moving agents outside React state, share typed-array snapshots from a worker, render vehicles with instancing, compare spatial data structures with real counters, and turn a performance experiment into a responsive interactive game.",
+  },
+  {
+    day: 27,
+    title: "Light Painter",
+    tagline:
+      "A browser-based long-exposure canvas for drawing with light in real time.",
+    description:
+      "Light Painter turns your camera or a local video file into a digital long-exposure canvas. Process frames locally, build glowing trails, tune the exposure, and export the result without uploading your footage.",
+    date: "2026-09-27",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "WebGL",
+      "Web Audio API",
+      "MediaDevices API",
+      "IndexedDB",
+    ],
+    images: [
+      { src: "/projects/day-27/1.png", alt: "Light Painter interface" },
+      { src: "/projects/day-27/2.png", alt: "Glowing light trails" },
+      { src: "/projects/day-27/3.png", alt: "Exposure settings panel" },
+      { src: "/projects/day-27/4.png", alt: "Export options" },
+    ],
+    liveUrl: "https://day-27-light-painter.netlify.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to build a local-first light-painting workflow with camera and video sources, accumulate frames with WebGL, handle camera permissions and fallbacks, and keep the experience usable without sending media to a server.",
   },
 ];
