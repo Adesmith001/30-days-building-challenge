@@ -19,6 +19,7 @@ import { Sheet } from '../ui/Sheet'
 interface Props {
   blob: Blob
   canvas: HTMLCanvasElement
+  overlayCanvas: HTMLCanvasElement
   mode: string
 
   onClose(): void
@@ -35,6 +36,7 @@ const RATIOS: ExportRatio[] = [
 export function CapturePanel({
   blob,
   canvas,
+  overlayCanvas,
   mode,
   onClose,
   onToast,
@@ -48,6 +50,7 @@ export function CapturePanel({
     return exportCanvas(
       canvas,
       ratio,
+      overlayCanvas,
     )
   }
 

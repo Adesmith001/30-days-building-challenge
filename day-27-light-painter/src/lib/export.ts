@@ -76,8 +76,9 @@ export function getCropRect(
 export async function exportCanvas(
   source: HTMLCanvasElement,
   ratio: ExportRatio = 'original',
+  overlay?: HTMLCanvasElement,
 ) {
-  if (ratio === 'original') {
+  if (ratio === 'original' && !overlay) {
     return canvasBlob(source)
   }
 
@@ -90,25 +91,30 @@ export async function exportCanvas(
   const output =
     document.createElement('canvas')
 
-  const targetRatio =
-    ratio === '1:1'
-      ? 1
-      : ratio === '9:16'
-        ? 9 / 16
-        : 16 / 9
-
-  const longest = 1600
-
-  if (targetRatio >= 1) {
-    output.width = longest
-    output.height = Math.round(
-      longest / targetRatio,
-    )
+  if (ratio === 'original') {
+    output.width = source.width
+    output.height = source.height
   } else {
-    output.height = longest
-    output.width = Math.round(
-      longest * targetRatio,
-    )
+    const targetRatio =
+      ratio === '1:1'
+        ? 1
+        : ratio === '9:16'
+          ? 9 / 16
+          : 16 / 9
+
+    const longest = 1600
+
+    if (targetRatio >= 1) {
+      output.width = longest
+      output.height = Math.round(
+        longest / targetRatio,
+      )
+    } else {
+      output.height = longest
+      output.width = Math.round(
+        longest * targetRatio,
+      )
+    }
   }
 
   const ctx = output.getContext('2d')
@@ -130,6 +136,20 @@ export async function exportCanvas(
     output.width,
     output.height,
   )
+
+  if (overlay) {
+    ctx.drawImage(
+      overlay,
+      crop.x,
+      crop.y,
+      crop.width,
+      crop.height,
+      0,
+      0,
+      output.width,
+      output.height,
+    )
+  }
 
   return canvasBlob(output)
 }

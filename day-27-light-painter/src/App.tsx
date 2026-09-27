@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/refs */
 import {
   useState,
+  useEffect,
 } from 'react'
 
 import {
@@ -35,12 +36,52 @@ type Phase =
   | 'studio'
   | 'error'
 
+type Route =
+  | '/'
+  | '/how-it-works'
+
+function getRoute(): Route {
+  return window.location.pathname === '/how-it-works'
+    ? '/how-it-works'
+    : '/'
+}
+
 export default function App() {
   const media =
     useMediaSource()
 
+  const [route, setRoute] =
+    useState<Route>(getRoute)
+
   const [phase, setPhase] =
-    useState<Phase>('landing')
+    useState<Phase>(() =>
+      route === '/how-it-works'
+        ? 'privacy'
+        : 'landing',
+    )
+
+  useEffect(() => {
+    const onPopState = () => {
+      setRoute(getRoute())
+      setPhase('landing')
+    }
+
+    window.addEventListener('popstate', onPopState)
+
+    return () => {
+      window.removeEventListener('popstate', onPopState)
+    }
+  }, [])
+
+  const goTo = (nextRoute: Route) => {
+    window.history.pushState({}, '', nextRoute)
+    setRoute(nextRoute)
+    setPhase(
+      nextRoute === '/how-it-works'
+        ? 'privacy'
+        : 'landing',
+    )
+  }
 
   const openCamera =
     async () => {
@@ -74,16 +115,16 @@ export default function App() {
         ref={media.videoRef}
         playsInline
         muted
-        className="pointer-events-none absolute size-px opacity-0"
+        className="pointer-events-none absolute left-1/2 top-1/2 z-0 aspect-video w-[min(88vw,1100px)] -translate-x-1/2 -translate-y-1/2 rounded-[1.4rem] object-cover opacity-100"
       />
 
-      {phase === 'landing' && (
+      {phase === 'landing' && route === '/' && (
         <Landing
           onOpen={() =>
             setPhase('privacy')
           }
           onHow={() =>
-            setPhase('privacy')
+            goTo('/how-it-works')
           }
         />
       )}
@@ -97,7 +138,7 @@ export default function App() {
             setPhase('import')
           }
           onBack={() =>
-            setPhase('landing')
+            goTo('/')
           }
         />
       )}

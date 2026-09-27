@@ -28,6 +28,17 @@ import {
   exportCanvas,
 } from '../../lib/export'
 
+import {
+  NEON_COLORS,
+} from '../../lib/constants'
+
+import {
+  getBrushStyle,
+  getBrushSettings,
+  getCanvasPoint,
+  type BrushPreset,
+} from '../../lib/drawing'
+
 import type {
   PainterMode,
   SettingsTab,
@@ -60,6 +71,15 @@ export function Studio({
 }: Props) {
   const canvasRef =
     useRef<HTMLCanvasElement>(null)
+
+  const brushCanvasRef =
+    useRef<HTMLCanvasElement>(null)
+
+  const drawingRef = useRef(false)
+
+  const [brushColor, setBrushColor] = useState('#ff9f4d')
+
+  const [brushPreset, setBrushPreset] = useState<BrushPreset>('fine')
 
   const painter =
     useLightPainter(
@@ -180,6 +200,68 @@ export function Studio({
     setControlsVisible(true)
   }
 
+  const resizeBrushCanvas = () => {
+    const canvas = brushCanvasRef.current
+    if (!canvas) return
+
+    const rect = canvas.getBoundingClientRect()
+    const image = canvas.toDataURL()
+    canvas.width = Math.max(2, Math.round(rect.width))
+    canvas.height = Math.max(2, Math.round(rect.height))
+
+    if (image !== 'data:,') {
+      const restored = new Image()
+      restored.onload = () => {
+        canvas.getContext('2d')?.drawImage(restored, 0, 0)
+      }
+      restored.src = image
+    }
+  }
+
+  useEffect(() => {
+    resizeBrushCanvas()
+    window.addEventListener('resize', resizeBrushCanvas)
+
+    return () => {
+      window.removeEventListener('resize', resizeBrushCanvas)
+    }
+  }, [])
+
+  const paintAt = (event: React.PointerEvent<HTMLCanvasElement>) => {
+    const canvas = brushCanvasRef.current
+    const context = canvas?.getContext('2d')
+    if (!canvas || !context) return
+
+    const point = getCanvasPoint(
+      canvas,
+      event.clientX,
+      event.clientY,
+    )
+
+    context.lineCap = 'round'
+    context.lineJoin = 'round'
+    const brushStyle = getBrushStyle(brushColor)
+    const brushSettings = getBrushSettings(brushPreset)
+    context.strokeStyle = brushStyle.strokeStyle
+    context.shadowColor = brushStyle.shadowColor
+    context.shadowBlur = brushSettings.shadowBlur
+    context.lineWidth = Math.max(4, canvas.width * brushSettings.widthScale)
+
+    if (!drawingRef.current) {
+      context.beginPath()
+      context.moveTo(point.x, point.y)
+    } else {
+      context.lineTo(point.x, point.y)
+      context.stroke()
+    }
+  }
+
+  const clearBrush = () => {
+    const canvas = brushCanvasRef.current
+    if (!canvas) return
+    canvas.getContext('2d')?.clearRect(0, 0, canvas.width, canvas.height)
+  }
+
   const startFirstRun =
     async () => {
       setFirstRun(
@@ -198,6 +280,7 @@ export function Studio({
 
   const clear = () => {
     painter.clear()
+    clearBrush()
 
     exposureBase.current = 0
     exposureStarted.current =
@@ -223,6 +306,7 @@ export function Studio({
       await exportCanvas(
         canvas,
         'original',
+        brushCanvasRef.current ?? undefined,
       )
 
     setCaptureBlob(blob)
@@ -332,15 +416,89 @@ export function Studio({
       onTouchStart={showControls}
       className="camera-noise relative h-full overflow-hidden bg-black text-white"
     >
-      <canvas
-        ref={canvasRef}
-        aria-label={`Light Painter canvas. Mode ${painter.settings.mode}. ${
-          painter.painting
-            ? 'Painting'
-            : 'Paused'
-        }.`}
-        className="absolute inset-0 h-full w-full"
-      />
+      <div className="absolute left-3 top-1/2 z-30 flex -translate-y-1/2 flex-col items-center gap-2 rounded-2xl border border-white/12 bg-black/55 p-2 shadow-xl shadow-black/30 backdrop-blur-xl md:left-6">
+        <span className="px-1 py-1 text-[8px] tracking-[0.16em] text-white/42">
+          BRUSH
+        </span>
+
+        <div className="flex flex-col gap-1.5">
+          {NEON_COLORS.map((color) => (
+            <button
+              key={color.value}
+              type="button"
+              title={`${color.name} brush color`}
+              aria-label={`${color.name} brush color`}
+              onClick={() => setBrushColor(color.value)}
+              className={`relative size-7 rounded-full border ${brushColor === color.value ? 'border-white' : 'border-white/20'}`}
+            >
+              <span
+                className="absolute inset-1 rounded-full"
+                style={{ background: color.value }}
+              />
+            </button>
+          ))}
+        </div>
+
+        <label
+          title="Custom brush color"
+          className="grid size-7 cursor-pointer place-items-center rounded-full border border-white/20 bg-[conic-gradient(from_90deg,#ff5ccf,#65e8ff,#7cff87,#ff9f4d,#ff5ccf)]"
+        >
+          <input
+            type="color"
+            aria-label="Custom brush color"
+            value={brushColor}
+            onChange={(event) => setBrushColor(event.target.value)}
+            className="sr-only"
+          />
+          <span className="size-3 rounded-full border border-black/40 bg-black/30" />
+        </label>
+
+        <div className="my-1 h-px w-6 bg-white/12" />
+
+        {(['fine', 'bold', 'soft'] as const).map((preset) => (
+          <button
+            key={preset}
+            type="button"
+            title={`${preset} brush stroke`}
+            aria-label={`${preset} brush stroke`}
+            onClick={() => setBrushPreset(preset)}
+            className={`grid size-7 place-items-center rounded-full border text-[8px] ${brushPreset === preset ? 'border-white bg-white text-black' : 'border-white/15 text-white/60 hover:border-white/40'}`}
+          >
+            <span
+              className={preset === 'bold' ? 'h-2 w-4 rounded-full bg-current' : preset === 'soft' ? 'h-1 w-4 rounded-full bg-current opacity-50' : 'h-px w-4 bg-current'}
+            />
+          </button>
+        ))}
+      </div>
+
+      <section className="absolute left-1/2 top-1/2 z-10 aspect-video w-[min(88vw,1100px)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[1.4rem] border border-white/15 bg-black shadow-2xl shadow-black/60">
+        <canvas
+          ref={canvasRef}
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full"
+        />
+        <canvas
+          ref={brushCanvasRef}
+          aria-label={`Paint over the video. Mode ${painter.settings.mode}.`}
+          className="absolute inset-0 h-full w-full cursor-crosshair touch-none"
+          onPointerDown={(event) => {
+            event.currentTarget.setPointerCapture(event.pointerId)
+            drawingRef.current = false
+            paintAt(event)
+            drawingRef.current = true
+          }}
+          onPointerMove={(event) => {
+            if (drawingRef.current) paintAt(event)
+          }}
+          onPointerUp={(event) => {
+            drawingRef.current = false
+            event.currentTarget.releasePointerCapture(event.pointerId)
+          }}
+          onPointerCancel={() => {
+            drawingRef.current = false
+          }}
+        />
+      </section>
 
       <TopBar
         exposureMs={exposureMs}
@@ -536,6 +694,9 @@ export function Studio({
             blob={captureBlob}
             canvas={
               canvasRef.current
+            }
+            overlayCanvas={
+              brushCanvasRef.current!
             }
             mode={
               painter.settings.mode
