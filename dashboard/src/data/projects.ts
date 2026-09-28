@@ -1107,4 +1107,36 @@ export const projects: Project[] = [
     learned:
       "I learned how to build a local-first light-painting workflow with camera and video sources, accumulate frames with WebGL, handle camera permissions and fallbacks, and keep the experience usable without sending media to a server.",
   },
+  {
+    day: 28,
+    title: "Brand Me",
+    tagline:
+      "A generative brand workbench that turns intent into a complete visual system.",
+    description:
+      "Brand Me interprets a brand brief into structured Brand DNA, then deterministically generates colour scales, semantic themes, typography, spacing, radii, motion, tokens, component states, and exportable design-system files.",
+    date: "2026-09-28",
+    status: "completed",
+    stack: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Zustand",
+      "Zod",
+      "Gemini API",
+      "OKLCH",
+      "LocalStorage",
+    ],
+    images: [
+      {
+        src: "/projects/day-28/brand-me.svg",
+        alt: "Brand Me project mark",
+      },
+    ],
+    liveUrl: "https://day-28-brand-me.netlify.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to separate AI interpretation from deterministic design generation, build reproducible brand systems from a seed, model editable design tokens, and keep the entire workspace local-first with optional server-side AI assistance.",
+  },
 ];

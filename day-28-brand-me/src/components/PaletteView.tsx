@@ -208,12 +208,19 @@ export function PaletteView({
         </button>
 
         <button
-          onClick={() =>
-            toggleLock(
-              "primary",
-              system.colors.light.primary,
+          onClick={() => {
+            setOverride(
+              "primaryColor",
+              brandColor,
             )
-          }
+
+            window.setTimeout(() => {
+              toggleLock(
+                "primary",
+                brandColor,
+              )
+            }, 0)
+          }}
           className="editor-button mt-2 w-full"
         >
           <Lock size={13} />

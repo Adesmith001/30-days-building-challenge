@@ -95,6 +95,23 @@ export function ExportView({
           <Package size={15} />
           DOWNLOAD ALL
         </button>
+
+        <button
+          onClick={() =>
+            downloadText(
+              "brand.brandme.json",
+              JSON.stringify(
+                project,
+                null,
+                2,
+              ),
+              "application/json",
+            )
+          }
+          className="editor-button"
+        >
+          DOWNLOAD BRAND FILE
+        </button>
       </div>
 
       <div className="mt-10 flex overflow-x-auto border-b border-black/10">
