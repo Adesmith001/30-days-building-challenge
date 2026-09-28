@@ -1129,7 +1129,23 @@ export const projects: Project[] = [
     ],
     images: [
       {
-        src: "/projects/day-28/brand-me.svg",
+        src: "/projects/day-28/1.png",
+        alt: "Brand Me project mark",
+      },
+      {
+        src: "/projects/day-28/2.png",
+        alt: "Brand Me project mark",
+      },
+      {
+        src: "/projects/day-28/3.png",
+        alt: "Brand Me project mark",
+      },
+      {
+        src: "/projects/day-28/4.png",
+        alt: "Brand Me project mark",
+      },
+      {
+        src: "/projects/day-28/5.png",
         alt: "Brand Me project mark",
       },
     ],
