@@ -1155,4 +1155,36 @@ export const projects: Project[] = [
     learned:
       "I learned how to separate AI interpretation from deterministic design generation, build reproducible brand systems from a seed, model editable design tokens, and keep the entire workspace local-first with optional server-side AI assistance.",
   },
+  {
+    day: 29,
+    title: "ShipCheck",
+    tagline:
+      "An evidence-based release preflight for proving a change is ready to ship.",
+    description:
+      "ShipCheck turns a pull request or unified diff into a release workspace. It maps changes to risk, runs readiness gates, surfaces security and rollout concerns, and assembles an auditable release packet before production.",
+    date: "2026-09-29",
+    status: "completed",
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Zustand",
+      "Zod",
+      "Vitest",
+      "GitHub API",
+    ],
+    images: [
+      { src: "/projects/day-29/1.png", alt: "ShipCheck landing screen" },
+      { src: "/projects/day-29/2.png", alt: "ShipCheck release overview" },
+      { src: "/projects/day-29/3.png", alt: "ShipCheck release gates" },
+      { src: "/projects/day-29/4.png", alt: "ShipCheck change map" },
+      { src: "/projects/day-29/5.png", alt: "ShipCheck release packet" },
+    ],
+    liveUrl: "https://day-29-shipcheck.netlify.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to turn a diff into structured release evidence, classify change risk, model deterministic readiness gates, keep GitHub analysis safe, and make rollout decisions auditable instead of relying on intuition.",
+  },
 ];
