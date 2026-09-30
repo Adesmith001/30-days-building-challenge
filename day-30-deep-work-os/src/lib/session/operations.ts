@@ -428,6 +428,19 @@ export async function extendSession(
   );
 }
 
+export async function makeSessionOpenEnded(id: string) {
+  const session = await db.sessions.get(id);
+
+  if (!session) return;
+
+  session.mode = "open";
+  session.plannedDurationSeconds = null;
+  session.updatedAt = new Date().toISOString();
+
+  await saveSession(session);
+  await addEvent(id, "PLANNED_TIME_EXTENDED", { mode: "open" });
+}
+
 interface FinishDetails {
   completionNote?: string;
   finalNextStep?: string;

@@ -14,6 +14,7 @@ import {
 
 import { cn } from "@/lib/utils";
 import { SyncStatus } from "./sync-status";
+import { CommandPalette } from "./command-palette";
 
 const navigation = [
   {
@@ -101,6 +102,8 @@ export function AppShell({
       <div className="pb-20 md:ml-60 md:pb-0">
         {children}
       </div>
+
+      <CommandPalette />
 
       <nav className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t bg-[var(--background)] md:hidden">
         {navigation.slice(0, 5).map((item) => {
