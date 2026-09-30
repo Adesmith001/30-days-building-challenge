@@ -92,7 +92,7 @@ export function SessionForm({
         <Field
           label="Session outcome"
           value={value.outcome}
-          placeholder="Finish Google OAuth."
+          placeholder="Finish the first working slice."
           onChange={(outcome) =>
             patch({ outcome })
           }
@@ -111,7 +111,7 @@ export function SessionForm({
         <Field
           label="First action"
           value={value.firstAction}
-          placeholder="Verify OAuth provider redirect configuration."
+          placeholder="The result is usable without another setup step."
           onChange={(firstAction) =>
             patch({ firstAction })
           }
