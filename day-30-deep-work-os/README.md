@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Deep Work OS
+
+Day 30 / 30 — 30 Builds in 30 Days.
+
+Deep Work OS is an offline-first focus-session environment built around context preservation rather than productivity scoring. Define the outcome, keep the next action visible, park interruptions, save checkpoints, and return to the exact work context after a break.
+
 ## Getting Started
 
 First, run the development server:
