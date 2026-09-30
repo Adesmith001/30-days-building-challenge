@@ -124,24 +124,6 @@ export interface DailyPlan {
   updatedAt: string;
 }
 
-export type SyncEntity =
-  | "sessions"
-  | "session_events"
-  | "checkpoints"
-  | "parked_items"
-  | "projects"
-  | "daily_plans";
-
-export interface SyncQueueItem {
-  id: string;
-  entity: SyncEntity;
-  recordId: string;
-  operation: "upsert" | "delete";
-  payload: unknown;
-  createdAt: string;
-  attempts: number;
-}
-
 export interface ReentryState {
   hiddenAt: string;
   returnedAt: string;

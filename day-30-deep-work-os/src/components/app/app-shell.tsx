@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { SyncStatus } from "./sync-status";
+import { LocalStorageStatus } from "./sync-status";
 import { CommandPalette } from "./command-palette";
 
 const navigation = [
@@ -95,7 +95,7 @@ export function AppShell({
         </nav>
 
         <div className="border-t p-5">
-          <SyncStatus />
+          <LocalStorageStatus />
         </div>
       </aside>
 

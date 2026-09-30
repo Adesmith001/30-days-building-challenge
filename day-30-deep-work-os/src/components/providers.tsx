@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 
-import { AuthProvider } from "@/components/auth-provider";
 import { useSettingsStore } from "@/stores/settings-store";
 
 function ThemeRuntime() {
@@ -62,11 +61,5 @@ export function Providers({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <AuthProvider>
-      <ThemeRuntime />
-      <ServiceWorkerRuntime />
-      {children}
-    </AuthProvider>
-  );
+  return <><ThemeRuntime /><ServiceWorkerRuntime />{children}</>;
 }
