@@ -1187,4 +1187,37 @@ export const projects: Project[] = [
     learned:
       "I learned how to turn a diff into structured release evidence, classify change risk, model deterministic readiness gates, keep GitHub analysis safe, and make rollout decisions auditable instead of relying on intuition.",
   },
+  {
+    day: 30,
+    title: "Deep Work OS",
+    tagline:
+      "An offline-first focus environment for protecting attention and recovering context.",
+    description:
+      "Deep Work OS turns a focus session into a durable work record: define the outcome, preserve the next action, park interruptions, save checkpoints, derive resilient time from timestamps, and return to the exact context after an interruption.",
+    date: "2026-09-30",
+    status: "completed",
+    stack: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Dexie / IndexedDB",
+      "Zustand",
+      "Vitest",
+      "PWA APIs",
+    ],
+    images: [
+      { src: "/projects/day-30/1.png", alt: "Deep Work OS landing screen" },
+      { src: "/projects/day-30/2.png", alt: "Deep Work OS session overview" },
+      { src: "/projects/day-30/3.png", alt: "Deep Work OS session details" },
+      { src: "/projects/day-30/4.png", alt: "Deep Work OS interruption screen" },
+      { src: "/projects/day-30/5.png", alt: "Deep Work OS session history" },
+      { src: "/projects/day-30/6.png", alt: "Deep Work OS session insights" },
+    ],
+    liveUrl: "https://day-30-deep-work-os.vercel.app/",
+    githubUrl: "https://github.com/Adesmith001/30-days-building-challenge",
+    twitterUrl: "",
+    learned:
+      "I learned how to model attention as a recoverable session instead of a countdown, derive timer state from timestamps, keep local-first writes in IndexedDB, and make interruptions explicit without pretending that a hidden browser tab proves distraction.",
+  },
 ];

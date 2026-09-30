@@ -55,6 +55,12 @@ test("dashboard registers day 22 GitCity with its project screenshots", () => {
   assert.match(source, /\/projects\/day-22\/4\.png/);
 });
 
+test("dashboard registers day 30 Deep Work OS", () => {
+  assert.match(source, /day:\s*30/);
+  assert.match(source, /title:\s*"Deep Work OS"/);
+  assert.match(source, /offline-first focus environment/);
+});
+
 test("site navigation exposes home, projects, and about routes", () => {
   assert.match(appSource, /pathname/);
   assert.match(appSource, /AboutPage/);

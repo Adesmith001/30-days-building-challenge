@@ -1,0 +1,8 @@
+"use client";
+
+import { useSettingsStore } from "@/stores/settings-store";
+
+export default function SettingsPage() {
+  const settings = useSettingsStore();
+  return <main className="min-h-dvh p-5 md:p-10 lg:p-14"><h1 className="editorial text-6xl leading-none md:text-8xl">Settings</h1><div className="mt-16 max-w-2xl border-t"><label className="flex items-center justify-between gap-8 border-b py-5 text-xs font-bold uppercase tracking-[0.14em]">Default minutes<input type="number" min="1" value={settings.defaultDuration} onChange={(event) => settings.setDefaultDuration(Number(event.target.value))} className="w-24 border-b bg-transparent py-2 text-right outline-none" /></label><label className="flex items-center justify-between gap-8 border-b py-5 text-xs font-bold uppercase tracking-[0.14em]">Re-entry threshold<input type="number" min="0" value={settings.reentryThreshold} onChange={(event) => settings.setReentryThreshold(Number(event.target.value))} className="w-24 border-b bg-transparent py-2 text-right outline-none" /></label><label className="flex items-center justify-between gap-8 border-b py-5 text-xs font-bold uppercase tracking-[0.14em]">Keep screen awake<input type="checkbox" checked={settings.keepScreenAwake} onChange={(event) => settings.setKeepScreenAwake(event.target.checked)} /></label><label className="flex items-center justify-between gap-8 border-b py-5 text-xs font-bold uppercase tracking-[0.14em]">Reduced motion<input type="checkbox" checked={settings.reducedMotion} onChange={(event) => settings.setReducedMotion(event.target.checked)} /></label></div></main>;
+}
