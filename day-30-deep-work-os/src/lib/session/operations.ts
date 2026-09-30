@@ -1,5 +1,4 @@
 import { db } from "@/lib/storage/db";
-import { queueUpsert } from "@/lib/storage/queue";
 import { assertTransition } from "@/lib/session/engine";
 import { uid } from "@/lib/utils";
 
@@ -37,12 +36,6 @@ async function addEvent(
 
   await db.sessionEvents.add(event);
 
-  await queueUpsert(
-    "session_events",
-    event.id,
-    event,
-  );
-
   return event;
 }
 
@@ -50,7 +43,6 @@ async function saveSession(
   session: DeepWorkSession,
 ) {
   await db.sessions.put(session);
-  await queueUpsert("sessions", session.id, session);
 }
 
 export async function createSession(
@@ -247,12 +239,6 @@ export async function parkThought(
 
   await db.parkedItems.add(item);
 
-  await queueUpsert(
-    "parked_items",
-    item.id,
-    item,
-  );
-
   await addEvent(sessionId, "THOUGHT_PARKED", {
     parkedItemId: item.id,
   });
@@ -291,18 +277,6 @@ export async function createCheckpoint(
       await db.checkpoints.add(checkpoint);
       await db.sessions.put(session);
     },
-  );
-
-  await queueUpsert(
-    "checkpoints",
-    checkpoint.id,
-    checkpoint,
-  );
-
-  await queueUpsert(
-    "sessions",
-    session.id,
-    session,
   );
 
   await addEvent(

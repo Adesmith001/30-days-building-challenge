@@ -7,7 +7,6 @@ import type {
   Project,
   SessionCheckpoint,
   SessionEvent,
-  SyncQueueItem,
 } from "@/types";
 
 class DeepWorkDB extends Dexie {
@@ -17,7 +16,6 @@ class DeepWorkDB extends Dexie {
   parkedItems!: EntityTable<ParkedItem, "id">;
   projects!: EntityTable<Project, "id">;
   dailyPlans!: EntityTable<DailyPlan, "id">;
-  syncQueue!: EntityTable<SyncQueueItem, "id">;
 
   constructor() {
     super("deep-work-os");
@@ -38,7 +36,6 @@ class DeepWorkDB extends Dexie {
       parkedItems: "id,sessionId,resolved,createdAt",
       projects: "id,name,archived,createdAt,updatedAt",
       dailyPlans: "id,date,updatedAt",
-      syncQueue: "id,entity,recordId,createdAt,attempts",
     });
   }
 }
