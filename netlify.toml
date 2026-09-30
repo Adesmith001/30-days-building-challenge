@@ -1,0 +1,7 @@
+[build]
+  base = "day-30-deep-work-os"
+  command = "pnpm build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
